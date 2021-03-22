@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - GameManager
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Obstruct
+  - NPC
+  - Player
+  - Background
+  - Walls
+  - Player Collision Blocker
+  - NPC Collision Blocker
+  - FOVLayer
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Layer 1
+  - Layer 2
+  - Layer 3
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 633280677
+    locked: 0
+  - name: Foreground
+    uniqueID: 308980745
+    locked: 0
+  - name: Props
+    uniqueID: 3640311987
+    locked: 0
+  - name: Walls
+    uniqueID: 3797036745
+    locked: 0
+  - name: Trees
+    uniqueID: 1139581471
+    locked: 0
+  - name: Shadow
+    uniqueID: 3161893793
+    locked: 0
+  - name: NPC
+    uniqueID: 3961926941
+    locked: 0
+  - name: Player
+    uniqueID: 4197977315
+    locked: 0
+  - name: Overlay
+    uniqueID: 3930943737
+    locked: 0

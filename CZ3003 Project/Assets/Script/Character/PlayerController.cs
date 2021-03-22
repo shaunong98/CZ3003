@@ -9,7 +9,13 @@ public class PlayerController : MonoBehaviour
     public LayerMask fovLayer;
     public LayerMask NPCLayer;
 
-    public float speed=1f;
+    [SerializeField] BattleUnit playerUnit;
+
+    public BattleUnit PlayerUnit { 
+        get { return playerUnit; }
+    }
+
+    public float speed=5f;
     public bool Moving;
     private Vector2 input;
     
@@ -80,7 +86,7 @@ public class PlayerController : MonoBehaviour
     {
         var faceDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
         var interactPos = transform.position+faceDir;
-       // Debug.DrawLine(transform.position,interactPos,Color.blue,1.5f);
+       
         var collider = Physics2D.OverlapCircle(interactPos,0.3f,NPCLayer);
         if(collider!=null)
         {
