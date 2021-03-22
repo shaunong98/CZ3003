@@ -3,25 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum GameState{FreeRoam, Battle, Dialog, Cutscene}
+
 public class GameController : MonoBehaviour
 {
     [SerializeField] PlayerController playerController;
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Camera worldCamera;
 
-
     GameState state;
+
+    TrainerController trainer;
+
+    public static GameController Instance { get; private set; }
+
+    private void Awake() {
+        Instance = this;
+        Debug.Log("Are we starting the battle");
+    }
 
     private void Start() 
     {
-        playerController.onEncountered += StartBattle;
-        battleSystem.onBattleOver += EndBattle;
-
+        battleSystem.Awake();
+        BattleSystem.Instance.onBattleOver += EndBattle;
+        
         playerController.onEnterTrainersView += (Collider2D trainerCollider) => 
         {
             var trainer = trainerCollider.GetComponentInParent<TrainerController>();
+            this.trainer = trainer;
             if (trainer != null) {
                 state = GameState.Cutscene;
+                
                 StartCoroutine(trainer.TriggerTrainerBattle(playerController));
             }
         };
@@ -38,16 +49,28 @@ public class GameController : MonoBehaviour
         };
     }
 
-    void StartBattle() {
+    
+
+    public void StartBattle(BattleUnit trainerUnit) {
         state = GameState.Battle;
-        battleSystem.gameObject.SetActive(true);
+        BattleSystem.Instance.gameObject.SetActive(true);
         worldCamera.gameObject.SetActive(false);
-        battleSystem.StartBattle();
+        BattleSystem.Instance.StartBattle(trainerUnit); 
     }
 
     void EndBattle(bool won) {
+        if (won == true) { //true means trainer lost and false means trainer won.
+            Debug.Log("trainer lost");
+            trainer.BattleLost();
+            //Debug.Log("it reached here");
+            trainer = null;
+        }
+        else {
+            Debug.Log("trainer won");
+            trainer.BattleWon();
+        }
         state = GameState.FreeRoam;
-        battleSystem.gameObject.SetActive(false);
+        BattleSystem.Instance.gameObject.SetActive(false);
         worldCamera.gameObject.SetActive(true);
     }
 
@@ -59,7 +82,7 @@ public class GameController : MonoBehaviour
         }
         else if (state == GameState.Battle)
         {
-            battleSystem.HandleUpdate();
+            BattleSystem.Instance.HandleUpdate();
         }
         else if (state == GameState.Dialog)
         {

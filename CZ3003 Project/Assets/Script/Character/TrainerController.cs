@@ -2,11 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrainerController : MonoBehaviour
+public class TrainerController : MonoBehaviour, Interactable
 {
     [SerializeField] Dialog dialog;
+    [SerializeField] Dialog dialogAfterLosingBattle;
+    [SerializeField] Dialog dialogAfterWinningBattle;
     [SerializeField] GameObject exclamation;
+    [SerializeField] GameObject fov;
+    [SerializeField] BattleUnit trainerUnit;
+    //[SerializeField] BattleSystem battleSystem;
 
+    public BattleUnit TrainerUnit { 
+        get { return trainerUnit; }
+    }
+
+    bool battleLost = false;
+    bool battleAgain = false;
     Character character;
 
     public void Awake()
@@ -14,55 +25,51 @@ public class TrainerController : MonoBehaviour
         character = GetComponent<Character>();
     }
 
-    public Vector3 calcDirection(PlayerController player)
-    {
-        var xdiff = player.transform.position.x - transform.position.x;
-        var ydiff = player.transform.position.y - transform.position.y;
-        Debug.Log(xdiff);
-        Debug.Log(ydiff);
-
-        if (Mathf.Abs(xdiff)>Mathf.Abs(ydiff)) 
-        {
-            Debug.Log("xdiff greater");
-            ydiff=0;
+    public void Interact(Transform initiator) {
+        character.LookTowards(initiator.position);
+        if (!battleLost) {
+            if(battleAgain) {
+                StartCoroutine(DialogManager.Instance.ShowDialog(dialogAfterWinningBattle,()=>
+                {
+                    GameController.Instance.StartBattle(trainerUnit);
+                }));
+            }
+            else {
+                StartCoroutine(DialogManager.Instance.ShowDialog(dialog,()=>
+                {
+                    GameController.Instance.StartBattle(trainerUnit);
+                }));
+            } 
         }
-        else if (Mathf.Abs(ydiff)>Mathf.Abs(xdiff)) 
-        {
-            Debug.Log("ydiff greater");
-            xdiff=0;
-        }  
         
-        if(xdiff>0)
-        {
-            return new Vector3(1.3f,0,0);
+        else {
+            StartCoroutine(DialogManager.Instance.ShowDialog(dialogAfterLosingBattle));
         }
-        else if(xdiff<0)
-        {
-            return new Vector3(-1.3f,0,0);
-        }
-        else if(ydiff>0)
-        {
-            return new Vector3(0,1.3f,0);
-        }
-        else if(ydiff<0)
-        {
-            return new Vector3(0,-1.3f,0);
-        }
-        return new Vector3(0,0,0);
     }
+
     public IEnumerator TriggerTrainerBattle(PlayerController player) {
         exclamation.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         exclamation.SetActive(false);
-
-        var diff = player.transform.position - transform.position + calcDirection(player);
-        Debug.Log(diff);
-        var moveVec = diff - diff.normalized; //normalized vector keeps the same direction but its length is 1.0
+        Debug.Log("Start Battle");
+        var diff = player.transform.position - transform.position + new Vector3(0,1.3f,0);
+        //var moveVec = diff - diff.normalized; //normalized vector keeps the same direction but its length is 1.0
         yield return character.Move(diff);
 
         StartCoroutine(DialogManager.Instance.ShowDialog(dialog,()=>
             {
-               Debug.Log("start trainer battle");
+                GameController.Instance.StartBattle(trainerUnit);
             }));
     }
+
+    public void BattleLost() {
+        Debug.Log("Battle ended");
+        battleLost = true;
+        fov.gameObject.SetActive(false);
+    }
+    public void BattleWon() {
+        battleAgain = true;
+        fov.gameObject.SetActive(false);
+    }
+
 }

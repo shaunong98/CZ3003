@@ -2,17 +2,31 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using UnityEngine.UI;
+
+
 
 public enum BattleState { Start, ActionSelection, MoveSelection, PlayerAnswer, PerformMove, Busy, BattleOver }
 
 public class BattleSystem : MonoBehaviour
 {
-    [SerializeField] BattleUnit playerUnit;
-    [SerializeField] BattleUnit enemyUnit;
+    //[SerializeField] BattleUnit playerUnit;
+    //[SerializeField] BattleUnit enemyUnit;
+    //[SerializeField] TrainerController trainer;
+    [SerializeField] PlayerController player;
     // [SerializeField] BattleHud playerHud;
     // [SerializeField] BattleHud enemyHud;
     [SerializeField] BattleDialogBox dialogBox;
     [SerializeField] BattleQuestions battleQuestions;
+    BattleUnit trainerUnit;
+
+    // BattleSystem battleSystem;
+
+    public static BattleSystem Instance{ get; private set; }
+
+    public void Awake() {
+        Instance = this;
+    }
 
     public event Action<bool> onBattleOver;
 
@@ -24,31 +38,35 @@ public class BattleSystem : MonoBehaviour
     int correctAnswer;
     bool isCorrect = true;
 
-    public void StartBattle() {
-        StartCoroutine(SetupBattle());
+    public void StartBattle(BattleUnit trainerUnit) {
+        StartCoroutine(SetupBattle(trainerUnit));
     }
-
-    public IEnumerator SetupBattle() {
-        playerUnit.SetUp();
-        enemyUnit.SetUp();
+    // i changed all enemyunit to trainer.TrainerUnit and playerunit to player.PlayerUnit
+    public IEnumerator SetupBattle(BattleUnit trainerUnit) {
+        this.trainerUnit = trainerUnit;
+        player.PlayerUnit.SetUp();
+        trainerUnit.SetUp();
+        //trainer.TrainerUnit.SetUp();
+        // playerUnit.SetUp();
+        // enemyUnit.SetUp();
         dialogBox.SetMoveNames();
         dialogBox.EnableActionSelector(false);
         dialogBox.EnableQuestionText(false);
         dialogBox.EnableMoveSelector(false);
         dialogBox.EnableDialogText(true);
         dialogBox.EnableAnswerSelector(false);
-        yield return dialogBox.TypeDialog($"{enemyUnit.Monster.Base.Name} has challenged you to a duel."); //use startcoroutine because its ienumerator
+        yield return dialogBox.TypeDialog($"{trainerUnit.Monster.Base.Name} has challenged you to a duel."); //use startcoroutine because its ienumerator
         yield return new WaitForSeconds(1f);
         dialogBox.EnableActionSelector(true);
         ActionSelection();
     }
 
-    void BattleOver(bool won) {
+    public void BattleOver(bool won) {
         state = BattleState.BattleOver; //notifies state only
         onBattleOver(won); //onBattleOver notifies gamecontroller that its over
     }
 
-    void ActionSelection() {
+    public void ActionSelection() {
         state = BattleState.ActionSelection;
         StartCoroutine(dialogBox.TypeDialog("Choose an action"));
         dialogBox.EnableActionSelector(true);
@@ -58,7 +76,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    void MoveSelection() {
+    public void MoveSelection() {
         state = BattleState.MoveSelection;
         dialogBox.EnableActionSelector(false);
         dialogBox.EnableDialogText(false);
@@ -67,7 +85,7 @@ public class BattleSystem : MonoBehaviour
         dialogBox.EnableQuestionText(false);
     }
 
-    void PlayerAnswer() {
+    public void PlayerAnswer() {
         state = BattleState.PlayerAnswer;
         dialogBox.EnableActionSelector(false);
         dialogBox.EnableDialogText(false);
@@ -76,43 +94,43 @@ public class BattleSystem : MonoBehaviour
         dialogBox.EnableMoveSelector(false);
     }
 
-    IEnumerator PlayerMove() {
+    public IEnumerator PlayerMove() {
         state = BattleState.PerformMove;
         Move move;
         if (currentMove == 2) {
-           move = playerUnit.Monster.Moves[currentMove-1];
+           move = player.PlayerUnit.Monster.Moves[currentMove-1];
         }
         else if (currentMove == 1) {
-           move = playerUnit.Monster.Moves[currentMove+1];
+           move = player.PlayerUnit.Monster.Moves[currentMove+1];
         }
-        else {move = playerUnit.Monster.Moves[currentMove];}
+        else {move = player.PlayerUnit.Monster.Moves[currentMove];}
         yield return dialogBox.TypeDialog($"You answered correctly!");
         yield return new WaitForSeconds(1f);
 
-        yield return RunMove(playerUnit, enemyUnit, move);
+        yield return RunMove(player.PlayerUnit, trainerUnit, move);
        
         if (state == BattleState.PerformMove){
             StartCoroutine(EnemyMove());
         }
     }
 
-    IEnumerator EnemyMove() {
+    public IEnumerator EnemyMove() {
         state = BattleState.PerformMove;
 
-        var move = enemyUnit.Monster.GetRandomMove();
+        var move = trainerUnit.Monster.GetRandomMove();
         if (!isCorrect) {
             yield return dialogBox.TypeDialog("You answered wrongly!");
             yield return new WaitForSeconds(1f);
             isCorrect = true;
         }
-        yield return RunMove(enemyUnit, playerUnit, move);
+        yield return RunMove(trainerUnit, player.PlayerUnit, move);
 
         if (state == BattleState.PerformMove) {
             ActionSelection();
         }
     }
 
-    IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move) {
+    public IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move) {
         yield return dialogBox.TypeDialog($"{sourceUnit.Monster.Base.Name} used {move.Base.Name}.");
         sourceUnit.PlayerAttackAnimation();
         yield return new WaitForSeconds(1f);
@@ -131,7 +149,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    void CheckForBattleOver(BattleUnit faintedUnit) {
+    public void CheckForBattleOver(BattleUnit faintedUnit) {
         if (faintedUnit.IsPlayerUnit) {
             BattleOver(false);
         }
@@ -153,7 +171,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    void HandleActionSelection() {
+    public void HandleActionSelection() {
         if (Input.GetKeyDown(KeyCode.DownArrow)) {
             if (currentAction < 1)
                 ++currentAction;
@@ -176,7 +194,7 @@ public class BattleSystem : MonoBehaviour
     }
 
 
-    void HandleMoveSelection() {
+    public void HandleMoveSelection() {
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
             if (currentMove < 2)//playerUnit.Monster.Moves.Count - 1
                 ++currentMove;
@@ -223,7 +241,7 @@ public class BattleSystem : MonoBehaviour
         return null;
     }
 
-    void HandleAnswerSelection(int answer) {
+    public void HandleAnswerSelection(int answer) {
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
             if (currentAnswer < 2)
                 ++currentAnswer;

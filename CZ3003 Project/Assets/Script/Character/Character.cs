@@ -12,9 +12,7 @@ public class Character : MonoBehaviour
     public float walkCounter;
     public Vector2 moveDir;
     public bool isCollided;
-
     public NPCController npcController;
-
     public void Start()
     {
         npcController = GetComponent<NPCController>();
@@ -23,7 +21,6 @@ public class Character : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
         walkCounter = walkTime;
     }
-
     private void Update() 
     {
         if(walkCounter>=0 && !isCollided)
@@ -35,6 +32,7 @@ public class Character : MonoBehaviour
         {
             myRigidbody.velocity = Vector2.zero;
             IsMoving=false;
+            animator.SetBool("IsMoving", false);
             npcController.setIdle();
         }
     }
@@ -52,7 +50,6 @@ public class Character : MonoBehaviour
         else
             Debug.Log("cant see diag");
     }
-
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -60,7 +57,6 @@ public class Character : MonoBehaviour
             Debug.Log("collided with player");
         }
     }
-
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -69,13 +65,11 @@ public class Character : MonoBehaviour
             isCollided = true;
         }
     }
-
-
     public IEnumerator Move(Vector2 moveVec)
     {
+        IsMoving=true;
         moveDir = moveVec;
         walkCounter = walkTime;
-        
         if(walkCounter>=0)
         {   
             if(moveVec.x>0)
@@ -99,41 +93,11 @@ public class Character : MonoBehaviour
                 animator.SetFloat("moveY",moveVec.y);
             }
             IsMoving=true;
+        animator.SetBool("IsMoving", moveDir.magnitude > 0);
         yield return null;
+       
         }
         myRigidbody.velocity = new Vector2 (moveDir.x * moveSpeed,moveDir.y * moveSpeed);
     }
-
-    public IEnumerator MoveBaseOnDistance(Vector2 moveVec)
-    {
-        moveDir = moveVec;
-        walkCounter = walkTime;
-        if(walkCounter>=0)
-        {   
-            if(moveVec.x>0)
-            {
-                animator.SetFloat("moveX",moveVec.x);
-                animator.SetFloat("moveY",moveVec.y);
-            }
-            else if(moveVec.x<0)
-            {
-                animator.SetFloat("moveX",moveVec.x);
-                animator.SetFloat("moveY",moveVec.y);
-            }
-            else if(moveVec.y>0)
-            {
-                animator.SetFloat("moveX",moveVec.x);
-                animator.SetFloat("moveY",moveVec.y);
-            }
-            else if(moveVec.y<0)
-            {
-                animator.SetFloat("moveX",moveVec.x);
-                animator.SetFloat("moveY",moveVec.y);
-            }
-            IsMoving=true;
-
-        //myRigidbody.velocity = moveSpeed * moveDir;
-        yield return null;
-        }
-    }
+    
 }
