@@ -16,8 +16,11 @@ public class SingleLevel : MonoBehaviour
             PlayerPrefs.SetInt("Lv" + levelIndex, levelStarsNum);
         }
         Debug.Log("Saving Data is " + PlayerPrefs.GetInt("Lv" + levelIndex));
+
         //UIManager.instance.BackLevelSelection();
         UIManager.instance.SceneTransition("GameScene");
         UIManager.instance.gameStart();
+        UIManager.instance.BackLevelSelection();
+
     }
 }

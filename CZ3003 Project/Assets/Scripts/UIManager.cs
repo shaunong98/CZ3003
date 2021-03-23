@@ -79,6 +79,10 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene(_sceneName);
     }
+    /*public void SceneTransition(string _sceneName)
+    {
+        SceneManager.LoadScene(_sceneName);
+    }*/
     public void PressQuestModeButton()
     {
         mapSelectionPanel.gameObject.SetActive(true);
