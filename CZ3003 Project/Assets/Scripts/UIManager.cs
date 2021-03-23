@@ -75,6 +75,10 @@ public class UIManager : MonoBehaviour
         for (int i=0; i< levelSelectionPanels.Length;i++)
             levelSelectionPanels[i].gameObject.SetActive(false);
     }
+    public void SceneTransition(string _sceneName)
+    {
+        SceneManager.LoadScene(_sceneName);
+    }
     /*public void SceneTransition(string _sceneName)
     {
         SceneManager.LoadScene(_sceneName);
@@ -102,5 +106,11 @@ public class UIManager : MonoBehaviour
     public void BackLevelSelection()
     {
         SceneManager.LoadScene("Map Selection");
+    }
+
+    public void gameStart()
+    {
+        for (int i=0; i< levelSelectionPanels.Length;i++)
+            levelSelectionPanels[i].gameObject.SetActive(false);
     }
 }
