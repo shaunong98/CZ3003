@@ -13,6 +13,7 @@ public class Account : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         LoginButton.onClick.AddListener(()=>
         {
             StartCoroutine(Main.Instance.Web.Login(UsernameInput.text,PasswordInput.text));
