@@ -8,12 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Login.unity
     guid: d3156139b4e83714aa625e766b47941a
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Map Selection.unity
-    guid: b4fa2a0960a2b8545b12f3cab8009010
+    guid: a5f9666e3611ab24c9b2fdd51cf931be
   - enabled: 1
     path: Assets/Scenes/01_level1.unity
     guid: ce0b9a742b4bdda4ba1aac879d017575
