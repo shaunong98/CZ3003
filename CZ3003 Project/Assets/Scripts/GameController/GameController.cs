@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState{FreeRoam, Battle, Dialog, Cutscene}
 
@@ -54,6 +55,7 @@ public class GameController : MonoBehaviour
     public void StartBattle(BattleUnit trainerUnit) {
         state = GameState.Battle;
         BattleSystem.Instance.gameObject.SetActive(true);
+        //SceneManager.LoadScene("BattleScene");
         worldCamera.gameObject.SetActive(false);
         BattleSystem.Instance.StartBattle(trainerUnit); 
     }

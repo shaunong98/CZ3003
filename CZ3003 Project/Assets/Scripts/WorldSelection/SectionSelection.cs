@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class SectionSelection : MonoBehaviour
 {
+    public int worldNumber;
+    public int sectionNumber;
     public bool isUnlocked = false;
     public Image lockImage;
     public Image[] starsImage;
@@ -53,6 +55,8 @@ public class SectionSelection : MonoBehaviour
         if(isUnlocked)
         {
             WorldUIManager.instance.setAllToFalse();
+            QuestionManager.worldNumber = worldNumber;
+            QuestionManager.sectionNumber = sectionNumber;
             SceneManager.LoadScene(_sceneName);
         }
         else
