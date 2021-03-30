@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using Firebase;
 using Firebase.Auth;
@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class FirebaseManager : MonoBehaviour
 {
+    //[SerializeField] QuestionManager questionManager;
     //Firebase variables
     [Header("Firebase")]
     public DependencyStatus dependencyStatus;
@@ -81,6 +82,7 @@ public class FirebaseManager : MonoBehaviour
     //Function for the login button
     public void LoginButton()
     {
+        //questionManager.Awake();
         //Call the login coroutine passing the email and password
         StartCoroutine(Login(emailLoginField.text, passwordLoginField.text));
     }
