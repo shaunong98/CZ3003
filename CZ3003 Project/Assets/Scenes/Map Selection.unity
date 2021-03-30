@@ -349,6 +349,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dffe8f5c8566c0408774498fc0d6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldNumber: 0
+  sectionNumber: 0
   isUnlocked: 1
   lockImage: {fileID: 0}
   starsImage:
@@ -1692,10 +1694,10 @@ RectTransform:
   m_Father: {fileID: 1584901358}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1680, y: -250}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &326659684
 MonoBehaviour:
@@ -1804,6 +1806,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dffe8f5c8566c0408774498fc0d6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldNumber: 1
+  sectionNumber: 0
   isUnlocked: 0
   lockImage: {fileID: 1242116452}
   starsImage:
@@ -2069,7 +2073,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1320, y: -307.45587}
+  m_AnchoredPosition: {x: 1320, y: -364.62646}
   m_SizeDelta: {x: 700, y: 360}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &372898819
@@ -2377,7 +2381,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1320, y: -707.4559}
+  m_AnchoredPosition: {x: 1320, y: -764.62646}
   m_SizeDelta: {x: 700, y: 360}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &452880684
@@ -2664,7 +2668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &497622810
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3689,10 +3693,10 @@ RectTransform:
   m_Father: {fileID: 1584901358}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 720, y: -250}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &734180461
 MonoBehaviour:
@@ -3801,6 +3805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dffe8f5c8566c0408774498fc0d6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldNumber: 1
+  sectionNumber: 2
   isUnlocked: 0
   lockImage: {fileID: 1408292669}
   starsImage:
@@ -4192,6 +4198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dffe8f5c8566c0408774498fc0d6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldNumber: 0
+  sectionNumber: 0
   isUnlocked: 0
   lockImage: {fileID: 0}
   starsImage:
@@ -4501,7 +4509,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -307.45587}
+  m_AnchoredPosition: {x: 600, y: -364.62646}
   m_SizeDelta: {x: 700, y: 360}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &818374154
@@ -5201,6 +5209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dffe8f5c8566c0408774498fc0d6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldNumber: 0
+  sectionNumber: 0
   isUnlocked: 0
   lockImage: {fileID: 0}
   starsImage:
@@ -5440,6 +5450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dffe8f5c8566c0408774498fc0d6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldNumber: 0
+  sectionNumber: 0
   isUnlocked: 0
   lockImage: {fileID: 1779099443}
   starsImage:
@@ -6495,6 +6507,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dffe8f5c8566c0408774498fc0d6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldNumber: 0
+  sectionNumber: 0
   isUnlocked: 1
   lockImage: {fileID: 929884034}
   starsImage:
@@ -8491,10 +8505,10 @@ RectTransform:
   m_Father: {fileID: 1584901358}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1200, y: -250}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1267594555
 MonoBehaviour:
@@ -8603,6 +8617,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dffe8f5c8566c0408774498fc0d6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldNumber: 1
+  sectionNumber: 3
   isUnlocked: 0
   lockImage: {fileID: 2131281912}
   starsImage:
@@ -9893,6 +9909,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dffe8f5c8566c0408774498fc0d6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldNumber: 0
+  sectionNumber: 0
   isUnlocked: 0
   lockImage: {fileID: 0}
   starsImage:
@@ -11198,6 +11216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dffe8f5c8566c0408774498fc0d6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldNumber: 0
+  sectionNumber: 0
   isUnlocked: 1
   lockImage: {fileID: 0}
   starsImage:
@@ -11438,6 +11458,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dffe8f5c8566c0408774498fc0d6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldNumber: 0
+  sectionNumber: 0
   isUnlocked: 0
   lockImage: {fileID: 0}
   starsImage:
@@ -12335,6 +12357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dffe8f5c8566c0408774498fc0d6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldNumber: 0
+  sectionNumber: 0
   isUnlocked: 0
   lockImage: {fileID: 287652258}
   starsImage:
@@ -12926,6 +12950,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dffe8f5c8566c0408774498fc0d6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldNumber: 0
+  sectionNumber: 0
   isUnlocked: 0
   lockImage: {fileID: 0}
   starsImage:
@@ -13415,6 +13441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dffe8f5c8566c0408774498fc0d6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldNumber: 0
+  sectionNumber: 0
   isUnlocked: 0
   lockImage: {fileID: 1957241360}
   starsImage:
@@ -13648,10 +13676,10 @@ RectTransform:
   m_Father: {fileID: 1584901358}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 240, y: -250}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1943605218
 MonoBehaviour:
@@ -13737,7 +13765,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1943605221}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: SectionSelection, Assembly-CSharp
         m_MethodName: SceneTransition
         m_Mode: 5
         m_Arguments:
@@ -13760,6 +13788,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dffe8f5c8566c0408774498fc0d6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldNumber: 1
+  sectionNumber: 1
   isUnlocked: 1
   lockImage: {fileID: 1475031202}
   starsImage:
@@ -13960,7 +13990,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -707.4559}
+  m_AnchoredPosition: {x: 600, y: -764.62646}
   m_SizeDelta: {x: 700, y: 360}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1965565952
@@ -15146,6 +15176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dffe8f5c8566c0408774498fc0d6bcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldNumber: 0
+  sectionNumber: 0
   isUnlocked: 0
   lockImage: {fileID: 0}
   starsImage:
