@@ -23,7 +23,7 @@ public class Character : MonoBehaviour
     }
     private void Update() 
     {
-        if(walkCounter>=0 && !isCollided)
+        if(walkCounter>=0)
         {
             walkCounter -= Time.deltaTime;
 //            gameObject.transform.position = new Vector2 (transform.position.x + (moveDir.x * moveSpeed*Time.deltaTime), transform.position.y + (moveDir.y * moveSpeed*Time.deltaTime));

@@ -40,7 +40,6 @@ public class PlayerController : MonoBehaviour
         {
             dir.x = -1;
             dir.y = 0;
-            spriteRenderer.flipX=true;
             animator.SetFloat("moveX",dir.x);
             animator.SetFloat("moveY",dir.y);
 
@@ -49,7 +48,6 @@ public class PlayerController : MonoBehaviour
         {
             dir.x = 1;
             dir.y = 0;
-            spriteRenderer.flipX=false;
             animator.SetFloat("moveX",dir.x);
             animator.SetFloat("moveY",dir.y);
         }
