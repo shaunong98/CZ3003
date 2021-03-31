@@ -18,7 +18,9 @@ public class BattleSystem : MonoBehaviour
     // [SerializeField] BattleHud enemyHud;
     [SerializeField] BattleDialogBox dialogBox;
     [SerializeField] BattleQuestions battleQuestions;
+    //[SerializeField] CountdownTimer countDown;
     BattleUnit trainerUnit;
+    public bool isPVP;
 
     // BattleSystem battleSystem;
 
@@ -45,11 +47,14 @@ public class BattleSystem : MonoBehaviour
     public IEnumerator SetupBattle(BattleUnit trainerUnit) {
         this.trainerUnit = trainerUnit;
         player.PlayerUnit.SetUp();
-        trainerUnit.SetUp();
+        trainerUnit.SetUp();    
         //trainer.TrainerUnit.SetUp();
         // playerUnit.SetUp();
         // enemyUnit.SetUp();
         dialogBox.SetMoveNames();
+        // if (isPVP) {
+        //     countDown.EnableTimerText(true);
+        // }
         dialogBox.EnableActionSelector(false);
         dialogBox.EnableQuestionText(false);
         dialogBox.EnableMoveSelector(false);
@@ -73,7 +78,16 @@ public class BattleSystem : MonoBehaviour
         dialogBox.EnableMoveSelector(false);
         dialogBox.EnableDialogText(true);
         dialogBox.EnableAnswerSelector(false);
+    }
 
+    public void ActionSelectionifWrong() {
+        state = BattleState.ActionSelection;
+        isCorrect = true;
+        StartCoroutine(dialogBox.TypeDialog("You answered wrongly! Choose an action"));
+        dialogBox.EnableActionSelector(true);
+        dialogBox.EnableMoveSelector(false);
+        dialogBox.EnableDialogText(true);
+        dialogBox.EnableAnswerSelector(false);
     }
 
     public void MoveSelection() {
@@ -110,7 +124,12 @@ public class BattleSystem : MonoBehaviour
         yield return RunMove(player.PlayerUnit, trainerUnit, move);
        
         if (state == BattleState.PerformMove){
-            StartCoroutine(EnemyMove());
+            if (!isPVP) {
+                StartCoroutine(EnemyMove()); //not sure this part
+            }
+            else {
+                ActionSelection();
+            }
         }
     }
 
@@ -285,7 +304,14 @@ public class BattleSystem : MonoBehaviour
                 dialogBox.EnableAnswerSelector(false);
                 dialogBox.EnableQuestionText(false);
                 isCorrect = false;
-                StartCoroutine(EnemyMove());
+                if (!isPVP) {
+                    StartCoroutine(EnemyMove());
+                }
+                else {
+                    //dialogBox.TypeDialog("You answered wrongly!");
+                    ActionSelectionifWrong();
+                }
+                
             }
         }
 
