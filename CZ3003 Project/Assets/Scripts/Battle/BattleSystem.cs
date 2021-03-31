@@ -35,7 +35,7 @@ public class BattleSystem : MonoBehaviour
     int currentAction;
     int currentMove;
     int currentAnswer;
-    int correctAnswer;
+    public static int correctAnswer;
     bool isCorrect = true;
 
     public void StartBattle(BattleUnit trainerUnit) {
@@ -193,7 +193,6 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-
     public void HandleMoveSelection() {
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
             if (currentMove < 2)//playerUnit.Monster.Moves.Count - 1
@@ -210,21 +209,29 @@ public class BattleSystem : MonoBehaviour
             if (currentMove == 0) {
                 dialogBox.EnableQuestionText(true);
                 dialogBox.EnableAnswerSelector(true);
-                StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Easy").Question));
-                correctAnswer = dialogBox.SetAnswer(SelectQuestion(battleQuestions.Questions.QB, "Easy"));
+                //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Easy").Question));
+                StartCoroutine(QuestionManager.Instance.getQuestionsBaseOnLevel("Easy"));
+                // string question = QuestionManager.Instance.Question;
+                // Debug.Log(question);
+                // StartCoroutine(dialogBox.TypeQuestion(question));
+                //correctAnswer = QuestionManager.correctAnswer;
+                Debug.Log($"correct answer is {correctAnswer}");
+                //correctAnswer = dialogBox.SetAnswer(SelectQuestion(battleQuestions.Questions.QB, "Easy"));
                 PlayerAnswer();
             }
             else if (currentMove == 1) {
                 dialogBox.EnableQuestionText(true);
                 dialogBox.EnableAnswerSelector(true);
-                StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Medium").Question));
+                //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Medium").Question));
+                StartCoroutine(QuestionManager.Instance.getQuestionsBaseOnLevel("Medium"));
                 correctAnswer = dialogBox.SetAnswer(SelectQuestion(battleQuestions.Questions.QB, "Medium"));
                 PlayerAnswer();
             }
             else if (currentMove == 2) {
                 dialogBox.EnableQuestionText(true);
                 dialogBox.EnableAnswerSelector(true);
-                StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Hard").Question));
+                //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Hard").Question));
+                StartCoroutine(QuestionManager.Instance.getQuestionsBaseOnLevel("Hard"));
                 correctAnswer = dialogBox.SetAnswer(SelectQuestion(battleQuestions.Questions.QB, "Hard"));
                 PlayerAnswer();
             }

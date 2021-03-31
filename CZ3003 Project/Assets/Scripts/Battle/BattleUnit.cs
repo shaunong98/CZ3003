@@ -13,6 +13,10 @@ public class BattleUnit : MonoBehaviour
 
     public Monster Monster { get; set; }
 
+    public int Level {
+        get { return level; }
+    }
+
     public bool IsPlayerUnit { 
         get { return isPlayerUnit; }
     }
