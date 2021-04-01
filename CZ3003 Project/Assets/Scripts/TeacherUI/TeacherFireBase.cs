@@ -37,6 +37,7 @@ public class TeacherFireBase : MonoBehaviour
     public GameObject AddQuestionPanel;
     public GameObject OptionSelectionPanel;
     public GameObject FunctionSelectionPanel;
+    public Button SubmitButton;
 
     void Awake()
     {
@@ -108,16 +109,13 @@ public class TeacherFireBase : MonoBehaviour
         {
             Debug.LogWarning(message: $"Failed to register task with {qnTask.Exception}");
 
-            /*string message = "Missing Question!";
-            if (string.IsNullOrEmpty(AnswerInputField1.text))
+            string message = "Missing Question!";
+            if (string.IsNullOrWhiteSpace(QuestionInputField.text))
             {
                 Warning_Text.text = message;
-            }*/
+                SubmitButton.interactable = false;
+            }
 
-        }
-        else
-        {
-            //Qn should be added
         }
 
         var a1Task = DBreference.Child("Qns").Child($"{worldNumber}").Child($"{sectionNumber}").Child(difficulty).Child($"{length + 1}").Child("A1").SetValueAsync(_answer1);
@@ -129,14 +127,10 @@ public class TeacherFireBase : MonoBehaviour
             Debug.LogWarning(message: $"Failed to register task with {a1Task.Exception}");
 
             /*string message = "Missing Answer!";
-            if (string.IsNullOrEmpty(QuestionInputField.text))
+            if (string.IsNullOrEmpty(AnswerInputField1.text))
             {
                 Warning_Text.text = message;
             }*/
-        }
-        else
-        {
-            //A1 should be added
         }
 
         var a2Task = DBreference.Child("Qns").Child($"{worldNumber}").Child($"{sectionNumber}").Child(difficulty).Child($"{length + 1}").Child("A2").SetValueAsync(_answer2);
@@ -153,10 +147,6 @@ public class TeacherFireBase : MonoBehaviour
                 Warning_Text.text = message;
             }*/
         }
-        else
-        {
-            //A2 should be added
-        }
 
         var a3Task = DBreference.Child("Qns").Child($"{worldNumber}").Child($"{sectionNumber}").Child(difficulty).Child($"{length + 1}").Child("A3").SetValueAsync(_answer3);
 
@@ -171,10 +161,6 @@ public class TeacherFireBase : MonoBehaviour
             {
                 Warning_Text.text = message;
             }*/
-        }
-        else
-        {
-            //A3 should be added
         }
 
         ClearQuestionAndAnswersFields();
