@@ -5,14 +5,28 @@ using UnityEngine.UI;
 
 public class QuestionAdder : MonoBehaviour
 {
+    public static QuestionAdder instance;
     public GameObject AddQuestionPanel;
     public GameObject OptionSelectionPanel;
     public Dropdown WorldSelection;
-    public int World;
+    public static int World;
     public Dropdown DifficultySelect;
-    public string Difficulty;
+    public static string Difficulty;
     public Dropdown SectionSelect;
-    public int Section;
+    public static int Section;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != null)
+        {
+            Debug.Log("Instance already exists, destroying object!");
+            Destroy(this);
+        }
+    }
 
     public void WorldSelect()
     {
@@ -44,6 +58,7 @@ public class QuestionAdder : MonoBehaviour
         Section = int.Parse(SectionSelect.options[SectionSelect.value].text);
         Debug.Log(Section);
     }
+
     public void PressNextButton()
     {
         AddQuestionPanel.gameObject.SetActive(true);
