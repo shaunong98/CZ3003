@@ -56,10 +56,6 @@ public class TeacherFireBase : MonoBehaviour
                 Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
             }
         });
-
-        QuestionInputField = GetComponent<InputField>();
-        // Add callback
-        QuestionInputField.onValueChanged.AddListener(ValidateInput);
     }
 
     private void InitializeFirebase()
@@ -70,26 +66,6 @@ public class TeacherFireBase : MonoBehaviour
         DBreference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
-    private void OnEnable()
-    {
-        ValidateInput(QuestionInputField.text);
-    }
-
-    private void ValidateInput(string input)
-    {
-        // Here you could implement some replace or further validation logic
-        // if e.g. only certain characters shall be allowed
-
-        // Enable the button only if some valid input is available
-        SubmitButton.interactable = !string.IsNullOrWhiteSpace(input);
-
-        // just a bonus if you want to show an info box why input is invalid
-        if (InfoBox)
-        {
-            InfoBox.SetActive(string.IsNullOrWhiteSpace(input));
-            InfoBox.text = "Missing input!";
-        }
-    }
 
     public void ClearQuestionAndAnswersFields()
     {
