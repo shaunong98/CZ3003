@@ -56,6 +56,10 @@ public class TeacherFireBase : MonoBehaviour
                 Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
             }
         });
+
+        QuestionInputField = GetComponent<InputField>();
+        // Add callback
+        QuestionInputField.onValueChanged.AddListener(ValidateInput);
     }
 
     private void InitializeFirebase()
@@ -64,6 +68,27 @@ public class TeacherFireBase : MonoBehaviour
         //Set the authentication instance object
         auth = FirebaseAuth.DefaultInstance;
         DBreference = FirebaseDatabase.DefaultInstance.RootReference;
+    }
+
+    private void OnEnable()
+    {
+        ValidateInput(QuestionInputField.text);
+    }
+
+    private void ValidateInput(string input)
+    {
+        // Here you could implement some replace or further validation logic
+        // if e.g. only certain characters shall be allowed
+
+        // Enable the button only if some valid input is available
+        SubmitButton.interactable = !string.IsNullOrWhiteSpace(input);
+
+        // just a bonus if you want to show an info box why input is invalid
+        if (InfoBox)
+        {
+            InfoBox.SetActive(string.IsNullOrWhiteSpace(input));
+            InfoBox.text = "Missing input!";
+        }
     }
 
     public void ClearQuestionAndAnswersFields()
@@ -76,21 +101,6 @@ public class TeacherFireBase : MonoBehaviour
         AnswerInputField2.text = "";
         AnswerInputField3.Select();
         AnswerInputField3.text = "";
-    }
-    // Fix error handling!
-    void update()
-    {
-        string message = "Missing Input!";
-        if (string.IsNullOrWhiteSpace(QuestionInputField.text) || string.IsNullOrWhiteSpace(AnswerInputField1.text) || string.IsNullOrWhiteSpace(AnswerInputField2.text) || string.IsNullOrWhiteSpace(AnswerInputField3.text))
-        {
-            Warning_Text.text = message;
-            SubmitButton.interactable = false;
-        }
-        else
-        {
-            SubmitButton.interactable = true;
-            SubmitButtonMethod();
-        }
     }
 
     //Function for the register button
@@ -125,12 +135,12 @@ public class TeacherFireBase : MonoBehaviour
         {
             Debug.LogWarning(message: $"Failed to register task with {qnTask.Exception}");
 
-            /*string message = "Missing Question!";
+            string message = "Missing Question!";
             if (string.IsNullOrWhiteSpace(QuestionInputField.text))
             {
                 Warning_Text.text = message;
                 SubmitButton.interactable = false;
-            }*/
+            }
 
         }
 
