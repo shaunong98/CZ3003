@@ -72,6 +72,7 @@ public class GameController : MonoBehaviour
             trainer.BattleWon();
         }
         state = GameState.FreeRoam;
+        trainer.TrainerUnit.disableImage(); //have to disable image here or will have overlap as we are calling instance of same trainerunit scripts and when battle ends didnt account for this image
         BattleSystem.Instance.gameObject.SetActive(false);
         worldCamera.gameObject.SetActive(true);
     }

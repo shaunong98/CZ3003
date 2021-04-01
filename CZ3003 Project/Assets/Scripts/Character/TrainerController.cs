@@ -48,6 +48,7 @@ public class TrainerController : MonoBehaviour, Interactable
     }
 
     public IEnumerator TriggerTrainerBattle(PlayerController player) {
+        Debug.Log("exclamation set active");
         exclamation.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         exclamation.SetActive(false);

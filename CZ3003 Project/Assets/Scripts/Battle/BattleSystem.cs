@@ -18,7 +18,9 @@ public class BattleSystem : MonoBehaviour
     // [SerializeField] BattleHud enemyHud;
     [SerializeField] BattleDialogBox dialogBox;
     [SerializeField] BattleQuestions battleQuestions;
+    //[SerializeField] CountdownTimer countDown;
     BattleUnit trainerUnit;
+    public bool isPVP;
 
     // BattleSystem battleSystem;
 
@@ -45,11 +47,15 @@ public class BattleSystem : MonoBehaviour
     public IEnumerator SetupBattle(BattleUnit trainerUnit) {
         this.trainerUnit = trainerUnit;
         player.PlayerUnit.SetUp();
-        trainerUnit.SetUp();
+        trainerUnit.SetUp();    
         //trainer.TrainerUnit.SetUp();
         // playerUnit.SetUp();
         // enemyUnit.SetUp();
         dialogBox.SetMoveNames();
+        if (!isPVP) {
+            Debug.Log("timer text true");
+            dialogBox.EnableTimerText(false);
+        }
         dialogBox.EnableActionSelector(false);
         dialogBox.EnableQuestionText(false);
         dialogBox.EnableMoveSelector(false);
@@ -73,7 +79,16 @@ public class BattleSystem : MonoBehaviour
         dialogBox.EnableMoveSelector(false);
         dialogBox.EnableDialogText(true);
         dialogBox.EnableAnswerSelector(false);
+    }
 
+    public void ActionSelectionifWrong() {
+        state = BattleState.ActionSelection;
+        //isCorrect = true;
+        StartCoroutine(dialogBox.TypeDialog("You answered wrongly! Choose an action"));
+        dialogBox.EnableActionSelector(true);
+        dialogBox.EnableMoveSelector(false);
+        dialogBox.EnableDialogText(true);
+        dialogBox.EnableAnswerSelector(false);
     }
 
     public void MoveSelection() {
@@ -110,7 +125,12 @@ public class BattleSystem : MonoBehaviour
         yield return RunMove(player.PlayerUnit, trainerUnit, move);
        
         if (state == BattleState.PerformMove){
-            StartCoroutine(EnemyMove());
+            if (!isPVP) {
+                StartCoroutine(EnemyMove()); //not sure this part
+            }
+            else {
+                ActionSelection();
+            }
         }
     }
 
@@ -160,23 +180,52 @@ public class BattleSystem : MonoBehaviour
     public void HandleUpdate() {
         if (state == BattleState.ActionSelection) {
             HandleActionSelection();
+            if (isPVP) {
+                HandleTimer();
+            }
         }
 
         else if (state == BattleState.MoveSelection) {
             HandleMoveSelection();
+            if (isPVP) {
+                HandleTimer();
+            }
         }
         else if (state == BattleState.PlayerAnswer) {
             HandleAnswerSelection(correctAnswer);
+            if (isPVP) {
+                HandleTimer();
+            }
         }
 
     }
 
+    public void HandleTimer() 
+    {
+        if (!isCorrect) {
+            dialogBox.Timer -= 10f;
+            isCorrect = true;
+        }
+        if (!dialogBox.TimerPaused)
+        {
+            dialogBox.Timer -= Time.deltaTime;
+        }
+        dialogBox.SetTimer(dialogBox.Timer.ToString());
+        if (dialogBox.Timer <= 0)
+        {
+            BattleOver(false);
+            //SceneManager.LoadScene("Map Selection");
+            //Application.LoadLevel(levelToLoad);
+        }
+    }
+    
+
     public void HandleActionSelection() {
-        if (Input.GetKeyDown(KeyCode.DownArrow)) {
+        if (Input.GetKeyDown(KeyCode.S)) {
             if (currentAction < 1)
                 ++currentAction;
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow)) {
+        else if (Input.GetKeyDown(KeyCode.W)) {
             if (currentAction > 0)
                 --currentAction;
         }
@@ -189,16 +238,17 @@ public class BattleSystem : MonoBehaviour
             }
             else if (currentAction == 1) {
                 //run
+                BattleOver(false);
             }
         }
     }
 
     public void HandleMoveSelection() {
-        if (Input.GetKeyDown(KeyCode.RightArrow)) {
+        if (Input.GetKeyDown(KeyCode.D)) {
             if (currentMove < 2)//playerUnit.Monster.Moves.Count - 1
                 ++currentMove;
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+        else if (Input.GetKeyDown(KeyCode.A)) {
             if (currentMove > 0)
                 --currentMove;
         } 
@@ -249,11 +299,11 @@ public class BattleSystem : MonoBehaviour
     }
 
     public void HandleAnswerSelection(int answer) {
-        if (Input.GetKeyDown(KeyCode.RightArrow)) {
+        if (Input.GetKeyDown(KeyCode.D)) {
             if (currentAnswer < 2)
                 ++currentAnswer;
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+        else if (Input.GetKeyDown(KeyCode.A)) {
             if (currentAnswer > 0)
                 --currentAnswer;
         }
@@ -285,7 +335,14 @@ public class BattleSystem : MonoBehaviour
                 dialogBox.EnableAnswerSelector(false);
                 dialogBox.EnableQuestionText(false);
                 isCorrect = false;
-                StartCoroutine(EnemyMove());
+                if (!isPVP) {
+                    StartCoroutine(EnemyMove());
+                }
+                else {
+                    //dialogBox.TypeDialog("You answered wrongly!");
+                    ActionSelectionifWrong();
+                }
+                
             }
         }
 
