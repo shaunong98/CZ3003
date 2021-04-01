@@ -6,10 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class WorldUIManager : MonoBehaviour
 {
-    //testing
-    public int worldNumber;
-    public int sectionNumber;
-
     public static WorldUIManager instance;
     public GameObject mapSelectionPanel;
     public GameObject[] levelSelectionPanels;
@@ -99,11 +95,6 @@ public class WorldUIManager : MonoBehaviour
     }
     public void PressPVPModeButton()
     {
-        //testing
-        QuestionManager.worldNumber = worldNumber;
-        QuestionManager.sectionNumber = sectionNumber;
-        SceneManager.LoadScene("BattleScene");
-
         PVPSelectionPanel.gameObject.SetActive(true);
         modeSelectionPanel.gameObject.SetActive(false);
     }
