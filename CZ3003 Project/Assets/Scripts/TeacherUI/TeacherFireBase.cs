@@ -37,6 +37,7 @@ public class TeacherFireBase : MonoBehaviour
     public GameObject AddQuestionPanel;
     public GameObject OptionSelectionPanel;
     public GameObject FunctionSelectionPanel;
+    public GameObject InfoBox;
     public Button SubmitButton;
 
     void Awake()
@@ -64,6 +65,7 @@ public class TeacherFireBase : MonoBehaviour
         auth = FirebaseAuth.DefaultInstance;
         DBreference = FirebaseDatabase.DefaultInstance.RootReference;
     }
+
 
     public void ClearQuestionAndAnswersFields()
     {
