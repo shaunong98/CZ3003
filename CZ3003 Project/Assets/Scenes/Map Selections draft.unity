@@ -1456,8 +1456,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d222f7ef9953d5a4f8a893546dfd9bae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldNumber: 1
-  sectionNumber: 1
   mapSelectionPanel: {fileID: 141883823}
   levelSelectionPanels:
   - {fileID: 497622809}
@@ -2753,7 +2751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldNumber: 1
   sectionNumber: 2
-  isUnlocked: 1
+  isUnlocked: 0
   lockImage: {fileID: 1408292669}
   starsImage:
   - {fileID: 1996815683}
@@ -3536,7 +3534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldNumber: 0
   sectionNumber: 0
-  isUnlocked: 0
+  isUnlocked: 1
   lockImage: {fileID: 1779099443}
   starsImage:
   - {fileID: 857289642}
@@ -4517,7 +4515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldNumber: 0
   sectionNumber: 0
-  isUnlocked: 1
+  isUnlocked: 0
   lockImage: {fileID: 929884034}
   starsImage:
   - {fileID: 856574527}
@@ -6096,7 +6094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldNumber: 1
   sectionNumber: 3
-  isUnlocked: 0
+  isUnlocked: 1
   lockImage: {fileID: 2131281912}
   starsImage:
   - {fileID: 1952108443}
@@ -9317,7 +9315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldNumber: 0
   sectionNumber: 0
-  isUnlocked: 0
+  isUnlocked: 1
   lockImage: {fileID: 1957241360}
   starsImage:
   - {fileID: 147063207}

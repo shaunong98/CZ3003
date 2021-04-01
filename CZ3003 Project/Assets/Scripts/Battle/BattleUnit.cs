@@ -37,6 +37,7 @@ public class BattleUnit : MonoBehaviour
     }
 
     public void SetUp() {
+        image.enabled = false;
         image.enabled = true;
         Monster = new Monster(_base, level);
         if (isPlayerUnit) {
@@ -44,13 +45,17 @@ public class BattleUnit : MonoBehaviour
             image.sprite = Monster.Base.BackSprite;
         }
         else
-            
+
             image.sprite = Monster.Base.FrontSprite;
         image.color = originalColor;
 
         hud.SetData(Monster);
         
         PlayerEnterAnimation();
+    }
+
+    public void disableImage() {
+        image.enabled = false;
     }
 
     public void PlayerEnterAnimation() {
