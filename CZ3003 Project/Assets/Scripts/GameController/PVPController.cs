@@ -9,7 +9,6 @@ public class PVPController: MonoBehaviour
 {
     [SerializeField] PlayerController playerController;
     [SerializeField] BattleSystem battleSystem;
-    //[SerializeField] CountdownTimer countDown;
     //[SerializeField] Camera worldCamera;
 
     PVPState state;
@@ -60,7 +59,7 @@ public class PVPController: MonoBehaviour
         BattleSystem.Instance.StartBattle(trainerUnit); 
     }
 
-    void EndBattle(bool won) {
+    public void EndBattle(bool won) {
         state = PVPState.End;
         BattleSystem.Instance.gameObject.SetActive(false);
         //SceneManager.LoadScene("Map Selection");
@@ -72,7 +71,6 @@ public class PVPController: MonoBehaviour
         if (state == PVPState.Battle)
         {
             BattleSystem.Instance.HandleUpdate();
-            //countDown.TimerUpdate();
 
         }
         else if (state == PVPState.End)

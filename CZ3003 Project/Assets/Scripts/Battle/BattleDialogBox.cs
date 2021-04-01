@@ -6,6 +6,19 @@ using UnityEngine.UI;
 
 public class BattleDialogBox : MonoBehaviour
 {
+   [SerializeField] Text timerSeconds;
+   public float timer = 20f;
+   public bool timerPaused = false;
+
+   public bool TimerPaused {
+       get {return timerPaused;}
+   }
+
+   public float Timer {
+        get { return timer; }
+        set { timer = value; }
+    }
+
    [SerializeField] int lettersPerSecond;
    [SerializeField] Color highlightedColor; 
 
@@ -20,6 +33,10 @@ public class BattleDialogBox : MonoBehaviour
    [SerializeField] List<Text> answerText;
 
     public List<Text> AnswerText { get; set; }
+
+    public void SetTimer(string time) {
+        timerSeconds.text = time;
+    }
 
     public IEnumerator TypeQuestion(string question) {
        questionText.text = "";
@@ -79,6 +96,10 @@ public class BattleDialogBox : MonoBehaviour
 //        }
 //        return false;
 //    }
+
+    public void EnableTimerText(bool enabled) {
+       timerSeconds.enabled = enabled;
+   }
 
    public void EnableDialogText(bool enabled) {
        dialogText.enabled = enabled;
