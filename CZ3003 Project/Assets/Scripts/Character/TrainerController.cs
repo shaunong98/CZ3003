@@ -54,8 +54,8 @@ public class TrainerController : MonoBehaviour, Interactable
         exclamation.SetActive(false);
         Debug.Log("Start Battle");
         var diff = player.transform.position - transform.position ;
-        //var moveVec = diff - diff.normalized; //normalized vector keeps the same direction but its length is 1.0
-        yield return character.Move(diff);
+        var moveVec = diff - diff.normalized; //normalized vector keeps the same direction but its length is 1.0
+        yield return character.Move(moveVec);
 
         StartCoroutine(DialogManager.Instance.ShowDialog(dialog,()=>
             {
