@@ -53,9 +53,9 @@ public class TrainerController : MonoBehaviour, Interactable
         yield return new WaitForSeconds(0.5f);
         exclamation.SetActive(false);
         Debug.Log("Start Battle");
-        var diff = player.transform.position - transform.position + new Vector3(0,1.3f,0);
-        //var moveVec = diff - diff.normalized; //normalized vector keeps the same direction but its length is 1.0
-        yield return character.Move(diff);
+        var diff = player.transform.position - transform.position ;
+        var moveVec = diff - diff.normalized; //normalized vector keeps the same direction but its length is 1.0
+        yield return character.Move(moveVec);
 
         StartCoroutine(DialogManager.Instance.ShowDialog(dialog,()=>
             {
