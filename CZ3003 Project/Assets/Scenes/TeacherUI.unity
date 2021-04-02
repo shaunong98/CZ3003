@@ -1019,7 +1019,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: dasfasd
+  m_Text: 
 --- !u!222 &250681373
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5238,7 +5238,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 
 --- !u!222 &1014300556
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8413,7 +8413,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 
 --- !u!222 &1508978336
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11528,7 +11528,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 
 --- !u!222 &2079394603
 CanvasRenderer:
   m_ObjectHideFlags: 0
