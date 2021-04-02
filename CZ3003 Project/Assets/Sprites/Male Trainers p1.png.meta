@@ -1,0 +1,1356 @@
+fileFormatVersion: 2
+guid: 893eea277d656694c8d9815f5d066127
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -598538004846161064
+    second: Male Trainers p1_0
+  - first:
+      213: 2553211206685392625
+    second: Male Trainers p1_1
+  - first:
+      213: 5091929304999611172
+    second: Male Trainers p1_2
+  - first:
+      213: -8201979356080793293
+    second: Male Trainers p1_3
+  - first:
+      213: 6795222265955166015
+    second: Male Trainers p1_4
+  - first:
+      213: 8409078056844051361
+    second: Male Trainers p1_5
+  - first:
+      213: -6122845205624324043
+    second: Male Trainers p1_6
+  - first:
+      213: -4715481390131862795
+    second: Male Trainers p1_7
+  - first:
+      213: -4876980006378032771
+    second: Male Trainers p1_8
+  - first:
+      213: 3109627992696363647
+    second: Male Trainers p1_9
+  - first:
+      213: 8656354215772140767
+    second: Male Trainers p1_10
+  - first:
+      213: 5457272317443390045
+    second: Male Trainers p1_11
+  - first:
+      213: 8111145473435509873
+    second: Male Trainers p1_12
+  - first:
+      213: 3276444630534150002
+    second: Male Trainers p1_13
+  - first:
+      213: -7114443699641799453
+    second: Male Trainers p1_14
+  - first:
+      213: 4642360901180336125
+    second: Male Trainers p1_15
+  - first:
+      213: 6043273096136678259
+    second: Male Trainers p1_16
+  - first:
+      213: 2488884584534311413
+    second: Male Trainers p1_17
+  - first:
+      213: 6529753490605816980
+    second: Male Trainers p1_18
+  - first:
+      213: 6504404751100009853
+    second: Male Trainers p1_19
+  - first:
+      213: -3052788496781030016
+    second: Male Trainers p1_20
+  - first:
+      213: 6818795301789260596
+    second: Male Trainers p1_21
+  - first:
+      213: 4185710068196647927
+    second: Male Trainers p1_22
+  - first:
+      213: 3605250304189961794
+    second: Male Trainers p1_23
+  - first:
+      213: 1768258096152939070
+    second: Male Trainers p1_24
+  - first:
+      213: -1840414981530181366
+    second: Male Trainers p1_25
+  - first:
+      213: 3034556078383980201
+    second: Male Trainers p1_26
+  - first:
+      213: 8197545724401308656
+    second: Male Trainers p1_27
+  - first:
+      213: 7935427518135784505
+    second: Male Trainers p1_28
+  - first:
+      213: -5022408332564272432
+    second: Male Trainers p1_29
+  - first:
+      213: 2302701529028199238
+    second: Male Trainers p1_30
+  - first:
+      213: 694721780348323665
+    second: Male Trainers p1_31
+  - first:
+      213: 4412533858615275148
+    second: Male Trainers p1_32
+  - first:
+      213: 1588017226212683123
+    second: Male Trainers p1_33
+  - first:
+      213: 6776398482386752270
+    second: Male Trainers p1_34
+  - first:
+      213: -7134936710788968616
+    second: Male Trainers p1_35
+  - first:
+      213: -4287891040591864570
+    second: Male Trainers p1_36
+  - first:
+      213: 7641423028753771091
+    second: Male Trainers p1_37
+  - first:
+      213: -1859729331281569466
+    second: Male Trainers p1_38
+  - first:
+      213: 7258034657844797784
+    second: Male Trainers p1_39
+  - first:
+      213: -8443325559070952866
+    second: Male Trainers p1_40
+  - first:
+      213: -8238399604231856446
+    second: Male Trainers p1_41
+  - first:
+      213: 2543283111086788764
+    second: Male Trainers p1_42
+  - first:
+      213: 1820959773316519873
+    second: Male Trainers p1_43
+  - first:
+      213: -3744027365260236105
+    second: Male Trainers p1_44
+  - first:
+      213: 4270784075409083647
+    second: Male Trainers p1_45
+  - first:
+      213: -723268291343726636
+    second: Male Trainers p1_46
+  - first:
+      213: 129626258495663812
+    second: Male Trainers p1_47
+  - first:
+      213: -2678082844996839358
+    second: Male Trainers p1_48
+  - first:
+      213: 8616016297751865869
+    second: Male Trainers p1_49
+  - first:
+      213: 5927653690223584950
+    second: Male Trainers p1_50
+  - first:
+      213: 7381329701306897468
+    second: Male Trainers p1_51
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Male Trainers p1_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 218
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 853d2941bd091b7f0800000000000000
+      internalID: -598538004846161064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 218
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fe7703a014de6320800000000000000
+      internalID: 2553211206685392625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_2
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 218
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42b47e589ba2aa640800000000000000
+      internalID: 5091929304999611172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_3
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 218
+        width: 17
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33997b94b37bc2e80800000000000000
+      internalID: -8201979356080793293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_4
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 218
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f372514f5aa7d4e50800000000000000
+      internalID: 6795222265955166015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_5
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 218
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a3c8b280fb03b470800000000000000
+      internalID: 8409078056844051361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_6
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 218
+        width: 17
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5300f08c9b8470ba0800000000000000
+      internalID: -6122845205624324043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_7
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 218
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f2a93cc8ae3f8eb0800000000000000
+      internalID: -4715481390131862795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_8
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 218
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d71b727068c715cb0800000000000000
+      internalID: -4876980006378032771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_9
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 218
+        width: 17
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7a17401f2e972b20800000000000000
+      internalID: 3109627992696363647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_10
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 218
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd4bd01cb4c812870800000000000000
+      internalID: 8656354215772140767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_11
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 218
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5a39c342402cbb40800000000000000
+      internalID: 5457272317443390045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_12
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 186
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17424a955d3909070800000000000000
+      internalID: 8111145473435509873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_13
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 186
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27759393805487d20800000000000000
+      internalID: 3276444630534150002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_14
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 186
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3eca55c262b644d90800000000000000
+      internalID: -7114443699641799453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_15
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 186
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df72402b4aafc6040800000000000000
+      internalID: 4642360901180336125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_16
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 186
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37bd6efbcd40ed350800000000000000
+      internalID: 6043273096136678259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_17
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 186
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f10d1cc75b4a8220800000000000000
+      internalID: 2488884584534311413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_18
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 186
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49c3d6e14385e9a50800000000000000
+      internalID: 6529753490605816980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_19
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 186
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7ddda8c8a9444a50800000000000000
+      internalID: 6504404751100009853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_20
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 186
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08dc7fa590152a5d0800000000000000
+      internalID: -3052788496781030016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_21
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 186
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43b504f033a31ae50800000000000000
+      internalID: 6818795301789260596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_22
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 186
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f323a35121a61a30800000000000000
+      internalID: 4185710068196647927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_23
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 186
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2469c9bdc0c680230800000000000000
+      internalID: 3605250304189961794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_24
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 154
+        width: 17
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3a876cae5d1a8810800000000000000
+      internalID: 1768258096152939070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_25
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 154
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a01269243588576e0800000000000000
+      internalID: -1840414981530181366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_26
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 154
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ae541feca8ec1a20800000000000000
+      internalID: 3034556078383980201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_27
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 154
+        width: 17
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f356f4676883c170800000000000000
+      internalID: 8197545724401308656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_28
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 154
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 934d757b84d402e60800000000000000
+      internalID: 7935427518135784505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_29
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 154
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0da6b8c3b32dc4ab0800000000000000
+      internalID: -5022408332564272432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_30
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 154
+        width: 17
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 643897527d6d4ff10800000000000000
+      internalID: 2302701529028199238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_31
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 154
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 157836747c524a900800000000000000
+      internalID: 694721780348323665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_32
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 154
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8ea5227a287c3d30800000000000000
+      internalID: 4412533858615275148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_33
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 154
+        width: 17
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37dab99e045c90610800000000000000
+      internalID: 1588017226212683123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_34
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 154
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e03982f448a9a0e50800000000000000
+      internalID: 6776398482386752270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_35
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 154
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85f87823ddc9bfc90800000000000000
+      internalID: -7134936710788968616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_36
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 122
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60d11f911d95e74c0800000000000000
+      internalID: -4287891040591864570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_37
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 122
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35aab5732c9cb0a60800000000000000
+      internalID: 7641423028753771091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_38
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 122
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6495696c60ae036e0800000000000000
+      internalID: -1859729331281569466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_39
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 122
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 851205c0118b9b460800000000000000
+      internalID: 7258034657844797784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_40
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 122
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e527990832843da80800000000000000
+      internalID: -8443325559070952866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_41
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 122
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ce9a0875335bad80800000000000000
+      internalID: -8238399604231856446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_42
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 122
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c90149fb38e8b4320800000000000000
+      internalID: 2543283111086788764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_43
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 122
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c79ec61449554910800000000000000
+      internalID: 1820959773316519873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_44
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 122
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ba6250b2fa8a0cc0800000000000000
+      internalID: -3744027365260236105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_45
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 122
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffc472f2d7fd44b30800000000000000
+      internalID: 4270784075409083647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_46
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 122
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d74721325f66f5f0800000000000000
+      internalID: -723268291343726636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_47
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 122
+        width: 16
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ce623335668cc100800000000000000
+      internalID: 129626258495663812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_48
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 20
+        width: 44
+        height: 83
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24855e077d985dad0800000000000000
+      internalID: -2678082844996839358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_49
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 21
+        width: 44
+        height: 83
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0ae9765c2d329770800000000000000
+      internalID: 8616016297751865869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_50
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 21
+        width: 44
+        height: 83
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b66f4d00a1434250800000000000000
+      internalID: 5927653690223584950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Male Trainers p1_51
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 21
+        width: 44
+        height: 83
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3410706140cf6660800000000000000
+      internalID: 7381329701306897468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
