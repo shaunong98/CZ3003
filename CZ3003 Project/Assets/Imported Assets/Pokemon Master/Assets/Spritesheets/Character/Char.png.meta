@@ -1,0 +1,1062 @@
+fileFormatVersion: 2
+guid: 2f3b174d83018d04885316e8867622f7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Idle_North
+  - first:
+      213: 21300002
+    second: Walk_North1
+  - first:
+      213: 21300004
+    second: Walk_North2
+  - first:
+      213: 21300006
+    second: Char_3
+  - first:
+      213: 21300008
+    second: Char_4
+  - first:
+      213: 21300010
+    second: Char_5
+  - first:
+      213: 21300012
+    second: Char_6
+  - first:
+      213: 21300014
+    second: Char_7
+  - first:
+      213: 21300016
+    second: Char_8
+  - first:
+      213: 21300018
+    second: Char_9
+  - first:
+      213: 21300020
+    second: Char_10
+  - first:
+      213: 21300022
+    second: Char_11
+  - first:
+      213: 21300024
+    second: Char_12
+  - first:
+      213: 21300026
+    second: Char_13
+  - first:
+      213: 21300028
+    second: Char_14
+  - first:
+      213: 21300030
+    second: Char_15
+  - first:
+      213: 21300032
+    second: Char_16
+  - first:
+      213: 21300034
+    second: Char_17
+  - first:
+      213: 21300036
+    second: Char_18
+  - first:
+      213: 21300038
+    second: Char_19
+  - first:
+      213: 21300040
+    second: Idle_South
+  - first:
+      213: 21300042
+    second: Walk_South1
+  - first:
+      213: 21300044
+    second: Walk_South2
+  - first:
+      213: 21300046
+    second: Char_23
+  - first:
+      213: 21300048
+    second: Char_24
+  - first:
+      213: 21300050
+    second: Char_25
+  - first:
+      213: 21300052
+    second: Char_26
+  - first:
+      213: 21300054
+    second: Char_27
+  - first:
+      213: 21300056
+    second: Char_28
+  - first:
+      213: 21300058
+    second: Char_29
+  - first:
+      213: 21300060
+    second: Char_30
+  - first:
+      213: 21300062
+    second: Char_31
+  - first:
+      213: 21300064
+    second: Char_32
+  - first:
+      213: 21300066
+    second: Char_33
+  - first:
+      213: 21300068
+    second: Char_34
+  - first:
+      213: 21300070
+    second: Char_35
+  - first:
+      213: 21300072
+    second: Char_36
+  - first:
+      213: 21300074
+    second: Char_37
+  - first:
+      213: 21300076
+    second: Char_38
+  - first:
+      213: 21300078
+    second: Char_39
+  - first:
+      213: 21300080
+    second: Char_40
+  - first:
+      213: 21300082
+    second: Char_41
+  - first:
+      213: 21300084
+    second: Char_42
+  - first:
+      213: 21300086
+    second: Idle_West
+  - first:
+      213: 21300088
+    second: Walk_West1
+  - first:
+      213: 21300090
+    second: Walk_West2
+  - first:
+      213: 21300092
+    second: Char_46
+  - first:
+      213: 21300094
+    second: Char_47
+  - first:
+      213: 21300096
+    second: Char_48
+  - first:
+      213: 21300098
+    second: Char_49
+  - first:
+      213: 21300100
+    second: Char_50
+  - first:
+      213: 21300102
+    second: Char_51
+  - first:
+      213: 21300104
+    second: Char_52
+  - first:
+      213: 21300106
+    second: Char_53
+  - first:
+      213: 21300108
+    second: Char_54
+  - first:
+      213: 21300110
+    second: Char_55
+  - first:
+      213: 21300112
+    second: Char_56
+  - first:
+      213: 21300114
+    second: Char_57
+  - first:
+      213: 21300116
+    second: Char_58
+  - first:
+      213: 21300118
+    second: Char_59
+  - first:
+      213: 21300120
+    second: Char_60
+  - first:
+      213: 21300122
+    second: Char_61
+  - first:
+      213: 21300124
+    second: Char_62
+  - first:
+      213: 21300126
+    second: Char_63
+  - first:
+      213: 21300128
+    second: Char_64
+  - first:
+      213: 21300130
+    second: Idle_East
+  - first:
+      213: 21300132
+    second: Walk_East1
+  - first:
+      213: 21300134
+    second: Walk_East2
+  - first:
+      213: 21300136
+    second: Char_68
+  - first:
+      213: 21300138
+    second: Char_69
+  - first:
+      213: 21300140
+    second: Char_70
+  - first:
+      213: 21300142
+    second: Char_71
+  - first:
+      213: 21300144
+    second: Char_72
+  - first:
+      213: 21300146
+    second: Char_73
+  - first:
+      213: 21300148
+    second: Char_74
+  - first:
+      213: 21300150
+    second: Char_75
+  - first:
+      213: 21300152
+    second: Char_76
+  - first:
+      213: 21300154
+    second: Char_77
+  - first:
+      213: 21300156
+    second: Char_78
+  - first:
+      213: 21300158
+    second: Char_79
+  - first:
+      213: 21300160
+    second: Char_80
+  - first:
+      213: 21300162
+    second: Char_81
+  - first:
+      213: 21300164
+    second: Char_82
+  - first:
+      213: 21300166
+    second: Char_83
+  - first:
+      213: 21300168
+    second: Char_84
+  - first:
+      213: 21300170
+    second: Char_85
+  - first:
+      213: 21300172
+    second: Char_86
+  - first:
+      213: 21300174
+    second: Char_87
+  - first:
+      213: 21300176
+    second: Char_88
+  - first:
+      213: 21300178
+    second: Char_89
+  - first:
+      213: 21300180
+    second: Char_90
+  - first:
+      213: 21300182
+    second: Char_91
+  - first:
+      213: 21300184
+    second: Char_92
+  - first:
+      213: 21300186
+    second: Char_93
+  - first:
+      213: 21300188
+    second: Char_94
+  - first:
+      213: 21300190
+    second: Char_95
+  - first:
+      213: 21300192
+    second: Char_96
+  - first:
+      213: 21300194
+    second: Char_97
+  - first:
+      213: 21300196
+    second: Char_98
+  - first:
+      213: 21300198
+    second: Char_99
+  - first:
+      213: 21300200
+    second: Char_100
+  - first:
+      213: 21300202
+    second: Char_101
+  - first:
+      213: 21300204
+    second: Char_102
+  - first:
+      213: 21300206
+    second: Char_103
+  - first:
+      213: 21300208
+    second: Char_104
+  - first:
+      213: 21300210
+    second: Char_105
+  - first:
+      213: 21300212
+    second: Char_106
+  - first:
+      213: 21300214
+    second: Char_107
+  - first:
+      213: 21300216
+    second: Char_108
+  - first:
+      213: 21300218
+    second: Char_109
+  - first:
+      213: 21300220
+    second: Char_110
+  - first:
+      213: 21300222
+    second: Char_111
+  - first:
+      213: 21300224
+    second: Char_112
+  - first:
+      213: 21300226
+    second: Char_113
+  - first:
+      213: 21300228
+    second: Char_114
+  - first:
+      213: 21300230
+    second: Char_115
+  - first:
+      213: 21300232
+    second: Char_116
+  - first:
+      213: 21300234
+    second: Char_117
+  - first:
+      213: 21300236
+    second: Char_118
+  - first:
+      213: 21300238
+    second: Char_119
+  - first:
+      213: 21300240
+    second: Char_120
+  - first:
+      213: 21300242
+    second: Char_121
+  - first:
+      213: 21300244
+    second: Char_122
+  - first:
+      213: 21300246
+    second: Char_123
+  - first:
+      213: 21300248
+    second: Char_124
+  - first:
+      213: 21300250
+    second: Char_125
+  - first:
+      213: 21300252
+    second: Char_126
+  - first:
+      213: 21300254
+    second: Char_127
+  - first:
+      213: 21300256
+    second: Char_128
+  - first:
+      213: 21300258
+    second: Char_129
+  - first:
+      213: 21300260
+    second: Char_130
+  - first:
+      213: 21300262
+    second: Char_131
+  - first:
+      213: 21300264
+    second: Char_132
+  - first:
+      213: 21300266
+    second: Char_133
+  - first:
+      213: 21300268
+    second: Char_134
+  - first:
+      213: 21300270
+    second: Char_135
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 16
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Walk_North1
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 245
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22305410000000000800000000000000
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_North2
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 245
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42305410000000000800000000000000
+      internalID: 21300004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_15
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 155
+        width: 52
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3305410000000000800000000000000
+      internalID: 21300030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_South
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 213
+        width: 20
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84305410000000000800000000000000
+      internalID: 21300040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_South1
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 213
+        width: 20
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4305410000000000800000000000000
+      internalID: 21300042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_South2
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 213
+        width: 20
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4305410000000000800000000000000
+      internalID: 21300044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_West
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 181
+        width: 19
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67305410000000000800000000000000
+      internalID: 21300086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_West1
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 181
+        width: 19
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87305410000000000800000000000000
+      internalID: 21300088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_West2
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 181
+        width: 19
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7305410000000000800000000000000
+      internalID: 21300090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_East
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 149
+        width: 19
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a305410000000000800000000000000
+      internalID: 21300130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_East1
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 149
+        width: 19
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a305410000000000800000000000000
+      internalID: 21300132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Walk_East2
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 149
+        width: 19
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a305410000000000800000000000000
+      internalID: 21300134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_88
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 106
+        width: 18
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d305410000000000800000000000000
+      internalID: 21300176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_89
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 105
+        width: 17
+        height: 29
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d305410000000000800000000000000
+      internalID: 21300178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_90
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 105
+        width: 17
+        height: 29
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d305410000000000800000000000000
+      internalID: 21300180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_99
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 75
+        width: 20
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e305410000000000800000000000000
+      internalID: 21300198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_100
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 72
+        width: 21
+        height: 25
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e305410000000000800000000000000
+      internalID: 21300200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_101
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 72
+        width: 21
+        height: 25
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae305410000000000800000000000000
+      internalID: 21300202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_110
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 40
+        width: 19
+        height: 23
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf305410000000000800000000000000
+      internalID: 21300220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_111
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 40
+        width: 22
+        height: 25
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef305410000000000800000000000000
+      internalID: 21300222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_112
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 40
+        width: 21
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00405410000000000800000000000000
+      internalID: 21300224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_123
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 7
+        width: 19
+        height: 24
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61405410000000000800000000000000
+      internalID: 21300246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_124
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 7
+        width: 22
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81405410000000000800000000000000
+      internalID: 21300248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_125
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 7
+        width: 21
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1405410000000000800000000000000
+      internalID: 21300250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_133
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 7
+        width: 33
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2405410000000000800000000000000
+      internalID: 21300266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Char_134
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 7
+        width: 32
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2405410000000000800000000000000
+      internalID: 21300268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 67f8da41a31c23948a84bce0a04375a3
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
