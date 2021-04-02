@@ -287,12 +287,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterList:
-  - splash: {fileID: 21300268, guid: 2f3b174d83018d04885316e8867622f7, type: 3}
-    characterName: 
-    characterColor: {r: 1, g: 0, b: 0, a: 0.43137255}
-  - splash: {fileID: 21300266, guid: 2f3b174d83018d04885316e8867622f7, type: 3}
-    characterName: 
-    characterColor: {r: 0, g: 0.23529412, b: 1, a: 0.43137255}
+  - splash: {fileID: 21300032, guid: 2f3b174d83018d04885316e8867622f7, type: 3}
+    characterName: Male1
+    characterColor: {r: 1, g: 0, b: 0, a: 0.627451}
+  - splash: {fileID: -3190212445718334284, guid: 16b165101c318824399fd19d1dbfb430,
+      type: 3}
+    characterName: Male2
+    characterColor: {r: 0, g: 0.23529412, b: 1, a: 0.627451}
+  - splash: {fileID: 4837035593983760551, guid: 03ccf516985f9254a8c45b0430160dc1,
+      type: 3}
+    characterName: Female1
+    characterColor: {r: 0, g: 1, b: 0.3960271, a: 0.627451}
+  - splash: {fileID: 8426410015707501485, guid: c78ed2892b0c6ac4d877feabaf0c248c,
+      type: 3}
+    characterName: Female2
+    characterColor: {r: 0.9951428, g: 1, b: 0, a: 0.627451}
   characterName: {fileID: 61328447}
   characterSplash: {fileID: 1983966629}
   backgroundColor: {fileID: 1643555768}
@@ -396,7 +405,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 419582165}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 115534055}
+        m_TargetAssemblyTypeName: CharacterSel, Assembly-CSharp
+        m_MethodName: Confirm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &419582165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -866,7 +887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.40269795, g: 0.5566038, b: 0.2809274, a: 1}
+  m_Color: {r: 0.29168424, g: 0.2924528, b: 0.29107332, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1470,7 +1491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300268, guid: 2f3b174d83018d04885316e8867622f7, type: 3}
+  m_Sprite: {fileID: 21300032, guid: 2f3b174d83018d04885316e8867622f7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
