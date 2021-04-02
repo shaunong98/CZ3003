@@ -5759,6 +5759,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e826443f240481748b91ec173cf5d80b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dependencyStatus: 0
+  usernameField: {fileID: 0}
+  xpField: {fileID: 0}
+  killsField: {fileID: 0}
+  masteryField: {fileID: 0}
+  scoreElement: {fileID: 0}
+  scoreboardContent: {fileID: 0}
   SearchBar: {fileID: 792703768}
   OverviewPanel: {fileID: 1019857100}
   StudentPanel: {fileID: 1989284245}
@@ -5772,6 +5779,9 @@ MonoBehaviour:
   - {fileID: 329822000}
   - {fileID: 539925112}
   - {fileID: 207122747}
+  Statistic1: {fileID: 250681372}
+  Statistic2: {fileID: 2079394602}
+  Statistic3: {fileID: 1508978335}
 --- !u!1 &1061311763
 GameObject:
   m_ObjectHideFlags: 0
