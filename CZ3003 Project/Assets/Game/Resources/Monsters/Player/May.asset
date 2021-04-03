@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa70544ad3ce12343ba6446c3ef44676, type: 3}
+  m_Name: May
+  m_EditorClassIdentifier: 
+  name: May
+  description: 
+  frontSprite: {fileID: 4837035593983760551, guid: 03ccf516985f9254a8c45b0430160dc1,
+    type: 3}
+  backSprite: {fileID: 3008087652619403660, guid: 03ccf516985f9254a8c45b0430160dc1,
+    type: 3}
+  maxHp: 50
+  attack: 5
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 73a605629e94c564fa22a1aa854acc60, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 55967d5cb66e0e843b286e821c8128d6, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: cabfb4137941ca346898efd219a604b7, type: 2}
+    level: 1
