@@ -31,6 +31,15 @@ public class CharacterSel : MonoBehaviour
         public Color characterColor;
     }
 
+    public static int getCharacterIndex()
+    {
+        return 0;
+    }
+
+    public void Confirm()
+    {
+        Debug.Log(string.Format("Character {0}:{1} has been chosen", selectedCharacterIndex, characterList[selectedCharacterIndex].characterName));
+    }
     public void LeftArrow()
     {
         selectedCharacterIndex--;

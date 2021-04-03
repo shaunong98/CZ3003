@@ -40,6 +40,15 @@ public class TeacherFireBase : MonoBehaviour
     public GameObject InfoBox;
     public Button SubmitButton;
 
+    string StudentSearched;
+    public InputField SearchBar;
+    public GameObject OverviewPanel;
+    public GameObject StudentPanel;
+    public Text Statistic1;
+    public Text Statistic2;
+    public Text Statistic3;
+    public Text Name;
+
     void Awake()
     {
         //Check that all of the necessary dependencies for Firebase are present on the system
@@ -172,6 +181,61 @@ public class TeacherFireBase : MonoBehaviour
         FunctionSelectionPanel.gameObject.SetActive(true);
     }
 
+    public void SearchStudent()
+    {
+        StudentSearched = SearchBar.text;
+        Debug.Log(StudentSearched);
+        SearchBar.text = "";
+        StartCoroutine(ShowInformation(StudentSearched));
+    }
+
+    private IEnumerator ShowInformation(string _StudentID)
+    {
+
+        //Get Student
+        var DBTask = DBreference.Child("users").GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        Debug.Log("something");
+
+        if (DBTask.Exception != null)
+        {
+            Debug.Log("Yea");
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else if (DBTask.Result.Value == null)
+        {
+            Debug.Log("Yo");
+            Statistic3.text = "XP = 0";
+            Statistic1.text = "Kills = 0";
+            Statistic2.text = "Mastery = 0";
+        }
+        else
+        {
+            Debug.Log("hello");
+            DataSnapshot snapshot = DBTask.Result;
+            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                string username = childSnapshot.Child("username").Value.ToString();
+                int kills = int.Parse(childSnapshot.Child("kills").Value.ToString());
+                int mastery = int.Parse(childSnapshot.Child("mastery").Value.ToString());
+                int xp = int.Parse(childSnapshot.Child("xp").Value.ToString());
+
+                if (username == _StudentID)
+                {
+                    Statistic1.text = "Kills = " + kills.ToString();
+                    Statistic2.text = "Mastery = " + mastery.ToString();
+                    Statistic3.text = "XP = " + xp.ToString();
+                    Name.text = username;
+                    break;
+                }
+                Statistic1.text = "Kills = 0"; //for non-existent account
+                Statistic2.text = "Mastery = 0";
+                Statistic3.text = "XP = 0";
+                Name.text = "Invalid User";
+            }
+        }
+    }
 }
 
 ///// FIX ERROR HANDLING!!!!!
