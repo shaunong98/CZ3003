@@ -44,7 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleScene.unity
     guid: 992bdcbdcc8ba8d4b9288f68548c6bfc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Map Selections draft.unity
     guid: a5f9666e3611ab24c9b2fdd51cf931be
   - enabled: 1

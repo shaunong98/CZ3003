@@ -29,18 +29,21 @@ public class PlayerSelector : MonoBehaviour
         {
             brendanPlayer.gameObject.SetActive(true);
             gameManager.GetComponent<GameController>().playerController=brendanPlayer.GetComponent<PlayerController>();
+            cam.GetComponent<CameraFollow>().target= brendanPlayer.transform;
         }
 
         else if(index==2)
         {
             mayPlayer.gameObject.SetActive(true);
             gameManager.GetComponent<GameController>().playerController=mayPlayer.GetComponent<PlayerController>();
+            cam.GetComponent<CameraFollow>().target= mayPlayer.transform;
         }
 
         else if(index==3)
         {
             serenaPlayer.gameObject.SetActive(true);
             gameManager.GetComponent<GameController>().playerController=serenaPlayer.GetComponent<PlayerController>();
+            cam.GetComponent<CameraFollow>().target= serenaPlayer.transform;
         }
     }
 }
