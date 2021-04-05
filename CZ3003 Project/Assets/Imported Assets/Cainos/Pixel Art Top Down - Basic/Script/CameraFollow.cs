@@ -19,7 +19,7 @@ using UnityEngine;
             offset = transform.position - target.position;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (target == null) return;
 
