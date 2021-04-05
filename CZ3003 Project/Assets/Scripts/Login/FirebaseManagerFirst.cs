@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Firebase;
 using Firebase.Auth;
@@ -8,7 +7,7 @@ using TMPro;
 using System.Linq;
 using UnityEngine.SceneManagement;
 
-public class FirebaseManager : MonoBehaviour
+public class FirebaseManagerFirst : MonoBehaviour
 {
     //[SerializeField] QuestionManager questionManager;
     //Firebase variables
@@ -105,20 +104,23 @@ public class FirebaseManager : MonoBehaviour
     public void EnterGameButton() {
         ClearRegisterFeilds();
         ClearLoginFeilds();
-        SceneManager.LoadScene("Character Selection");
+        SceneManager.LoadScene("Map Selection");
     }
     //Function for the save button
     public void SaveDataButton()
-    {   StartCoroutine(UpdateStars(1,1,0));
+    {
         StartCoroutine(UpdateUsernameAuth(usernameField.text));
         StartCoroutine(UpdateUsernameDatabase(usernameField.text));
+
+        StartCoroutine(UpdateXp(int.Parse(xpField.text)));
         StartCoroutine(UpdateKills(int.Parse(killsField.text)));
+        StartCoroutine(Updatemastery(int.Parse(masteryField.text)));
     }
     //Function for the scoreboard button
-    // public void ScoreboardButton()
-    // {        
-    //     StartCoroutine(LoadScoreboardData());
-    // }
+    public void ScoreboardButton()
+    {        
+        StartCoroutine(LoadScoreboardData());
+    }
 
     private IEnumerator Login(string _email, string _password)
     {
@@ -163,9 +165,9 @@ public class FirebaseManager : MonoBehaviour
             Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
             warningLoginText.text = "";
             confirmLoginText.text = "Logged In";
-            // StartCoroutine(LoadUserData());
+            StartCoroutine(LoadUserData());
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
 
             usernameField.text = User.DisplayName;
             UIManager.instance.UserDataScreen(); // Change to user data UI
@@ -234,9 +236,7 @@ public class FirebaseManager : MonoBehaviour
                     var ProfileTask = User.UpdateUserProfileAsync(profile);
                     //Wait until the task completes
                     yield return new WaitUntil(predicate: () => ProfileTask.IsCompleted);
-                    // StartCoroutine(UpdateInnerStars(0));
-                    InitialisePlayerProfile();
-                    StartCoroutine(UpdateUsernameDatabase(_username));
+
                     if (ProfileTask.Exception != null)
                     {
                         //If there are errors handle them
@@ -257,64 +257,6 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    private IEnumerator UpdateStars(int starsworld, int starssection, int input)
-    {   
-        string starworld = starsworld.ToString();
-        string starsection = starssection.ToString();
-        var DBTask = DBreference.Child("users").Child(User.UserId).Child("stars").Child(starworld).Child(starsection).SetValueAsync(input);
-        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-
-        if (DBTask.Exception != null)
-        {
-            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-        }
-        else
-        {
-            //Kills are now updated
-        }
-    }
-
-    public void UniversalUpdateStars(int starsworld, int starssection, int input){
-        StartCoroutine(UpdateStars(starsworld,starssection,input));
-    }
-
-    private IEnumerator UpdateBattleStats(int starsworld,int section, int input)
-    {   
-        string starsection = section.ToString();
-        string starworld = starsworld.ToString();
-        var DBTask = DBreference.Child("users").Child(User.UserId).Child("BattleStats").Child(starworld).Child(starsection).Child("Points").SetValueAsync(input);
-        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-
-        if (DBTask.Exception != null)
-        {
-            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-        }
-        else
-        {
-            //Kills are now updated
-        }
-    }
-    private void InitialisePlayerProfile()
-    {   
-        StartCoroutine(UpdateBattleStats(1,1,0));
-        StartCoroutine(UpdateBattleStats(1,2,0));
-        StartCoroutine(UpdateBattleStats(1,3,0));
-        StartCoroutine(UpdateBattleStats(2,1,0));
-        StartCoroutine(UpdateBattleStats(2,2,0));
-        StartCoroutine(UpdateBattleStats(2,3,0));
-        StartCoroutine(UpdateBattleStats(3,1,0));
-        StartCoroutine(UpdateBattleStats(3,2,0));
-        StartCoroutine(UpdateBattleStats(3,3,0));
-        StartCoroutine(UpdateStars(1,1,0));
-        StartCoroutine(UpdateStars(1,2,0));
-        StartCoroutine(UpdateStars(1,3,0));
-        StartCoroutine(UpdateStars(2,1,0));
-        StartCoroutine(UpdateStars(2,2,0));
-        StartCoroutine(UpdateStars(2,3,0));
-        StartCoroutine(UpdateStars(3,1,0));
-        StartCoroutine(UpdateStars(3,2,0));
-        StartCoroutine(UpdateStars(3,3,0));
-    }
     private IEnumerator UpdateUsernameAuth(string _username)
     {
         //Create a user profile and set the username
@@ -351,9 +293,23 @@ public class FirebaseManager : MonoBehaviour
             //Database username is now updated
         }
     }
-    
 
+    private IEnumerator UpdateXp(int _xp)
+    {
+        //Set the currently logged in user xp
+        var DBTask = DBreference.Child("users").Child(User.UserId).Child("xp").SetValueAsync(_xp);
 
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Xp is now updated
+        }
+    }
 
     private IEnumerator UpdateKills(int _kills)
     {
@@ -368,75 +324,93 @@ public class FirebaseManager : MonoBehaviour
         }
         else
         {
-            // Kills are now updated
+            //Kills are now updated
         }
     }
 
+    private IEnumerator Updatemastery(int _mastery)
+    {
+        //Set the currently logged in user mastery
+        var DBTask = DBreference.Child("users").Child(User.UserId).Child("mastery").SetValueAsync(_mastery);
 
-    // private IEnumerator LoadUserData()
-    // {
-    //     //Get the currently logged in user data
-    //     var DBTask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
-    //     yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //mastery are now updated
+        }
+    }
 
-    //     if (DBTask.Exception != null)
-    //     {
-    //         Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-    //     }
-    //     else if (DBTask.Result.Value == null)
-    //     {
-    //         //No data exists yet
-    //         xpField.text = "0";
-    //         killsField.text = "0";
-    //         masteryField.text = "0";
-    //     }
-    //     else
-    //     {
-    //         //Data has been retrieved
-    //         DataSnapshot snapshot = DBTask.Result;
+    private IEnumerator LoadUserData()
+    {
+        //Get the currently logged in user data
+        var DBTask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
 
-    //         killsField.text = snapshot.Child("kills").Value.ToString();
-    //     }
-    // }
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
-    // private IEnumerator LoadScoreboardData()
-    // {
-    //     //Get all the users data ordered by kills amount
-    //     var DBTask = DBreference.Child("users").OrderByChild("mastery").GetValueAsync();
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else if (DBTask.Result.Value == null)
+        {
+            //No data exists yet
+            xpField.text = "0";
+            killsField.text = "0";
+            masteryField.text = "0";
+        }
+        else
+        {
+            //Data has been retrieved
+            DataSnapshot snapshot = DBTask.Result;
 
-    //     yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+            xpField.text = snapshot.Child("xp").Value.ToString();
+            killsField.text = snapshot.Child("kills").Value.ToString();
+            masteryField.text = snapshot.Child("mastery").Value.ToString();
+        }
+    }
 
-    //     if (DBTask.Exception != null)
-    //     {
-    //         Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-    //     }
-    //     else
-    //     {
-    //         //Data has been retrieved
-    //         DataSnapshot snapshot = DBTask.Result;
+    private IEnumerator LoadScoreboardData()
+    {
+        //Get all the users data ordered by kills amount
+        var DBTask = DBreference.Child("users").OrderByChild("mastery").GetValueAsync();
 
-    //         //Destroy any existing scoreboard elements
-    //         foreach (Transform child in scoreboardContent.transform)
-    //         {
-    //             Destroy(child.gameObject);
-    //         }
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
-    //         //Loop through every users UID
-    //         foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
-    //         {
-    //             string username = childSnapshot.Child("username").Value.ToString();
-    //             int kills = int.Parse(childSnapshot.Child("kills").Value.ToString());
-    //             int mastery = int.Parse(childSnapshot.Child("mastery").Value.ToString());
-    //             int xp = int.Parse(childSnapshot.Child("xp").Value.ToString());
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Data has been retrieved
+            DataSnapshot snapshot = DBTask.Result;
 
-    //             //Instantiate new scoreboard elements
-    //             GameObject scoreboardElement = Instantiate(scoreElement, scoreboardContent);
-    //             scoreboardElement.GetComponent<ScoreElement>().NewScoreElement(username, kills, mastery, xp);
-    //         }
+            //Destroy any existing scoreboard elements
+            foreach (Transform child in scoreboardContent.transform)
+            {
+                Destroy(child.gameObject);
+            }
 
-    //         //Go to scoareboard screen
-    //         UIManager.instance.ScoreboardScreen();
-    //     }
-    // }
+            //Loop through every users UID
+            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                string username = childSnapshot.Child("username").Value.ToString();
+                int kills = int.Parse(childSnapshot.Child("kills").Value.ToString());
+                int mastery = int.Parse(childSnapshot.Child("mastery").Value.ToString());
+                int xp = int.Parse(childSnapshot.Child("xp").Value.ToString());
+
+                //Instantiate new scoreboard elements
+                GameObject scoreboardElement = Instantiate(scoreElement, scoreboardContent);
+                scoreboardElement.GetComponent<ScoreElement>().NewScoreElement(username, kills, mastery, xp);
+            }
+
+            //Go to scoareboard screen
+            UIManager.instance.ScoreboardScreen();
+        }
+    }
 }
