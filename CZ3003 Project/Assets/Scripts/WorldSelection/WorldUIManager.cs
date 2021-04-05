@@ -121,4 +121,8 @@ public class WorldUIManager : MonoBehaviour
         modeSelectionPanel.gameObject.SetActive(false);
         PVPSelectionPanel.gameObject.SetActive(false);
     }
+    public void Openforum()
+    {
+        Application.OpenURL("https://softwaremon.quora.com/");
+    }
 }
