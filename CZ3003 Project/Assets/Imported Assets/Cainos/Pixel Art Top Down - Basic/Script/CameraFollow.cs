@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cainos.PixelArtTopDown_Basic
-{
     //let camera follow target
     public class CameraFollow : MonoBehaviour
     {
@@ -21,7 +19,7 @@ namespace Cainos.PixelArtTopDown_Basic
             offset = transform.position - target.position;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (target == null) return;
 
@@ -30,4 +28,3 @@ namespace Cainos.PixelArtTopDown_Basic
         }
 
     }
-}

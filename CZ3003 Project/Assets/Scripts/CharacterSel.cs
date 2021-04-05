@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 public class CharacterSel : MonoBehaviour
 {
     private int selectedCharacterIndex;
-    private Color desiredColor;
+    private Color desiredColor = new Color(1, 0, 0, 0.63f);
     [Header("List of characters")]
     [SerializeField] private List<CharacterSelectObject> characterList = new List<CharacterSelectObject>();
     
@@ -31,14 +33,13 @@ public class CharacterSel : MonoBehaviour
         public Color characterColor;
     }
 
-    public static int getCharacterIndex()
-    {
-        return 0;
-    }
-
     public void Confirm()
     {
+        PlayerPrefs.SetInt("CharacterSelected",selectedCharacterIndex);
+        if(PlayerPrefs.HasKey("CharacterSelected"))
+
         Debug.Log(string.Format("Character {0}:{1} has been chosen", selectedCharacterIndex, characterList[selectedCharacterIndex].characterName));
+        SceneManager.LoadScene("Map Selection");
     }
     public void LeftArrow()
     {
@@ -57,14 +58,15 @@ public class CharacterSel : MonoBehaviour
     }
     private void UpdateCharacterSelectionUI()
     {
+        desiredColor = characterList[selectedCharacterIndex].characterColor;
         characterSplash.sprite = characterList[selectedCharacterIndex].splash;
         characterName.text = characterList[selectedCharacterIndex].characterName;
-        desiredColor = characterList[selectedCharacterIndex].characterColor;
     }
 
     private void start()
     {
         UpdateCharacterSelectionUI();
+        AudioManager.Instance.PlayMusicWithFade(characterSelectMusic);
     }
     
     private void Update() 

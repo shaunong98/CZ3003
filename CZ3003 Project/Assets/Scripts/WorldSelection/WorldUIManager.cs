@@ -37,7 +37,10 @@ public class WorldUIManager : MonoBehaviour
     }
     private void Start()
     {
+
+        int temp = PlayerPrefs.GetInt("CharacterSelected");
         PlayerPrefs.DeleteAll();   //delete all player key and values from player prefs
+        PlayerPrefs.SetInt("CharacterSelected",temp);
     }
     private void Update()
     {
@@ -79,10 +82,7 @@ public class WorldUIManager : MonoBehaviour
     {
         SceneManager.LoadScene(_sceneName);
     }
-    /*public void SceneTransition(string _sceneName)
-    {
-        SceneManager.LoadScene(_sceneName);
-    }*/
+
     public void PressQuestModeButton()
     {
         mapSelectionPanel.gameObject.SetActive(true);

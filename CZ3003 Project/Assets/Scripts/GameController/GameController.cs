@@ -7,7 +7,7 @@ public enum GameState{FreeRoam, Battle, Dialog, Cutscene}
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] PlayerController playerController;
+    [SerializeField] public PlayerController playerController;
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Camera worldCamera;
 
@@ -31,9 +31,9 @@ public class GameController : MonoBehaviour
         {
             var trainer = trainerCollider.GetComponentInParent<TrainerController>();
             this.trainer = trainer;
-            if (trainer != null) {
-                state = GameState.Cutscene;
-                
+            if (trainer != null) 
+            {
+                state = GameState.Cutscene;    
                 StartCoroutine(trainer.TriggerTrainerBattle(playerController));
             }
         };
@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour
             Debug.Log("trainer lost");
             trainer.BattleLost();
             //Debug.Log("it reached here");
-            trainer = null;
+            //trainer = null;
         }
         else {
             Debug.Log("trainer won");
