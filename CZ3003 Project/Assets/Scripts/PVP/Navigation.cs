@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Navigation : MonoBehaviour
 {
@@ -32,5 +33,10 @@ public class Navigation : MonoBehaviour
             World[i].gameObject.SetActive(false);
         }
         SelectionPanel.gameObject.SetActive(false);
+    }
+
+    public void backToWorldPVPScreen(int index) {
+        SceneManager.LoadScene("Map Selection");
+        World[index].gameObject.SetActive(true);
     }
 }
