@@ -44,9 +44,31 @@ public class TeacherFireBase : MonoBehaviour
     public InputField SearchBar;
     public GameObject OverviewPanel;
     public GameObject StudentPanel;
-    public Text Statistic1;
-    public Text Statistic2;
-    public Text Statistic3;
+
+    public Text OODP_S1_points;
+    public Text OODP_S2_points;
+    public Text OODP_S3_points;
+
+    public Text SE_S1_points;
+    public Text SE_S2_points;
+    public Text SE_S3_points;
+
+    public Text SSAD_S1_points;
+    public Text SSAD_S2_points;
+    public Text SSAD_S3_points;
+
+    public Text OODP_S1_stars;
+    public Text OODP_S2_stars;
+    public Text OODP_S3_stars;
+
+    public Text SE_S1_stars;
+    public Text SE_S2_stars;
+    public Text SE_S3_stars;
+
+    public Text SSAD_S1_stars;
+    public Text SSAD_S2_stars;
+    public Text SSAD_S3_stars;
+
     public Text Name;
 
     void Awake()
@@ -206,9 +228,25 @@ public class TeacherFireBase : MonoBehaviour
         else if (DBTask.Result.Value == null)
         {
             Debug.Log("Yo");
-            Statistic3.text = "XP = 0";
-            Statistic1.text = "Kills = 0";
-            Statistic2.text = "Mastery = 0";
+            OODP_S1_points.text = "0";
+            OODP_S2_points.text = "0";
+            OODP_S3_points.text = "0";
+            SE_S1_points.text = "0";
+            SE_S2_points.text = "0";
+            SE_S3_points.text = "0";
+            SSAD_S1_points.text = "0";
+            SSAD_S2_points.text = "0";
+            SSAD_S3_points.text = "0";
+
+            OODP_S1_stars.text = "0";
+            OODP_S2_stars.text = "0";
+            OODP_S3_stars.text = "0";
+            SE_S1_stars.text = "0";
+            SE_S2_stars.text = "0";
+            SE_S3_stars.text = "0";
+            SSAD_S1_stars.text = "0";
+            SSAD_S2_stars.text = "0";
+            SSAD_S3_stars.text = "0";
         }
         else
         {
@@ -217,21 +255,79 @@ public class TeacherFireBase : MonoBehaviour
             foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
             {
                 string username = childSnapshot.Child("username").Value.ToString();
-                int kills = int.Parse(childSnapshot.Child("kills").Value.ToString());
-                int mastery = int.Parse(childSnapshot.Child("mastery").Value.ToString());
-                int xp = int.Parse(childSnapshot.Child("xp").Value.ToString());
+
+                int oodpS1pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{1}").Child($"{1}").Child("Points").Value.ToString());
+                int oodpS2pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{1}").Child($"{2}").Child("Points").Value.ToString());
+                int oodpS3pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{1}").Child($"{3}").Child("Points").Value.ToString());
+
+                int seS1pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{2}").Child($"{1}").Child("Points").Value.ToString());
+                int seS2pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{2}").Child($"{2}").Child("Points").Value.ToString());
+                int seS3pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{2}").Child($"{3}").Child("Points").Value.ToString());
+
+                int ssadS1pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{3}").Child($"{1}").Child("Points").Value.ToString());
+                int ssadS2pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{3}").Child($"{2}").Child("Points").Value.ToString());
+                int ssadS3pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{3}").Child($"{3}").Child("Points").Value.ToString());
+
+                int oodpS1stars = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Value.ToString());
+                int oodpS2stars = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Value.ToString());
+                int oodpS3stars = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Value.ToString());
+
+                int seS1stars = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Value.ToString());
+                int seS2stars = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Value.ToString());
+                int seS3stars = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Value.ToString());
+
+                int ssadS1stars = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Value.ToString());
+                int ssadS2stars = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Value.ToString());
+                int ssadS3stars = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Value.ToString());
 
                 if (username == _StudentID)
                 {
-                    Statistic1.text = "Kills = " + kills.ToString();
-                    Statistic2.text = "Mastery = " + mastery.ToString();
-                    Statistic3.text = "XP = " + xp.ToString();
+                    OODP_S1_points.text = oodpS1pts.ToString();
+                    OODP_S2_points.text = oodpS2pts.ToString();
+                    OODP_S3_points.text = oodpS3pts.ToString();
+
+                    SE_S1_points.text = seS1pts.ToString();
+                    SE_S2_points.text = seS2pts.ToString();
+                    SE_S3_points.text = seS3pts.ToString();
+
+                    SSAD_S1_points.text = ssadS1pts.ToString();
+                    SSAD_S2_points.text = ssadS2pts.ToString();
+                    SSAD_S3_points.text = ssadS3pts.ToString();
+
+                    OODP_S1_stars.text = oodpS1stars.ToString();
+                    OODP_S2_stars.text = oodpS2stars.ToString();
+                    OODP_S3_stars.text = oodpS3stars.ToString();
+
+                    SE_S1_stars.text = seS1stars.ToString();
+                    SE_S2_stars.text = seS2stars.ToString();
+                    SE_S3_stars.text = seS3stars.ToString();
+
+                    SSAD_S1_stars.text = ssadS1stars.ToString();
+                    SSAD_S2_stars.text = ssadS2stars.ToString();
+                    SSAD_S3_stars.text = ssadS3stars.ToString();
+
                     Name.text = username;
                     break;
                 }
-                Statistic1.text = "Kills = 0"; //for non-existent account
-                Statistic2.text = "Mastery = 0";
-                Statistic3.text = "XP = 0";
+                OODP_S1_points.text = "0"; //invalid user
+                OODP_S2_points.text = "0";
+                OODP_S3_points.text = "0";
+                SE_S1_points.text = "0";
+                SE_S2_points.text = "0";
+                SE_S3_points.text = "0";
+                SSAD_S1_points.text = "0";
+                SSAD_S2_points.text = "0";
+                SSAD_S3_points.text = "0";
+
+                OODP_S1_stars.text = "0";
+                OODP_S2_stars.text = "0";
+                OODP_S3_stars.text = "0";
+                SE_S1_stars.text = "0";
+                SE_S2_stars.text = "0";
+                SE_S3_stars.text = "0";
+                SSAD_S1_stars.text = "0";
+                SSAD_S2_stars.text = "0";
+                SSAD_S3_stars.text = "0";
                 Name.text = "Invalid User";
             }
         }
