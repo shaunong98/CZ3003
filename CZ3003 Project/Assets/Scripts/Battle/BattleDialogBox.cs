@@ -9,6 +9,7 @@ public class BattleDialogBox : MonoBehaviour
    [SerializeField] Text timerSeconds;
    public float timer = 20f;
    public bool timerPaused = false;
+   public int points = 0;
 
    public bool TimerPaused {
        get {return timerPaused;}
@@ -17,6 +18,11 @@ public class BattleDialogBox : MonoBehaviour
    public float Timer {
         get { return timer; }
         set { timer = value; }
+    }
+
+    public int Points {
+        get { return points; }
+        set { points = value; }
     }
 
    [SerializeField] int lettersPerSecond;
@@ -151,7 +157,9 @@ public class BattleDialogBox : MonoBehaviour
        }
    }
 
-
-
-   
+   public void completedLevel()
+    {
+        timerPaused = true;
+        points = (int)timer;
+    } 
 }

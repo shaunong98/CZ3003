@@ -13,6 +13,7 @@ public class QuestionManager : MonoBehaviour {
 
     [SerializeField] int lettersPerSecond;
     [SerializeField] Text questionText;
+    [SerializeField] GameObject answerSelector;
     [SerializeField] List<Text> answerText;
 
     //Firebase variables
@@ -22,7 +23,6 @@ public class QuestionManager : MonoBehaviour {
     public FirebaseUser User;
     public DatabaseReference DBreference;
     
-
     public static int correctAnswer;
     public string question;
     public static int worldNumber;
@@ -63,6 +63,7 @@ public class QuestionManager : MonoBehaviour {
                 Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
             }
         });
+        //User = FirebaseManager.User;
         DontDestroyOnLoad(this);
     }
 
@@ -77,12 +78,14 @@ public class QuestionManager : MonoBehaviour {
     public IEnumerator TypeQuestion(string question) {
        questionText.text = "";
        foreach (var letter in question.ToCharArray()) {
+           Debug.Log("for loop");
            questionText.text += letter;
            yield return new WaitForSeconds(1f/lettersPerSecond);
        }
    }
 
     public IEnumerator getQuestionsBaseOnLevel(string difficulty) {
+        Debug.Log("Handlemoveselection");
         int questionNum;
         Debug.Log("reached here at getquestion");
         Debug.Log($"{worldNumber}");
@@ -116,6 +119,9 @@ public class QuestionManager : MonoBehaviour {
             Debug.Log(question);
             yield return TypeQuestion(question);
             
+            // if (Input.GetKeyDown(KeyCode.Space)) {
+            //     Debug.Log("reached here at space");
+            //     EnableAnswerSelector(true);
             List<int> list = new List<int>();   //  Declare list
             for (int n = 0; n < 3; n++)    //  Populate list
             {
@@ -142,9 +148,15 @@ public class QuestionManager : MonoBehaviour {
             }
   
         }
+        // }
+        // BattleSystem.Instance.PlayerAnswer();
         yield return new WaitForSeconds(1f);
         
     }
+
+    public void EnableAnswerSelector(bool enabled) {
+       answerSelector.SetActive(enabled);
+   }
 
 
 }
