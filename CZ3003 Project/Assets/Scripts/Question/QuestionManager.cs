@@ -13,7 +13,7 @@ public class QuestionManager : MonoBehaviour {
 
     [SerializeField] int lettersPerSecond;
     [SerializeField] Text questionText;
-    [SerializeField] GameObject answerSelector;
+    //[SerializeField] GameObject answerSelector;
     [SerializeField] List<Text> answerText;
 
     //Firebase variables
@@ -64,7 +64,7 @@ public class QuestionManager : MonoBehaviour {
             }
         });
         //User = FirebaseManager.User;
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
     }
 
     private void InitializeFirebase()
@@ -78,14 +78,13 @@ public class QuestionManager : MonoBehaviour {
     public IEnumerator TypeQuestion(string question) {
        questionText.text = "";
        foreach (var letter in question.ToCharArray()) {
-           Debug.Log("for loop");
            questionText.text += letter;
            yield return new WaitForSeconds(1f/lettersPerSecond);
        }
    }
 
     public IEnumerator getQuestionsBaseOnLevel(string difficulty) {
-        Debug.Log("Handlemoveselection");
+        //Debug.Log("Handlemoveselection");
         int questionNum;
         Debug.Log("reached here at getquestion");
         Debug.Log($"{worldNumber}");
@@ -154,9 +153,9 @@ public class QuestionManager : MonoBehaviour {
         
     }
 
-    public void EnableAnswerSelector(bool enabled) {
-       answerSelector.SetActive(enabled);
-   }
+//     public void EnableAnswerSelector(bool enabled) {
+//        answerSelector.SetActive(enabled);
+//    }
 
 
 }

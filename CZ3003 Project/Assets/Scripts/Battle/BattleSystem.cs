@@ -17,7 +17,7 @@ public class BattleSystem : MonoBehaviour
     //[SerializeField] BattleUnit playerUnit;
     //[SerializeField] BattleUnit enemyUnit;
     //[SerializeField] TrainerController trainer;
-    [SerializeField] PlayerController player;
+    [SerializeField] public PlayerController player;
     // [SerializeField] BattleHud playerHud;
     // [SerializeField] BattleHud enemyHud;
     [SerializeField] BattleDialogBox dialogBox;
@@ -194,7 +194,7 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.PlayerAnswer;
         dialogBox.EnableActionSelector(false);
         dialogBox.EnableDialogText(false);
-        dialogBox.EnableQuestionText(false);
+        dialogBox.EnableQuestionText(true);
         dialogBox.EnableAnswerSelector(true);
         dialogBox.EnableMoveSelector(false);
     }
@@ -354,6 +354,7 @@ public class BattleSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)) {
             if (currentMove == 0) {
                 dialogBox.EnableQuestionText(true);
+                Debug.Log("enable question is selected");
                 dialogBox.EnableAnswerSelector(false);
                 //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Easy").Question));
                 StartCoroutine(QuestionManager.Instance.getQuestionsBaseOnLevel("Easy"));

@@ -975,6 +975,7 @@ MonoBehaviour:
   dialogBox: {fileID: 1277695422003284941}
   battleQuestions: {fileID: 1277695420684452967}
   isPVP: 0
+  dependencyStatus: 0
 --- !u!1 &1277695420684452964
 GameObject:
   m_ObjectHideFlags: 0
@@ -2918,6 +2919,7 @@ MonoBehaviour:
   timerSeconds: {fileID: 0}
   timer: 300
   timerPaused: 0
+  points: 0
   lettersPerSecond: 30
   highlightedColor: {r: 0.04705881, g: 0.38782802, b: 0.8901961, a: 1}
   dialogText: {fileID: 1277695420291662387}

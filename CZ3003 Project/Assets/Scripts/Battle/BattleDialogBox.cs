@@ -112,6 +112,7 @@ public class BattleDialogBox : MonoBehaviour
    }
 
     public void EnableQuestionText(bool enabled) {
+        Debug.Log("enabled text");
        questionText.enabled = enabled;
    }
 

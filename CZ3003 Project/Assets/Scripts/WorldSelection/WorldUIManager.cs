@@ -32,7 +32,7 @@ public class WorldUIManager : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
     }
     private void Start()
@@ -121,4 +121,6 @@ public class WorldUIManager : MonoBehaviour
         modeSelectionPanel.gameObject.SetActive(false);
         PVPSelectionPanel.gameObject.SetActive(false);
     }
+
+
 }
