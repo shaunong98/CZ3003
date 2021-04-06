@@ -11823,12 +11823,12 @@ PrefabInstance:
     - target: {fileID: 467246028921403452, guid: a51bbd0ab2d4d264f9aa2bad4f30dbb9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.5
+      value: -8.44
       objectReference: {fileID: 0}
     - target: {fileID: 467246028921403452, guid: a51bbd0ab2d4d264f9aa2bad4f30dbb9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.9
+      value: -8.91
       objectReference: {fileID: 0}
     - target: {fileID: 467246028921403452, guid: a51bbd0ab2d4d264f9aa2bad4f30dbb9,
         type: 3}
@@ -26150,6 +26150,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 641349407826790385, guid: c6a02dcf9b560ce4b80b8b659a5ff73e,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 641349407826790385, guid: c6a02dcf9b560ce4b80b8b659a5ff73e,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -497930551
+      objectReference: {fileID: 0}
+    - target: {fileID: 1930500629997330553, guid: c6a02dcf9b560ce4b80b8b659a5ff73e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4395688291499089192, guid: c6a02dcf9b560ce4b80b8b659a5ff73e,
         type: 3}
       propertyPath: trainerUnit
@@ -26420,6 +26435,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1860692463099497296, guid: 957a5892fa124a942a0ff27a3c5497ee,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860692463099497296, guid: 957a5892fa124a942a0ff27a3c5497ee,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -497930551
+      objectReference: {fileID: 0}
     - target: {fileID: 8174351583069162387, guid: 957a5892fa124a942a0ff27a3c5497ee,
         type: 3}
       propertyPath: m_RootOrder
@@ -26560,6 +26585,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red Trainer Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7972326145932774535, guid: 1249a70838863ce4784c6cdab5fd233f,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972326145932774535, guid: 1249a70838863ce4784c6cdab5fd233f,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -497930551
+      objectReference: {fileID: 0}
     - target: {fileID: 8734521296434019904, guid: 1249a70838863ce4784c6cdab5fd233f,
         type: 3}
       propertyPath: trainerUnit
@@ -26699,6 +26734,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Green Trainer Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423990429041511477, guid: 92e380d1dff619542b74998f0597face,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5422297856826017800, guid: 92e380d1dff619542b74998f0597face,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5422297856826017800, guid: 92e380d1dff619542b74998f0597face,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -497930551
       objectReference: {fileID: 0}
     - target: {fileID: 7492456328717091581, guid: 92e380d1dff619542b74998f0597face,
         type: 3}
@@ -29812,7 +29862,7 @@ Tilemap:
       - {fileID: 21301288, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301290, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301292, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
