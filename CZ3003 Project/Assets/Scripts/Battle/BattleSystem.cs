@@ -356,6 +356,7 @@ public class BattleSystem : MonoBehaviour
                 dialogBox.EnableQuestionText(true);
                 Debug.Log("enable question is selected");
                 dialogBox.EnableAnswerSelector(false);
+                dialogBox.RestartAnswerSelection();
                 //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Easy").Question));
                 StartCoroutine(QuestionManager.Instance.getQuestionsBaseOnLevel("Easy"));
                 // string question = QuestionManager.Instance.Question;
@@ -369,6 +370,7 @@ public class BattleSystem : MonoBehaviour
             else if (currentMove == 1) {
                 dialogBox.EnableQuestionText(true);
                 dialogBox.EnableAnswerSelector(true);
+                dialogBox.RestartAnswerSelection();
                 //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Medium").Question));
                 StartCoroutine(QuestionManager.Instance.getQuestionsBaseOnLevel("Medium"));
                 Debug.Log($"correct answer is {correctAnswer}");
@@ -378,6 +380,7 @@ public class BattleSystem : MonoBehaviour
             else if (currentMove == 2) {
                 dialogBox.EnableQuestionText(true);
                 dialogBox.EnableAnswerSelector(true);
+                dialogBox.RestartAnswerSelection();
                 //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Hard").Question));
                 StartCoroutine(QuestionManager.Instance.getQuestionsBaseOnLevel("Hard"));
                 Debug.Log($"correct answer is {correctAnswer}");

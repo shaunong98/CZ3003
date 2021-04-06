@@ -158,6 +158,13 @@ public class BattleDialogBox : MonoBehaviour
        }
    }
 
+    public void RestartAnswerSelection() {
+       for (int i = 0; i < answerText.Count; ++i) {
+            answerText[i].text = "";
+       }
+    }
+   
+
    public void completedLevel()
     {
         timerPaused = true;
