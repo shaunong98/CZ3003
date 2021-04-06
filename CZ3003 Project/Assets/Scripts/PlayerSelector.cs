@@ -13,6 +13,8 @@ public class PlayerSelector : MonoBehaviour
 
     public GameObject gameManager;
 
+    public GameObject battleSystem;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -22,6 +24,7 @@ public class PlayerSelector : MonoBehaviour
         {
             calemPlayer.gameObject.SetActive(true);
             gameManager.GetComponent<GameController>().playerController=calemPlayer.GetComponent<PlayerController>();
+            battleSystem.GetComponent<BattleSystem>().player=calemPlayer.GetComponent<PlayerController>();
             cam.GetComponent<CameraFollow>().target= calemPlayer.transform;
         }
 
@@ -29,6 +32,7 @@ public class PlayerSelector : MonoBehaviour
         {
             brendanPlayer.gameObject.SetActive(true);
             gameManager.GetComponent<GameController>().playerController=brendanPlayer.GetComponent<PlayerController>();
+            battleSystem.GetComponent<BattleSystem>().player=brendanPlayer.GetComponent<PlayerController>();
             cam.GetComponent<CameraFollow>().target= brendanPlayer.transform;
         }
 
@@ -36,6 +40,7 @@ public class PlayerSelector : MonoBehaviour
         {
             mayPlayer.gameObject.SetActive(true);
             gameManager.GetComponent<GameController>().playerController=mayPlayer.GetComponent<PlayerController>();
+            battleSystem.GetComponent<BattleSystem>().player=mayPlayer.GetComponent<PlayerController>();
             cam.GetComponent<CameraFollow>().target= mayPlayer.transform;
         }
 
@@ -43,6 +48,7 @@ public class PlayerSelector : MonoBehaviour
         {
             serenaPlayer.gameObject.SetActive(true);
             gameManager.GetComponent<GameController>().playerController=serenaPlayer.GetComponent<PlayerController>();
+            battleSystem.GetComponent<BattleSystem>().player=serenaPlayer.GetComponent<PlayerController>();
             cam.GetComponent<CameraFollow>().target= serenaPlayer.transform;
         }
     }

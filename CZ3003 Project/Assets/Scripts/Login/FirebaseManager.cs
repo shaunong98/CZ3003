@@ -168,10 +168,11 @@ public class FirebaseManager : MonoBehaviour
             yield return new WaitForSeconds(1);
 
             usernameField.text = User.DisplayName;
-            UIManager.instance.UserDataScreen(); // Change to user data UI
+            //UIManager.instance.UserDataScreen(); // Change to user data UI
             confirmLoginText.text = "";
             ClearLoginFeilds();
             ClearRegisterFeilds();
+            SceneManager.LoadScene("Character Selection");
         }
     }
 

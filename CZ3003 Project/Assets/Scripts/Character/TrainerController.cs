@@ -29,6 +29,7 @@ public class TrainerController : MonoBehaviour, Interactable
         character.LookTowards(initiator.position);
         if (!battleLost) {
             if(battleAgain) {
+                Debug.Log("battle won");
                 StartCoroutine(DialogManager.Instance.ShowDialog(dialogAfterWinningBattle,()=>
                 {
                     GameController.Instance.StartBattle(trainerUnit);
@@ -43,6 +44,7 @@ public class TrainerController : MonoBehaviour, Interactable
         }
         
         else {
+            Debug.Log("battle lost");
             StartCoroutine(DialogManager.Instance.ShowDialog(dialogAfterLosingBattle));
         }
     }
