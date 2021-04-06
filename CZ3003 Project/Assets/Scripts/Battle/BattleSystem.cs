@@ -79,8 +79,8 @@ public class BattleSystem : MonoBehaviour
     // i changed all enemyunit to trainer.TrainerUnit and playerunit to player.PlayerUnit
     public IEnumerator SetupBattle(BattleUnit trainerUnit) {
         this.trainerUnit = trainerUnit;
-        player.PlayerUnit.SetUp();
-        trainerUnit.SetUp();    
+        player.PlayerUnit.SetUp(true);
+        trainerUnit.SetUp(false);    
         //trainer.TrainerUnit.SetUp();
         // playerUnit.SetUp();
         // enemyUnit.SetUp();

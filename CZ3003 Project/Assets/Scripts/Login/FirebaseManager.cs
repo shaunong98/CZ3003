@@ -42,6 +42,8 @@ public class FirebaseManager : MonoBehaviour
     public GameObject scoreElement;
     public Transform scoreboardContent;
 
+    public static string username;
+
     void Awake()
     {
         //Check that all of the necessary dependencies for Firebase are present on the system
@@ -160,6 +162,7 @@ public class FirebaseManager : MonoBehaviour
             //User is now logged in
             //Now get the result
             User = LoginTask.Result;
+            username = User.DisplayName;
             Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
             warningLoginText.text = "";
             confirmLoginText.text = "Logged In";
