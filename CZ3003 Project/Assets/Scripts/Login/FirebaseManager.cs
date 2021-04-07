@@ -32,6 +32,7 @@ public class FirebaseManager : MonoBehaviour
     public TMP_InputField passwordRegisterField;
     public TMP_InputField passwordRegisterVerifyField;
     public TMP_Text warningRegisterText;
+    public TMP_Text confirmRegisterText;
 
     //User Data variables
     [Header("UserData")]
@@ -111,7 +112,7 @@ public class FirebaseManager : MonoBehaviour
     }
     //Function for the save button
     public void SaveDataButton()
-    {   StartCoroutine(UpdateStars(1,1,0));
+    {   StartCoroutine(UpdateStars(1,1,1,0));
         StartCoroutine(UpdateUsernameAuth(usernameField.text));
         StartCoroutine(UpdateUsernameDatabase(usernameField.text));
         StartCoroutine(UpdateKills(int.Parse(killsField.text)));
@@ -173,9 +174,10 @@ public class FirebaseManager : MonoBehaviour
             usernameField.text = User.DisplayName;
             //UIManager.instance.UserDataScreen(); // Change to user data UI
             confirmLoginText.text = "";
+            initialisePlayerPrefStars();
             ClearLoginFeilds();
             ClearRegisterFeilds();
-            SceneManager.LoadScene("Character Selection");
+            // SceneManager.LoadScene("Character Selection");
         }
     }
 
@@ -251,6 +253,9 @@ public class FirebaseManager : MonoBehaviour
                     {
                         //Username is now set
                         //Now return to login screen
+                        confirmRegisterText.text = "Account created successfully";
+                        yield return new WaitForSeconds(1f);
+                        confirmRegisterText.text = "";
                         UIManager.instance.LoginScreen();                        
                         warningRegisterText.text = "";
                         ClearRegisterFeilds();
@@ -261,11 +266,12 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    private IEnumerator UpdateStars(int starsworld, int starssection, int input)
+    private IEnumerator UpdateStars(int starsworld, int starssection, int starslevel, int input)
     {   
         string starworld = starsworld.ToString();
         string starsection = starssection.ToString();
-        var DBTask = DBreference.Child("users").Child(User.UserId).Child("stars").Child(starworld).Child(starsection).SetValueAsync(input);
+        string starlevel = starslevel.ToString();
+        var DBTask = DBreference.Child("users").Child(User.UserId).Child("stars").Child(starworld).Child(starsection).Child(starlevel).SetValueAsync(input);
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
         if (DBTask.Exception != null)
@@ -278,8 +284,8 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    public void UniversalUpdateStars(int starsworld, int starssection, int input){
-        StartCoroutine(UpdateStars(starsworld,starssection,input));
+    public void UniversalUpdateStars(int starsworld, int starssection, int starlevel, int input){
+        StartCoroutine(UpdateStars(starsworld,starssection, starlevel, input));
     }
 
     private IEnumerator UpdateBattleStats(int starsworld,int section, int input)
@@ -298,6 +304,114 @@ public class FirebaseManager : MonoBehaviour
             //Kills are now updated
         }
     }
+
+    private void initialisePlayerPrefStars() 
+    {
+        StartCoroutine(loadPlayerPrefStars());
+    }
+
+    private IEnumerator loadPlayerPrefStars() 
+    {
+        Debug.Log("reached here at load before");
+        Debug.Log($"{User.UserId}");
+        var DBTask = DBreference.Child("users").Child(User.UserId).Child("stars").GetValueAsync();
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+        Debug.Log("reached here at load");
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Data has been retrieved
+            DataSnapshot snapshot = DBTask.Result;
+            int index = 1;
+            for (int world = 1; world < 4; world++) {
+                for (int section = 1; section < 4; section++) {
+                    int totalStarsSection = 0;
+                    for (int level = 1; level < 5;  level++) {
+                        if (world == 1) {
+                            if (section == 1) {
+                                int value = int.Parse(snapshot.Child($"{world}").Child($"{section}").Child($"{level}").Value.ToString());
+                                Debug.Log($"{value}");
+                                totalStarsSection += value;
+                                PlayerPrefs.SetInt($"{level}", value);
+                            }
+                            else if (section == 2) {
+                                int value = int.Parse(snapshot.Child($"{world}").Child($"{section}").Child($"{level+4}").Value.ToString());
+                                Debug.Log($"{value}");
+                                totalStarsSection += value;
+                                PlayerPrefs.SetInt($"{level+4}", value);
+                            }
+                            else if (section == 3) {
+                                int value = int.Parse(snapshot.Child($"{world}").Child($"{section}").Child($"{level+8}").Value.ToString());
+                                Debug.Log($"{value}");
+                                totalStarsSection += value;
+                                PlayerPrefs.SetInt($"{level+8}", value);
+                            }
+                            
+                        }
+                        if (world == 2) {
+                            if (section == 1) {
+                                int value = int.Parse(snapshot.Child($"{world}").Child($"{section}").Child($"{level+12}").Value.ToString());
+                                Debug.Log($"{value}");
+                                totalStarsSection += value;
+                                PlayerPrefs.SetInt($"{level+12}", value);
+                                
+                            }
+                            else if (section == 2) {
+                                int value = int.Parse(snapshot.Child($"{world}").Child($"{section}").Child($"{level+16}").Value.ToString());
+                                Debug.Log($"{value}");
+                                totalStarsSection += value;
+                                PlayerPrefs.SetInt($"{level+16}", value);
+                            }
+                            else if (section == 3) {
+                                int value = int.Parse(snapshot.Child($"{world}").Child($"{section}").Child($"{level+20}").Value.ToString());
+                                Debug.Log($"{value}");
+                                totalStarsSection += value;
+                                PlayerPrefs.SetInt($"{level+20}", value);
+                            }
+                            //PlayerPrefs.SetInt($"{world}.{section}", totalStarsSection);
+                        }
+                        if (world == 3) {
+                            if (section == 1) {
+                                int value = int.Parse(snapshot.Child($"{world}").Child($"{section}").Child($"{level+24}").Value.ToString());
+                                Debug.Log($"{value}");
+                                totalStarsSection += value;
+                                PlayerPrefs.SetInt($"{level+24}", value);
+                            }
+                            else if (section == 2) {
+                                int value = int.Parse(snapshot.Child($"{world}").Child($"{section}").Child($"{level+28}").Value.ToString());
+                                Debug.Log($"{value}");
+                                totalStarsSection += value;
+                                PlayerPrefs.SetInt($"{level+28}", value);
+                            }
+                            else if (section == 3) {
+                                int value = int.Parse(snapshot.Child($"{world}").Child($"{section}").Child($"{level+32}").Value.ToString());
+                                Debug.Log($"{value}");
+                                totalStarsSection += value;
+                                PlayerPrefs.SetInt($"{level+32}", value);
+                            }
+                            
+                        }
+                    } 
+                    string ind = index.ToString();
+                    PlayerPrefs.SetInt("Lv" + ind, totalStarsSection);
+                    Debug.Log($"{totalStarsSection}");
+                    Debug.Log("Lv" + ind);
+                    index++;
+                }
+            }
+        }
+        SceneManager.LoadScene("Character Selection");
+    }
+    // for (int i = 0; i<snapshot.ChildrenCount; i++) {
+    //             int value = int.Parse(snapshot.Child($"{i+1}").Value.ToString());
+    //             Debug.Log($"{value}");
+    //         }
+
     private void InitialisePlayerProfile()
     {   
         StartCoroutine(UpdateBattleStats(1,1,0));
@@ -309,16 +423,54 @@ public class FirebaseManager : MonoBehaviour
         StartCoroutine(UpdateBattleStats(3,1,0));
         StartCoroutine(UpdateBattleStats(3,2,0));
         StartCoroutine(UpdateBattleStats(3,3,0));
-        StartCoroutine(UpdateStars(1,1,0));
-        StartCoroutine(UpdateStars(1,2,0));
-        StartCoroutine(UpdateStars(1,3,0));
-        StartCoroutine(UpdateStars(2,1,0));
-        StartCoroutine(UpdateStars(2,2,0));
-        StartCoroutine(UpdateStars(2,3,0));
-        StartCoroutine(UpdateStars(3,1,0));
-        StartCoroutine(UpdateStars(3,2,0));
-        StartCoroutine(UpdateStars(3,3,0));
+
+        //register stars
+        StartCoroutine(UpdateStars(1,1,1,0));
+        StartCoroutine(UpdateStars(1,1,2,0));
+        StartCoroutine(UpdateStars(1,1,3,0));
+        StartCoroutine(UpdateStars(1,1,4,0));
+
+        StartCoroutine(UpdateStars(1,2,5,0));
+        StartCoroutine(UpdateStars(1,2,6,0));
+        StartCoroutine(UpdateStars(1,2,7,0));
+        StartCoroutine(UpdateStars(1,2,8,0));
+
+        StartCoroutine(UpdateStars(1,3,9,0));
+        StartCoroutine(UpdateStars(1,3,10,0));
+        StartCoroutine(UpdateStars(1,3,11,0));
+        StartCoroutine(UpdateStars(1,3,12,0));
+
+        StartCoroutine(UpdateStars(2,1,13,0));
+        StartCoroutine(UpdateStars(2,1,14,0));
+        StartCoroutine(UpdateStars(2,1,15,0));
+        StartCoroutine(UpdateStars(2,1,16,0));
+
+        StartCoroutine(UpdateStars(2,2,17,0));
+        StartCoroutine(UpdateStars(2,2,18,0));
+        StartCoroutine(UpdateStars(2,2,19,0));
+        StartCoroutine(UpdateStars(2,2,20,0));
+
+        StartCoroutine(UpdateStars(2,3,21,0));
+        StartCoroutine(UpdateStars(2,3,22,0));
+        StartCoroutine(UpdateStars(2,3,23,0));
+        StartCoroutine(UpdateStars(2,3,24,0));
+
+        StartCoroutine(UpdateStars(3,1,25,0));
+        StartCoroutine(UpdateStars(3,1,26,0));
+        StartCoroutine(UpdateStars(3,1,27,0));
+        StartCoroutine(UpdateStars(3,1,28,0));
+
+        StartCoroutine(UpdateStars(3,2,29,0));
+        StartCoroutine(UpdateStars(3,2,30,0));
+        StartCoroutine(UpdateStars(3,2,31,0));
+        StartCoroutine(UpdateStars(3,2,32,0));
+
+        StartCoroutine(UpdateStars(3,3,33,0));
+        StartCoroutine(UpdateStars(3,3,34,0));
+        StartCoroutine(UpdateStars(3,3,35,0));
+        StartCoroutine(UpdateStars(3,3,36,0));
     }
+
     private IEnumerator UpdateUsernameAuth(string _username)
     {
         //Create a user profile and set the username
@@ -356,7 +508,53 @@ public class FirebaseManager : MonoBehaviour
         }
     }
     
+    public void UpdateStarsToDb() 
+    {
+        StartCoroutine(UpdateStars(1,1,1,PlayerPrefs.GetInt("1")));
+        StartCoroutine(UpdateStars(1,1,2,PlayerPrefs.GetInt("2")));
+        StartCoroutine(UpdateStars(1,1,3,PlayerPrefs.GetInt("3")));
+        StartCoroutine(UpdateStars(1,1,4,PlayerPrefs.GetInt("4")));
 
+        StartCoroutine(UpdateStars(1,2,5,PlayerPrefs.GetInt("5")));
+        StartCoroutine(UpdateStars(1,2,6,PlayerPrefs.GetInt("6")));
+        StartCoroutine(UpdateStars(1,2,7,PlayerPrefs.GetInt("7")));
+        StartCoroutine(UpdateStars(1,2,8,PlayerPrefs.GetInt("8")));
+
+        StartCoroutine(UpdateStars(1,3,9,PlayerPrefs.GetInt("9")));
+        StartCoroutine(UpdateStars(1,3,10,PlayerPrefs.GetInt("10")));
+        StartCoroutine(UpdateStars(1,3,11,PlayerPrefs.GetInt("11")));
+        StartCoroutine(UpdateStars(1,3,12,PlayerPrefs.GetInt("12")));
+
+        StartCoroutine(UpdateStars(2,1,13,PlayerPrefs.GetInt("13")));
+        StartCoroutine(UpdateStars(2,1,14,PlayerPrefs.GetInt("14")));
+        StartCoroutine(UpdateStars(2,1,15,PlayerPrefs.GetInt("15")));
+        StartCoroutine(UpdateStars(2,1,16,PlayerPrefs.GetInt("16")));
+
+        StartCoroutine(UpdateStars(2,2,17,PlayerPrefs.GetInt("17")));
+        StartCoroutine(UpdateStars(2,2,18,PlayerPrefs.GetInt("18")));
+        StartCoroutine(UpdateStars(2,2,19,PlayerPrefs.GetInt("19")));
+        StartCoroutine(UpdateStars(2,2,20,PlayerPrefs.GetInt("20")));
+
+        StartCoroutine(UpdateStars(2,3,21,PlayerPrefs.GetInt("21")));
+        StartCoroutine(UpdateStars(2,3,22,PlayerPrefs.GetInt("22")));
+        StartCoroutine(UpdateStars(2,3,23,PlayerPrefs.GetInt("23")));
+        StartCoroutine(UpdateStars(2,3,24,PlayerPrefs.GetInt("24")));
+
+        StartCoroutine(UpdateStars(3,1,25,PlayerPrefs.GetInt("25")));
+        StartCoroutine(UpdateStars(3,1,26,PlayerPrefs.GetInt("26")));
+        StartCoroutine(UpdateStars(3,1,27,PlayerPrefs.GetInt("27")));
+        StartCoroutine(UpdateStars(3,1,28,PlayerPrefs.GetInt("28")));
+
+        StartCoroutine(UpdateStars(3,2,29,PlayerPrefs.GetInt("29")));
+        StartCoroutine(UpdateStars(3,2,30,PlayerPrefs.GetInt("30")));
+        StartCoroutine(UpdateStars(3,2,31,PlayerPrefs.GetInt("31")));
+        StartCoroutine(UpdateStars(3,2,32,PlayerPrefs.GetInt("32")));
+
+        StartCoroutine(UpdateStars(3,3,33,PlayerPrefs.GetInt("33")));
+        StartCoroutine(UpdateStars(3,3,34,PlayerPrefs.GetInt("34")));
+        StartCoroutine(UpdateStars(3,3,35,PlayerPrefs.GetInt("35")));
+        StartCoroutine(UpdateStars(3,3,36,PlayerPrefs.GetInt("36")));
+    }
 
 
     private IEnumerator UpdateKills(int _kills)
