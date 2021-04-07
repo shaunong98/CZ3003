@@ -9876,7 +9876,7 @@ Tilemap:
       - {fileID: 21301262, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301264, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301266, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -8, y: -19, z: 0}
@@ -9993,7 +9993,7 @@ Tilemap:
       - {fileID: 21301262, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301264, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301266, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
@@ -79767,6 +79767,14 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 797820000}
+    - target: {fileID: 300263812, guid: c4e790ea38de0914081f9c3f200fab30, type: 3}
+      propertyPath: trainerNumber
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 300263812, guid: c4e790ea38de0914081f9c3f200fab30, type: 3}
+      propertyPath: trainerSection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 639765455128982628, guid: c4e790ea38de0914081f9c3f200fab30,
         type: 3}
       propertyPath: m_RootOrder
@@ -81076,6 +81084,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1147490604, guid: 8ae31544ec6a23e4cbd3a52c04593e90, type: 3}
+      propertyPath: trainerNumber
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1147490604, guid: 8ae31544ec6a23e4cbd3a52c04593e90, type: 3}
+      propertyPath: trainerSection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6764021120717785756, guid: 8ae31544ec6a23e4cbd3a52c04593e90,
         type: 3}
       propertyPath: m_Name
@@ -81323,6 +81339,14 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 1786691785}
+    - target: {fileID: 1921070485, guid: 7b59c620e4e24394fbafa7469a7b6325, type: 3}
+      propertyPath: trainerNumber
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1921070485, guid: 7b59c620e4e24394fbafa7469a7b6325, type: 3}
+      propertyPath: trainerSection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7301928215884247010, guid: 7b59c620e4e24394fbafa7469a7b6325,
         type: 3}
       propertyPath: m_Name
@@ -81406,6 +81430,14 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 204087797}
+    - target: {fileID: 1387176122, guid: d5efefb8cfeca9640993771a210d3117, type: 3}
+      propertyPath: trainerNumber
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1387176122, guid: d5efefb8cfeca9640993771a210d3117, type: 3}
+      propertyPath: trainerSection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8918972449301582440, guid: d5efefb8cfeca9640993771a210d3117,
         type: 3}
       propertyPath: m_RootOrder
