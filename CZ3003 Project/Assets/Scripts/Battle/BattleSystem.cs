@@ -9,7 +9,6 @@ using Firebase.Database;
 //using UnityEngine.UI;
 
 
-
 public enum BattleState { Start, ActionSelection, MoveSelection, PlayerAnswer, PerformMove, Busy, BattleOver }
 
 public class BattleSystem : MonoBehaviour

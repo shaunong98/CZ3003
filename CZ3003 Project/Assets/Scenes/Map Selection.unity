@@ -3782,7 +3782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldNumber: 1
   sectionNumber: 2
-  isUnlocked: 1
+  isUnlocked: 0
   lockImage: {fileID: 1408292669}
   starsImage:
   - {fileID: 1996815683}
@@ -8009,7 +8009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldNumber: 1
   sectionNumber: 3
-  isUnlocked: 1
+  isUnlocked: 0
   lockImage: {fileID: 2131281912}
   starsImage:
   - {fileID: 1952108443}
