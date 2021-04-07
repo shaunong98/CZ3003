@@ -3908,7 +3908,7 @@ MonoBehaviour:
   xpField: {fileID: 0}
   killsField: {fileID: 0}
   masteryField: {fileID: 0}
-  scoreElement: {fileID: 3255970624655622724, guid: 179561c55038b544c9255c531883036a,
+  statisticElement: {fileID: 3255970624655622724, guid: 179561c55038b544c9255c531883036a,
     type: 3}
   scoreboardContent: {fileID: 2013163657}
   QuestionInputField: {fileID: 1815941681}

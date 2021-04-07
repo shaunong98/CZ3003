@@ -23,7 +23,7 @@ public class TeacherFireBase : MonoBehaviour
     public TMP_InputField xpField;
     public TMP_InputField killsField;
     public TMP_InputField masteryField;
-    public GameObject scoreElement;
+    public GameObject statisticElement;
     public Transform scoreboardContent;
 
     //Question and Answers variables
@@ -279,17 +279,59 @@ public class TeacherFireBase : MonoBehaviour
                 int ssadS2pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{3}").Child($"{2}").Child("Points").Value.ToString());
                 int ssadS3pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{3}").Child($"{3}").Child("Points").Value.ToString());
 
-                int oodpS1stars = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Value.ToString());
-                int oodpS2stars = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Value.ToString());
-                int oodpS3stars = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Value.ToString());
+                int oodpS1starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{1}").Value.ToString());
+                int oodpS1starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{2}").Value.ToString());
+                int oodpS1starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{3}").Value.ToString());
+                int oodpS1starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{4}").Value.ToString());
+                int oodpS1stars = oodpS1starsT1 + oodpS1starsT2 + oodpS1starsT3 + oodpS1starsT4;
 
-                int seS1stars = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Value.ToString());
-                int seS2stars = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Value.ToString());
-                int seS3stars = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Value.ToString());
+                int oodpS2starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{5}").Value.ToString());
+                int oodpS2starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{6}").Value.ToString());
+                int oodpS2starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{7}").Value.ToString());
+                int oodpS2starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{8}").Value.ToString());
+                int oodpS2stars = oodpS2starsT1 + oodpS2starsT2 + oodpS2starsT3 + oodpS2starsT4;
 
-                int ssadS1stars = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Value.ToString());
-                int ssadS2stars = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Value.ToString());
-                int ssadS3stars = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Value.ToString());
+                int oodpS3starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{9}").Value.ToString());
+                int oodpS3starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{10}").Value.ToString());
+                int oodpS3starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{11}").Value.ToString());
+                int oodpS3starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{12}").Value.ToString());
+                int oodpS3stars = oodpS3starsT1 + oodpS3starsT2 + oodpS3starsT3 + oodpS3starsT4;
+
+                int seS1starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{13}").Value.ToString());
+                int seS1starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{14}").Value.ToString());
+                int seS1starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{15}").Value.ToString());
+                int seS1starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{16}").Value.ToString());
+                int seS1stars = seS1starsT1 + seS1starsT2 + seS1starsT3 + seS1starsT4;
+
+                int seS2starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{17}").Value.ToString());
+                int seS2starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{18}").Value.ToString());
+                int seS2starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{19}").Value.ToString());
+                int seS2starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{20}").Value.ToString());
+                int seS2stars = seS2starsT1 + seS2starsT2 + seS2starsT3 + seS2starsT4;
+
+                int seS3starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{21}").Value.ToString());
+                int seS3starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{22}").Value.ToString());
+                int seS3starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{23}").Value.ToString());
+                int seS3starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{24}").Value.ToString());
+                int seS3stars = seS3starsT1 + seS3starsT2 + seS3starsT3 + seS3starsT4;
+
+                int ssadS1starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{25}").Value.ToString());
+                int ssadS1starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{26}").Value.ToString());
+                int ssadS1starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{27}").Value.ToString());
+                int ssadS1starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{28}").Value.ToString());
+                int ssadS1stars = ssadS1starsT1 + ssadS1starsT2 + ssadS1starsT3 + ssadS1starsT4;
+
+                int ssadS2starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{29}").Value.ToString());
+                int ssadS2starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{30}").Value.ToString());
+                int ssadS2starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{31}").Value.ToString());
+                int ssadS2starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{32}").Value.ToString());
+                int ssadS2stars = ssadS2starsT1 + ssadS2starsT2 + ssadS2starsT3 + ssadS2starsT4;
+
+                int ssadS3starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{33}").Value.ToString());
+                int ssadS3starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{34}").Value.ToString());
+                int ssadS3starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{35}").Value.ToString());
+                int ssadS3starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{36}").Value.ToString());
+                int ssadS3stars = ssadS3starsT1 + ssadS3starsT2 + ssadS3starsT3 + ssadS3starsT4;
 
                 if (username == _StudentID)
                 {
@@ -386,17 +428,59 @@ public class TeacherFireBase : MonoBehaviour
                 int ssadS2pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{3}").Child($"{2}").Child("Points").Value.ToString());
                 int ssadS3pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{3}").Child($"{3}").Child("Points").Value.ToString());
 
-                int oodpS1stars = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Value.ToString());
-                int oodpS2stars = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Value.ToString());
-                int oodpS3stars = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Value.ToString());
+                int oodpS1starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{1}").Value.ToString());
+                int oodpS1starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{2}").Value.ToString());
+                int oodpS1starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{3}").Value.ToString());
+                int oodpS1starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{4}").Value.ToString());
+                int oodpS1stars = oodpS1starsT1 + oodpS1starsT2 + oodpS1starsT3 + oodpS1starsT4;
 
-                int seS1stars = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Value.ToString());
-                int seS2stars = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Value.ToString());
-                int seS3stars = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Value.ToString());
+                int oodpS2starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{5}").Value.ToString());
+                int oodpS2starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{6}").Value.ToString());
+                int oodpS2starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{7}").Value.ToString());
+                int oodpS2starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{8}").Value.ToString());
+                int oodpS2stars = oodpS2starsT1 + oodpS2starsT2 + oodpS2starsT3 + oodpS2starsT4;
 
-                int ssadS1stars = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Value.ToString());
-                int ssadS2stars = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Value.ToString());
-                int ssadS3stars = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Value.ToString());
+                int oodpS3starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{9}").Value.ToString());
+                int oodpS3starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{10}").Value.ToString());
+                int oodpS3starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{11}").Value.ToString());
+                int oodpS3starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{12}").Value.ToString());
+                int oodpS3stars = oodpS3starsT1 + oodpS3starsT2 + oodpS3starsT3 + oodpS3starsT4;
+
+                int seS1starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{13}").Value.ToString());
+                int seS1starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{14}").Value.ToString());
+                int seS1starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{15}").Value.ToString());
+                int seS1starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{16}").Value.ToString());
+                int seS1stars = seS1starsT1 + seS1starsT2 + seS1starsT3 + seS1starsT4;
+
+                int seS2starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{17}").Value.ToString());
+                int seS2starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{18}").Value.ToString());
+                int seS2starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{19}").Value.ToString());
+                int seS2starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{20}").Value.ToString());
+                int seS2stars = seS2starsT1 + seS2starsT2 + seS2starsT3 + seS2starsT4;
+
+                int seS3starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{21}").Value.ToString());
+                int seS3starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{22}").Value.ToString());
+                int seS3starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{23}").Value.ToString());
+                int seS3starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{24}").Value.ToString());
+                int seS3stars = seS3starsT1 + seS3starsT2 + seS3starsT3 + seS3starsT4;
+
+                int ssadS1starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{25}").Value.ToString());
+                int ssadS1starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{26}").Value.ToString());
+                int ssadS1starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{27}").Value.ToString());
+                int ssadS1starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{28}").Value.ToString());
+                int ssadS1stars = ssadS1starsT1 + ssadS1starsT2 + ssadS1starsT3 + ssadS1starsT4;
+
+                int ssadS2starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{29}").Value.ToString());
+                int ssadS2starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{30}").Value.ToString());
+                int ssadS2starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{31}").Value.ToString());
+                int ssadS2starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{32}").Value.ToString());
+                int ssadS2stars = ssadS2starsT1 + ssadS2starsT2 + ssadS2starsT3 + ssadS2starsT4;
+
+                int ssadS3starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{33}").Value.ToString());
+                int ssadS3starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{34}").Value.ToString());
+                int ssadS3starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{35}").Value.ToString());
+                int ssadS3starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{36}").Value.ToString());
+                int ssadS3stars = ssadS3starsT1 + ssadS3starsT2 + ssadS3starsT3 + ssadS3starsT4;
                 if (world == "OODP")
                 {
                     switch (section)
@@ -520,8 +604,8 @@ public class TeacherFireBase : MonoBehaviour
                 }
                 Debug.Log(stars);
                 Debug.Log(world);
-                //GameObject scoreboardElement = Instantiate(scoreElement, scoreboardContent);
-                //scoreboardElement.GetComponent<scoreElement>().NewscoreElement(username, stars, points);
+                GameObject scoreboardElement = Instantiate(statisticElement, scoreboardContent);
+                scoreboardElement.GetComponent<statisticElement>().NewScoreElement(username, stars, points);
             }
         }
     }
