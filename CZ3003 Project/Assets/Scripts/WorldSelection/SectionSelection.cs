@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
+
 
 public class SectionSelection : MonoBehaviour
 {
+    public LevelLoader levelLoader;
+    [Header("Sounds")]
+    [SerializeField] private AudioClip cfmClickSFX;
+    [SerializeField] private AudioClip ErrorClickSFX;
     public int worldNumber;
     public int sectionNumber;
     public bool isUnlocked = false;
@@ -57,13 +63,15 @@ public class SectionSelection : MonoBehaviour
     {
         if(isUnlocked)
         {
+            AudioManager.Instance.PlaySFX(cfmClickSFX);
             WorldUIManager.instance.setAllToFalse();
             QuestionManager.worldNumber = worldNumber;
             QuestionManager.sectionNumber = sectionNumber;
-            SceneManager.LoadScene(_sceneName);
+            levelLoader.Loadlevel(_sceneName);
         }
         else
         {
+            AudioManager.Instance.PlaySFX(ErrorClickSFX);
             Debug.Log("not unlocked");
         }
     }

@@ -10,6 +10,8 @@ using UnityEngine.SceneManagement;
 
 public class FirebaseManager : MonoBehaviour
 {
+    [SerializeField] private AudioClip cfmClickSFX;
+    public LevelLoader levelLoader;
     //[SerializeField] QuestionManager questionManager;
     //Firebase variables
     [Header("Firebase")]
@@ -88,17 +90,20 @@ public class FirebaseManager : MonoBehaviour
     {
         //questionManager.Awake();
         //Call the login coroutine passing the email and password
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
         StartCoroutine(Login(emailLoginField.text, passwordLoginField.text));
     }
     //Function for the register button
     public void RegisterButton()
     {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
         //Call the register coroutine passing the email, password, and username
         StartCoroutine(Register(emailRegisterField.text, passwordRegisterField.text, usernameRegisterField.text));
     }
     //Function for the sign out button
     public void SignOutButton()
     {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
         auth.SignOut();
         UIManager.instance.LoginScreen();
         ClearRegisterFeilds();
@@ -106,13 +111,16 @@ public class FirebaseManager : MonoBehaviour
     }
 
     public void EnterGameButton() {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
         ClearRegisterFeilds();
         ClearLoginFeilds();
-        SceneManager.LoadScene("Character Selection");
+        levelLoader.LoadCharSel();
     }
     //Function for the save button
     public void SaveDataButton()
-    {   StartCoroutine(UpdateStars(1,1,1,0));
+    {   
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
+        StartCoroutine(UpdateStars(1,1,1,0));
         StartCoroutine(UpdateUsernameAuth(usernameField.text));
         StartCoroutine(UpdateUsernameDatabase(usernameField.text));
         StartCoroutine(UpdateKills(int.Parse(killsField.text)));
@@ -405,7 +413,7 @@ public class FirebaseManager : MonoBehaviour
                 }
             }
         }
-        SceneManager.LoadScene("Character Selection");
+        levelLoader.LoadCharSel();
     }
     // for (int i = 0; i<snapshot.ChildrenCount; i++) {
     //             int value = int.Parse(snapshot.Child($"{i+1}").Value.ToString());

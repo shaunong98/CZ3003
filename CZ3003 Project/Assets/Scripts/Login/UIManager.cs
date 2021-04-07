@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     public GameObject registerUI;
     public GameObject userDataUI;
     public GameObject scoreboardUI;
+    [SerializeField] private AudioClip cfmClickSFX;
 
     private void Awake()
     {
@@ -38,11 +39,13 @@ public class UIManager : MonoBehaviour
 
     public void LoginScreen() //Back button
     {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
         ClearScreen();
         loginUI.SetActive(true);
     }
     public void RegisterScreen() // Regester button
     {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
         ClearScreen();
         registerUI.SetActive(true);
     }
