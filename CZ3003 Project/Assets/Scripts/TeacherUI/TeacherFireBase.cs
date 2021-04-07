@@ -71,6 +71,11 @@ public class TeacherFireBase : MonoBehaviour
 
     public Text Name;
 
+    public Dropdown Worldselection;
+    public Dropdown SectionSelection;
+    string world;
+    string section;
+
     void Awake()
     {
         //Check that all of the necessary dependencies for Firebase are present on the system
@@ -336,6 +341,187 @@ public class TeacherFireBase : MonoBehaviour
                 SSAD_S2_stars.text = "0";
                 SSAD_S3_stars.text = "0";
                 Name.text = "Invalid User";
+            }
+        }
+    }
+    public void filter()
+    {
+        world = Worldselection.options[Worldselection.value].text;
+        section = SectionSelection.options[SectionSelection.value].text;
+        Debug.Log(world);
+        Debug.Log(section);
+        StartCoroutine(LoadOverallStatistics(world, section));
+    }
+    private IEnumerator LoadOverallStatistics(string world, string section)
+    {
+        var DBTask = DBreference.Child("users").GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+        if (DBTask.Exception != null)
+        {
+            Debug.Log("Yea");
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            DataSnapshot snapshot = DBTask.Result;
+            foreach (Transform child in scoreboardContent.transform)
+            {
+                Destroy(child.gameObject);
+            }
+            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                int stars = 0;
+                int points = 0;
+                string username = childSnapshot.Child("username").Value.ToString();
+                Debug.Log(username);
+                int oodpS1pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{1}").Child($"{1}").Child("Points").Value.ToString());
+                int oodpS2pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{1}").Child($"{2}").Child("Points").Value.ToString());
+                int oodpS3pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{1}").Child($"{3}").Child("Points").Value.ToString());
+
+                int seS1pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{2}").Child($"{1}").Child("Points").Value.ToString());
+                int seS2pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{2}").Child($"{2}").Child("Points").Value.ToString());
+                int seS3pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{2}").Child($"{3}").Child("Points").Value.ToString());
+
+                int ssadS1pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{3}").Child($"{1}").Child("Points").Value.ToString());
+                int ssadS2pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{3}").Child($"{2}").Child("Points").Value.ToString());
+                int ssadS3pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{3}").Child($"{3}").Child("Points").Value.ToString());
+
+                int oodpS1stars = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Value.ToString());
+                int oodpS2stars = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Value.ToString());
+                int oodpS3stars = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Value.ToString());
+
+                int seS1stars = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Value.ToString());
+                int seS2stars = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Value.ToString());
+                int seS3stars = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Value.ToString());
+
+                int ssadS1stars = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Value.ToString());
+                int ssadS2stars = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Value.ToString());
+                int ssadS3stars = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Value.ToString());
+                if (world == "OODP")
+                {
+                    switch (section)
+                    {
+                        case "1":
+                            {
+                                points = oodpS1pts;
+                                stars = oodpS1stars;
+                                break;
+                            }
+                        case "2":
+                            {
+                                points = oodpS2pts;
+                                stars = oodpS2stars;
+                                break;
+                            }
+                        case "3":
+                            {
+                                points = oodpS3pts;
+                                stars = oodpS3stars;
+                                break;
+                            }
+                        case "TOTAL":
+                            {
+                                points = oodpS1pts + oodpS2pts + oodpS3pts;
+                                stars = oodpS1stars + oodpS2stars + oodpS3stars;
+                                break;
+                            }
+                    }
+
+                }
+                else if (world == "SE")
+                {
+                    switch (section)
+                    {
+                        case "1":
+                            {
+                                points = seS1pts;
+                                stars = seS1stars;
+                                break;
+                            }
+                        case "2":
+                            {
+                                points = seS2pts;
+                                stars = seS2stars;
+                                break;
+                            }
+                        case "3":
+                            {
+                                points = seS3pts;
+                                stars = seS3stars;
+                                break;
+                            }
+                        case "TOTAL":
+                            {
+                                points = seS1pts + seS2pts + seS3pts;
+                                stars = seS1stars + seS2stars + seS3stars;
+                                break;
+                            }
+                    }
+                }
+                else if (world == "SSAD")
+                {
+                    switch (section)
+                    {
+                        case "1":
+                            {
+                                points = ssadS1pts;
+                                stars = ssadS1stars;
+                                break;
+                            }
+                        case "2":
+                            {
+                                points = ssadS2pts;
+                                stars = ssadS2stars;
+                                break;
+                            }
+                        case "3":
+                            {
+                                points = ssadS3pts;
+                                stars = ssadS3stars;
+                                break;
+                            }
+                        case "TOTAL":
+                            {
+                                points = ssadS1pts + ssadS2pts + ssadS3pts;
+                                stars = ssadS1stars + ssadS2stars + ssadS3stars;
+                                break;
+                            }
+                    }
+                }
+                else if (world == "Total")
+                {
+                    switch (section)
+                    {
+                        case "1":
+                            {
+                                points = ssadS1pts + oodpS1pts + seS1pts;
+                                stars = ssadS1stars + oodpS1stars + seS1stars;
+                                break;
+                            }
+                        case "2":
+                            {
+                                points = ssadS2pts + oodpS2pts + seS2pts;
+                                stars = ssadS2stars + oodpS2stars + seS2stars;
+                                break;
+                            }
+                        case "3":
+                            {
+                                points = ssadS3pts + oodpS3pts + seS3pts;
+                                stars = ssadS3stars + oodpS3stars + seS3stars;
+                                break;
+                            }
+                        case "TOTAL":
+                            {
+                                points = ssadS1pts + oodpS1pts + seS1pts + ssadS2pts + oodpS2pts + seS2pts + ssadS3pts + oodpS3pts + seS3pts;
+                                stars = ssadS1stars + oodpS1stars + seS1stars + ssadS2stars + oodpS2stars + seS2stars + ssadS3stars + oodpS3stars + seS3stars;
+                                break;
+                            }
+                    }
+                }
+                Debug.Log(stars);
+                Debug.Log(world);
+                //GameObject scoreboardElement = Instantiate(scoreElement, scoreboardContent);
+                //scoreboardElement.GetComponent<scoreElement>().NewscoreElement(username, stars, points);
             }
         }
     }
