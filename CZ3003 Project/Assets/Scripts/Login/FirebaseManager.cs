@@ -32,6 +32,7 @@ public class FirebaseManager : MonoBehaviour
     public TMP_InputField passwordRegisterField;
     public TMP_InputField passwordRegisterVerifyField;
     public TMP_Text warningRegisterText;
+    public TMP_Text confirmRegisterText;
 
     //User Data variables
     [Header("UserData")]
@@ -111,7 +112,7 @@ public class FirebaseManager : MonoBehaviour
     }
     //Function for the save button
     public void SaveDataButton()
-    {   StartCoroutine(UpdateStars(1,1,0));
+    {   StartCoroutine(UpdateStars(1,1,1,0));
         StartCoroutine(UpdateUsernameAuth(usernameField.text));
         StartCoroutine(UpdateUsernameDatabase(usernameField.text));
         StartCoroutine(UpdateKills(int.Parse(killsField.text)));
@@ -251,6 +252,9 @@ public class FirebaseManager : MonoBehaviour
                     {
                         //Username is now set
                         //Now return to login screen
+                        confirmRegisterText.text = "Account created successfully";
+                        yield return new WaitForSeconds(1f);
+                        confirmRegisterText.text = "";
                         UIManager.instance.LoginScreen();                        
                         warningRegisterText.text = "";
                         ClearRegisterFeilds();
@@ -261,11 +265,12 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    private IEnumerator UpdateStars(int starsworld, int starssection, int input)
+    private IEnumerator UpdateStars(int starsworld, int starssection, int starslevel, int input)
     {   
         string starworld = starsworld.ToString();
         string starsection = starssection.ToString();
-        var DBTask = DBreference.Child("users").Child(User.UserId).Child("stars").Child(starworld).Child(starsection).SetValueAsync(input);
+        string starlevel = starslevel.ToString();
+        var DBTask = DBreference.Child("users").Child(User.UserId).Child("stars").Child(starworld).Child(starsection).Child(starlevel).SetValueAsync(input);
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
         if (DBTask.Exception != null)
@@ -278,8 +283,8 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    public void UniversalUpdateStars(int starsworld, int starssection, int input){
-        StartCoroutine(UpdateStars(starsworld,starssection,input));
+    public void UniversalUpdateStars(int starsworld, int starssection, int starlevel, int input){
+        StartCoroutine(UpdateStars(starsworld,starssection, starlevel, input));
     }
 
     private IEnumerator UpdateBattleStats(int starsworld,int section, int input)
@@ -309,16 +314,54 @@ public class FirebaseManager : MonoBehaviour
         StartCoroutine(UpdateBattleStats(3,1,0));
         StartCoroutine(UpdateBattleStats(3,2,0));
         StartCoroutine(UpdateBattleStats(3,3,0));
-        StartCoroutine(UpdateStars(1,1,0));
-        StartCoroutine(UpdateStars(1,2,0));
-        StartCoroutine(UpdateStars(1,3,0));
-        StartCoroutine(UpdateStars(2,1,0));
-        StartCoroutine(UpdateStars(2,2,0));
-        StartCoroutine(UpdateStars(2,3,0));
-        StartCoroutine(UpdateStars(3,1,0));
-        StartCoroutine(UpdateStars(3,2,0));
-        StartCoroutine(UpdateStars(3,3,0));
+
+        //register stars
+        StartCoroutine(UpdateStars(1,1,1,0));
+        StartCoroutine(UpdateStars(1,1,2,0));
+        StartCoroutine(UpdateStars(1,1,3,0));
+        StartCoroutine(UpdateStars(1,1,4,0));
+
+        StartCoroutine(UpdateStars(1,2,5,0));
+        StartCoroutine(UpdateStars(1,2,6,0));
+        StartCoroutine(UpdateStars(1,2,7,0));
+        StartCoroutine(UpdateStars(1,2,8,0));
+
+        StartCoroutine(UpdateStars(1,3,9,0));
+        StartCoroutine(UpdateStars(1,3,10,0));
+        StartCoroutine(UpdateStars(1,3,11,0));
+        StartCoroutine(UpdateStars(1,3,12,0));
+
+        StartCoroutine(UpdateStars(2,1,13,0));
+        StartCoroutine(UpdateStars(2,1,14,0));
+        StartCoroutine(UpdateStars(2,1,15,0));
+        StartCoroutine(UpdateStars(2,1,16,0));
+
+        StartCoroutine(UpdateStars(2,2,17,0));
+        StartCoroutine(UpdateStars(2,2,18,0));
+        StartCoroutine(UpdateStars(2,2,19,0));
+        StartCoroutine(UpdateStars(2,2,20,0));
+
+        StartCoroutine(UpdateStars(2,3,21,0));
+        StartCoroutine(UpdateStars(2,3,22,0));
+        StartCoroutine(UpdateStars(2,3,23,0));
+        StartCoroutine(UpdateStars(2,3,24,0));
+
+        StartCoroutine(UpdateStars(3,1,25,0));
+        StartCoroutine(UpdateStars(3,1,26,0));
+        StartCoroutine(UpdateStars(3,1,27,0));
+        StartCoroutine(UpdateStars(3,1,28,0));
+
+        StartCoroutine(UpdateStars(3,2,29,0));
+        StartCoroutine(UpdateStars(3,2,30,0));
+        StartCoroutine(UpdateStars(3,2,31,0));
+        StartCoroutine(UpdateStars(3,2,32,0));
+
+        StartCoroutine(UpdateStars(3,3,33,0));
+        StartCoroutine(UpdateStars(3,3,34,0));
+        StartCoroutine(UpdateStars(3,3,35,0));
+        StartCoroutine(UpdateStars(3,3,36,0));
     }
+
     private IEnumerator UpdateUsernameAuth(string _username)
     {
         //Create a user profile and set the username
