@@ -23,7 +23,7 @@ public class TeacherFireBase : MonoBehaviour
     public TMP_InputField xpField;
     public TMP_InputField killsField;
     public TMP_InputField masteryField;
-    public GameObject scoreElement;
+    public GameObject statisticElement;
     public Transform scoreboardContent;
 
     //Question and Answers variables
@@ -70,6 +70,11 @@ public class TeacherFireBase : MonoBehaviour
     public Text SSAD_S3_stars;
 
     public Text Name;
+
+    public Dropdown Worldselection;
+    public Dropdown SectionSelection;
+    string world;
+    string section;
 
     void Awake()
     {
@@ -274,17 +279,59 @@ public class TeacherFireBase : MonoBehaviour
                 int ssadS2pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{3}").Child($"{2}").Child("Points").Value.ToString());
                 int ssadS3pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{3}").Child($"{3}").Child("Points").Value.ToString());
 
-                int oodpS1stars = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Value.ToString());
-                int oodpS2stars = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Value.ToString());
-                int oodpS3stars = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Value.ToString());
+                int oodpS1starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{1}").Value.ToString());
+                int oodpS1starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{2}").Value.ToString());
+                int oodpS1starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{3}").Value.ToString());
+                int oodpS1starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{4}").Value.ToString());
+                int oodpS1stars = oodpS1starsT1 + oodpS1starsT2 + oodpS1starsT3 + oodpS1starsT4;
 
-                int seS1stars = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Value.ToString());
-                int seS2stars = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Value.ToString());
-                int seS3stars = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Value.ToString());
+                int oodpS2starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{5}").Value.ToString());
+                int oodpS2starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{6}").Value.ToString());
+                int oodpS2starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{7}").Value.ToString());
+                int oodpS2starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{8}").Value.ToString());
+                int oodpS2stars = oodpS2starsT1 + oodpS2starsT2 + oodpS2starsT3 + oodpS2starsT4;
 
-                int ssadS1stars = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Value.ToString());
-                int ssadS2stars = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Value.ToString());
-                int ssadS3stars = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Value.ToString());
+                int oodpS3starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{9}").Value.ToString());
+                int oodpS3starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{10}").Value.ToString());
+                int oodpS3starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{11}").Value.ToString());
+                int oodpS3starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{12}").Value.ToString());
+                int oodpS3stars = oodpS3starsT1 + oodpS3starsT2 + oodpS3starsT3 + oodpS3starsT4;
+
+                int seS1starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{13}").Value.ToString());
+                int seS1starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{14}").Value.ToString());
+                int seS1starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{15}").Value.ToString());
+                int seS1starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{16}").Value.ToString());
+                int seS1stars = seS1starsT1 + seS1starsT2 + seS1starsT3 + seS1starsT4;
+
+                int seS2starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{17}").Value.ToString());
+                int seS2starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{18}").Value.ToString());
+                int seS2starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{19}").Value.ToString());
+                int seS2starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{20}").Value.ToString());
+                int seS2stars = seS2starsT1 + seS2starsT2 + seS2starsT3 + seS2starsT4;
+
+                int seS3starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{21}").Value.ToString());
+                int seS3starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{22}").Value.ToString());
+                int seS3starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{23}").Value.ToString());
+                int seS3starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{24}").Value.ToString());
+                int seS3stars = seS3starsT1 + seS3starsT2 + seS3starsT3 + seS3starsT4;
+
+                int ssadS1starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{25}").Value.ToString());
+                int ssadS1starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{26}").Value.ToString());
+                int ssadS1starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{27}").Value.ToString());
+                int ssadS1starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{28}").Value.ToString());
+                int ssadS1stars = ssadS1starsT1 + ssadS1starsT2 + ssadS1starsT3 + ssadS1starsT4;
+
+                int ssadS2starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{29}").Value.ToString());
+                int ssadS2starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{30}").Value.ToString());
+                int ssadS2starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{31}").Value.ToString());
+                int ssadS2starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{32}").Value.ToString());
+                int ssadS2stars = ssadS2starsT1 + ssadS2starsT2 + ssadS2starsT3 + ssadS2starsT4;
+
+                int ssadS3starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{33}").Value.ToString());
+                int ssadS3starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{34}").Value.ToString());
+                int ssadS3starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{35}").Value.ToString());
+                int ssadS3starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{36}").Value.ToString());
+                int ssadS3stars = ssadS3starsT1 + ssadS3starsT2 + ssadS3starsT3 + ssadS3starsT4;
 
                 if (username == _StudentID)
                 {
@@ -336,6 +383,229 @@ public class TeacherFireBase : MonoBehaviour
                 SSAD_S2_stars.text = "0";
                 SSAD_S3_stars.text = "0";
                 Name.text = "Invalid User";
+            }
+        }
+    }
+    public void filter()
+    {
+        world = Worldselection.options[Worldselection.value].text;
+        section = SectionSelection.options[SectionSelection.value].text;
+        Debug.Log(world);
+        Debug.Log(section);
+        StartCoroutine(LoadOverallStatistics(world, section));
+    }
+    private IEnumerator LoadOverallStatistics(string world, string section)
+    {
+        var DBTask = DBreference.Child("users").GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+        if (DBTask.Exception != null)
+        {
+            Debug.Log("Yea");
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            DataSnapshot snapshot = DBTask.Result;
+            foreach (Transform child in scoreboardContent.transform)
+            {
+                Destroy(child.gameObject);
+            }
+            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                int stars = 0;
+                int points = 0;
+                string username = childSnapshot.Child("username").Value.ToString();
+                Debug.Log(username);
+                int oodpS1pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{1}").Child($"{1}").Child("Points").Value.ToString());
+                int oodpS2pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{1}").Child($"{2}").Child("Points").Value.ToString());
+                int oodpS3pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{1}").Child($"{3}").Child("Points").Value.ToString());
+
+                int seS1pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{2}").Child($"{1}").Child("Points").Value.ToString());
+                int seS2pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{2}").Child($"{2}").Child("Points").Value.ToString());
+                int seS3pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{2}").Child($"{3}").Child("Points").Value.ToString());
+
+                int ssadS1pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{3}").Child($"{1}").Child("Points").Value.ToString());
+                int ssadS2pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{3}").Child($"{2}").Child("Points").Value.ToString());
+                int ssadS3pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{3}").Child($"{3}").Child("Points").Value.ToString());
+
+                int oodpS1starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{1}").Value.ToString());
+                int oodpS1starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{2}").Value.ToString());
+                int oodpS1starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{3}").Value.ToString());
+                int oodpS1starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{4}").Value.ToString());
+                int oodpS1stars = oodpS1starsT1 + oodpS1starsT2 + oodpS1starsT3 + oodpS1starsT4;
+
+                int oodpS2starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{5}").Value.ToString());
+                int oodpS2starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{6}").Value.ToString());
+                int oodpS2starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{7}").Value.ToString());
+                int oodpS2starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{8}").Value.ToString());
+                int oodpS2stars = oodpS2starsT1 + oodpS2starsT2 + oodpS2starsT3 + oodpS2starsT4;
+
+                int oodpS3starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{9}").Value.ToString());
+                int oodpS3starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{10}").Value.ToString());
+                int oodpS3starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{11}").Value.ToString());
+                int oodpS3starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{12}").Value.ToString());
+                int oodpS3stars = oodpS3starsT1 + oodpS3starsT2 + oodpS3starsT3 + oodpS3starsT4;
+
+                int seS1starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{13}").Value.ToString());
+                int seS1starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{14}").Value.ToString());
+                int seS1starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{15}").Value.ToString());
+                int seS1starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{16}").Value.ToString());
+                int seS1stars = seS1starsT1 + seS1starsT2 + seS1starsT3 + seS1starsT4;
+
+                int seS2starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{17}").Value.ToString());
+                int seS2starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{18}").Value.ToString());
+                int seS2starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{19}").Value.ToString());
+                int seS2starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{20}").Value.ToString());
+                int seS2stars = seS2starsT1 + seS2starsT2 + seS2starsT3 + seS2starsT4;
+
+                int seS3starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{21}").Value.ToString());
+                int seS3starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{22}").Value.ToString());
+                int seS3starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{23}").Value.ToString());
+                int seS3starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{24}").Value.ToString());
+                int seS3stars = seS3starsT1 + seS3starsT2 + seS3starsT3 + seS3starsT4;
+
+                int ssadS1starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{25}").Value.ToString());
+                int ssadS1starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{26}").Value.ToString());
+                int ssadS1starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{27}").Value.ToString());
+                int ssadS1starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{28}").Value.ToString());
+                int ssadS1stars = ssadS1starsT1 + ssadS1starsT2 + ssadS1starsT3 + ssadS1starsT4;
+
+                int ssadS2starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{29}").Value.ToString());
+                int ssadS2starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{30}").Value.ToString());
+                int ssadS2starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{31}").Value.ToString());
+                int ssadS2starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{32}").Value.ToString());
+                int ssadS2stars = ssadS2starsT1 + ssadS2starsT2 + ssadS2starsT3 + ssadS2starsT4;
+
+                int ssadS3starsT1 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{33}").Value.ToString());
+                int ssadS3starsT2 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{34}").Value.ToString());
+                int ssadS3starsT3 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{35}").Value.ToString());
+                int ssadS3starsT4 = int.Parse(childSnapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{36}").Value.ToString());
+                int ssadS3stars = ssadS3starsT1 + ssadS3starsT2 + ssadS3starsT3 + ssadS3starsT4;
+                if (world == "OODP")
+                {
+                    switch (section)
+                    {
+                        case "1":
+                            {
+                                points = oodpS1pts;
+                                stars = oodpS1stars;
+                                break;
+                            }
+                        case "2":
+                            {
+                                points = oodpS2pts;
+                                stars = oodpS2stars;
+                                break;
+                            }
+                        case "3":
+                            {
+                                points = oodpS3pts;
+                                stars = oodpS3stars;
+                                break;
+                            }
+                        case "TOTAL":
+                            {
+                                points = oodpS1pts + oodpS2pts + oodpS3pts;
+                                stars = oodpS1stars + oodpS2stars + oodpS3stars;
+                                break;
+                            }
+                    }
+
+                }
+                else if (world == "SE")
+                {
+                    switch (section)
+                    {
+                        case "1":
+                            {
+                                points = seS1pts;
+                                stars = seS1stars;
+                                break;
+                            }
+                        case "2":
+                            {
+                                points = seS2pts;
+                                stars = seS2stars;
+                                break;
+                            }
+                        case "3":
+                            {
+                                points = seS3pts;
+                                stars = seS3stars;
+                                break;
+                            }
+                        case "TOTAL":
+                            {
+                                points = seS1pts + seS2pts + seS3pts;
+                                stars = seS1stars + seS2stars + seS3stars;
+                                break;
+                            }
+                    }
+                }
+                else if (world == "SSAD")
+                {
+                    switch (section)
+                    {
+                        case "1":
+                            {
+                                points = ssadS1pts;
+                                stars = ssadS1stars;
+                                break;
+                            }
+                        case "2":
+                            {
+                                points = ssadS2pts;
+                                stars = ssadS2stars;
+                                break;
+                            }
+                        case "3":
+                            {
+                                points = ssadS3pts;
+                                stars = ssadS3stars;
+                                break;
+                            }
+                        case "TOTAL":
+                            {
+                                points = ssadS1pts + ssadS2pts + ssadS3pts;
+                                stars = ssadS1stars + ssadS2stars + ssadS3stars;
+                                break;
+                            }
+                    }
+                }
+                else if (world == "Total")
+                {
+                    switch (section)
+                    {
+                        case "1":
+                            {
+                                points = ssadS1pts + oodpS1pts + seS1pts;
+                                stars = ssadS1stars + oodpS1stars + seS1stars;
+                                break;
+                            }
+                        case "2":
+                            {
+                                points = ssadS2pts + oodpS2pts + seS2pts;
+                                stars = ssadS2stars + oodpS2stars + seS2stars;
+                                break;
+                            }
+                        case "3":
+                            {
+                                points = ssadS3pts + oodpS3pts + seS3pts;
+                                stars = ssadS3stars + oodpS3stars + seS3stars;
+                                break;
+                            }
+                        case "TOTAL":
+                            {
+                                points = ssadS1pts + oodpS1pts + seS1pts + ssadS2pts + oodpS2pts + seS2pts + ssadS3pts + oodpS3pts + seS3pts;
+                                stars = ssadS1stars + oodpS1stars + seS1stars + ssadS2stars + oodpS2stars + seS2stars + ssadS3stars + oodpS3stars + seS3stars;
+                                break;
+                            }
+                    }
+                }
+                Debug.Log(stars);
+                Debug.Log(world);
+                GameObject scoreboardElement = Instantiate(statisticElement, scoreboardContent);
+                scoreboardElement.GetComponent<statisticElement>().NewScoreElement(username, stars, points);
             }
         }
     }
