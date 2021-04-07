@@ -603,9 +603,9 @@ public class TeacherFireBase : MonoBehaviour
                     }
                 }
                 Debug.Log(stars);
-                Debug.Log(world);
+                Debug.Log(points);
                 GameObject scoreboardElement = Instantiate(statisticElement, scoreboardContent);
-                scoreboardElement.GetComponent<statisticElement>().NewScoreElement(username, stars, points);
+                scoreboardElement.GetComponent<StatisticElement>().NewScoreElement(username,stars, points);
             }
         }
     }
