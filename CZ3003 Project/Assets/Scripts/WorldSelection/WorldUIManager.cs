@@ -39,7 +39,7 @@ public class WorldUIManager : MonoBehaviour
     {
 
         int temp = PlayerPrefs.GetInt("CharacterSelected");
-        PlayerPrefs.DeleteAll();   //delete all player key and values from player prefs
+        //PlayerPrefs.DeleteAll();   //delete all player key and values from player prefs
         PlayerPrefs.SetInt("CharacterSelected",temp);
     }
     private void Update()

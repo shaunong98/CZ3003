@@ -10,6 +10,8 @@ public class TrainerController : MonoBehaviour, Interactable
     [SerializeField] GameObject exclamation;
     [SerializeField] GameObject fov;
     [SerializeField] BattleUnit trainerUnit;
+    public int trainerNumber;
+    public int trainerSection;
     //[SerializeField] BattleSystem battleSystem;
 
     public BattleUnit TrainerUnit { 
@@ -68,8 +70,20 @@ public class TrainerController : MonoBehaviour, Interactable
     public void BattleLost() {
         Debug.Log("Battle ended");
         battleLost = true;
+        string trainersection = trainerSection.ToString();
+        if (PlayerPrefs.GetInt($"{trainerNumber}") == 0) {
+            PlayerPrefs.SetInt($"{trainerNumber}", 1);
+            //PlayerPrefs.SetInt($"Lv{trainerSection}", PlayerPrefs.GetInt($"Lv{trainerSection}") + 1);
+            PlayerPrefs.SetInt("Lv" + trainersection, PlayerPrefs.GetInt("Lv" + trainersection) + 1);
+        }
         fov.gameObject.SetActive(false);
+        int star = PlayerPrefs.GetInt($"{trainerNumber}");
+        //int totalstar = PlayerPrefs.GetInt($"Lv{trainerSection}");
+        int totalstar = PlayerPrefs.GetInt("Lv" + trainersection);
+        Debug.Log($"{star}");
+        Debug.Log($"{totalstar}");
     }
+
     public void BattleWon() {
         battleAgain = true;
         fov.gameObject.SetActive(false);
