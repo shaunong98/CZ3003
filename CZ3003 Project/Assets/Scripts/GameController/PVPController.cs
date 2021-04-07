@@ -7,7 +7,7 @@ public enum PVPState{End, Battle}
 
 public class PVPController: MonoBehaviour
 {
-    [SerializeField] PlayerController playerController;
+    [SerializeField] public PlayerController playerController;
     [SerializeField] BattleSystem battleSystem;
     //[SerializeField] Camera worldCamera;
 
@@ -75,7 +75,8 @@ public class PVPController: MonoBehaviour
         }
         else if (state == PVPState.End)
         {
-            SceneManager.LoadScene("Map Selection");
+            Debug.Log("Did it load scene?");
+            Navigation.Instance.backToWorldPVPScreen(QuestionManager.worldNumber - 1);
         }
     }
 }

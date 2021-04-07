@@ -2,6 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+using Firebase;
+using Firebase.Auth;
+using Firebase.Database;
 //using UnityEngine.UI;
 
 
@@ -13,7 +17,7 @@ public class BattleSystem : MonoBehaviour
     //[SerializeField] BattleUnit playerUnit;
     //[SerializeField] BattleUnit enemyUnit;
     //[SerializeField] TrainerController trainer;
-    [SerializeField] PlayerController player;
+    [SerializeField] public PlayerController player;
     // [SerializeField] BattleHud playerHud;
     // [SerializeField] BattleHud enemyHud;
     [SerializeField] BattleDialogBox dialogBox;
@@ -26,8 +30,37 @@ public class BattleSystem : MonoBehaviour
 
     public static BattleSystem Instance{ get; private set; }
 
+    [Header("Firebase")]
+    public DependencyStatus dependencyStatus;
+    public FirebaseAuth auth;
+    //public FirebaseUser User;
+    public DatabaseReference DBreference;
+
     public void Awake() {
         Instance = this;
+
+        //Check that all of the necessary dependencies for Firebase are present on the system
+        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+        {
+            dependencyStatus = task.Result;
+            if (dependencyStatus == DependencyStatus.Available)
+            {
+                //If they are avalible Initialize Firebase
+                InitializeFirebase();
+            }
+            else
+            {
+                Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
+            }
+        });
+    }
+
+    private void InitializeFirebase()
+    {
+        Debug.Log("Setting up Firebase Auth");
+        //Set the authentication instance object
+        auth = FirebaseAuth.DefaultInstance;
+        DBreference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
     public event Action<bool> onBattleOver;
@@ -46,8 +79,8 @@ public class BattleSystem : MonoBehaviour
     // i changed all enemyunit to trainer.TrainerUnit and playerunit to player.PlayerUnit
     public IEnumerator SetupBattle(BattleUnit trainerUnit) {
         this.trainerUnit = trainerUnit;
-        player.PlayerUnit.SetUp();
-        trainerUnit.SetUp();    
+        player.PlayerUnit.SetUp(true);
+        trainerUnit.SetUp(false);    
         //trainer.TrainerUnit.SetUp();
         // playerUnit.SetUp();
         // enemyUnit.SetUp();
@@ -67,10 +100,67 @@ public class BattleSystem : MonoBehaviour
         ActionSelection();
     }
 
-    public void BattleOver(bool won) {
+    public void BattleOver(bool won) { //if true means player has won
         state = BattleState.BattleOver; //notifies state only
-        onBattleOver(won); //onBattleOver notifies gamecontroller that its over
+        if (won && isPVP) {
+            Debug.Log($"{dialogBox.Points}");
+            //StudentFireBase.Instance.updateBattlePoints(dialogBox.Points);
+            StartCoroutine(updateUserBattlePoints(dialogBox.Points, won));
+            Debug.Log("How to solve this");
+        }
+        else {
+            onBattleOver(won);
+        }
+        //onBattleOver(won); //onBattleOver notifies gamecontroller that its over 
     }
+
+    public IEnumerator updateUserBattlePoints(int points, bool won)
+    {
+        //need integrate with jh one!
+        FirebaseUser User;
+        User = FirebaseManager.User;
+        Debug.Log("update user battle");
+        int worldNumber = QuestionManager.worldNumber;
+        int sectionNumber = QuestionManager.sectionNumber;
+        Debug.Log($"{worldNumber}");
+        Debug.Log($"{sectionNumber}");
+        Debug.Log(User.UserId);
+        //string initialPoint;
+        var DBTask = DBreference.Child("users").Child(User.UserId).Child("BattleStats").Child($"{worldNumber}").Child($"{sectionNumber}").GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+        Debug.Log("reached here at users");
+        if (DBTask.Exception != null)
+        {
+            Debug.Log("hello");
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else if (DBTask.Result.Value == null)
+        {
+            Debug.Log("what");
+        }
+        else
+        {
+            DataSnapshot snapshot = DBTask.Result;
+            string initialPoint = snapshot.Child("Points").Value.ToString();
+            Debug.Log("initial points");
+            Debug.Log(initialPoint);
+            int initialPoints = int.Parse(initialPoint);
+            if (points > initialPoints) {
+                var DBTasks = DBreference.Child("users").Child(User.UserId).Child("BattleStats").Child($"{worldNumber}").Child($"{sectionNumber}").Child("Points").SetValueAsync(points);
+                yield return new WaitUntil(predicate: () => DBTasks.IsCompleted);
+
+                if (DBTasks.Exception != null)
+                {
+                    Debug.LogWarning(message: $"Failed to register task with {DBTasks.Exception}");
+                }
+                else
+                {
+                    //Xp is now updated
+                }
+            }
+        }
+        onBattleOver(won);
+    }  
 
     public void ActionSelection() {
         state = BattleState.ActionSelection;
@@ -173,6 +263,11 @@ public class BattleSystem : MonoBehaviour
         if (faintedUnit.IsPlayerUnit) {
             BattleOver(false);
         }
+        else if (isPVP && !faintedUnit.IsPlayerUnit) {
+            Debug.Log("completed level");
+            dialogBox.completedLevel();
+            BattleOver(true);
+        }
         else
             BattleOver(true); 
     }
@@ -213,7 +308,7 @@ public class BattleSystem : MonoBehaviour
         dialogBox.SetTimer(dialogBox.Timer.ToString());
         if (dialogBox.Timer <= 0)
         {
-            BattleOver(false);
+            BattleOver(false); //player have lost.
             //SceneManager.LoadScene("Map Selection");
             //Application.LoadLevel(levelToLoad);
         }
@@ -244,6 +339,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     public void HandleMoveSelection() {
+        
         if (Input.GetKeyDown(KeyCode.D)) {
             if (currentMove < 2)//playerUnit.Monster.Moves.Count - 1
                 ++currentMove;
@@ -258,7 +354,9 @@ public class BattleSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)) {
             if (currentMove == 0) {
                 dialogBox.EnableQuestionText(true);
-                dialogBox.EnableAnswerSelector(true);
+                Debug.Log("enable question is selected");
+                dialogBox.EnableAnswerSelector(false);
+                dialogBox.RestartAnswerSelection();
                 //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Easy").Question));
                 StartCoroutine(QuestionManager.Instance.getQuestionsBaseOnLevel("Easy"));
                 // string question = QuestionManager.Instance.Question;
@@ -272,17 +370,21 @@ public class BattleSystem : MonoBehaviour
             else if (currentMove == 1) {
                 dialogBox.EnableQuestionText(true);
                 dialogBox.EnableAnswerSelector(true);
+                dialogBox.RestartAnswerSelection();
                 //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Medium").Question));
                 StartCoroutine(QuestionManager.Instance.getQuestionsBaseOnLevel("Medium"));
-                correctAnswer = dialogBox.SetAnswer(SelectQuestion(battleQuestions.Questions.QB, "Medium"));
+                Debug.Log($"correct answer is {correctAnswer}");
+                //correctAnswer = dialogBox.SetAnswer(SelectQuestion(battleQuestions.Questions.QB, "Medium"));
                 PlayerAnswer();
             }
             else if (currentMove == 2) {
                 dialogBox.EnableQuestionText(true);
                 dialogBox.EnableAnswerSelector(true);
+                dialogBox.RestartAnswerSelection();
                 //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Hard").Question));
                 StartCoroutine(QuestionManager.Instance.getQuestionsBaseOnLevel("Hard"));
-                correctAnswer = dialogBox.SetAnswer(SelectQuestion(battleQuestions.Questions.QB, "Hard"));
+                Debug.Log($"correct answer is {correctAnswer}");
+                //correctAnswer = dialogBox.SetAnswer(SelectQuestion(battleQuestions.Questions.QB, "Hard"));
                 PlayerAnswer();
             }
 

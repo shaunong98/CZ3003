@@ -252,10 +252,16 @@ public class TeacherFireBase : MonoBehaviour
         {
             Debug.Log("hello");
             DataSnapshot snapshot = DBTask.Result;
+            /*foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                string username1 = childSnapshot.Child("username").Value.ToString();
+                Debug.Log(username1);
+            }*/
             foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
             {
+                
                 string username = childSnapshot.Child("username").Value.ToString();
-
+                Debug.Log(username);
                 int oodpS1pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{1}").Child($"{1}").Child("Points").Value.ToString());
                 int oodpS2pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{1}").Child($"{2}").Child("Points").Value.ToString());
                 int oodpS3pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{1}").Child($"{3}").Child("Points").Value.ToString());
@@ -282,7 +288,8 @@ public class TeacherFireBase : MonoBehaviour
 
                 if (username == _StudentID)
                 {
-                    OODP_S1_points.text = oodpS1pts.ToString();
+                    Debug.Log("match");
+                    OODP_S1_points.text = oodpS1pts.ToString(); // need change wonky
                     OODP_S2_points.text = oodpS2pts.ToString();
                     OODP_S3_points.text = oodpS3pts.ToString();
 

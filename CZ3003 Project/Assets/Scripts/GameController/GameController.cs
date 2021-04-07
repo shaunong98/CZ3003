@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour
             Debug.Log("trainer lost");
             trainer.BattleLost();
             //Debug.Log("it reached here");
-            trainer = null;
+            //trainer = null;
         }
         else {
             Debug.Log("trainer won");

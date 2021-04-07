@@ -11,9 +11,16 @@ public class BattleHud : MonoBehaviour
 
     Monster _monster;
 
-    public void SetData(Monster monster) {
+    public void SetData(Monster monster, bool isPlayerUnit) {
         _monster = monster;
-        nameText.text = monster.Base.Name;
+        if (isPlayerUnit) {
+            nameText.text = FirebaseManager.username;
+        }
+        else{
+            nameText.text = monster.Base.Name;
+        }
+        //
+        
         levelText.text = "Lvl " + monster.Level;
         hpBar.SetHP((float) monster.HP/monster.MaxHp); //current / total hp
     }
