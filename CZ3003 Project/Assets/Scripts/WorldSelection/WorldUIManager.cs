@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class WorldUIManager : MonoBehaviour
 {
+    [Header("Sounds")]
+    [SerializeField] private AudioClip cfmClickSFX;
     public static WorldUIManager instance;
     public GameObject mapSelectionPanel;
     public GameObject[] levelSelectionPanels;
@@ -69,11 +72,13 @@ public class WorldUIManager : MonoBehaviour
     }
     public void PressMapButton(int _mapIndex)
     {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
         levelSelectionPanels[_mapIndex].gameObject.SetActive(true);
         mapSelectionPanel.gameObject.SetActive(false);
     }
     public void PressSectionBackButton()
     {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
         mapSelectionPanel.gameObject.SetActive(true);
         for (int i=0; i< levelSelectionPanels.Length;i++)
             levelSelectionPanels[i].gameObject.SetActive(false);
@@ -85,26 +90,31 @@ public class WorldUIManager : MonoBehaviour
 
     public void PressQuestModeButton()
     {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
         mapSelectionPanel.gameObject.SetActive(true);
         modeSelectionPanel.gameObject.SetActive(false);
     }
     public void PressQuestBackButton()
     {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
         mapSelectionPanel.gameObject.SetActive(false);
         modeSelectionPanel.gameObject.SetActive(true);
     }
     public void PressPVPModeButton()
     {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
         PVPSelectionPanel.gameObject.SetActive(true);
         modeSelectionPanel.gameObject.SetActive(false);
     }
     public void PressPVPBackButton()
     {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
         PVPSelectionPanel.gameObject.SetActive(false);
         modeSelectionPanel.gameObject.SetActive(true);
     }
     public void BackLevelSelection()
     {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
         SceneManager.LoadScene("Map Selection");
     }
 

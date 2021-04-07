@@ -69,7 +69,17 @@ PrefabInstance:
     - target: {fileID: 639765455128982636, guid: c4e790ea38de0914081f9c3f200fab30,
         type: 3}
       propertyPath: m_Name
-      value: Yellow Trainer
+      value: Yellow Trainer Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 639765455128982639, guid: c4e790ea38de0914081f9c3f200fab30,
+        type: 3}
+      propertyPath: dialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 639765455128982639, guid: c4e790ea38de0914081f9c3f200fab30,
+        type: 3}
+      propertyPath: dialog.lines.Array.data[1]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4e790ea38de0914081f9c3f200fab30, type: 3}

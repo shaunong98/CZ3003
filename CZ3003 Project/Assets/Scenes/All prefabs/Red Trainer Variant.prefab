@@ -7,10 +7,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6764021120717785753, guid: 8ae31544ec6a23e4cbd3a52c04593e90,
+        type: 3}
+      propertyPath: dialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6764021120717785753, guid: 8ae31544ec6a23e4cbd3a52c04593e90,
+        type: 3}
+      propertyPath: dialog.lines.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6764021120717785756, guid: 8ae31544ec6a23e4cbd3a52c04593e90,
         type: 3}
       propertyPath: m_Name
-      value: Red Trainer
+      value: Red Trainer Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6764021120717785764, guid: 8ae31544ec6a23e4cbd3a52c04593e90,
         type: 3}
