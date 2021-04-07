@@ -35,7 +35,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        GameisPaused = false;
+        GameisPaused = true;
     }
 
     public void Quit()
@@ -45,6 +45,9 @@ public class PauseMenu : MonoBehaviour
 
     public void Menu()
     {
+        pauseMenuUI.SetActive(false);
+        GameisPaused = false;
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Map Selection");
     }
 }

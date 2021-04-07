@@ -112,6 +112,7 @@ public class BattleDialogBox : MonoBehaviour
    }
 
     public void EnableQuestionText(bool enabled) {
+        Debug.Log("enabled text");
        questionText.enabled = enabled;
    }
 
@@ -156,6 +157,13 @@ public class BattleDialogBox : MonoBehaviour
                 answerText[i].color = Color.black;
        }
    }
+
+    public void RestartAnswerSelection() {
+       for (int i = 0; i < answerText.Count; ++i) {
+            answerText[i].text = "";
+       }
+    }
+   
 
    public void completedLevel()
     {

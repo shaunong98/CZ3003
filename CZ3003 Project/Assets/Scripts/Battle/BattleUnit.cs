@@ -36,7 +36,7 @@ public class BattleUnit : MonoBehaviour
         originalColor = image.color;
     }
 
-    public void SetUp() {
+    public void SetUp(bool isPlayerUnit) {
         image.enabled = false;
         image.enabled = true;
         Monster = new Monster(_base, level);
@@ -49,7 +49,7 @@ public class BattleUnit : MonoBehaviour
             image.sprite = Monster.Base.FrontSprite;
         image.color = originalColor;
 
-        hud.SetData(Monster);
+        hud.SetData(Monster, isPlayerUnit);
         
         PlayerEnterAnimation();
     }
