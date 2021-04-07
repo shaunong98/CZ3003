@@ -7,16 +7,16 @@ public class ScoreElement : MonoBehaviour
 {
 
     public TMP_Text usernameText;
-    public TMP_Text killsText;
-    public TMP_Text masteryText;
-    public TMP_Text xpText;
+    public TMP_Text worldText;
+    public TMP_Text sectionText;
+    public TMP_Text pointsText;
 
-    public void NewScoreElement (string _username, int _kills, int _mastery, int _xp)
+    public void NewScoreElement (string _username, string _world, string _section, int _points)
     {
         usernameText.text = _username;
-        killsText.text = _kills.ToString();
-        masteryText.text = _mastery.ToString();
-        xpText.text = _xp.ToString();
+        worldText.text = _world;
+        sectionText.text = _section;
+        pointsText.text = _points.ToString();
     }
 
 }

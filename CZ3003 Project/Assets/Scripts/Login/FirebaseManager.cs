@@ -414,6 +414,7 @@ public class FirebaseManager : MonoBehaviour
 
     private void InitialisePlayerProfile()
     {   
+        StartCoroutine(UpdateTotalPoints());
         StartCoroutine(UpdateBattleStats(1,1,0));
         StartCoroutine(UpdateBattleStats(1,2,0));
         StartCoroutine(UpdateBattleStats(1,3,0));
@@ -573,6 +574,118 @@ public class FirebaseManager : MonoBehaviour
             // Kills are now updated
         }
     }
+
+    private IEnumerator UpdateTotalPoints()
+    {
+        var DBTask = DBreference.Child("users").Child(User.UserId).Child("TotalPoints").SetValueAsync(0);
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else 
+        {
+
+        }
+    }
+    
+    private IEnumerator LoadWorldData()
+    {
+        string world = "1";
+        string section = "All";
+        //Get all the users data ordered by kills amount
+        var DBTask = DBreference.Child("users").OrderByChild("TotalPoints").GetValueAsync();
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Data has been retrieved
+            DataSnapshot snapshot = DBTask.Result;
+
+            //Destroy any existing scoreboard elements
+            foreach (Transform child in scoreboardContent.transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            //Loop through every users UID
+            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                string username = childSnapshot.Child("username").Value.ToString();
+                int points = int.Parse(childSnapshot.Child("TotalPoints").Value.ToString());
+
+                //Instantiate new scoreboard elements
+                GameObject scoreboardElement = Instantiate(scoreElement, scoreboardContent);
+                scoreboardElement.GetComponent<ScoreElement>().NewScoreElement(username, world, section, points);
+            }
+
+            //Go to scoareboard screen
+            UIManager.instance.ScoreboardScreen();
+        }
+    }
+
+    //Function for the dropdown menu
+    public void HandleInputData(int val)
+    {
+        if (val == 0)
+        {
+            Debug.Log("Hi");
+            StartCoroutine(LoadScoreboardData());
+        }
+        else if (val == 1)
+        {
+            Debug.Log("Hi2");
+            StartCoroutine(LoadWorldData());
+        }
+    }
+
+    private IEnumerator LoadScoreboardData()
+    {
+        string world = "All";
+        string section = "All";
+        //Get all the users data ordered by kills amount
+        var DBTask = DBreference.Child("users").OrderByChild("TotalPoints").GetValueAsync();
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Data has been retrieved
+            DataSnapshot snapshot = DBTask.Result;
+
+            //Destroy any existing scoreboard elements
+            foreach (Transform child in scoreboardContent.transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            //Loop through every users UID
+            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                string username = childSnapshot.Child("username").Value.ToString();
+                int points = int.Parse(childSnapshot.Child("TotalPoints").Value.ToString());
+
+                //Instantiate new scoreboard elements
+                GameObject scoreboardElement = Instantiate(scoreElement, scoreboardContent);
+                scoreboardElement.GetComponent<ScoreElement>().NewScoreElement(username, world, section, points);
+            }
+
+            //Go to scoareboard screen
+            UIManager.instance.ScoreboardScreen();
+        }
+    }
+
 
 
     // private IEnumerator LoadUserData()
