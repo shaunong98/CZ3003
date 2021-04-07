@@ -144,7 +144,8 @@ public class BattleSystem : MonoBehaviour
             Debug.Log("initial points");
             Debug.Log(initialPoint);
             int initialPoints = int.Parse(initialPoint);
-            if (points > initialPoints) {
+            if (points > initialPoints)
+            {
                 var DBTasks = DBreference.Child("users").Child(User.UserId).Child("BattleStats").Child($"{worldNumber}").Child($"{sectionNumber}").Child("Points").SetValueAsync(points);
                 yield return new WaitUntil(predicate: () => DBTasks.IsCompleted);
 
@@ -154,12 +155,46 @@ public class BattleSystem : MonoBehaviour
                 }
                 else
                 {
-                    //Xp is now updated
+                    //points is now updated
+                }
+
+                var DBTask1 = DBreference.Child("users").Child(User.UserId).GetValueAsync();
+                yield return new WaitUntil(predicate: () => DBTask1.IsCompleted);
+                Debug.Log("reached here at users");
+                if (DBTask1.Exception != null)
+                {
+                    Debug.Log("hello");
+                    Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+                }
+                else if (DBTask1.Result.Value == null)
+                {
+                    Debug.Log("what");
+                }
+                else
+                {
+                    DataSnapshot snapshot1 = DBTask1.Result;
+                    string totalPoint = snapshot1.Child("TotalPoints").Value.ToString();
+                    int totalPoints = int.Parse(totalPoint);
+
+                    totalPoints = totalPoints - initialPoints + points;
+                    Debug.Log($"{totalPoints}");
+
+                    var DBTask2 = DBreference.Child("users").Child(User.UserId).Child("TotalPoints").SetValueAsync(totalPoints);
+                    yield return new WaitUntil(predicate: () => DBTask2.IsCompleted);
+
+                    if (DBTask2.Exception != null)
+                    {
+                        Debug.LogWarning(message: $"Failed to register task with {DBTasks.Exception}");
+                    }
+                    else
+                    {
+                        //total points is now updated
+                    }
                 }
             }
         }
         onBattleOver(won);
-    }  
+    }    
 
     public void ActionSelection() {
         state = BattleState.ActionSelection;
