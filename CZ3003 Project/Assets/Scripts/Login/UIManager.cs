@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class UIManager : MonoBehaviour
     public GameObject registerUI;
     public GameObject userDataUI;
     public GameObject scoreboardUI;
+
+    public Dropdown WorldSelection;
+    public static int World;
+    public Dropdown SectionSelect;
+    public static int Section;
 
     private void Awake()
     {
@@ -58,4 +64,32 @@ public class UIManager : MonoBehaviour
         ClearScreen();
         scoreboardUI.SetActive(true);
     }
+
+    public void WorldSelect()
+    {
+        Debug.Log(WorldSelection.options[WorldSelection.value].text);
+        switch (WorldSelection.options[WorldSelection.value].text)
+        {
+            case "OODP":
+                World = 1;
+                break;
+            case "SE":
+                World = 2;
+                break;
+            case "SSAD":
+                World = 3;
+                break;
+            default:
+                Debug.Log("Error Occured");
+                break;
+        }
+        Debug.Log(World);
+    }
+
+    public void SectionSelection()
+    {
+        Section = int.Parse(SectionSelect.options[SectionSelect.value].text);
+        Debug.Log(Section);
+    }
+    
 }
