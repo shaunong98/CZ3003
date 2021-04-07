@@ -23,6 +23,9 @@ public class SectionSelection : MonoBehaviour
     {
         if(isUnlocked)
         {
+            int totalstar = PlayerPrefs.GetInt("Lv"+gameObject.name);
+            Debug.Log($"{totalstar}");
+            Debug.Log("Lv"+gameObject.name);
             lockImage.gameObject.SetActive(false);
             for (int i=0; i< starsImage.Length; i++)
             {
