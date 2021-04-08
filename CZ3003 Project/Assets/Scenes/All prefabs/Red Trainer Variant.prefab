@@ -24,6 +24,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1147490604, guid: 8ae31544ec6a23e4cbd3a52c04593e90, type: 3}
+      propertyPath: TrainerMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 6295a38dda65db94595c35c957430625, type: 3}
     - target: {fileID: 6764021120717785753, guid: 8ae31544ec6a23e4cbd3a52c04593e90,
         type: 3}
       propertyPath: dialog.lines.Array.size

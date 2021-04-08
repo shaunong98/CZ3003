@@ -97,6 +97,26 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1277695420682305580, guid: 69420855c4fc4bf4186c7a2989525e2b,
+        type: 3}
+      propertyPath: AttackMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: d3a7c2999ae023f41841a56f80293c0e, type: 3}
+    - target: {fileID: 1277695420682305580, guid: 69420855c4fc4bf4186c7a2989525e2b,
+        type: 3}
+      propertyPath: cfmClickSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: eaa81b68478a1af4696ae4a8971f2ece, type: 3}
+    - target: {fileID: 1277695420682305580, guid: 69420855c4fc4bf4186c7a2989525e2b,
+        type: 3}
+      propertyPath: NoHealthMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: d6c7841bd06debd44ac3c6a43ce2748c, type: 3}
+    - target: {fileID: 1277695420682305580, guid: 69420855c4fc4bf4186c7a2989525e2b,
+        type: 3}
+      propertyPath: arrowClickSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 59054ccf4bdf62540abe7c32c1024dd1, type: 3}
     - target: {fileID: 1277695420682305582, guid: 69420855c4fc4bf4186c7a2989525e2b,
         type: 3}
       propertyPath: m_RootOrder
@@ -155,7 +175,7 @@ PrefabInstance:
     - target: {fileID: 1277695420682305583, guid: 69420855c4fc4bf4186c7a2989525e2b,
         type: 3}
       propertyPath: m_Name
-      value: BattleSystem
+      value: BattleSystem Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1277695420682305583, guid: 69420855c4fc4bf4186c7a2989525e2b,
         type: 3}
