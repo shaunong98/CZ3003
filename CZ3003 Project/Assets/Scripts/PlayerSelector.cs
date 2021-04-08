@@ -16,6 +16,7 @@ public class PlayerSelector : MonoBehaviour
     public GameObject battleSystem;
 
     public bool isPVP;
+    public bool isCustom;
 
     // Start is called before the first frame update
     void Awake()
@@ -26,14 +27,20 @@ public class PlayerSelector : MonoBehaviour
         {
             if (isPVP) {
                 gameManager.GetComponent<PVPController>().playerController=calemPlayer.GetComponent<PlayerController>();
+                battleSystem.GetComponent<BattleSystem>().player=calemPlayer.GetComponent<PlayerController>();
+            }
+            else if (isCustom) {
+                gameManager.GetComponent<CustomController>().playerController=calemPlayer.GetComponent<PlayerController>();
+                battleSystem.GetComponent<CustomBattleSystem>().player=calemPlayer.GetComponent<PlayerController>();
             }
             else {
                 cam.GetComponent<CameraFollow>().target= calemPlayer.transform;
                 gameManager.GetComponent<GameController>().playerController=calemPlayer.GetComponent<PlayerController>();
+                battleSystem.GetComponent<BattleSystem>().player=calemPlayer.GetComponent<PlayerController>();
             }
             calemPlayer.gameObject.SetActive(true);
             //gameManager.GetComponent<GameController>().playerController=calemPlayer.GetComponent<PlayerController>();
-            battleSystem.GetComponent<BattleSystem>().player=calemPlayer.GetComponent<PlayerController>();
+            //battleSystem.GetComponent<BattleSystem>().player=calemPlayer.GetComponent<PlayerController>();
             //cam.GetComponent<CameraFollow>().target= calemPlayer.transform;
         }
 
@@ -41,13 +48,19 @@ public class PlayerSelector : MonoBehaviour
         {
             if (isPVP) {
                 gameManager.GetComponent<PVPController>().playerController=brendanPlayer.GetComponent<PlayerController>();
+                battleSystem.GetComponent<BattleSystem>().player=brendanPlayer.GetComponent<PlayerController>();
+            }
+            else if (isCustom) {
+                gameManager.GetComponent<CustomController>().playerController=brendanPlayer.GetComponent<PlayerController>();
+                battleSystem.GetComponent<CustomBattleSystem>().player=brendanPlayer.GetComponent<PlayerController>();
             }
             else {
                 gameManager.GetComponent<GameController>().playerController=brendanPlayer.GetComponent<PlayerController>();
                 cam.GetComponent<CameraFollow>().target= brendanPlayer.transform;
+                battleSystem.GetComponent<BattleSystem>().player=brendanPlayer.GetComponent<PlayerController>();
             }
             brendanPlayer.gameObject.SetActive(true);
-            battleSystem.GetComponent<BattleSystem>().player=brendanPlayer.GetComponent<PlayerController>();
+            //battleSystem.GetComponent<BattleSystem>().player=brendanPlayer.GetComponent<PlayerController>();
             
             
         }
@@ -56,13 +69,19 @@ public class PlayerSelector : MonoBehaviour
         {
             if (isPVP) {
                 gameManager.GetComponent<PVPController>().playerController=mayPlayer.GetComponent<PlayerController>();
+                battleSystem.GetComponent<BattleSystem>().player=mayPlayer.GetComponent<PlayerController>();
+            }
+            else if (isCustom) {
+                gameManager.GetComponent<CustomController>().playerController=mayPlayer.GetComponent<PlayerController>();
+                battleSystem.GetComponent<CustomBattleSystem>().player=mayPlayer.GetComponent<PlayerController>();
             }
             else {
                 gameManager.GetComponent<GameController>().playerController=mayPlayer.GetComponent<PlayerController>();
                 cam.GetComponent<CameraFollow>().target= mayPlayer.transform;
+                battleSystem.GetComponent<BattleSystem>().player=mayPlayer.GetComponent<PlayerController>();
             }
             mayPlayer.gameObject.SetActive(true);
-            battleSystem.GetComponent<BattleSystem>().player=mayPlayer.GetComponent<PlayerController>();
+            //battleSystem.GetComponent<BattleSystem>().player=mayPlayer.GetComponent<PlayerController>();
             
         }
 
@@ -70,13 +89,19 @@ public class PlayerSelector : MonoBehaviour
         {
             if (isPVP) {
                 gameManager.GetComponent<PVPController>().playerController=serenaPlayer.GetComponent<PlayerController>();
+                battleSystem.GetComponent<BattleSystem>().player=serenaPlayer.GetComponent<PlayerController>();
+            }
+            else if (isCustom) {
+                gameManager.GetComponent<CustomController>().playerController=serenaPlayer.GetComponent<PlayerController>();
+                battleSystem.GetComponent<CustomBattleSystem>().player=serenaPlayer.GetComponent<PlayerController>();
             }
             else {
                 gameManager.GetComponent<GameController>().playerController=serenaPlayer.GetComponent<PlayerController>();
                 cam.GetComponent<CameraFollow>().target= serenaPlayer.transform;
+                battleSystem.GetComponent<BattleSystem>().player=serenaPlayer.GetComponent<PlayerController>();
             }
             serenaPlayer.gameObject.SetActive(true);
-            battleSystem.GetComponent<BattleSystem>().player=serenaPlayer.GetComponent<PlayerController>();
+            //battleSystem.GetComponent<BattleSystem>().player=serenaPlayer.GetComponent<PlayerController>();
         }
     }
 }
