@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
-
+    public LevelLoader levelLoader;
     //Screen object variables
     public GameObject loginUI;
     public GameObject registerUI;
@@ -60,6 +60,12 @@ public class UIManager : MonoBehaviour
     {
         ClearScreen();
         userDataUI.SetActive(true);
+    }
+
+    public void EnterGame() //Enter Game
+    {
+        ClearScreen();
+        levelLoader.LoadCharSel();
     }
 
     public void ScoreboardScreen() //Scoreboard button
