@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &1079177384
+--- !u!114 &3643867287318748359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,10 +102,11 @@ PrefabInstance:
     - target: {fileID: 8918972449301582480, guid: d5efefb8cfeca9640993771a210d3117,
         type: 3}
       propertyPath: m_Name
-      value: Green Trainer
+      value: Green Trainer Variant
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8918972449301582447, guid: d5efefb8cfeca9640993771a210d3117, type: 3}
+    - {fileID: 2107114177837470464, guid: d5efefb8cfeca9640993771a210d3117, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d5efefb8cfeca9640993771a210d3117, type: 3}
 --- !u!1 &2034504867631608023 stripped
 GameObject:
