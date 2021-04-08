@@ -205,7 +205,7 @@ public class TeacherFireBase : MonoBehaviour
 
         AddQuestionPanel.gameObject.SetActive(false);
         OptionSelectionPanel.gameObject.SetActive(false);
-        FunctionSelectionPanel.gameObject.SetActive(true);
+        FunctionSelectionPanel.gameObject.SetActive(true);// shift this to button
     }
     //Method is called when searchbar is filled
     public void SearchStudent()
