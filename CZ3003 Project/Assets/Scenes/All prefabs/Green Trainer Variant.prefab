@@ -29,6 +29,10 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1387176122, guid: d5efefb8cfeca9640993771a210d3117, type: 3}
+      propertyPath: TrainerMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 6295a38dda65db94595c35c957430625, type: 3}
     - target: {fileID: 8918972449301582440, guid: d5efefb8cfeca9640993771a210d3117,
         type: 3}
       propertyPath: m_RootOrder
