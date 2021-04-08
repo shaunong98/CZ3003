@@ -25525,7 +25525,7 @@ Tilemap:
       - {fileID: 21301324, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301326, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301328, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -10, y: -22, z: 0}
@@ -25543,7 +25543,7 @@ Tilemap:
       - {fileID: 21301288, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301290, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301292, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -8, y: -22, z: 0}
@@ -34767,6 +34767,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e13e002b1f100d4cafbf41db248e187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrowClickSFX: {fileID: 0}
+  cfmClickSFX: {fileID: 0}
+  musicVolume: 0
 --- !u!4 &1308202132
 Transform:
   m_ObjectHideFlags: 0
@@ -35420,7 +35423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bdcc32e950bcba4492bf0de858f27ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelMusic: {fileID: 8300000, guid: d5d663c20b3678248a0f440ea54e9495, type: 3}
+  levelMusic: {fileID: 8300000, guid: 0edb9c9ac7118a7439edf0df84115498, type: 3}
 --- !u!224 &1366310367
 RectTransform:
   m_ObjectHideFlags: 0

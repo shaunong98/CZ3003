@@ -28,4 +28,13 @@ public class LevelLoader : MonoBehaviour
         SceneManager.LoadScene(levelName);
     }
 
+    public void FadetoBlack()
+    {
+        transition.SetTrigger("Start");
+    }
+
+    public void UnFade()
+    {
+        transition.SetTrigger("End");
+    }
 }
