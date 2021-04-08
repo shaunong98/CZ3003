@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Firebase;
 using Firebase.Auth;
 using Firebase.Database;
@@ -38,6 +39,7 @@ public class FirebaseManager : MonoBehaviour
     public TMP_InputField passwordRegisterVerifyField;
     public TMP_Text warningRegisterText;
     public TMP_Text confirmRegisterText;
+    public InputField UniquePin;
 
     //User Data variables
     // [Header("UserData")]
@@ -45,7 +47,7 @@ public class FirebaseManager : MonoBehaviour
     // public TMP_InputField xpField;
     // public TMP_InputField killsField;
     // public TMP_InputField masteryField;
-    
+
     public GameObject scoreElement;
     public Transform scoreboardContent;
 
@@ -57,6 +59,7 @@ public class FirebaseManager : MonoBehaviour
     public TMP_Text selectedPoints;
 
     public static string username;
+    public Toggle register_toggle;
 
     void Awake()
     {
@@ -108,8 +111,15 @@ public class FirebaseManager : MonoBehaviour
     public void RegisterButton()
     {
         AudioManager.Instance.PlaySFX(cfmClickSFX);
+        if (register_toggle.isOn & UniquePin.text == "pin1")
+        {
+            StartCoroutine(TeacherRegister(emailRegisterField.text, passwordRegisterField.text, usernameRegisterField.text)); // Unique pin can get from database
+        }
         //Call the register coroutine passing the email, password, and username
-        StartCoroutine(Register(emailRegisterField.text, passwordRegisterField.text, usernameRegisterField.text));
+        else
+        {
+            StartCoroutine(Register(emailRegisterField.text, passwordRegisterField.text, usernameRegisterField.text));
+        }
     }
     //Function for the sign out button
     public void SignOutButton()
@@ -187,7 +197,8 @@ public class FirebaseManager : MonoBehaviour
             Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
             warningLoginText.text = "";
             confirmLoginText.text = "Logged In";
-            StartCoroutine(loadMainMenu());
+            StartCoroutine(CheckTeacher(_email));
+            //StartCoroutine(loadMainMenu());
 
             yield return new WaitForSeconds(1);
 
@@ -283,6 +294,100 @@ public class FirebaseManager : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    private IEnumerator TeacherRegister(string _email, string _password, string _username)
+    {
+        if (_username == "")
+        {
+            //If the username field is blank show a warning
+            warningRegisterText.text = "Missing Username";
+        }
+        else if (passwordRegisterField.text != passwordRegisterVerifyField.text)
+        {
+            //If the password does not match show a warning
+            warningRegisterText.text = "Password Does Not Match!";
+        }
+        else
+        {
+            //Call the Firebase auth signin function passing the email and password
+            var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(_email, _password);
+            //Wait until the task completes
+            yield return new WaitUntil(predicate: () => RegisterTask.IsCompleted);
+
+            if (RegisterTask.Exception != null)
+            {
+                //If there are errors handle them
+                Debug.LogWarning(message: $"Failed to register task with {RegisterTask.Exception}");
+                FirebaseException firebaseEx = RegisterTask.Exception.GetBaseException() as FirebaseException;
+                AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
+
+                string message = "Register Failed!";
+                switch (errorCode)
+                {
+                    case AuthError.MissingEmail:
+                        message = "Missing Email";
+                        break;
+                    case AuthError.MissingPassword:
+                        message = "Missing Password";
+                        break;
+                    case AuthError.WeakPassword:
+                        message = "Weak Password";
+                        break;
+                    case AuthError.EmailAlreadyInUse:
+                        message = "Email Already In Use";
+                        break;
+                }
+                warningRegisterText.text = message;
+            }
+            else
+            {
+                //User has now been created
+                //Now get the result
+                User = RegisterTask.Result;
+
+                if (User != null)
+                {
+                    //Create a user profile and set the username
+                    UserProfile profile = new UserProfile { DisplayName = _email };
+
+                    //Call the Firebase auth update user profile function passing the profile with the username
+                    var ProfileTask = User.UpdateUserProfileAsync(profile);
+                    //Wait until the task completes
+                    yield return new WaitUntil(predicate: () => ProfileTask.IsCompleted);
+                    // StartCoroutine(UpdateInnerStars(0));
+                    StartCoroutine(UpdateTeacherUsernameDatabase(_email));
+                    if (ProfileTask.Exception != null)
+                    {
+                        //If there are errors handle them
+                        Debug.LogWarning(message: $"Failed to register task with {ProfileTask.Exception}");
+                        warningRegisterText.text = "Username Set Failed!";
+                    }
+                    else
+                    {
+                        //Username is now set
+                        //Now return to login screen
+                        UIManager.instance.LoginScreen();
+                        warningRegisterText.text = "";
+                        ClearRegisterFeilds();
+                        ClearLoginFeilds();
+                    }
+                }
+            }
+        }
+    }
+
+    public void ToggleTeacher()
+    {
+        if (register_toggle.isOn)
+        {
+            UniquePin.gameObject.SetActive(true);
+        }
+        else
+        {
+            UniquePin.gameObject.SetActive(false);
+
         }
     }
 
@@ -955,6 +1060,163 @@ public class FirebaseManager : MonoBehaviour
                         selectedPoints.text = ssadS3pts.ToString();
                     }
                 }
+            }
+        }
+    }
+
+    private IEnumerator UpdateTeacherUsernameDatabase(string _username)
+    {
+        //Set the currently logged in user username in the database
+        var DBTask = DBreference.Child("teachers").Child(User.UserId).Child("username").SetValueAsync(_username);
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Database username is now updated
+        }
+    }
+
+
+    private IEnumerator CheckTeacher(string _username)
+    {
+        //Get all the users data ordered by kills amount
+        var DBTask1 = DBreference.Child("teachers").GetValueAsync();
+
+        yield return new WaitUntil(predicate: () => DBTask1.IsCompleted);
+
+        if (DBTask1.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask1.Exception}");
+        }
+        else
+        {
+            //Data has been retrieved
+            DataSnapshot snapshot1 = DBTask1.Result;
+
+            //Destroy any existing scoreboard elements
+            foreach (Transform child in scoreboardContent.transform)
+            {
+                Destroy(child.gameObject);
+            }
+            bool teacher = false;
+            //Loop through every users UID
+            foreach (DataSnapshot childSnapshot in snapshot1.Children.Reverse<DataSnapshot>())
+            {
+                string username = childSnapshot.Child("username").Value.ToString();
+                //Instantiate new scoreboard elements
+                GameObject scoreboardElement = Instantiate(scoreElement, scoreboardContent);
+                if (username == _username)
+                {
+                    teacher = true;
+                    UIManager.instance.ClearScreen();
+                    SceneManager.LoadScene("TeacherUI");
+                    break;
+                }
+            }
+
+            //Go to data screen
+            if (teacher == false)
+            {
+                //get the currently logged in user data
+                var DBtask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
+
+                yield return new WaitUntil(predicate: () => DBtask.IsCompleted);
+
+                if (DBtask.Exception != null)
+                {
+                    Debug.LogWarning(message: $"failed to register task with {DBtask.Exception}");
+                }
+                else if (DBtask.Result.Value == null)
+                {
+                    //no data exists yet
+                    totalStars.text = "0";
+                    totalPoints.text = "0";
+                    usernameTitle.text = "Invalid username";
+                }
+                else
+                {
+                    DataSnapshot snapshot = DBtask.Result;
+                    string username = snapshot.Child("username").Value.ToString();
+                    usernameTitle.text = username;
+                    int oodpS1starsT1 = int.Parse(snapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{1}").Value.ToString());
+                    int oodpS1starsT2 = int.Parse(snapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{2}").Value.ToString());
+                    int oodpS1starsT3 = int.Parse(snapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{3}").Value.ToString());
+                    int oodpS1starsT4 = int.Parse(snapshot.Child("stars").Child($"{1}").Child($"{1}").Child($"{4}").Value.ToString());
+                    int oodpS1stars = oodpS1starsT1 + oodpS1starsT2 + oodpS1starsT3 + oodpS1starsT4;
+                    Debug.Log(oodpS1stars);
+
+                    int oodpS2starsT1 = int.Parse(snapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{5}").Value.ToString());
+                    int oodpS2starsT2 = int.Parse(snapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{6}").Value.ToString());
+                    int oodpS2starsT3 = int.Parse(snapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{7}").Value.ToString());
+                    int oodpS2starsT4 = int.Parse(snapshot.Child("stars").Child($"{1}").Child($"{2}").Child($"{8}").Value.ToString());
+                    int oodpS2stars = oodpS2starsT1 + oodpS2starsT2 + oodpS2starsT3 + oodpS2starsT4;
+                    Debug.Log(oodpS2stars);
+
+                    int oodpS3starsT1 = int.Parse(snapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{9}").Value.ToString());
+                    int oodpS3starsT2 = int.Parse(snapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{10}").Value.ToString());
+                    int oodpS3starsT3 = int.Parse(snapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{11}").Value.ToString());
+                    int oodpS3starsT4 = int.Parse(snapshot.Child("stars").Child($"{1}").Child($"{3}").Child($"{12}").Value.ToString());
+                    int oodpS3stars = oodpS3starsT1 + oodpS3starsT2 + oodpS3starsT3 + oodpS3starsT4;
+                    Debug.Log(oodpS3stars);
+
+                    int seS1starsT1 = int.Parse(snapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{13}").Value.ToString());
+                    int seS1starsT2 = int.Parse(snapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{14}").Value.ToString());
+                    int seS1starsT3 = int.Parse(snapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{15}").Value.ToString());
+                    int seS1starsT4 = int.Parse(snapshot.Child("stars").Child($"{2}").Child($"{1}").Child($"{16}").Value.ToString());
+                    int seS1stars = seS1starsT1 + seS1starsT2 + seS1starsT3 + seS1starsT4;
+                    Debug.Log(seS1stars);
+
+                    int seS2starsT1 = int.Parse(snapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{17}").Value.ToString());
+                    int seS2starsT2 = int.Parse(snapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{18}").Value.ToString());
+                    int seS2starsT3 = int.Parse(snapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{19}").Value.ToString());
+                    int seS2starsT4 = int.Parse(snapshot.Child("stars").Child($"{2}").Child($"{2}").Child($"{20}").Value.ToString());
+                    int seS2stars = seS2starsT1 + seS2starsT2 + seS2starsT3 + seS2starsT4;
+                    Debug.Log(seS2stars);
+
+                    int seS3starsT1 = int.Parse(snapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{21}").Value.ToString());
+                    int seS3starsT2 = int.Parse(snapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{22}").Value.ToString());
+                    int seS3starsT3 = int.Parse(snapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{23}").Value.ToString());
+                    int seS3starsT4 = int.Parse(snapshot.Child("stars").Child($"{2}").Child($"{3}").Child($"{24}").Value.ToString());
+                    int seS3stars = seS3starsT1 + seS3starsT2 + seS3starsT3 + seS3starsT4;
+                    Debug.Log(seS3stars);
+
+                    int ssadS1starsT1 = int.Parse(snapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{25}").Value.ToString());
+                    int ssadS1starsT2 = int.Parse(snapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{26}").Value.ToString());
+                    int ssadS1starsT3 = int.Parse(snapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{27}").Value.ToString());
+                    int ssadS1starsT4 = int.Parse(snapshot.Child("stars").Child($"{3}").Child($"{1}").Child($"{28}").Value.ToString());
+                    int ssadS1stars = ssadS1starsT1 + ssadS1starsT2 + ssadS1starsT3 + ssadS1starsT4;
+                    Debug.Log(ssadS1stars);
+
+                    int ssadS2starsT1 = int.Parse(snapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{29}").Value.ToString());
+                    int ssadS2starsT2 = int.Parse(snapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{30}").Value.ToString());
+                    int ssadS2starsT3 = int.Parse(snapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{31}").Value.ToString());
+                    int ssadS2starsT4 = int.Parse(snapshot.Child("stars").Child($"{3}").Child($"{2}").Child($"{32}").Value.ToString());
+                    int ssadS2stars = ssadS2starsT1 + ssadS2starsT2 + ssadS2starsT3 + ssadS2starsT4;
+                    Debug.Log(ssadS2stars);
+
+                    int ssadS3starsT1 = int.Parse(snapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{33}").Value.ToString());
+                    int ssadS3starsT2 = int.Parse(snapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{34}").Value.ToString());
+                    int ssadS3starsT3 = int.Parse(snapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{35}").Value.ToString());
+                    int ssadS3starsT4 = int.Parse(snapshot.Child("stars").Child($"{3}").Child($"{3}").Child($"{36}").Value.ToString());
+                    int ssadS3stars = ssadS3starsT1 + ssadS3starsT2 + ssadS3starsT3 + ssadS3starsT4;
+                    Debug.Log(ssadS3stars);
+
+                    int totalStarsObtained = oodpS1stars + oodpS2stars + oodpS3stars + seS1stars + seS2stars + seS3stars + ssadS1stars + ssadS2stars + ssadS3stars;
+                    Debug.Log(totalStarsObtained);
+
+                    int totalPointsObtained = int.Parse(snapshot.Child("TotalPoints").Value.ToString());
+
+                    totalStars.text = totalStarsObtained.ToString();
+                    totalPoints.text = totalPointsObtained.ToString();
+
+                }
+                loginUI.SetActive(false);
+                userDataUI.SetActive(true);
             }
         }
     }
