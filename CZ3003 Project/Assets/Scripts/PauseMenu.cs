@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    public FirebaseManager firebaseManager;
     public bool GameisPaused = false;
 
     public GameObject pauseMenuUI;
     // Update is called once per frame
+    
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -54,7 +56,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Save() {
-        FirebaseManager.Instance.UpdateStarsToDb();
+        firebaseManager.UpdateStarsToDb();
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameisPaused = false;
