@@ -572,7 +572,7 @@ public class TeacherFireBase : MonoBehaviour
                             }
                     }
                 }
-                else if (world == "Total")
+                else if (world == "TOTAL")
                 {
                     switch (section)
                     {
