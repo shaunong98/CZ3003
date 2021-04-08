@@ -7,9 +7,16 @@ public enum GameState{FreeRoam, Battle, Dialog, Cutscene}
 
 public class GameController : MonoBehaviour
 {
+    public LevelLoader battleLoader;
     [SerializeField] public PlayerController playerController;
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Camera worldCamera;
+
+    [SerializeField] private AudioClip BattleMusic;
+    [SerializeField] private AudioClip VictoryMusic;
+
+    [SerializeField] private AudioClip LevelMusic;
+
 
     GameState state;
 
@@ -52,9 +59,13 @@ public class GameController : MonoBehaviour
 
     
 
-    public void StartBattle(BattleUnit trainerUnit) {
+    public IEnumerator StartBattle(BattleUnit trainerUnit) {
         state = GameState.Battle;
+        AudioManager.Instance.PlayMusic(BattleMusic);
+        battleLoader.FadetoBlack();
+        yield return new WaitForSeconds(1f);
         BattleSystem.Instance.gameObject.SetActive(true);
+        battleLoader.UnFade();
         //SceneManager.LoadScene("BattleScene");
         worldCamera.gameObject.SetActive(false);
         BattleSystem.Instance.StartBattle(trainerUnit); 
@@ -62,16 +73,21 @@ public class GameController : MonoBehaviour
 
     void EndBattle(bool won) {
         if (won == true) { //true means trainer lost and false means trainer won.
+            AudioManager.Instance.PlayMusicWithFade(VictoryMusic,0.1f);
             Debug.Log("trainer lost");
             trainer.BattleLost();
             //Debug.Log("it reached here");
             //trainer = null;
+            battleLoader.FadetoBlack();
         }
         else {
             Debug.Log("trainer won");
             trainer.BattleWon();
+            battleLoader.FadetoBlack();
         }
         state = GameState.FreeRoam;
+        AudioManager.Instance.PlayMusicWithFade(LevelMusic,0.1f);
+        battleLoader.UnFade();
         trainer.TrainerUnit.disableImage(); //have to disable image here or will have overlap as we are calling instance of same trainerunit scripts and when battle ends didnt account for this image
         BattleSystem.Instance.gameObject.SetActive(false);
         worldCamera.gameObject.SetActive(true);

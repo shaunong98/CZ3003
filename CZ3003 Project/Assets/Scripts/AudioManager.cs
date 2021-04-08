@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    [SerializeField] private AudioClip arrowClickSFX;
+    [SerializeField] private AudioClip cfmClickSFX;
+
     private AudioSource musicSource;
     private AudioSource musicSource2;
     private AudioSource sfxSource;
 
+    public float musicVolume;
     private bool firstMusicSourceisPlaying;
     private static AudioManager instance;
     public static AudioManager Instance
@@ -37,13 +41,14 @@ public class AudioManager : MonoBehaviour
         musicSource2=this.gameObject.AddComponent<AudioSource>();
         sfxSource=this.gameObject.AddComponent<AudioSource>();
 
+
         musicSource.loop = true;
         musicSource2.loop = true;
     }
 
     public void PlayMusic(AudioClip musicClip)
     {
-       AudioSource activeSource = (firstMusicSourceisPlaying) ? musicSource : musicSource2;
+       AudioSource activeSource = musicSource;
        musicSource.clip = musicClip;
        activeSource.volume = 1;
        musicSource.Play();
@@ -61,7 +66,9 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusicWithFade(AudioClip newClip, float transitionTime=1.0f)
     {
-        AudioSource activeSource = (firstMusicSourceisPlaying) ? musicSource : musicSource2;
+        AudioSource activeSource = musicSource;
+
+        musicVolume = activeSource.volume;
 
         StartCoroutine(UpdateMusicWithFade(activeSource,newClip,transitionTime));
     }
@@ -72,6 +79,7 @@ public class AudioManager : MonoBehaviour
         AudioSource newSource = (firstMusicSourceisPlaying) ? musicSource2 : musicSource;
 
         firstMusicSourceisPlaying = !firstMusicSourceisPlaying;
+        musicVolume = activeSource.volume;
 
         newSource.clip = musicClip;
         newSource.Play();
@@ -101,7 +109,8 @@ public class AudioManager : MonoBehaviour
         //fade out
         for(t = 0; t< transitionTime;t+=Time.deltaTime)
         {
-            activeSource.volume = (1-(t/transitionTime));
+            activeSource.volume = (musicVolume - ((t/ transitionTime) * musicVolume));
+            Debug.Log(activeSource.volume);
             yield return null;
         }
 
@@ -112,9 +121,21 @@ public class AudioManager : MonoBehaviour
         //fade in
         for(t = 0; t< transitionTime;t+=Time.deltaTime)
         {
-            activeSource.volume = (t/transitionTime);
+            activeSource.volume = (t / transitionTime) * musicVolume;
             yield return null;
         }
+    }
+
+    public void PauseMusic()
+    {
+        musicSource.Pause();
+        musicSource2.Pause();
+    }
+
+    public void ResumeMusic()
+    {
+        musicSource.UnPause();
+        musicSource2.UnPause();
     }
 
     public void SetMusicVolume(float volume)

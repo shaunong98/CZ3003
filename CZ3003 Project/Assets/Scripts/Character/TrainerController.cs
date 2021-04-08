@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TrainerController : MonoBehaviour, Interactable
 {
+    [SerializeField] private AudioClip TrainerMusic;
     [SerializeField] Dialog dialog;
     [SerializeField] Dialog dialogAfterLosingBattle;
     [SerializeField] Dialog dialogAfterWinningBattle;
@@ -34,13 +35,13 @@ public class TrainerController : MonoBehaviour, Interactable
                 Debug.Log("battle won");
                 StartCoroutine(DialogManager.Instance.ShowDialog(dialogAfterWinningBattle,()=>
                 {
-                    GameController.Instance.StartBattle(trainerUnit);
+                    StartCoroutine(GameController.Instance.StartBattle(trainerUnit));
                 }));
             }
             else {
                 StartCoroutine(DialogManager.Instance.ShowDialog(dialog,()=>
                 {
-                    GameController.Instance.StartBattle(trainerUnit);
+                    StartCoroutine(GameController.Instance.StartBattle(trainerUnit));
                 }));
             } 
         }
@@ -52,6 +53,7 @@ public class TrainerController : MonoBehaviour, Interactable
     }
 
     public IEnumerator TriggerTrainerBattle(PlayerController player) {
+        AudioManager.Instance.PlayMusic(TrainerMusic);
         Debug.Log("exclamation set active");
         exclamation.SetActive(true);
         yield return new WaitForSeconds(0.5f);
@@ -62,9 +64,9 @@ public class TrainerController : MonoBehaviour, Interactable
         yield return character.Move(moveVec);
 
         StartCoroutine(DialogManager.Instance.ShowDialog(dialog,()=>
-            {
-                GameController.Instance.StartBattle(trainerUnit);
-            }));
+        {
+            StartCoroutine(GameController.Instance.StartBattle(trainerUnit));
+        }));
     }
 
     public void BattleLost() {
@@ -88,5 +90,4 @@ public class TrainerController : MonoBehaviour, Interactable
         battleAgain = true;
         fov.gameObject.SetActive(false);
     }
-
 }
