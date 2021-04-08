@@ -9,6 +9,7 @@ public class UIcontroller : MonoBehaviour
     public GameObject ViewStatisticPanel;
     public GameObject MakeAssignmentPanel;
     public GameObject FunctionSelectionPanel;
+    public GameObject EditQuestionPanel;
 
     public void PressAddQuestionButton()
     {
@@ -30,6 +31,11 @@ public class UIcontroller : MonoBehaviour
         MakeAssignmentPanel.gameObject.SetActive(true);
         FunctionSelectionPanel.gameObject.SetActive(false);
     }
+    public void PressEditQuestionButton()
+    {
+        EditQuestionPanel.gameObject.SetActive(true);
+        FunctionSelectionPanel.gameObject.SetActive(false);
+    }
     public void PressBackAddQuestionButton()
     {
         AddQuestionPanel.gameObject.SetActive(false);
@@ -48,6 +54,11 @@ public class UIcontroller : MonoBehaviour
     public void PressBackMakeAssignmentButton()
     {
         MakeAssignmentPanel.gameObject.SetActive(false);
+        FunctionSelectionPanel.gameObject.SetActive(true);
+    }
+    public void PressBackEditQuestionButton()
+    {
+        EditQuestionPanel.gameObject.SetActive(false);
         FunctionSelectionPanel.gameObject.SetActive(true);
     }
 }
