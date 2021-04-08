@@ -123,6 +123,30 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &12360085 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8174351583069162395, guid: 957a5892fa124a942a0ff27a3c5497ee,
+    type: 3}
+  m_PrefabInstance: {fileID: 1083869417}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &12360086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12360085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11ce5ef0dbbd64409d9eafb4a060b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog:
+    lines: []
+  movementPattern:
+  - {x: 0, y: 0}
+  timeBetweenPattern: 0
+  state: 0
 --- !u!1 &146971094
 GameObject:
   m_ObjectHideFlags: 0
@@ -14688,7 +14712,8 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 1336002546}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4786066207846439859, guid: 1249a70838863ce4784c6cdab5fd233f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1249a70838863ce4784c6cdab5fd233f, type: 3}
 --- !u!1 &1069854393
 GameObject:
@@ -14825,8 +14850,33 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 1336002540}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1837089365299730066, guid: 957a5892fa124a942a0ff27a3c5497ee, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 957a5892fa124a942a0ff27a3c5497ee, type: 3}
+--- !u!1 &1118797492 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2659905029320893936, guid: 1249a70838863ce4784c6cdab5fd233f,
+    type: 3}
+  m_PrefabInstance: {fileID: 941006453}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1118797493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118797492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11ce5ef0dbbd64409d9eafb4a060b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog:
+    lines: []
+  movementPattern:
+  - {x: 0, y: 0}
+  timeBetweenPattern: 0
+  state: 0
 --- !u!1001 &1261248636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18986,6 +19036,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1389602001 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2034504867631608023, guid: 92e380d1dff619542b74998f0597face,
+    type: 3}
+  m_PrefabInstance: {fileID: 1825908159}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1389602002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389602001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11ce5ef0dbbd64409d9eafb4a060b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog:
+    lines: []
+  movementPattern:
+  - {x: 0, y: 0}
+  timeBetweenPattern: 0
+  state: 0
 --- !u!1001 &1430349995
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19073,7 +19147,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blue Trainer Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5765098146365384671, guid: c6a02dcf9b560ce4b80b8b659a5ff73e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c6a02dcf9b560ce4b80b8b659a5ff73e, type: 3}
 --- !u!1001 &1520397970
 PrefabInstance:
@@ -19230,6 +19305,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1520397970}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1676343077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6365053228941969247, guid: c6a02dcf9b560ce4b80b8b659a5ff73e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1430349995}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1676343078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676343077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11ce5ef0dbbd64409d9eafb4a060b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog:
+    lines: []
+  movementPattern:
+  - {x: 0, y: 0}
+  timeBetweenPattern: 0
+  state: 0
 --- !u!1001 &1734029190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19482,7 +19581,8 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 1336002545}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3643867287318748359, guid: 92e380d1dff619542b74998f0597face, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 92e380d1dff619542b74998f0597face, type: 3}
 --- !u!1001 &1876656548
 PrefabInstance:

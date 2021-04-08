@@ -26500,6 +26500,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: dialog.lines.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8174351583069162395, guid: 957a5892fa124a942a0ff27a3c5497ee,
         type: 3}
       propertyPath: m_Name
@@ -26584,6 +26588,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Red Trainer Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: dialog.lines.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7972326145932774535, guid: 1249a70838863ce4784c6cdab5fd233f,
         type: 3}
