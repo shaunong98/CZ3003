@@ -431,6 +431,16 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 127584426}
+    - target: {fileID: 8734521296434019904, guid: 1249a70838863ce4784c6cdab5fd233f,
+        type: 3}
+      propertyPath: trainerNumber
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734521296434019904, guid: 1249a70838863ce4784c6cdab5fd233f,
+        type: 3}
+      propertyPath: trainerSection
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4786066207846439859, guid: 1249a70838863ce4784c6cdab5fd233f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1249a70838863ce4784c6cdab5fd233f, type: 3}
@@ -2347,6 +2357,16 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 127584425}
+    - target: {fileID: 7492456328717091581, guid: 92e380d1dff619542b74998f0597face,
+        type: 3}
+      propertyPath: trainerNumber
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492456328717091581, guid: 92e380d1dff619542b74998f0597face,
+        type: 3}
+      propertyPath: trainerSection
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3643867287318748359, guid: 92e380d1dff619542b74998f0597face, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 92e380d1dff619542b74998f0597face, type: 3}
@@ -3938,7 +3958,7 @@ Tilemap:
       - {fileID: 21301324, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301326, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301328, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 8, y: -16, z: 0}
@@ -3974,7 +3994,7 @@ Tilemap:
       - {fileID: 21301262, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301264, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301266, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 9, y: -15, z: 0}
@@ -4019,7 +4039,7 @@ Tilemap:
       - {fileID: 21301324, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301326, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301328, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -1, y: 0, z: 0}
@@ -4546,6 +4566,16 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 127584427}
+    - target: {fileID: 4395688291499089192, guid: c6a02dcf9b560ce4b80b8b659a5ff73e,
+        type: 3}
+      propertyPath: trainerNumber
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395688291499089192, guid: c6a02dcf9b560ce4b80b8b659a5ff73e,
+        type: 3}
+      propertyPath: trainerSection
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6365053228941969239, guid: c6a02dcf9b560ce4b80b8b659a5ff73e,
         type: 3}
       propertyPath: m_RootOrder
@@ -19251,6 +19281,16 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 127584420}
+    - target: {fileID: 8760000720551253619, guid: 957a5892fa124a942a0ff27a3c5497ee,
+        type: 3}
+      propertyPath: trainerNumber
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 8760000720551253619, guid: 957a5892fa124a942a0ff27a3c5497ee,
+        type: 3}
+      propertyPath: trainerSection
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1837089365299730066, guid: 957a5892fa124a942a0ff27a3c5497ee, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 957a5892fa124a942a0ff27a3c5497ee, type: 3}

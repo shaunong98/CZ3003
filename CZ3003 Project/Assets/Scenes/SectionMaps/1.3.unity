@@ -26170,6 +26170,16 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 2071721440}
+    - target: {fileID: 4395688291499089192, guid: c6a02dcf9b560ce4b80b8b659a5ff73e,
+        type: 3}
+      propertyPath: trainerNumber
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395688291499089192, guid: c6a02dcf9b560ce4b80b8b659a5ff73e,
+        type: 3}
+      propertyPath: trainerSection
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6365053228941969239, guid: c6a02dcf9b560ce4b80b8b659a5ff73e,
         type: 3}
       propertyPath: m_RootOrder
@@ -26500,10 +26510,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: dialog.lines.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8174351583069162395, guid: 957a5892fa124a942a0ff27a3c5497ee,
         type: 3}
       propertyPath: m_Name
@@ -26514,6 +26520,16 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 1387215166}
+    - target: {fileID: 8760000720551253619, guid: 957a5892fa124a942a0ff27a3c5497ee,
+        type: 3}
+      propertyPath: trainerNumber
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8760000720551253619, guid: 957a5892fa124a942a0ff27a3c5497ee,
+        type: 3}
+      propertyPath: trainerSection
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 957a5892fa124a942a0ff27a3c5497ee, type: 3}
 --- !u!1 &1285361101 stripped
@@ -26589,10 +26605,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red Trainer Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: dialog.lines.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7972326145932774535, guid: 1249a70838863ce4784c6cdab5fd233f,
         type: 3}
       propertyPath: m_SortingLayer
@@ -26608,6 +26620,16 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 1716657987}
+    - target: {fileID: 8734521296434019904, guid: 1249a70838863ce4784c6cdab5fd233f,
+        type: 3}
+      propertyPath: trainerNumber
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734521296434019904, guid: 1249a70838863ce4784c6cdab5fd233f,
+        type: 3}
+      propertyPath: trainerSection
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1249a70838863ce4784c6cdab5fd233f, type: 3}
 --- !u!114 &1387215166 stripped
@@ -26763,6 +26785,16 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 1629787651}
+    - target: {fileID: 7492456328717091581, guid: 92e380d1dff619542b74998f0597face,
+        type: 3}
+      propertyPath: trainerNumber
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492456328717091581, guid: 92e380d1dff619542b74998f0597face,
+        type: 3}
+      propertyPath: trainerSection
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92e380d1dff619542b74998f0597face, type: 3}
 --- !u!1 &1769399485
