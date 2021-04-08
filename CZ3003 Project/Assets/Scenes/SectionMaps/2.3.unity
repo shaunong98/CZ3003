@@ -4012,7 +4012,7 @@ Tilemap:
       - {fileID: 21301262, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301264, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301266, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -1, y: -1, z: 0}
@@ -4039,7 +4039,7 @@ Tilemap:
       - {fileID: 21301324, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301326, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301328, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -1, y: 0, z: 0}
@@ -4084,7 +4084,7 @@ Tilemap:
       - {fileID: 21301262, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301264, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301266, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 1, y: 1, z: 0}
@@ -4794,6 +4794,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1005537609}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1005537611 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3727780441105307729, guid: 830662160f6d0da47baee15a933a312a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1005537609}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2767123b2f624cd4e8e9e09f2c7a48da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1254723250
 GameObject:
   m_ObjectHideFlags: 0
@@ -19416,6 +19428,11 @@ PrefabInstance:
       propertyPath: pauseMenuUI
       value: 
       objectReference: {fileID: 1005537610}
+    - target: {fileID: 7230562119800166721, guid: ce39d9e3a4363f54dbde191ed1a49971,
+        type: 3}
+      propertyPath: firebaseManager
+      value: 
+      objectReference: {fileID: 1005537611}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce39d9e3a4363f54dbde191ed1a49971, type: 3}
 --- !u!114 &1672825644 stripped

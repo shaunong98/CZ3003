@@ -10,6 +10,9 @@ using UnityEngine.SceneManagement;
 
 public class FirebaseManager : MonoBehaviour
 {
+    public GameObject loginUI;
+    public GameObject userDataUI;
+
     [SerializeField] private AudioClip cfmClickSFX;
     public LevelLoader levelLoader;
     //[SerializeField] QuestionManager questionManager;
@@ -55,11 +58,8 @@ public class FirebaseManager : MonoBehaviour
 
     public static string username;
 
-    public static FirebaseManager Instance { get; private set; }
-
     void Awake()
     {
-        Instance = this;
         //Check that all of the necessary dependencies for Firebase are present on the system
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
@@ -125,7 +125,7 @@ public class FirebaseManager : MonoBehaviour
         AudioManager.Instance.PlaySFX(cfmClickSFX);
         ClearRegisterFeilds();
         ClearLoginFeilds();
-        levelLoader.LoadCharSel();
+        //levelLoader.LoadCharSel();
     }
     //Function for the save button
     // public void SaveDataButton()
@@ -325,7 +325,7 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
-    private void initialisePlayerPrefStars() 
+    public void initialisePlayerPrefStars() 
     {
         StartCoroutine(loadPlayerPrefStars());
     }
@@ -425,7 +425,7 @@ public class FirebaseManager : MonoBehaviour
                 }
             }
         }
-        levelLoader.LoadCharSel();
+        //levelLoader.LoadCharSel();
     }
     // for (int i = 0; i<snapshot.ChildrenCount; i++) {
     //             int value = int.Parse(snapshot.Child($"{i+1}").Value.ToString());
@@ -806,6 +806,8 @@ public class FirebaseManager : MonoBehaviour
             totalPoints.text = totalPointsObtained.ToString();
 
         }
+        loginUI.SetActive(false);
+        userDataUI.SetActive(true);
     }
 
     private IEnumerator loadSelectedStarsPoints(string _username)

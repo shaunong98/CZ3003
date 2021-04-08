@@ -26473,6 +26473,11 @@ PrefabInstance:
       propertyPath: pauseMenuUI
       value: 
       objectReference: {fileID: 1408608442}
+    - target: {fileID: 7230562119800166721, guid: ce39d9e3a4363f54dbde191ed1a49971,
+        type: 3}
+      propertyPath: firebaseManager
+      value: 
+      objectReference: {fileID: 1935082554}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce39d9e3a4363f54dbde191ed1a49971, type: 3}
 --- !u!114 &1198707507 stripped
@@ -30629,6 +30634,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 830662160f6d0da47baee15a933a312a, type: 3}
+--- !u!114 &1935082554 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3727780441105307729, guid: 830662160f6d0da47baee15a933a312a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1935082553}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2767123b2f624cd4e8e9e09f2c7a48da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1993339158 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8174351583069162395, guid: 957a5892fa124a942a0ff27a3c5497ee,

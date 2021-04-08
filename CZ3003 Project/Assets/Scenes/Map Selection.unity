@@ -37397,8 +37397,33 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4786066207846439859, guid: 1249a70838863ce4784c6cdab5fd233f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1249a70838863ce4784c6cdab5fd233f, type: 3}
+--- !u!1 &1395097447 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2659905029320893936, guid: 1249a70838863ce4784c6cdab5fd233f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1395097446}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1395097448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395097447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11ce5ef0dbbd64409d9eafb4a060b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog:
+    lines: []
+  movementPattern:
+  - {x: 0, y: 0}
+  timeBetweenPattern: 0
+  state: 0
 --- !u!1 &1406999766
 GameObject:
   m_ObjectHideFlags: 0

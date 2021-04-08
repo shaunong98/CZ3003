@@ -27,4 +27,14 @@ public class LevelLoader : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(levelName);
     }
+
+    public void FadetoBlack()
+    {
+        transition.SetTrigger("Start");
+    }
+
+    public void UnFade()
+    {
+        transition.SetTrigger("End");
+    }
 }
