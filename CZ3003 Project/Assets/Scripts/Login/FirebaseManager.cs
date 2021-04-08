@@ -184,7 +184,7 @@ public class FirebaseManager : MonoBehaviour
             Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
             warningLoginText.text = "";
             confirmLoginText.text = "Logged In";
-            // StartCoroutine(LoadUserData());
+            StartCoroutine(loadMainMenu());
 
             yield return new WaitForSeconds(1);
 
