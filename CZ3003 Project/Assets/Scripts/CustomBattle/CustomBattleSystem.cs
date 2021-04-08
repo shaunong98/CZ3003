@@ -34,6 +34,18 @@ public class CustomBattleSystem : MonoBehaviour
     //public FirebaseUser User;
     public DatabaseReference DBreference;
 
+    public event Action<bool> onBattleOver;
+
+    CustomBattleState state;
+
+    int currentAction;
+    int currentMove = 0;
+    int currentAnswer;
+    public static int correctAnswer;
+    public static int questionNum = 1;
+    public static int totalQuestionNum = 2;
+    bool isCorrect = true;
+
     public void Awake() {
         Instance = this;
 
@@ -60,16 +72,6 @@ public class CustomBattleSystem : MonoBehaviour
         auth = FirebaseAuth.DefaultInstance;
         DBreference = FirebaseDatabase.DefaultInstance.RootReference;
     }
-
-    public event Action<bool> onBattleOver;
-
-    CustomBattleState state;
-
-    int currentAction;
-    int currentMove;
-    int currentAnswer;
-    public static int correctAnswer;
-    bool isCorrect = true;
 
     public void StartBattle(BattleUnit trainerUnit) {
         StartCoroutine(SetupBattle(trainerUnit));
@@ -208,6 +210,13 @@ public class CustomBattleSystem : MonoBehaviour
         state = CustomBattleState.ActionSelection;
         //isCorrect = true;
         StartCoroutine(dialogBox.TypeDialog("You answered wrongly! Choose an action"));
+
+        if (questionNum == (totalQuestionNum + 1))
+        {
+            Debug.Log("questionnum = total question");
+            StartCoroutine(dialogBox.TypeDialog("You have answered all questions!"));
+            BattleOver(false);
+        }
         dialogBox.EnableActionSelector(true);
         dialogBox.EnableMoveSelector(false);
         dialogBox.EnableDialogText(true);
@@ -235,40 +244,13 @@ public class CustomBattleSystem : MonoBehaviour
     public IEnumerator PlayerMove() {
         state = CustomBattleState.PerformMove;
         Move move;
-        if (currentMove == 2) {
-           move = player.PlayerUnit.Monster.Moves[currentMove-1];
-        }
-        else if (currentMove == 1) {
-           move = player.PlayerUnit.Monster.Moves[currentMove+1];
-        }
-        else {move = player.PlayerUnit.Monster.Moves[currentMove];}
+        move = player.PlayerUnit.Monster.Moves[currentMove+2];
         yield return dialogBox.TypeDialog($"You answered correctly!");
         yield return new WaitForSeconds(1f);
 
         yield return RunMove(player.PlayerUnit, trainerUnit, move);
        
         if (state == CustomBattleState.PerformMove){
-            if (!isPVP) {
-                StartCoroutine(EnemyMove()); //not sure this part
-            }
-            else {
-                ActionSelection();
-            }
-        }
-    }
-
-    public IEnumerator EnemyMove() {
-        state = CustomBattleState.PerformMove;
-
-        var move = trainerUnit.Monster.GetRandomMove();
-        if (!isCorrect) {
-            yield return dialogBox.TypeDialog("You answered wrongly!");
-            yield return new WaitForSeconds(1f);
-            isCorrect = true;
-        }
-        yield return RunMove(trainerUnit, player.PlayerUnit, move);
-
-        if (state == CustomBattleState.PerformMove) {
             ActionSelection();
         }
     }
@@ -290,6 +272,15 @@ public class CustomBattleSystem : MonoBehaviour
             yield return new WaitForSeconds(2f);
             CheckForBattleOver(targetUnit);
         }
+        Debug.Log($"{questionNum}");
+        Debug.Log($"{totalQuestionNum}");
+        if (questionNum == (totalQuestionNum + 1))
+        {
+            yield return dialogBox.TypeDialog("You have answered all questions!");
+            yield return new WaitForSeconds(1f);
+            BattleOver(false);
+        }
+        
     }
 
     public void CheckForBattleOver(BattleUnit faintedUnit) {
@@ -308,9 +299,9 @@ public class CustomBattleSystem : MonoBehaviour
     public void HandleUpdate() {
         if (state == CustomBattleState.ActionSelection) {
             HandleActionSelection();
-            if (isPVP) {
-                HandleTimer();
-            }
+            // if (isPVP) {
+            //     HandleQuestionsAnswered();
+            // }
         }
 
         // else if (state == CustomBattleState.MoveSelection) {
@@ -321,31 +312,17 @@ public class CustomBattleSystem : MonoBehaviour
         // }
         else if (state == CustomBattleState.PlayerAnswer) {
             HandleAnswerSelection(correctAnswer);
-            if (isPVP) {
-                HandleTimer();
-            }
+            // if (isPVP) {
+            //     HandleQuestionsAnswered();
+            // }
         }
 
     }
 
-    public void HandleTimer() 
-    {
-        if (!isCorrect) {
-            dialogBox.Timer -= 10f;
-            isCorrect = true;
-        }
-        if (!dialogBox.TimerPaused)
-        {
-            dialogBox.Timer -= Time.deltaTime;
-        }
-        dialogBox.SetTimer(dialogBox.Timer.ToString());
-        if (dialogBox.Timer <= 0)
-        {
-            BattleOver(false); //player have lost.
-            //SceneManager.LoadScene("Map Selection");
-            //Application.LoadLevel(levelToLoad);
-        }
-    }
+    // public void HandleQuestionsAnswered() 
+    // {
+        
+    // }
     
 
     public void HandleActionSelection() {
@@ -362,8 +339,14 @@ public class CustomBattleSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space)) {
             if (currentAction == 0) {
-                //add questions here. 
-                MoveSelection();
+                dialogBox.EnableQuestionText(true);
+                Debug.Log("enable question is selected");
+                dialogBox.EnableAnswerSelector(false);
+                dialogBox.RestartAnswerSelection();
+                //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Easy").Question));
+                StartCoroutine(QuestionManager.Instance.getQuestionsforCustom("3003", questionNum));
+                Debug.Log($"correct answer is {correctAnswer}");
+                PlayerAnswer();
             }
             else if (currentAction == 1) {
                 //run
@@ -425,15 +408,6 @@ public class CustomBattleSystem : MonoBehaviour
         }
     }
 
-    public QuestionBase SelectQuestion(List<QuestionBase> questions, string difficulty) {
-        foreach (var question in questions) {
-            if (question.QuestionDifficulty == difficulty) {
-                return question;
-            }
-        }
-        return null;
-    }
-
     public void HandleAnswerSelection(int answer) {
         if (Input.GetKeyDown(KeyCode.D)) {
             if (currentAnswer < 2)
@@ -471,13 +445,7 @@ public class CustomBattleSystem : MonoBehaviour
                 dialogBox.EnableAnswerSelector(false);
                 dialogBox.EnableQuestionText(false);
                 isCorrect = false;
-                if (!isPVP) {
-                    StartCoroutine(EnemyMove());
-                }
-                else {
-                    //dialogBox.TypeDialog("You answered wrongly!");
-                    ActionSelectionifWrong();
-                }
+                ActionSelectionifWrong();
                 
             }
         }

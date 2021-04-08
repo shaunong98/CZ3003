@@ -26,7 +26,7 @@ public class CustomController: MonoBehaviour
     {
         battleSystem.Awake();
         StartBattle(trainerUnit); 
-        BattleSystem.Instance.onBattleOver += EndBattle;
+        CustomBattleSystem.Instance.onBattleOver += EndBattle;
         
         // playerController.onEnterTrainersView += (Collider2D trainerCollider) => 
         // {
@@ -55,13 +55,13 @@ public class CustomController: MonoBehaviour
 
     public void StartBattle(BattleUnit trainerUnit) {
         state = PVPState.Battle;
-        BattleSystem.Instance.gameObject.SetActive(true);
-        BattleSystem.Instance.StartBattle(trainerUnit); 
+        CustomBattleSystem.Instance.gameObject.SetActive(true);
+        CustomBattleSystem.Instance.StartBattle(trainerUnit); 
     }
 
     public void EndBattle(bool won) {
         state = PVPState.End;
-        BattleSystem.Instance.gameObject.SetActive(false);
+        CustomBattleSystem.Instance.gameObject.SetActive(false);
         //SceneManager.LoadScene("Map Selection");
         //worldCamera.gameObject.SetActive(true);
     }
@@ -70,13 +70,14 @@ public class CustomController: MonoBehaviour
     {
         if (state == PVPState.Battle)
         {
-            BattleSystem.Instance.HandleUpdate();
+            CustomBattleSystem.Instance.HandleUpdate();
 
         }
         else if (state == PVPState.End)
         {
             Debug.Log("Did it load scene?");
-            Navigation.Instance.backToWorldPVPScreen(QuestionManager.worldNumber - 1);
+            SceneManager.LoadScene("Map Selection");
+            //Navigation.Instance.backToWorldPVPScreen(QuestionManager.worldNumber - 1);
         }
     }
 }
