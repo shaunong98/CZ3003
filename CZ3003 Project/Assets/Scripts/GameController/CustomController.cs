@@ -1,0 +1,82 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public enum CustomState{End, Battle}
+
+public class CustomController: MonoBehaviour
+{
+    [SerializeField] public PlayerController playerController;
+    [SerializeField] CustomBattleSystem battleSystem;
+    //[SerializeField] Camera worldCamera;
+
+    PVPState state;
+
+    [SerializeField] BattleUnit trainerUnit;
+
+    public static CustomController Instance { get; private set; }
+
+    private void Awake() {
+        Instance = this;
+        Debug.Log("Are we starting the battle");
+    }
+
+    private void Start() 
+    {
+        battleSystem.Awake();
+        StartBattle(trainerUnit); 
+        BattleSystem.Instance.onBattleOver += EndBattle;
+        
+        // playerController.onEnterTrainersView += (Collider2D trainerCollider) => 
+        // {
+        //     var trainer = trainerCollider.GetComponentInParent<TrainerController>();
+        //     this.trainer = trainer;
+        //     if (trainer != null) {
+        //         state = GameState.Cutscene;
+                
+        //         StartCoroutine(trainer.TriggerTrainerBattle(playerController));
+        //     }
+        // };
+
+        // DialogManager.Instance.OnShowDialog += () =>
+        // {
+        //     state = GameState.Dialog;
+        // };
+
+        // DialogManager.Instance.OnCloseDialog += () =>
+        // {
+        //     if(state == GameState.Dialog)
+        //         state = GameState.FreeRoam;
+        // };
+    }
+
+    
+
+    public void StartBattle(BattleUnit trainerUnit) {
+        state = PVPState.Battle;
+        BattleSystem.Instance.gameObject.SetActive(true);
+        BattleSystem.Instance.StartBattle(trainerUnit); 
+    }
+
+    public void EndBattle(bool won) {
+        state = PVPState.End;
+        BattleSystem.Instance.gameObject.SetActive(false);
+        //SceneManager.LoadScene("Map Selection");
+        //worldCamera.gameObject.SetActive(true);
+    }
+
+    private void Update()
+    {
+        if (state == PVPState.Battle)
+        {
+            BattleSystem.Instance.HandleUpdate();
+
+        }
+        else if (state == PVPState.End)
+        {
+            Debug.Log("Did it load scene?");
+            Navigation.Instance.backToWorldPVPScreen(QuestionManager.worldNumber - 1);
+        }
+    }
+}
