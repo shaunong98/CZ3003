@@ -125,14 +125,14 @@ public class FirebaseManager : MonoBehaviour
         levelLoader.LoadCharSel();
     }
     //Function for the save button
-    public void SaveDataButton()
-    {   
-        AudioManager.Instance.PlaySFX(cfmClickSFX);
-        StartCoroutine(UpdateStars(1,1,1,0));
-        StartCoroutine(UpdateUsernameAuth(usernameField.text));
-        StartCoroutine(UpdateUsernameDatabase(usernameField.text));
-        StartCoroutine(UpdateKills(int.Parse(killsField.text)));
-    }
+    // public void SaveDataButton()
+    // {   
+    //     AudioManager.Instance.PlaySFX(cfmClickSFX);
+    //     StartCoroutine(UpdateStars(1,1,1,0));
+    //     StartCoroutine(UpdateUsernameAuth(usernameField.text));
+    //     StartCoroutine(UpdateUsernameDatabase(usernameField.text));
+    //     StartCoroutine(UpdateKills(int.Parse(killsField.text)));
+    // }
 
     //Function for the scoreboard button
     // public void ScoreboardButton()
