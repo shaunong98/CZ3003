@@ -58,11 +58,8 @@ public class FirebaseManager : MonoBehaviour
 
     public static string username;
 
-    public static FirebaseManager Instance { get; private set; }
-
     void Awake()
     {
-        Instance = this;
         //Check that all of the necessary dependencies for Firebase are present on the system
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {

@@ -4771,6 +4771,18 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 2709648678599213250}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &588047391 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6503122041250036007, guid: 99218f06592cfec49b8f1ce64ccf62de,
+    type: 3}
+  m_PrefabInstance: {fileID: 2151364175479609776}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2767123b2f624cd4e8e9e09f2c7a48da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &683585930
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9912,7 +9924,7 @@ Tilemap:
       - {fileID: 21301288, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301290, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301292, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -10, y: -18, z: 0}
@@ -80463,6 +80475,11 @@ PrefabInstance:
       propertyPath: pauseMenuUI
       value: 
       objectReference: {fileID: 1608185558}
+    - target: {fileID: 4381834259627016856, guid: 18b3e1fc2d50a024b9d5c6ce49dce81f,
+        type: 3}
+      propertyPath: firebaseManager
+      value: 
+      objectReference: {fileID: 588047391}
     - target: {fileID: 4381834259860764424, guid: 18b3e1fc2d50a024b9d5c6ce49dce81f,
         type: 3}
       propertyPath: dialogBox
