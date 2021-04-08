@@ -1,19 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
-public class statisticElement : MonoBehaviour
+public class StatisticElement : MonoBehaviour
 {
-    public TMP_Text usernameText;
-    //public TMP_Text killsText;
-    public TMP_Text masteryText;
-    public TMP_Text xpText;
+    public Text username;
+    public Text Stars;
+    public Text Points;
 
     public void NewScoreElement(string _username, int stars, int points)
     {
-        usernameText.text = _username;
-        masteryText.text = stars.ToString();
-        xpText.text = points.ToString();
+        username.text = _username;
+        Stars.text = stars.ToString();
+        Points.text = points.ToString();
     }
 }

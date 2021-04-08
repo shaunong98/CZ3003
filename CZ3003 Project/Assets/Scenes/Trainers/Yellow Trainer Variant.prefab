@@ -25,6 +25,26 @@ MonoBehaviour:
   exclamation: {fileID: 2673540477213144317}
   fov: {fileID: 6939124544132504319}
   trainerUnit: {fileID: 0}
+  trainerNumber: 0
+  trainerSection: 0
+--- !u!114 &1874368762402899421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639765455128982636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11ce5ef0dbbd64409d9eafb4a060b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog:
+    lines: []
+  movementPattern:
+  - {x: 0, y: 0}
+  timeBetweenPattern: 0
+  state: 0
 --- !u!1001 &6314473495785198497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90,7 +110,7 @@ PrefabInstance:
     - target: {fileID: 6863876686742693837, guid: 60d4d863e063ce04997cc3c84b3b17c5,
         type: 3}
       propertyPath: m_Name
-      value: Yellow Trainer
+      value: Yellow Trainer Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6863876686742693838, guid: 60d4d863e063ce04997cc3c84b3b17c5,
         type: 3}

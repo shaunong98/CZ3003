@@ -207,7 +207,7 @@ public class TeacherFireBase : MonoBehaviour
         OptionSelectionPanel.gameObject.SetActive(false);
         FunctionSelectionPanel.gameObject.SetActive(true);
     }
-
+    //Method is called when searchbar is filled
     public void SearchStudent()
     {
         StudentSearched = SearchBar.text;
@@ -215,7 +215,7 @@ public class TeacherFireBase : MonoBehaviour
         SearchBar.text = "";
         StartCoroutine(ShowInformation(StudentSearched));
     }
-
+    //This method is called to display the individual student statistic from searchbar
     private IEnumerator ShowInformation(string _StudentID)
     {
 
@@ -386,6 +386,7 @@ public class TeacherFireBase : MonoBehaviour
             }
         }
     }
+    //Method is called when the filter button is clicked
     public void filter()
     {
         world = Worldselection.options[Worldselection.value].text;
@@ -394,6 +395,7 @@ public class TeacherFireBase : MonoBehaviour
         Debug.Log(section);
         StartCoroutine(LoadOverallStatistics(world, section));
     }
+    //This method creates the entries in the scrollview depending on the filters selected
     private IEnumerator LoadOverallStatistics(string world, string section)
     {
         var DBTask = DBreference.Child("users").GetValueAsync();
@@ -572,7 +574,7 @@ public class TeacherFireBase : MonoBehaviour
                             }
                     }
                 }
-                else if (world == "Total")
+                else if (world == "TOTAL")
                 {
                     switch (section)
                     {
@@ -603,9 +605,9 @@ public class TeacherFireBase : MonoBehaviour
                     }
                 }
                 Debug.Log(stars);
-                Debug.Log(world);
+                Debug.Log(points);
                 GameObject scoreboardElement = Instantiate(statisticElement, scoreboardContent);
-                scoreboardElement.GetComponent<statisticElement>().NewScoreElement(username, stars, points);
+                scoreboardElement.GetComponent<StatisticElement>().NewScoreElement(username,stars, points);
             }
         }
     }

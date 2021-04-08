@@ -50,4 +50,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("Map Selection");
     }
+
+    public void Save() {
+        FirebaseManager.Instance.UpdateStarsToDb();
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        GameisPaused = false;
+    }
 }
