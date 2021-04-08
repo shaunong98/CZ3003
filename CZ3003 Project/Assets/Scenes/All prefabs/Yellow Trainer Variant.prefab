@@ -1,5 +1,23 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1837089365299730066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8174351583069162395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11ce5ef0dbbd64409d9eafb4a060b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog:
+    lines: []
+  movementPattern:
+  - {x: 0, y: 0}
+  timeBetweenPattern: 0
+  state: 0
 --- !u!1001 &8760000720834019319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69,7 +87,25 @@ PrefabInstance:
     - target: {fileID: 639765455128982636, guid: c4e790ea38de0914081f9c3f200fab30,
         type: 3}
       propertyPath: m_Name
-      value: Yellow Trainer
+      value: Yellow Trainer Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 639765455128982639, guid: c4e790ea38de0914081f9c3f200fab30,
+        type: 3}
+      propertyPath: dialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 639765455128982639, guid: c4e790ea38de0914081f9c3f200fab30,
+        type: 3}
+      propertyPath: dialog.lines.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1874368762402899421, guid: c4e790ea38de0914081f9c3f200fab30, type: 3}
+    - {fileID: 639765455128982639, guid: c4e790ea38de0914081f9c3f200fab30, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c4e790ea38de0914081f9c3f200fab30, type: 3}
+--- !u!1 &8174351583069162395 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 639765455128982636, guid: c4e790ea38de0914081f9c3f200fab30,
+    type: 3}
+  m_PrefabInstance: {fileID: 8760000720834019319}
+  m_PrefabAsset: {fileID: 0}

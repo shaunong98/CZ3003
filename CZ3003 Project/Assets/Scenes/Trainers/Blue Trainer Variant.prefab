@@ -24,6 +24,26 @@ MonoBehaviour:
   exclamation: {fileID: 2867133997241862340}
   fov: {fileID: 6206068779609094855}
   trainerUnit: {fileID: 0}
+  trainerNumber: 0
+  trainerSection: 0
+--- !u!114 &2483497806438407221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7301928215884247010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11ce5ef0dbbd64409d9eafb4a060b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog:
+    lines: []
+  movementPattern:
+  - {x: 0, y: 0}
+  timeBetweenPattern: 0
+  state: 0
 --- !u!1001 &2142990667300533828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39,7 +59,7 @@ PrefabInstance:
     - target: {fileID: 8712433029324364198, guid: 158187c973d9ccd45a1d06a2e7dab1b3,
         type: 3}
       propertyPath: m_Name
-      value: Blue Trainer
+      value: Blue Trainer Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8712433029324364200, guid: 158187c973d9ccd45a1d06a2e7dab1b3,
         type: 3}

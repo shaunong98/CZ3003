@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 public class CharacterSel : MonoBehaviour
 {
+    public LevelLoader levelLoader;
     private int selectedCharacterIndex;
     private Color desiredColor = new Color(1, 0, 0, 0.63f);
     [Header("List of characters")]
@@ -19,8 +20,7 @@ public class CharacterSel : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private AudioClip arrowClickSFX;
-    [SerializeField] private AudioClip characterSelectMusic;
-
+    [SerializeField] private AudioClip cfmClickSFX;
 
     [Header("Tweaks")]
     [SerializeField] private float backgroundColorTransitionSpeed = 1f;
@@ -39,7 +39,8 @@ public class CharacterSel : MonoBehaviour
         if(PlayerPrefs.HasKey("CharacterSelected"))
 
         Debug.Log(string.Format("Character {0}:{1} has been chosen", selectedCharacterIndex, characterList[selectedCharacterIndex].characterName));
-        SceneManager.LoadScene("Map Selection");
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
+        levelLoader.LoadMain();
     }
     public void LeftArrow()
     {
@@ -47,6 +48,7 @@ public class CharacterSel : MonoBehaviour
         if(selectedCharacterIndex<0)
             selectedCharacterIndex = characterList.Count - 1;
         UpdateCharacterSelectionUI();
+        AudioManager.Instance.PlaySFX(arrowClickSFX);
     }
 
     public void RightArrow()
@@ -55,6 +57,7 @@ public class CharacterSel : MonoBehaviour
         if(selectedCharacterIndex == characterList.Count)
             selectedCharacterIndex = 0;
         UpdateCharacterSelectionUI();
+        AudioManager.Instance.PlaySFX(arrowClickSFX);
     }
     private void UpdateCharacterSelectionUI()
     {
@@ -66,7 +69,6 @@ public class CharacterSel : MonoBehaviour
     private void start()
     {
         UpdateCharacterSelectionUI();
-        AudioManager.Instance.PlayMusicWithFade(characterSelectMusic);
     }
     
     private void Update() 

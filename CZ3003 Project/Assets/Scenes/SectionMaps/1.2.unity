@@ -5458,7 +5458,19 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 2084881967}
-    m_RemovedComponents: []
+    - target: {fileID: 7492456328717091581, guid: 92e380d1dff619542b74998f0597face,
+        type: 3}
+      propertyPath: trainerNumber
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492456328717091581, guid: 92e380d1dff619542b74998f0597face,
+        type: 3}
+      propertyPath: trainerSection
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1079177384, guid: 92e380d1dff619542b74998f0597face, type: 3}
+    - {fileID: 8847168066867491143, guid: 92e380d1dff619542b74998f0597face, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 92e380d1dff619542b74998f0597face, type: 3}
 --- !u!1 &593263039
 GameObject:
@@ -31971,6 +31983,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8174351583069162392, guid: 957a5892fa124a942a0ff27a3c5497ee,
+        type: 3}
+      propertyPath: dialog.lines.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8174351583069162395, guid: 957a5892fa124a942a0ff27a3c5497ee,
         type: 3}
       propertyPath: m_Name
@@ -31981,7 +31998,18 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 2084881966}
-    m_RemovedComponents: []
+    - target: {fileID: 8760000720551253619, guid: 957a5892fa124a942a0ff27a3c5497ee,
+        type: 3}
+      propertyPath: trainerNumber
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8760000720551253619, guid: 957a5892fa124a942a0ff27a3c5497ee,
+        type: 3}
+      propertyPath: trainerSection
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8174351583069162392, guid: 957a5892fa124a942a0ff27a3c5497ee, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 957a5892fa124a942a0ff27a3c5497ee, type: 3}
 --- !u!1001 &1663928635
 PrefabInstance:
@@ -32055,12 +32083,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red Trainer Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2659905029320893941, guid: 1249a70838863ce4784c6cdab5fd233f,
+        type: 3}
+      propertyPath: dialog.lines.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4786066207846439859, guid: 1249a70838863ce4784c6cdab5fd233f,
+        type: 3}
+      propertyPath: movementPattern.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8734521296434019904, guid: 1249a70838863ce4784c6cdab5fd233f,
         type: 3}
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 2084881968}
-    m_RemovedComponents: []
+    - target: {fileID: 8734521296434019904, guid: 1249a70838863ce4784c6cdab5fd233f,
+        type: 3}
+      propertyPath: trainerNumber
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734521296434019904, guid: 1249a70838863ce4784c6cdab5fd233f,
+        type: 3}
+      propertyPath: trainerSection
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 260710796236366263, guid: 1249a70838863ce4784c6cdab5fd233f, type: 3}
+    - {fileID: 2659905029320893941, guid: 1249a70838863ce4784c6cdab5fd233f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1249a70838863ce4784c6cdab5fd233f, type: 3}
 --- !u!1001 &1956446907
 PrefabInstance:
@@ -32234,6 +32284,16 @@ PrefabInstance:
       propertyPath: trainerUnit
       value: 
       objectReference: {fileID: 2084881969}
+    - target: {fileID: 4395688291499089192, guid: c6a02dcf9b560ce4b80b8b659a5ff73e,
+        type: 3}
+      propertyPath: trainerNumber
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395688291499089192, guid: c6a02dcf9b560ce4b80b8b659a5ff73e,
+        type: 3}
+      propertyPath: trainerSection
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6365053228941969239, guid: c6a02dcf9b560ce4b80b8b659a5ff73e,
         type: 3}
       propertyPath: m_RootOrder
@@ -32294,7 +32354,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blue Trainer Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2267482347976635528, guid: c6a02dcf9b560ce4b80b8b659a5ff73e, type: 3}
+    - {fileID: 6365053228941969232, guid: c6a02dcf9b560ce4b80b8b659a5ff73e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c6a02dcf9b560ce4b80b8b659a5ff73e, type: 3}
 --- !u!1001 &2062541812
 PrefabInstance:
