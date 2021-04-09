@@ -43,7 +43,8 @@ public class CustomBattleSystem : MonoBehaviour
     int currentAnswer;
     public static int correctAnswer;
     public static int questionNum = 1;
-    public static int totalQuestionNum = 2;
+    public static int totalQuestionNum = 1;
+    public static int totalcorrectAnswer = 0;
     bool isCorrect = true;
 
     public void Awake() {
@@ -74,59 +75,29 @@ public class CustomBattleSystem : MonoBehaviour
     }
 
     public void StartBattle(BattleUnit trainerUnit) {
-        StartCoroutine(SetupBattle(trainerUnit));
+        if (questionNum == (totalQuestionNum + 1))
+        {
+            Debug.Log("questionnum = total question");
+            dialogBox.EnableActionSelector(false);
+            dialogBox.EnableQuestionText(false);
+            dialogBox.EnableMoveSelector(false);
+            dialogBox.EnableDialogText(true);
+            dialogBox.EnableAnswerSelector(false);
+            StartCoroutine(dialogBox.TypeDialog("Attempted!"));
+            BattleOver(false);
+        }
+        else{
+            StartCoroutine(SetupBattle(trainerUnit));
+        }
     }
     // i changed all enemyunit to trainer.TrainerUnit and playerunit to player.PlayerUnit
     public IEnumerator SetupBattle(BattleUnit trainerUnit) {
         this.trainerUnit = trainerUnit;
         player.PlayerUnit.SetUp(true);
         trainerUnit.SetUp(false);    
-        //trainer.TrainerUnit.SetUp();
-        // playerUnit.SetUp();
-        // enemyUnit.SetUp();
-        dialogBox.SetMoveNames();
-        if (!isPVP) {
-            Debug.Log("timer text true");
-            dialogBox.EnableTimerText(false);
-        }
-        dialogBox.EnableActionSelector(false);
-        dialogBox.EnableQuestionText(false);
-        dialogBox.EnableMoveSelector(false);
-        dialogBox.EnableDialogText(true);
-        dialogBox.EnableAnswerSelector(false);
-        yield return dialogBox.TypeDialog($"{trainerUnit.Monster.Base.Name} has challenged you to a duel."); //use startcoroutine because its ienumerator
-        yield return new WaitForSeconds(1f);
-        dialogBox.EnableActionSelector(true);
-        ActionSelection();
-    }
-
-    public void BattleOver(bool won) { //if true means player has won
-        state = CustomBattleState.BattleOver; //notifies state only
-        if (won && isPVP) {
-            Debug.Log($"{dialogBox.Points}");
-            //StudentFireBase.Instance.updateBattlePoints(dialogBox.Points);
-            StartCoroutine(updateUserBattlePoints(dialogBox.Points, won));
-            Debug.Log("How to solve this");
-        }
-        else {
-            onBattleOver(won);
-        }
-        //onBattleOver(won); //onBattleOver notifies gamecontroller that its over 
-    }
-
-    public IEnumerator updateUserBattlePoints(int points, bool won)
-    {
-        //need integrate with jh one!
-        FirebaseUser User;
-        User = FirebaseManager.User;
-        Debug.Log("update user battle");
-        int worldNumber = QuestionManager.worldNumber;
-        int sectionNumber = QuestionManager.sectionNumber;
-        Debug.Log($"{worldNumber}");
-        Debug.Log($"{sectionNumber}");
-        Debug.Log(User.UserId);
         //string initialPoint;
-        var DBTask = DBreference.Child("users").Child(User.UserId).Child("BattleStats").Child($"{worldNumber}").Child($"{sectionNumber}").GetValueAsync();
+        string username = "";
+        var DBTask = DBreference.Child("custom").Child(QuestionManager.roomID).GetValueAsync();
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
         Debug.Log("reached here at users");
         if (DBTask.Exception != null)
@@ -141,57 +112,69 @@ public class CustomBattleSystem : MonoBehaviour
         else
         {
             DataSnapshot snapshot = DBTask.Result;
-            string initialPoint = snapshot.Child("Points").Value.ToString();
-            Debug.Log("initial points");
-            Debug.Log(initialPoint);
-            int initialPoints = int.Parse(initialPoint);
-            if (points > initialPoints)
+            username = snapshot.Child("usercreated").Value.ToString();
+        }
+
+        dialogBox.SetMoveNames();
+        if (!isPVP) {
+            Debug.Log("timer text true");
+            dialogBox.EnableTimerText(false);
+        }
+        dialogBox.EnableActionSelector(false);
+        dialogBox.EnableQuestionText(false);
+        dialogBox.EnableMoveSelector(false);
+        dialogBox.EnableDialogText(true);
+        dialogBox.EnableAnswerSelector(false);
+        yield return dialogBox.TypeDialog($"{username} has challenged you to a duel."); // chnge this to access custom battlesystem to include username of challanger
+        yield return new WaitForSeconds(1f);
+        dialogBox.EnableActionSelector(true);
+        ActionSelection();
+    }
+
+    public void BattleOver(bool won) { //if true means player has won
+        state = CustomBattleState.BattleOver; //notifies state only
+        //StudentFireBase.Instance.updateBattlePoints(dialogBox.Points);
+        StartCoroutine(updateUserCustomBattlePoints(won));
+        Debug.Log("How to solve this");
+
+
+    }
+
+    public IEnumerator updateUserCustomBattlePoints(bool won)
+    {
+        //need add in username and the score for this
+        FirebaseUser User;
+        User = FirebaseManager.User;
+        Debug.Log("update user battle");
+        Debug.Log(User.UserId);
+        //string initialPoint;
+        var DBTask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+        Debug.Log("reached here at users");
+        if (DBTask.Exception != null)
+        {
+            Debug.Log("hello");
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else if (DBTask.Result.Value == null)
+        {
+            Debug.Log("what");
+        }
+        else
+        {
+            DataSnapshot snapshot = DBTask.Result;
+            string username = snapshot.Child("username").Value.ToString();
+           
+            var DBTasks = DBreference.Child("custom").Child(QuestionManager.roomID).Child("users").Child(username).SetValueAsync($"{totalcorrectAnswer}/{totalQuestionNum}");
+            yield return new WaitUntil(predicate: () => DBTasks.IsCompleted);
+
+            if (DBTasks.Exception != null)
             {
-                var DBTasks = DBreference.Child("users").Child(User.UserId).Child("BattleStats").Child($"{worldNumber}").Child($"{sectionNumber}").Child("Points").SetValueAsync(points);
-                yield return new WaitUntil(predicate: () => DBTasks.IsCompleted);
-
-                if (DBTasks.Exception != null)
-                {
-                    Debug.LogWarning(message: $"Failed to register task with {DBTasks.Exception}");
-                }
-                else
-                {
-                    //points is now updated
-                }
-
-                var DBTask1 = DBreference.Child("users").Child(User.UserId).GetValueAsync();
-                yield return new WaitUntil(predicate: () => DBTask1.IsCompleted);
-                Debug.Log("reached here at users");
-                if (DBTask1.Exception != null)
-                {
-                    Debug.Log("hello");
-                    Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-                }
-                else if (DBTask1.Result.Value == null)
-                {
-                    Debug.Log("what");
-                }
-                else
-                {
-                    DataSnapshot snapshot1 = DBTask1.Result;
-                    string totalPoint = snapshot1.Child("TotalPoints").Value.ToString();
-                    int totalPoints = int.Parse(totalPoint);
-
-                    totalPoints = totalPoints - initialPoints + points;
-                    Debug.Log($"{totalPoints}");
-
-                    var DBTask2 = DBreference.Child("users").Child(User.UserId).Child("TotalPoints").SetValueAsync(totalPoints);
-                    yield return new WaitUntil(predicate: () => DBTask2.IsCompleted);
-
-                    if (DBTask2.Exception != null)
-                    {
-                        Debug.LogWarning(message: $"Failed to register task with {DBTasks.Exception}");
-                    }
-                    else
-                    {
-                        //total points is now updated
-                    }
-                }
+                Debug.LogWarning(message: $"Failed to register task with {DBTasks.Exception}");
+            }
+            else
+            {
+                //points is now updated
             }
         }
         onBattleOver(won);
@@ -215,21 +198,13 @@ public class CustomBattleSystem : MonoBehaviour
         {
             Debug.Log("questionnum = total question");
             StartCoroutine(dialogBox.TypeDialog("You have answered all questions!"));
+            StartCoroutine(dialogBox.TypeDialog($"You have scored a total of {totalcorrectAnswer}/{totalQuestionNum} correct!"));
             BattleOver(false);
         }
         dialogBox.EnableActionSelector(true);
         dialogBox.EnableMoveSelector(false);
         dialogBox.EnableDialogText(true);
         dialogBox.EnableAnswerSelector(false);
-    }
-
-    public void MoveSelection() {
-        state = CustomBattleState.MoveSelection;
-        dialogBox.EnableActionSelector(false);
-        dialogBox.EnableDialogText(false);
-        dialogBox.EnableAnswerSelector(false);
-        dialogBox.EnableMoveSelector(true);
-        dialogBox.EnableQuestionText(false);
     }
 
     public void PlayerAnswer() {
@@ -244,7 +219,7 @@ public class CustomBattleSystem : MonoBehaviour
     public IEnumerator PlayerMove() {
         state = CustomBattleState.PerformMove;
         Move move;
-        move = player.PlayerUnit.Monster.Moves[currentMove+2];
+        move = player.PlayerUnit.Monster.Moves[currentMove];
         yield return dialogBox.TypeDialog($"You answered correctly!");
         yield return new WaitForSeconds(1f);
 
@@ -256,7 +231,29 @@ public class CustomBattleSystem : MonoBehaviour
     }
 
     public IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move) {
-        yield return dialogBox.TypeDialog($"{sourceUnit.Monster.Base.Name} used {move.Base.Name}.");
+        FirebaseUser User;
+        User = FirebaseManager.User;
+        Debug.Log("update user battle");
+        Debug.Log(User.UserId);
+        string username = "";
+        var DBTask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+        Debug.Log("reached here at users");
+        if (DBTask.Exception != null)
+        {
+            Debug.Log("hello");
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else if (DBTask.Result.Value == null)
+        {
+            Debug.Log("what");
+        }
+        else
+        {
+            DataSnapshot snapshot = DBTask.Result;
+            username = snapshot.Child("username").Value.ToString();
+        }
+        yield return dialogBox.TypeDialog($"{username} used {move.Base.Name}.");
         sourceUnit.PlayerAttackAnimation();
         yield return new WaitForSeconds(1f);
 
@@ -277,6 +274,7 @@ public class CustomBattleSystem : MonoBehaviour
         if (questionNum == (totalQuestionNum + 1))
         {
             yield return dialogBox.TypeDialog("You have answered all questions!");
+            yield return dialogBox.TypeDialog($"You have scored a total of {totalcorrectAnswer}/{totalQuestionNum} correct!");
             yield return new WaitForSeconds(1f);
             BattleOver(false);
         }
@@ -299,31 +297,15 @@ public class CustomBattleSystem : MonoBehaviour
     public void HandleUpdate() {
         if (state == CustomBattleState.ActionSelection) {
             HandleActionSelection();
-            // if (isPVP) {
-            //     HandleQuestionsAnswered();
-            // }
+            
         }
 
-        // else if (state == CustomBattleState.MoveSelection) {
-        //     HandleMoveSelection();
-        //     if (isPVP) {
-        //         HandleTimer();
-        //     }
-        // }
         else if (state == CustomBattleState.PlayerAnswer) {
             HandleAnswerSelection(correctAnswer);
-            // if (isPVP) {
-            //     HandleQuestionsAnswered();
-            // }
+            
         }
 
     }
-
-    // public void HandleQuestionsAnswered() 
-    // {
-        
-    // }
-    
 
     public void HandleActionSelection() {
         if (Input.GetKeyDown(KeyCode.S)) {
@@ -344,7 +326,7 @@ public class CustomBattleSystem : MonoBehaviour
                 dialogBox.EnableAnswerSelector(false);
                 dialogBox.RestartAnswerSelection();
                 //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Easy").Question));
-                StartCoroutine(QuestionManager.Instance.getQuestionsforCustom("3003", questionNum));
+                StartCoroutine(QuestionManager.Instance.getQuestionsforCustom(questionNum));
                 Debug.Log($"correct answer is {correctAnswer}");
                 PlayerAnswer();
             }
@@ -352,59 +334,6 @@ public class CustomBattleSystem : MonoBehaviour
                 //run
                 BattleOver(false);
             }
-        }
-    }
-
-    public void HandleMoveSelection() { //Easy medium hard
-        
-        if (Input.GetKeyDown(KeyCode.D)) {
-            if (currentMove < 2)//playerUnit.Monster.Moves.Count - 1
-                ++currentMove;
-        }
-        else if (Input.GetKeyDown(KeyCode.A)) {
-            if (currentMove > 0)
-                --currentMove;
-        } 
-
-        dialogBox.UpdateMoveSelection(currentMove);
-
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            if (currentMove == 0) {
-                dialogBox.EnableQuestionText(true);
-                Debug.Log("enable question is selected");
-                dialogBox.EnableAnswerSelector(false);
-                dialogBox.RestartAnswerSelection();
-                //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Easy").Question));
-                StartCoroutine(QuestionManager.Instance.getQuestionsBaseOnLevel("Easy"));
-                // string question = QuestionManager.Instance.Question;
-                // Debug.Log(question);
-                // StartCoroutine(dialogBox.TypeQuestion(question));
-                //correctAnswer = QuestionManager.correctAnswer;
-                Debug.Log($"correct answer is {correctAnswer}");
-                //correctAnswer = dialogBox.SetAnswer(SelectQuestion(battleQuestions.Questions.QB, "Easy"));
-                PlayerAnswer();
-            }
-            else if (currentMove == 1) {
-                dialogBox.EnableQuestionText(true);
-                dialogBox.EnableAnswerSelector(true);
-                dialogBox.RestartAnswerSelection();
-                //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Medium").Question));
-                StartCoroutine(QuestionManager.Instance.getQuestionsBaseOnLevel("Medium"));
-                Debug.Log($"correct answer is {correctAnswer}");
-                //correctAnswer = dialogBox.SetAnswer(SelectQuestion(battleQuestions.Questions.QB, "Medium"));
-                PlayerAnswer();
-            }
-            else if (currentMove == 2) {
-                dialogBox.EnableQuestionText(true);
-                dialogBox.EnableAnswerSelector(true);
-                dialogBox.RestartAnswerSelection();
-                //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Hard").Question));
-                StartCoroutine(QuestionManager.Instance.getQuestionsBaseOnLevel("Hard"));
-                Debug.Log($"correct answer is {correctAnswer}");
-                //correctAnswer = dialogBox.SetAnswer(SelectQuestion(battleQuestions.Questions.QB, "Hard"));
-                PlayerAnswer();
-            }
-
         }
     }
 
@@ -425,6 +354,7 @@ public class CustomBattleSystem : MonoBehaviour
                 dialogBox.EnableDialogText(true);
                 dialogBox.EnableAnswerSelector(false);
                 dialogBox.EnableQuestionText(false);
+                totalcorrectAnswer++;
                 StartCoroutine(PlayerMove());
 
             }
@@ -432,12 +362,14 @@ public class CustomBattleSystem : MonoBehaviour
                 dialogBox.EnableDialogText(true);
                 dialogBox.EnableAnswerSelector(false);
                 dialogBox.EnableQuestionText(false);
+                totalcorrectAnswer++;
                 StartCoroutine(PlayerMove());
             }
             else if (currentAnswer == 2 && currentAnswer == answer) {
                 dialogBox.EnableDialogText(true);
                 dialogBox.EnableAnswerSelector(false);
                 dialogBox.EnableQuestionText(false);
+                totalcorrectAnswer++;
                 StartCoroutine(PlayerMove());
             }
             else {
