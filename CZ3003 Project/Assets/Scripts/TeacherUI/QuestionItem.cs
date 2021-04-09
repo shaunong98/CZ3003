@@ -26,6 +26,6 @@ public class QuestionItem : MonoBehaviour
     }
     public void passData()
     {
-        item.GetData(Question.text);
+        item.EditData(Question.text);
     }
 }
