@@ -3769,7 +3769,7 @@ GameObject:
   - component: {fileID: 280338600}
   - component: {fileID: 280338599}
   m_Layer: 5
-  m_Name: AnswerInputField2
+  m_Name: AnswerInputField3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5442,8 +5442,8 @@ MonoBehaviour:
   questionListContent: {fileID: 201838416}
   EditQuestionInputField: {fileID: 593831321}
   EditAnswerInputField1: {fileID: 1412276103}
-  EditAnswerInputField2: {fileID: 280338599}
-  EditAnswerInputField3: {fileID: 1108107574}
+  EditAnswerInputField2: {fileID: 1108107574}
+  EditAnswerInputField3: {fileID: 280338599}
   EditQuestionPanel: {fileID: 464848880}
   DisplayQuestionPanel: {fileID: 66493958}
 --- !u!4 &461515263
@@ -10270,7 +10270,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 461515262}
         m_TargetAssemblyTypeName: TeacherFireBase, Assembly-CSharp
-        m_MethodName: SubmitButtonMethod
+        m_MethodName: savenewquestion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13354,7 +13354,7 @@ GameObject:
   - component: {fileID: 1108107575}
   - component: {fileID: 1108107574}
   m_Layer: 5
-  m_Name: AnswerInputField3
+  m_Name: AnswerInputField2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
