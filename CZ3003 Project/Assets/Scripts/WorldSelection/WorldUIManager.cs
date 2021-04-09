@@ -100,6 +100,15 @@ public class WorldUIManager : MonoBehaviour
         mapSelectionPanel.gameObject.SetActive(false);
         modeSelectionPanel.gameObject.SetActive(true);
     }
+
+    public void PressCustomModeButton()
+    {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
+        PVPSelectionPanel.gameObject.SetActive(false);
+        modeSelectionPanel.gameObject.SetActive(false);
+        SceneManager.LoadScene("CustomBattleScene");
+    }
+
     public void PressPVPModeButton()
     {
         AudioManager.Instance.PlaySFX(cfmClickSFX);
