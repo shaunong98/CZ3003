@@ -79,6 +79,13 @@ public class TeacherFireBase : MonoBehaviour
     public Transform questionListContent;
     string Question;
 
+    public InputField EditQuestionInputField;
+    public InputField EditAnswerInputField1;
+    public InputField EditAnswerInputField2;
+    public InputField EditAnswerInputField3;
+    public GameObject EditQuestionPanel;
+    public GameObject DisplayQuestionPanel;
+
 
     void Awake()
     {
@@ -626,9 +633,9 @@ public class TeacherFireBase : MonoBehaviour
         int world = EditQuestion.World;
         int section = EditQuestion.Section;
         string difficulty = EditQuestion.Difficulty;
-        Debug.Log(world);
-        Debug.Log(section);
-        Debug.Log(difficulty);
+        //Debug.Log(world);
+        //Debug.Log(section);
+        //Debug.Log(difficulty);
 
         var DBTask = DBreference.Child("Qns").Child($"{world}").Child($"{section}").Child(difficulty).GetValueAsync();
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
@@ -654,10 +661,52 @@ public class TeacherFireBase : MonoBehaviour
             }
         }
     }
-    public void GetData(string _question)
+    public void EditData(string _question)
     {
         Question = _question;
         Debug.Log(Question);
+        EditQuestionInputField.text = Question;
+        StartCoroutine(GetQuestionData());
+        EditQuestionPanel.gameObject.SetActive(true);
+        DisplayQuestionPanel.gameObject.SetActive(false);
+    }
+    private IEnumerator GetQuestionData() { 
+        int world = EditQuestion.World;
+        int section = EditQuestion.Section;
+        string difficulty = EditQuestion.Difficulty;
+
+        var DBTask = DBreference.Child("Qns").Child($"{world}").Child($"{section}").Child(difficulty).GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.Log("Yea");
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            DataSnapshot snapshot = DBTask.Result;
+
+            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                string question = childSnapshot.Child("Question").Value.ToString();
+                if (question == Question)
+                {
+                    string Answer1 = childSnapshot.Child("A1").Value.ToString();
+                    string Answer2 = childSnapshot.Child("A2").Value.ToString();
+                    string Answer3 = childSnapshot.Child("A3").Value.ToString();
+                    EditAnswerInputField1.text = Answer1;
+                    EditAnswerInputField2.text = Answer2;
+                    EditAnswerInputField3.text = Answer3;
+                    break;
+                }
+            EditAnswerInputField1.text = "";
+            EditAnswerInputField2.text = "";
+            EditAnswerInputField3.text = "";
+             }
+            
+        }
+
     }
 }
     
