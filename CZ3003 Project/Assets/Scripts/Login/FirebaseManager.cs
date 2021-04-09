@@ -41,24 +41,19 @@ public class FirebaseManager : MonoBehaviour
     public TMP_Text confirmRegisterText;
     public InputField UniquePin;
 
-    //User Data variables
-    // [Header("UserData")]
-    // public TMP_InputField usernameField;
-    // public TMP_InputField xpField;
-    // public TMP_InputField killsField;
-    // public TMP_InputField masteryField;
-
-    public GameObject scoreElement;
-    public Transform scoreboardContent;
-
+  //User Data variables
     [Header("UserData")]
     public TMP_Text usernameTitle;
     public TMP_Text totalStars;
     public TMP_Text totalPoints;
     public TMP_Text selectedStars;
     public TMP_Text selectedPoints;
+    public GameObject scoreElement;
+    public Transform scoreboardContent;
+    public TMP_Text ranktext;
 
     public static string username;
+
     public Toggle register_toggle;
 
     void Awake()
@@ -137,6 +132,13 @@ public class FirebaseManager : MonoBehaviour
         ClearLoginFeilds();
         //levelLoader.LoadCharSel();
     }
+
+    //Function for the scoreboard button
+    public void ScoreboardButton()
+    {
+        StartCoroutine(LoadScoreboardData());
+    }
+
     //Function for the save button
     // public void SaveDataButton()
     // {   
@@ -716,12 +718,16 @@ public class FirebaseManager : MonoBehaviour
         }
     }
     
-    private IEnumerator LoadWorldData()
+    private IEnumerator LoadWorldSectionData()
     {
-        string world = "1";
-        string section = "All";
-        //Get all the users data ordered by kills amount
-        var DBTask = DBreference.Child("users").OrderByChild("TotalPoints").GetValueAsync();
+        int rank = 0;
+        string LoggedinUser = "";
+        int worldNumber = UIManager.WorldLdrboard;
+        int sectionNumber = UIManager.SectionLdrboard;
+        Debug.Log(worldNumber);
+        Debug.Log(sectionNumber);
+        //Get all the users data ordered by points
+        var DBTask = DBreference.Child("users").OrderByChild("BattleStats/"+ $"{worldNumber}"+ "/"+$"{sectionNumber}"+"/Points").GetValueAsync();
 
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
@@ -734,6 +740,27 @@ public class FirebaseManager : MonoBehaviour
             //Data has been retrieved
             DataSnapshot snapshot = DBTask.Result;
 
+            //Get the currently logged in user data
+            var DBTask1 = DBreference.Child("users").Child(User.UserId).GetValueAsync();
+
+            yield return new WaitUntil(predicate: () => DBTask1.IsCompleted);
+
+            if (DBTask1.Exception != null)
+            {
+                Debug.LogWarning(message: $"Failed to register task with {DBTask1.Exception}");
+            }
+            else if (DBTask1.Result.Value == null)
+            {
+                //No data exists yet
+            }
+            else
+            {
+                //Data has been retrieved
+                DataSnapshot snapshot1 = DBTask1.Result;
+
+                LoggedinUser = snapshot1.Child("username").Value.ToString();
+            }
+
             //Destroy any existing scoreboard elements
             foreach (Transform child in scoreboardContent.transform)
             {
@@ -743,38 +770,29 @@ public class FirebaseManager : MonoBehaviour
             //Loop through every users UID
             foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
             {
+                rank += 1;
                 string username = childSnapshot.Child("username").Value.ToString();
-                int points = int.Parse(childSnapshot.Child("TotalPoints").Value.ToString());
+                Debug.Log(username);
+                int points = int.Parse(childSnapshot.Child("BattleStats").Child($"{worldNumber}").Child($"{sectionNumber}").Child("Points").Value.ToString());
+
+                if (LoggedinUser.Equals(username))
+                {
+                    ranktext.text = "You are ranked #" + $"{rank}";
+                }
 
                 //Instantiate new scoreboard elements
                 GameObject scoreboardElement = Instantiate(scoreElement, scoreboardContent);
-                scoreboardElement.GetComponent<ScoreElement>().NewScoreElement(username, world, section, points);
+                scoreboardElement.GetComponent<ScoreElement>().NewScoreElement($"{rank}", username, $"{worldNumber}"+"."+$"{sectionNumber}", points);
             }
-
-            //Go to scoareboard screen
-            UIManager.instance.ScoreboardScreen();
-        }
-    }
-
-    //Function for the dropdown menu
-    public void HandleInputData(int val)
-    {
-        if (val == 0)
-        {
-            Debug.Log("Hi");
-            StartCoroutine(LoadScoreboardData());
-        }
-        else if (val == 1)
-        {
-            Debug.Log("Hi2");
-            StartCoroutine(LoadWorldData());
         }
     }
 
     private IEnumerator LoadScoreboardData()
     {
-        string world = "All";
-        string section = "All";
+        int rank = 0;
+        string LoggedinUser = "";
+        string worldsection = "All";
+
         //Get all the users data ordered by kills amount
         var DBTask = DBreference.Child("users").OrderByChild("TotalPoints").GetValueAsync();
 
@@ -789,6 +807,28 @@ public class FirebaseManager : MonoBehaviour
             //Data has been retrieved
             DataSnapshot snapshot = DBTask.Result;
 
+            //Get the currently logged in user data
+            var DBTask1 = DBreference.Child("users").Child(User.UserId).GetValueAsync();
+
+            yield return new WaitUntil(predicate: () => DBTask1.IsCompleted);
+
+            if (DBTask1.Exception != null)
+            {
+                Debug.LogWarning(message: $"Failed to register task with {DBTask1.Exception}");
+            }
+            else if (DBTask1.Result.Value == null)
+            {
+                //No data exists yet
+            }
+            else
+            {
+                //Data has been retrieved
+                DataSnapshot snapshot1 = DBTask1.Result;
+
+                LoggedinUser = snapshot1.Child("username").Value.ToString();
+            }
+       
+
             //Destroy any existing scoreboard elements
             foreach (Transform child in scoreboardContent.transform)
             {
@@ -798,12 +838,18 @@ public class FirebaseManager : MonoBehaviour
             //Loop through every users UID
             foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
             {
+                rank += 1;
                 string username = childSnapshot.Child("username").Value.ToString();
                 int points = int.Parse(childSnapshot.Child("TotalPoints").Value.ToString());
 
+                if (LoggedinUser.Equals(username))
+                {
+                    ranktext.text = "You are ranked #" + $"{rank}";
+                }
+
                 //Instantiate new scoreboard elements
                 GameObject scoreboardElement = Instantiate(scoreElement, scoreboardContent);
-                scoreboardElement.GetComponent<ScoreElement>().NewScoreElement(username, world, section, points);
+                scoreboardElement.GetComponent<ScoreElement>().NewScoreElement($"{rank}", username, worldsection, points);
             }
 
             //Go to scoareboard screen
@@ -1064,6 +1110,11 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
+    public void displayWorldSectionData()
+    {
+        StartCoroutine(LoadWorldSectionData());
+    }
+
     private IEnumerator UpdateTeacherUsernameDatabase(string _username)
     {
         //Set the currently logged in user username in the database
@@ -1220,71 +1271,4 @@ public class FirebaseManager : MonoBehaviour
             }
         }
     }
-
-    // private IEnumerator LoadUserData()
-    // {
-    //     //Get the currently logged in user data
-    //     var DBTask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
-
-    //     yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-
-    //     if (DBTask.Exception != null)
-    //     {
-    //         Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-    //     }
-    //     else if (DBTask.Result.Value == null)
-    //     {
-    //         //No data exists yet
-    //         xpField.text = "0";
-    //         killsField.text = "0";
-    //         masteryField.text = "0";
-    //     }
-    //     else
-    //     {
-    //         //Data has been retrieved
-    //         DataSnapshot snapshot = DBTask.Result;
-
-    //         killsField.text = snapshot.Child("kills").Value.ToString();
-    //     }
-    // }
-
-    // private IEnumerator LoadScoreboardData()
-    // {
-    //     //Get all the users data ordered by kills amount
-    //     var DBTask = DBreference.Child("users").OrderByChild("mastery").GetValueAsync();
-
-    //     yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-
-    //     if (DBTask.Exception != null)
-    //     {
-    //         Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-    //     }
-    //     else
-    //     {
-    //         //Data has been retrieved
-    //         DataSnapshot snapshot = DBTask.Result;
-
-    //         //Destroy any existing scoreboard elements
-    //         foreach (Transform child in scoreboardContent.transform)
-    //         {
-    //             Destroy(child.gameObject);
-    //         }
-
-    //         //Loop through every users UID
-    //         foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
-    //         {
-    //             string username = childSnapshot.Child("username").Value.ToString();
-    //             int kills = int.Parse(childSnapshot.Child("kills").Value.ToString());
-    //             int mastery = int.Parse(childSnapshot.Child("mastery").Value.ToString());
-    //             int xp = int.Parse(childSnapshot.Child("xp").Value.ToString());
-
-    //             //Instantiate new scoreboard elements
-    //             GameObject scoreboardElement = Instantiate(scoreElement, scoreboardContent);
-    //             scoreboardElement.GetComponent<ScoreElement>().NewScoreElement(username, kills, mastery, xp);
-    //         }
-
-    //         //Go to scoareboard screen
-    //         UIManager.instance.ScoreboardScreen();
-    //     }
-    // }
 }
