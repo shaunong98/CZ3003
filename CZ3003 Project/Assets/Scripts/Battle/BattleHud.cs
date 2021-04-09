@@ -9,12 +9,17 @@ public class BattleHud : MonoBehaviour
     [SerializeField] Text levelText;
     [SerializeField] HPBar hpBar;
 
+    public bool isCustom;
+
     Monster _monster;
 
     public void SetData(Monster monster, bool isPlayerUnit) {
         _monster = monster;
         if (isPlayerUnit) {
             nameText.text = FirebaseManager.username;
+        }
+        else if (isCustom) {
+            nameText.text = CustomFirebase.createdUsername;
         }
         else{
             nameText.text = monster.Base.Name;

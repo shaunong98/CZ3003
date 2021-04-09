@@ -75,20 +75,8 @@ public class CustomBattleSystem : MonoBehaviour
     }
 
     public void StartBattle(BattleUnit trainerUnit) {
-        if (questionNum == (totalQuestionNum + 1))
-        {
-            Debug.Log("questionnum = total question");
-            dialogBox.EnableActionSelector(false);
-            dialogBox.EnableQuestionText(false);
-            dialogBox.EnableMoveSelector(false);
-            dialogBox.EnableDialogText(true);
-            dialogBox.EnableAnswerSelector(false);
-            StartCoroutine(dialogBox.TypeDialog("Attempted!"));
-            BattleOver(false);
-        }
-        else{
-            StartCoroutine(SetupBattle(trainerUnit));
-        }
+        StartCoroutine(SetupBattle(trainerUnit));
+
     }
     // i changed all enemyunit to trainer.TrainerUnit and playerunit to player.PlayerUnit
     public IEnumerator SetupBattle(BattleUnit trainerUnit) {
@@ -136,8 +124,6 @@ public class CustomBattleSystem : MonoBehaviour
         //StudentFireBase.Instance.updateBattlePoints(dialogBox.Points);
         StartCoroutine(updateUserCustomBattlePoints(won));
         Debug.Log("How to solve this");
-
-
     }
 
     public IEnumerator updateUserCustomBattlePoints(bool won)
@@ -189,19 +175,20 @@ public class CustomBattleSystem : MonoBehaviour
         dialogBox.EnableAnswerSelector(false);
     }
 
-    public void ActionSelectionifWrong() {
+    public IEnumerator ActionSelectionifWrong() {
         state = CustomBattleState.ActionSelection;
         //isCorrect = true;
-        StartCoroutine(dialogBox.TypeDialog("You answered wrongly! Choose an action"));
+        yield return dialogBox.TypeDialog("You answered wrongly!");
 
         if (questionNum == (totalQuestionNum + 1))
         {
             Debug.Log("questionnum = total question");
-            StartCoroutine(dialogBox.TypeDialog("You have answered all questions!"));
-            StartCoroutine(dialogBox.TypeDialog($"You have scored a total of {totalcorrectAnswer}/{totalQuestionNum} correct!"));
+            yield return dialogBox.TypeDialog("You have answered all questions!");
+            yield return dialogBox.TypeDialog($"You have scored a total of {totalcorrectAnswer}/{totalQuestionNum} correct!");
+            yield return new WaitForSeconds(1f);
             BattleOver(false);
         }
-        dialogBox.EnableActionSelector(true);
+        dialogBox.EnableActionSelector(false);
         dialogBox.EnableMoveSelector(false);
         dialogBox.EnableDialogText(true);
         dialogBox.EnableAnswerSelector(false);
@@ -377,7 +364,7 @@ public class CustomBattleSystem : MonoBehaviour
                 dialogBox.EnableAnswerSelector(false);
                 dialogBox.EnableQuestionText(false);
                 isCorrect = false;
-                ActionSelectionifWrong();
+                StartCoroutine(ActionSelectionifWrong());
                 
             }
         }
