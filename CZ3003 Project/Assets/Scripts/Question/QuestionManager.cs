@@ -27,6 +27,7 @@ public class QuestionManager : MonoBehaviour {
     public string question;
     public static int worldNumber;
     public static int sectionNumber;
+    public static string roomID;
 
     public int CorrectAnswer {
         get { return correctAnswer; }
@@ -147,15 +148,83 @@ public class QuestionManager : MonoBehaviour {
             }
   
         }
-        // }
-        // BattleSystem.Instance.PlayerAnswer();
         yield return new WaitForSeconds(1f);
         
     }
 
-//     public void EnableAnswerSelector(bool enabled) {
-//        answerSelector.SetActive(enabled);
-//    }
+    public IEnumerator getQuestionsforCustom(int questionNum) {
+        //Debug.Log("Handlemoveselection");
+        Debug.Log(roomID);
+        Debug.Log($"{questionNum}");
+        Debug.Log("reached here at getquestion");
+        var DBTask = DBreference.Child("custom").Child(roomID).GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+        Debug.Log("reached completed");
+        DataSnapshot snapshots = DBTask.Result;
+        int str = 0;
+        foreach (DataSnapshot childSnapshot in snapshots.Children.Reverse<DataSnapshot>()) {
+            if (childSnapshot.Key.ToString() == "users") {
+                str++;
+            }
+            if (childSnapshot.Key.ToString() == "usercreated") {
+                str++;
+            }
+        }
+        int length = (int)snapshots.ChildrenCount;
+        Debug.Log($"{length}");
+        CustomBattleSystem.totalQuestionNum = length - str;
+        Debug.Log($"{CustomBattleSystem.totalQuestionNum}");
+        
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else if (DBTask.Result.Value == null)
+        {
+            Debug.LogWarning(message: $"Failed to register task");
+        }
+        else
+        {
+            Debug.Log("reached else");
+            DataSnapshot snapshot = DBTask.Result;
+            question = snapshot.Child($"{questionNum}").Child("Question").Value.ToString();
+            Debug.Log("get question");
+            Debug.Log(question);
+            yield return TypeQuestion(question);
+            
+            // if (Input.GetKeyDown(KeyCode.Space)) {
+            //     Debug.Log("reached here at space");
+            //     EnableAnswerSelector(true);
+            List<int> list = new List<int>();   //  Declare list
+            for (int n = 0; n < 3; n++)    //  Populate list
+            {
+                list.Add(n);
+            }
+            int count = 0;
+            for (int ind = 0; ind < 3; ++ind) {
+                int index = Random.Range(0, list.Count);    //  Pick random element from the list
+                int i = list[index]; //  i = the number that was randomly picked
+                list.RemoveAt(index); 
+                if (count == 0) {
+                    answerText[i].text = $"{i}. {snapshot.Child($"{questionNum}").Child("A1").Value.ToString()}";
+                    CustomBattleSystem.correctAnswer = i;
+                    ++count;
+                }
+                else if (count == 1) {
+                    answerText[i].text = $"{i}. {snapshot.Child($"{questionNum}").Child("A2").Value.ToString()}";
+                    ++count;
+                } 
+                else if (count == 2) {
+                    answerText[i].text = $"{i}. {snapshot.Child($"{questionNum}").Child("A3").Value.ToString()}";
+                    ++count;
+                } 
+            }
+  
+        }
+        CustomBattleSystem.questionNum = questionNum + 1;
+        yield return new WaitForSeconds(1f);
+        
+    }
 
 
 }

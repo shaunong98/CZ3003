@@ -14,6 +14,7 @@ public class WorldUIManager : MonoBehaviour
     public GameObject[] levelSelectionPanels;
     public GameObject modeSelectionPanel;
     public GameObject PVPSelectionPanel;
+    public GameObject CustomSelection;
 
     public int stars;
     public Text startText;
@@ -100,6 +101,16 @@ public class WorldUIManager : MonoBehaviour
         mapSelectionPanel.gameObject.SetActive(false);
         modeSelectionPanel.gameObject.SetActive(true);
     }
+
+    public void PressCustomModeButton()
+    {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
+        PVPSelectionPanel.gameObject.SetActive(false);
+        modeSelectionPanel.gameObject.SetActive(false);
+        CustomSelection.gameObject.SetActive(true);
+        //SceneManager.LoadScene("CustomBattleScene");
+    }
+
     public void PressPVPModeButton()
     {
         AudioManager.Instance.PlaySFX(cfmClickSFX);

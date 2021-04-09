@@ -75,6 +75,18 @@ public class TeacherFireBase : MonoBehaviour
     public Dropdown SectionSelection;
     string world;
     string section;
+    public GameObject questionElement;
+    public Transform questionListContent;
+    string Question;
+
+    public InputField EditQuestionInputField;
+    public InputField EditAnswerInputField1;
+    public InputField EditAnswerInputField2;
+    public InputField EditAnswerInputField3;
+    public GameObject EditQuestionPanel;
+    public GameObject DisplayQuestionPanel;
+    int totalquestion = 0;
+    int currentindex;
 
     void Awake()
     {
@@ -611,6 +623,177 @@ public class TeacherFireBase : MonoBehaviour
             }
         }
     }
+    //Button to call the display of all the 
+    public void DisplayAllQuestionButtonMethod()
+    {
+        Debug.Log("Reached here!");
+        StartCoroutine(LoadAllQuestionsToDisplay());
+    }
+    private IEnumerator LoadAllQuestionsToDisplay()
+    {
+        int world = EditQuestion.World;
+        int section = EditQuestion.Section;
+        string difficulty = EditQuestion.Difficulty;
+        //Debug.Log(world);
+        //Debug.Log(section);
+        //Debug.Log(difficulty);
+
+        var DBTask = DBreference.Child("Qns").Child($"{world}").Child($"{section}").Child(difficulty).GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.Log("Yea");
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            DataSnapshot snapshot = DBTask.Result;
+            foreach (Transform child in questionListContent.transform)
+            {
+                Destroy(child.gameObject);
+            }
+            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                string question = childSnapshot.Child("Question").Value.ToString();
+                Debug.Log(question);
+                GameObject questionListElement = Instantiate(questionElement, questionListContent);
+                questionListElement.GetComponent<QuestionItem>().NewQuestionItem(question, world, section);
+            }
+        }
+    }
+    public void EditData(string _question)
+    {
+        Question = _question;
+        Debug.Log(Question);
+        EditQuestionInputField.text = Question;
+        StartCoroutine(GetQuestionData());
+        EditQuestionPanel.gameObject.SetActive(true);
+        DisplayQuestionPanel.gameObject.SetActive(false);
+    }
+    private IEnumerator GetQuestionData() { 
+        int world = EditQuestion.World;
+        int section = EditQuestion.Section;
+        string difficulty = EditQuestion.Difficulty;
+
+        var DBTask = DBreference.Child("Qns").Child($"{world}").Child($"{section}").Child(difficulty).GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.Log("Yea");
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            DataSnapshot snapshot = DBTask.Result;
+
+            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                string question = childSnapshot.Child("Question").Value.ToString();
+                totalquestion = totalquestion + 1;
+                if (question == Question)
+                {
+                    string Answer1 = childSnapshot.Child("A1").Value.ToString();
+                    string Answer2 = childSnapshot.Child("A2").Value.ToString();
+                    string Answer3 = childSnapshot.Child("A3").Value.ToString();
+                    EditAnswerInputField1.text = Answer1;
+                    EditAnswerInputField2.text = Answer2;
+                    EditAnswerInputField3.text = Answer3;
+                    currentindex = totalquestion;
+                }
+             }
+            Debug.Log(totalquestion);
+            Debug.Log(currentindex);
+            Debug.Log(totalquestion-currentindex+1);
+        }
+    }
+    public void savenewquestion()
+    {
+        string revisedquestion = EditQuestionInputField.text;
+        string revisedA1 = EditAnswerInputField1.text;
+        string revisedA2 = EditAnswerInputField2.text;
+        string revisedA3 = EditAnswerInputField3.text;
+        StartCoroutine(setrevisedquestion(revisedquestion,revisedA1,revisedA2,revisedA3));
+    }
+    private IEnumerator setrevisedquestion(string _question, string _answer1, string _answer2, string _answer3)
+    {
+        //need integrate with jh one!
+        int index = totalquestion - currentindex + 1;
+        int world = EditQuestion.World;
+        int section = EditQuestion.Section;
+        string difficulty = EditQuestion.Difficulty;
+
+
+        var qnTask = DBreference.Child("Qns").Child($"{world}").Child($"{section}").Child(difficulty).Child($"{index}").Child("Question").SetValueAsync(_question);
+
+        yield return new WaitUntil(predicate: () => qnTask.IsCompleted);
+
+        if (qnTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {qnTask.Exception}");
+
+            string message = "Missing Question!";
+            if (string.IsNullOrWhiteSpace(QuestionInputField.text))
+            {
+                Warning_Text.text = message;
+                SubmitButton.interactable = false;
+            }
+
+        }
+
+        var a1Task = DBreference.Child("Qns").Child($"{world}").Child($"{section}").Child(difficulty).Child($"{index}").Child("A1").SetValueAsync(_answer1);
+
+        yield return new WaitUntil(predicate: () => a1Task.IsCompleted);
+
+        if (a1Task.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {a1Task.Exception}");
+
+            /*string message = "Missing Answer!";
+            if (string.IsNullOrEmpty(AnswerInputField1.text))
+            {
+                Warning_Text.text = message;
+            }*/
+        }
+
+        var a2Task = DBreference.Child("Qns").Child($"{world}").Child($"{section}").Child(difficulty).Child($"{index}").Child("A2").SetValueAsync(_answer2);
+
+        yield return new WaitUntil(predicate: () => a2Task.IsCompleted);
+
+        if (a2Task.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {a2Task.Exception}");
+
+            /*string message = "Missing Answer!";
+            if (string.IsNullOrEmpty(AnswerInputField2.text))
+            {
+                Warning_Text.text = message;
+            }*/
+        }
+
+        var a3Task = DBreference.Child("Qns").Child($"{world}").Child($"{section}").Child(difficulty).Child($"{index}").Child("A3").SetValueAsync(_answer3);
+
+        yield return new WaitUntil(predicate: () => a3Task.IsCompleted);
+
+        if (a3Task.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {a3Task.Exception}");
+
+            /*string message = "Missing Answer!";
+            if (string.IsNullOrEmpty(AnswerInputField3.text))
+            {
+                Warning_Text.text = message;
+            }*/
+        }
+
+        //ClearQuestionAndAnswersFields();
+
+        EditQuestionPanel.gameObject.SetActive(false);
+        FunctionSelectionPanel.gameObject.SetActive(true);// shift this to button
+    }
 }
+    
+
 
 ///// FIX ERROR HANDLING!!!!!
