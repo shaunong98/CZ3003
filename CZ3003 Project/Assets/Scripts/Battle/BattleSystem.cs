@@ -284,7 +284,26 @@ public class BattleSystem : MonoBehaviour
     }
 
     public IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move) {
-        yield return dialogBox.TypeDialog($"{sourceUnit.Monster.Base.Name} used {move.Base.Name}.");
+        FirebaseUser User;
+        User = FirebaseManager.User;
+        string username = "";
+        var DBTask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+        if (DBTask.Exception != null)
+        {
+            Debug.Log("hello");
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else if (DBTask.Result.Value == null)
+        {
+            Debug.Log("what");
+        }
+        else
+        {
+            DataSnapshot snapshot = DBTask.Result;
+            username = snapshot.Child("username").Value.ToString();
+        }
+        yield return dialogBox.TypeDialog($"{username} used {move.Base.Name}.");
         sourceUnit.PlayerAttackAnimation();
         AudioManager.Instance.PlaySFX(AttackMusic);
         yield return new WaitForSeconds(1f);

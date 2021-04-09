@@ -14,6 +14,7 @@ public class WorldUIManager : MonoBehaviour
     public GameObject[] levelSelectionPanels;
     public GameObject modeSelectionPanel;
     public GameObject PVPSelectionPanel;
+    public GameObject CustomSelection;
 
     public int stars;
     public Text startText;
@@ -106,7 +107,8 @@ public class WorldUIManager : MonoBehaviour
         AudioManager.Instance.PlaySFX(cfmClickSFX);
         PVPSelectionPanel.gameObject.SetActive(false);
         modeSelectionPanel.gameObject.SetActive(false);
-        SceneManager.LoadScene("CustomBattleScene");
+        CustomSelection.gameObject.SetActive(true);
+        //SceneManager.LoadScene("CustomBattleScene");
     }
 
     public void PressPVPModeButton()

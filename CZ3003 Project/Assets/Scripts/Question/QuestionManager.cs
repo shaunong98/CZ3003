@@ -27,6 +27,7 @@ public class QuestionManager : MonoBehaviour {
     public string question;
     public static int worldNumber;
     public static int sectionNumber;
+    public static string roomID;
 
     public int CorrectAnswer {
         get { return correctAnswer; }
@@ -151,7 +152,7 @@ public class QuestionManager : MonoBehaviour {
         
     }
 
-    public IEnumerator getQuestionsforCustom(string roomID, int questionNum) {
+    public IEnumerator getQuestionsforCustom(int questionNum) {
         //Debug.Log("Handlemoveselection");
         Debug.Log(roomID);
         Debug.Log($"{questionNum}");
@@ -162,7 +163,8 @@ public class QuestionManager : MonoBehaviour {
         DataSnapshot snapshots = DBTask.Result;
         int length = (int)snapshots.ChildrenCount;
         Debug.Log($"{length}");
-        CustomBattleSystem.totalQuestionNum = length - 1 ;
+        CustomBattleSystem.totalQuestionNum = length - 2 ;
+        
         if (DBTask.Exception != null)
         {
             Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
