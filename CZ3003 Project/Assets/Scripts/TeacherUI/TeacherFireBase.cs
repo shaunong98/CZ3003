@@ -75,6 +75,10 @@ public class TeacherFireBase : MonoBehaviour
     public Dropdown SectionSelection;
     string world;
     string section;
+    public GameObject questionElement;
+    public Transform questionListContent;
+    string Question;
+
 
     void Awake()
     {
@@ -611,6 +615,52 @@ public class TeacherFireBase : MonoBehaviour
             }
         }
     }
+    //Button to call the display of all the 
+    public void DisplayAllQuestionButtonMethod()
+    {
+        Debug.Log("Reached here!");
+        StartCoroutine(LoadAllQuestionsToDisplay());
+    }
+    private IEnumerator LoadAllQuestionsToDisplay()
+    {
+        int world = EditQuestion.World;
+        int section = EditQuestion.Section;
+        string difficulty = EditQuestion.Difficulty;
+        Debug.Log(world);
+        Debug.Log(section);
+        Debug.Log(difficulty);
+
+        var DBTask = DBreference.Child("Qns").Child($"{world}").Child($"{section}").Child(difficulty).GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.Log("Yea");
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            DataSnapshot snapshot = DBTask.Result;
+            foreach (Transform child in questionListContent.transform)
+            {
+                Destroy(child.gameObject);
+            }
+            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                string question = childSnapshot.Child("Question").Value.ToString();
+                Debug.Log(question);
+                GameObject questionListElement = Instantiate(questionElement, questionListContent);
+                questionListElement.GetComponent<QuestionItem>().NewQuestionItem(question, world, section);
+            }
+        }
+    }
+    public void GetData(string _question)
+    {
+        Question = _question;
+        Debug.Log(Question);
+    }
 }
+    
+
 
 ///// FIX ERROR HANDLING!!!!!
