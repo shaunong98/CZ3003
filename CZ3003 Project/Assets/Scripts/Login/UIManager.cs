@@ -20,6 +20,11 @@ public class UIManager : MonoBehaviour
     public Dropdown SectionSelect;
     public static int Section;
 
+    public Dropdown WorldLeaderboard;
+    public static int WorldLdrboard;
+    public Dropdown SectionLeaderboard;
+    public static int SectionLdrboard;
+
     private void Awake()
     {
         if (instance == null)
@@ -99,6 +104,33 @@ public class UIManager : MonoBehaviour
     {
         Section = int.Parse(SectionSelect.options[SectionSelect.value].text);
         Debug.Log(Section);
+    }
+
+    public void WorldLdrboardSelect()
+    {
+        Debug.Log(WorldLeaderboard.options[WorldLeaderboard.value].text);
+        switch (WorldLeaderboard.options[WorldLeaderboard.value].text)
+        {
+            case "OODP":
+                WorldLdrboard = 1;
+                break;
+            case "SE":
+                WorldLdrboard = 2;
+                break;
+            case "SSAD":
+                WorldLdrboard = 3;
+                break;
+            default:
+                Debug.Log("Error Occured");
+                break;
+        }
+        Debug.Log(WorldLdrboard);
+    }
+
+    public void SectionLdrboardSelection()
+    {
+        SectionLdrboard = int.Parse(SectionLeaderboard.options[SectionLeaderboard.value].text);
+        Debug.Log(SectionLdrboard);
     }
     
 }
