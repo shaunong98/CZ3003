@@ -161,9 +161,19 @@ public class QuestionManager : MonoBehaviour {
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
         Debug.Log("reached completed");
         DataSnapshot snapshots = DBTask.Result;
+        int str = 0;
+        foreach (DataSnapshot childSnapshot in snapshots.Children.Reverse<DataSnapshot>()) {
+            if (childSnapshot.Key.ToString() == "users") {
+                str++;
+            }
+            if (childSnapshot.Key.ToString() == "usercreated") {
+                str++;
+            }
+        }
         int length = (int)snapshots.ChildrenCount;
         Debug.Log($"{length}");
-        CustomBattleSystem.totalQuestionNum = length - 2 ;
+        CustomBattleSystem.totalQuestionNum = length - str;
+        Debug.Log($"{CustomBattleSystem.totalQuestionNum}");
         
         if (DBTask.Exception != null)
         {

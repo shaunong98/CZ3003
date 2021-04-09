@@ -23,7 +23,10 @@ public class CustomFirebase : MonoBehaviour
     public TMP_InputField enterRoomID;
     public TMP_Text warningText;
     public TMP_Text confirmText;
-    bool found = false;
+    bool roomfound = false;
+    bool userfound = false;
+
+    public static string createdUsername;
     
     void Awake()
     {
@@ -64,7 +67,27 @@ public class CustomFirebase : MonoBehaviour
     }
 
     public IEnumerator checkRoomID() {
-        //Get Student
+        FirebaseUser User;
+        User = FirebaseManager.User;
+        string username = "";
+        var aTask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
+        yield return new WaitUntil(predicate: () => aTask.IsCompleted);
+        Debug.Log("reached here at users");
+        if (aTask.Exception != null)
+        {
+            Debug.Log("hello");
+            Debug.LogWarning(message: $"Failed to register task with {aTask.Exception}");
+        }
+        else if (aTask.Result.Value == null)
+        {
+            Debug.Log("what");
+        }
+        else
+        {
+            DataSnapshot snapshot = aTask.Result;
+            username = snapshot.Child("username").Value.ToString();
+        }
+
         if (enterRoomID != null) 
         {
             var DBTask = DBreference.Child("custom").GetValueAsync();
@@ -90,23 +113,44 @@ public class CustomFirebase : MonoBehaviour
                     Debug.Log("roomid");
                     Debug.Log(roomid);
                     if (roomid == enterRoomID.text) {
-                        found = true;
+                        roomfound = true;
+                        createdUsername = childSnapshot.Child("usercreated").Value.ToString();
+                        Debug.Log(createdUsername);
+                        var DBTasks = DBreference.Child("custom").Child(roomid).Child("users").GetValueAsync();
+                        yield return new WaitUntil(predicate: () => DBTasks.IsCompleted);
+                        DataSnapshot snapshots = DBTasks.Result;
+                        Debug.Log(username);
+                        foreach (DataSnapshot childSnapshots in snapshots.Children.Reverse<DataSnapshot>()) {
+                            string users = childSnapshots.Key.ToString();
+                            Debug.Log(users);
+                            if (username == users) {
+                                userfound = true;
+                            }
+                        }
+
                     }
                 }
-                if (!found) 
+                if (roomfound) 
                 {
+                    if (!userfound){
+                        QuestionManager.roomID = enterRoomID.text;
+                        warningText.text = "";
+                        confirmText.text = "RoomID found. Directing to BattleRoom...";
+                        yield return new WaitForSeconds(2f);
+                        confirmText.text = "";
+                        SceneManager.LoadScene("CustomBattleScene");
+                    }
+                    else {
+                        warningText.text = "You have attempted already!";
+                        yield return new WaitForSeconds(1f);
+                        warningText.text = "";
+                    }
+                }
+                else {
                     Debug.Log("Not found");
                     warningText.text = "RoomID not found!";
                     yield return new WaitForSeconds(1f);
                     warningText.text = "";
-                }
-                else {
-                    QuestionManager.roomID = enterRoomID.text;
-                    warningText.text = "";
-                    confirmText.text = "RoomID found. Directing to BattleRoom...";
-                    yield return new WaitForSeconds(2f);
-                    confirmText.text = "";
-                    SceneManager.LoadScene("CustomBattleScene");
                 }
             }
         }
