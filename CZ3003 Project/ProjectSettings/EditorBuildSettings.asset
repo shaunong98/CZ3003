@@ -35,6 +35,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TeacherUI.unity
     guid: 7491c38e23a4a084eb9669f631dc8009
+  - enabled: 1
+    path: Assets/Scenes/CustomBattleScene.unity
+    guid: b5db73e4883f78342b1ac1dd62eae1f1
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
