@@ -14,6 +14,7 @@ public class EditQuestion : MonoBehaviour
     public static int Section;
     public GameObject SelectionPanel;
     public GameObject QuestionDisplayPanel;
+    public GameObject QuestionPanel;
     private void Awake()
     {
         if (instance == null)
@@ -67,4 +68,10 @@ public class EditQuestion : MonoBehaviour
         QuestionDisplayPanel.gameObject.SetActive(false);
         SelectionPanel.gameObject.SetActive(true);
     }
+    public void PressBackButtonForQuestion()
+    {
+        QuestionDisplayPanel.gameObject.SetActive(true);
+        QuestionPanel.gameObject.SetActive(false);
+    }
+
 }
