@@ -1761,6 +1761,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718bdbbac50ea9341adf53e4f8a0449a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleLoader: {fileID: 1204756561}
+  PVPMusic: {fileID: 8300000, guid: 94658c804d613964c8717539490ddcd7, type: 3}
   worldNumber: 2
   sectionNumber: 1
 --- !u!114 &166247491
@@ -4201,6 +4203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718bdbbac50ea9341adf53e4f8a0449a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleLoader: {fileID: 1204756561}
+  PVPMusic: {fileID: 8300000, guid: 94658c804d613964c8717539490ddcd7, type: 3}
   worldNumber: 3
   sectionNumber: 2
 --- !u!114 &489507092
@@ -4429,6 +4433,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718bdbbac50ea9341adf53e4f8a0449a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleLoader: {fileID: 1204756561}
+  PVPMusic: {fileID: 8300000, guid: 94658c804d613964c8717539490ddcd7, type: 3}
   worldNumber: 1
   sectionNumber: 3
 --- !u!114 &494928197
@@ -8746,6 +8752,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718bdbbac50ea9341adf53e4f8a0449a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleLoader: {fileID: 1204756561}
+  PVPMusic: {fileID: 8300000, guid: 94658c804d613964c8717539490ddcd7, type: 3}
   worldNumber: 3
   sectionNumber: 3
 --- !u!114 &534634967
@@ -26981,6 +26989,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718bdbbac50ea9341adf53e4f8a0449a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleLoader: {fileID: 1204756561}
+  PVPMusic: {fileID: 8300000, guid: 94658c804d613964c8717539490ddcd7, type: 3}
   worldNumber: 1
   sectionNumber: 2
 --- !u!114 &1264248169
@@ -27393,6 +27403,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718bdbbac50ea9341adf53e4f8a0449a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleLoader: {fileID: 1204756561}
+  PVPMusic: {fileID: 8300000, guid: 94658c804d613964c8717539490ddcd7, type: 3}
   worldNumber: 1
   sectionNumber: 1
 --- !u!114 &1273741572
@@ -43042,6 +43054,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718bdbbac50ea9341adf53e4f8a0449a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleLoader: {fileID: 1204756561}
+  PVPMusic: {fileID: 8300000, guid: 94658c804d613964c8717539490ddcd7, type: 3}
   worldNumber: 2
   sectionNumber: 3
 --- !u!114 &1473612209
@@ -47031,6 +47045,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718bdbbac50ea9341adf53e4f8a0449a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleLoader: {fileID: 1204756561}
+  PVPMusic: {fileID: 8300000, guid: 94658c804d613964c8717539490ddcd7, type: 3}
   worldNumber: 3
   sectionNumber: 1
 --- !u!114 &1786380863
@@ -47483,6 +47499,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718bdbbac50ea9341adf53e4f8a0449a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleLoader: {fileID: 1204756561}
+  PVPMusic: {fileID: 8300000, guid: 94658c804d613964c8717539490ddcd7, type: 3}
   worldNumber: 2
   sectionNumber: 2
 --- !u!114 &1833935685

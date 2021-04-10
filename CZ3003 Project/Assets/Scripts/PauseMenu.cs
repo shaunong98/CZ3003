@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
+    public Slider AudioSlider;
+    public Slider SFXSlider;
+    
     [SerializeField] private AudioClip levelMusic;
     public LevelLoader battleLoader;
     public FirebaseManager firebaseManager;
@@ -15,6 +19,8 @@ public class PauseMenu : MonoBehaviour
     
     void Update()
     {
+        AudioManager.Instance.SetMusicVolume(AudioSlider.value);
+        AudioManager.Instance.SetSFXVolume(SFXSlider.value);
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(GameisPaused)

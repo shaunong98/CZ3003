@@ -31932,6 +31932,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1588086415 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3836262451572227216, guid: 830662160f6d0da47baee15a933a312a,
+    type: 3}
+  m_PrefabInstance: {fileID: 372526755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1616674710
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32197,6 +32209,18 @@ PrefabInstance:
     - {fileID: 260710796236366263, guid: 1249a70838863ce4784c6cdab5fd233f, type: 3}
     - {fileID: 2659905029320893941, guid: 1249a70838863ce4784c6cdab5fd233f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1249a70838863ce4784c6cdab5fd233f, type: 3}
+--- !u!114 &1671824752 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 434510874099974302, guid: 830662160f6d0da47baee15a933a312a,
+    type: 3}
+  m_PrefabInstance: {fileID: 372526755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1956446907
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32552,6 +32576,11 @@ PrefabInstance:
       objectReference: {fileID: 618358191}
     - target: {fileID: 7230562119496903891, guid: ce39d9e3a4363f54dbde191ed1a49971,
         type: 3}
+      propertyPath: battleLoader
+      value: 
+      objectReference: {fileID: 2086513876}
+    - target: {fileID: 7230562119496903891, guid: ce39d9e3a4363f54dbde191ed1a49971,
+        type: 3}
       propertyPath: battleSystem
       value: 
       objectReference: {fileID: 2084881956}
@@ -32562,9 +32591,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7230562119800166721, guid: ce39d9e3a4363f54dbde191ed1a49971,
         type: 3}
+      propertyPath: SFXSlider
+      value: 
+      objectReference: {fileID: 1588086415}
+    - target: {fileID: 7230562119800166721, guid: ce39d9e3a4363f54dbde191ed1a49971,
+        type: 3}
+      propertyPath: AudioSlider
+      value: 
+      objectReference: {fileID: 1671824752}
+    - target: {fileID: 7230562119800166721, guid: ce39d9e3a4363f54dbde191ed1a49971,
+        type: 3}
       propertyPath: pauseMenuUI
       value: 
       objectReference: {fileID: 372526756}
+    - target: {fileID: 7230562119800166721, guid: ce39d9e3a4363f54dbde191ed1a49971,
+        type: 3}
+      propertyPath: battleLoader
+      value: 
+      objectReference: {fileID: 2086513876}
     - target: {fileID: 7230562119800166721, guid: ce39d9e3a4363f54dbde191ed1a49971,
         type: 3}
       propertyPath: firebaseManager
@@ -32861,5 +32905,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d758475eefb28ff4081bf13354117387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2086513876 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6310966505916250767, guid: 6701fc017d49b83418b2efaa22a28d65,
+    type: 3}
+  m_PrefabInstance: {fileID: 899759898}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 494051456955f224d9bc83bb28b09d4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
