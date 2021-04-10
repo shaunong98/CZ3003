@@ -27,6 +27,14 @@ public class CustomFirebase : MonoBehaviour
     bool userfound = false;
 
     public static string createdUsername;
+
+    public GameObject questionElement;
+    public Transform questionListContent;
+    string Question;
+    string A1;
+    string A2;
+    string A3;
+    int questionNo;
     
     void Awake()
     {
@@ -153,6 +161,197 @@ public class CustomFirebase : MonoBehaviour
                     warningText.text = "";
                 }
             }
+        }
+    }
+    public void displayallquestions(){
+        Debug.Log("Yes");
+        StartCoroutine(filterquestions());
+    }
+    public IEnumerator filterquestions(){
+        int world = CreateRoom.World;
+        int section = CreateRoom.Section;
+        string difficulty = CreateRoom.Difficulty;
+
+         var DBTask = DBreference.Child("Qns").Child($"{world}").Child($"{section}").Child(difficulty).GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.Log("Yea");
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            DataSnapshot snapshot = DBTask.Result;
+            foreach (Transform child in questionListContent.transform)
+            {
+                Destroy(child.gameObject);
+            }
+            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                string question = childSnapshot.Child("Question").Value.ToString();
+                Debug.Log(question);
+                GameObject questionListElement = Instantiate(questionElement, questionListContent);
+                questionListElement.GetComponent<QuestionPicker>().NewQuestionItem(question);
+            }
+        }
+    }
+    public void newRoom()
+    {
+        questionNo = 0;
+    }
+    public void Addquestion(string _question){
+        Question = _question;
+        Debug.Log(Question);
+        StartCoroutine(LoadQuestionAndAnswer());
+        StartCoroutine(PushtoDB());
+    }
+    public IEnumerator LoadQuestionAndAnswer(){
+        int world = CreateRoom.World;
+        int section = CreateRoom.Section;
+        string difficulty = CreateRoom.Difficulty;
+
+         var DBTask = DBreference.Child("Qns").Child($"{world}").Child($"{section}").Child(difficulty).GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.Log("Yea");
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            DataSnapshot snapshot = DBTask.Result;
+           
+            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                string question = childSnapshot.Child("Question").Value.ToString();
+                if (question == Question)
+                {
+                    A1 = childSnapshot.Child("A1").Value.ToString();
+                    A2 = childSnapshot.Child("A2").Value.ToString();
+                    A3 = childSnapshot.Child("A3").Value.ToString();
+                    Debug.Log(A1);
+                }
+            }
+        }
+    }
+    public IEnumerator PushtoDB(){
+        int world = CreateRoom.World;
+        int section = CreateRoom.Section;
+        string difficulty = CreateRoom.Difficulty;
+        string Room = CreateRoom.Room;
+        questionNo = questionNo + 1;
+
+        var qnTask = DBreference.Child("custom").Child(Room).Child($"{questionNo}").Child("Question").SetValueAsync(Question);
+
+        yield return new WaitUntil(predicate: () => qnTask.IsCompleted);
+
+        if (qnTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {qnTask.Exception}");
+
+            /*string message = "Missing Question!";
+            if (string.IsNullOrWhiteSpace(QuestionInputField.text))
+            {
+                Warning_Text.text = message;
+                SubmitButton.interactable = false;
+            }*/
+
+        }
+
+        var a1Task = DBreference.Child("custom").Child(Room).Child($"{questionNo}").Child("A1").SetValueAsync(A1);
+
+        yield return new WaitUntil(predicate: () => a1Task.IsCompleted);
+
+        if (a1Task.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {a1Task.Exception}");
+
+            /*string message = "Missing Answer!";
+            if (string.IsNullOrEmpty(AnswerInputField1.text))
+            {
+                Warning_Text.text = message;
+            }*/
+        }
+
+        var a2Task = DBreference.Child("custom").Child(Room).Child($"{questionNo}").Child("A2").SetValueAsync(A2);
+
+        yield return new WaitUntil(predicate: () => a2Task.IsCompleted);
+
+        if (a2Task.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {a2Task.Exception}");
+
+            /*string message = "Missing Answer!";
+            if (string.IsNullOrEmpty(AnswerInputField2.text))
+            {
+                Warning_Text.text = message;
+            }*/
+        }
+
+        var a3Task = DBreference.Child("custom").Child(Room).Child($"{questionNo}").Child("A3").SetValueAsync(A3);
+
+        yield return new WaitUntil(predicate: () => a3Task.IsCompleted);
+
+        if (a3Task.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {a3Task.Exception}");
+
+            /*string message = "Missing Answer!";
+            if (string.IsNullOrEmpty(AnswerInputField3.text))
+            {
+                Warning_Text.text = message;
+            }*/
+        }
+
+        FirebaseUser User;
+        User = FirebaseManager.User;
+        string username = "";
+        var aTask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
+        yield return new WaitUntil(predicate: () => aTask.IsCompleted);
+        Debug.Log("reached here at users");
+        if (aTask.Exception != null)
+        {
+            Debug.Log("hello");
+            Debug.LogWarning(message: $"Failed to register task with {aTask.Exception}");
+        }
+        else if (aTask.Result.Value == null)
+        {
+            Debug.Log("what");
+        }
+        else
+        {
+            DataSnapshot snapshot = aTask.Result;
+            username = snapshot.Child("username").Value.ToString();
+        }
+        var UCTask = DBreference.Child("custom").Child(Room).Child("usercreated").SetValueAsync(username);
+
+        yield return new WaitUntil(predicate: () => UCTask.IsCompleted);
+
+        if (UCTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {UCTask.Exception}");
+
+            /*string message = "Missing Answer!";
+            if (string.IsNullOrEmpty(AnswerInputField3.text))
+            {
+                Warning_Text.text = message;
+            }*/
+        }
+        var UserTask = DBreference.Child("custom").Child(Room).Child("users").SetValueAsync(null);
+
+        yield return new WaitUntil(predicate: () => UserTask.IsCompleted);
+
+        if (UserTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {UserTask.Exception}");
+
+            /*string message = "Missing Answer!";
+            if (string.IsNullOrEmpty(AnswerInputField3.text))
+            {
+                Warning_Text.text = message;
+            }*/
         }
     }
    
