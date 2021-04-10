@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] private AudioClip arrowClickSFX;
-    [SerializeField] private AudioClip cfmClickSFX;
-
     private AudioSource musicSource;
     private AudioSource musicSource2;
     private AudioSource sfxSource;

@@ -12,6 +12,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2151364175260116566, guid: 99218f06592cfec49b8f1ce64ccf62de,
+        type: 3}
+      propertyPath: m_Name
+      value: Audio Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151364175260116567, guid: 99218f06592cfec49b8f1ce64ccf62de,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -87.75
+      objectReference: {fileID: 0}
     - target: {fileID: 2151364175260116568, guid: 99218f06592cfec49b8f1ce64ccf62de,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -20,7 +30,7 @@ PrefabInstance:
     - target: {fileID: 2151364175654449650, guid: 99218f06592cfec49b8f1ce64ccf62de,
         type: 3}
       propertyPath: m_Name
-      value: Pause Canvas
+      value: Pause Canvas Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2151364175654449654, guid: 99218f06592cfec49b8f1ce64ccf62de,
         type: 3}
@@ -125,6 +135,16 @@ PrefabInstance:
     - target: {fileID: 2151364175654449654, guid: 99218f06592cfec49b8f1ce64ccf62de,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151364175965065180, guid: 99218f06592cfec49b8f1ce64ccf62de,
+        type: 3}
+      propertyPath: m_Text
+      value: AUDIO
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151364176355553126, guid: 99218f06592cfec49b8f1ce64ccf62de,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2151364176558864213, guid: 99218f06592cfec49b8f1ce64ccf62de,

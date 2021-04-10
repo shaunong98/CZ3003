@@ -12,5 +12,4 @@ public class AudioLogin : MonoBehaviour
     {
         AudioManager.Instance.PlayMusic(levelMusic);
     }
-
 }
