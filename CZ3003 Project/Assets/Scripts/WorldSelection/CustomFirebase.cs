@@ -35,6 +35,11 @@ public class CustomFirebase : MonoBehaviour
     string A2;
     string A3;
     int questionNo;
+    bool roomexist;
+    public Text errormsg;
+    public GameObject StartPanel;
+    public GameObject SelectionPanel;
+    public string Room;
     
     void Awake()
     {
@@ -240,7 +245,6 @@ public class CustomFirebase : MonoBehaviour
         int world = CreateRoom.World;
         int section = CreateRoom.Section;
         string difficulty = CreateRoom.Difficulty;
-        string Room = CreateRoom.Room;
         questionNo = questionNo + 1;
 
         var qnTask = DBreference.Child("custom").Child(Room).Child($"{questionNo}").Child("Question").SetValueAsync(Question);
@@ -352,6 +356,38 @@ public class CustomFirebase : MonoBehaviour
             {
                 Warning_Text.text = message;
             }*/
+        }
+    }
+    public void checkRoomExist(){
+        StartCoroutine(CheckExistingRoom());
+    }
+    private IEnumerator CheckExistingRoom(){
+        Room = createRoomID.text;
+        var DBTask = DBreference.Child("custom").GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+        Debug.Log("here");
+        roomexist = false;
+        if (DBTask.Exception != null)
+        {
+            Debug.Log("Yea");
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else{
+            DataSnapshot snapshot = DBTask.Result;
+            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                string roomid = childSnapshot.Key.ToString();
+                if (roomid == Room) {
+                    roomexist = true;
+                    errormsg.text = "Room already exist!";
+                }
+            }
+            if (roomexist != true)
+            {
+            SelectionPanel.gameObject.SetActive(true);
+            StartPanel.gameObject.SetActive(false);
+            errormsg.text = "";
+            }
         }
     }
    
