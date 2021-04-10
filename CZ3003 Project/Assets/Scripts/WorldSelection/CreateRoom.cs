@@ -18,8 +18,16 @@ public class CreateRoom : MonoBehaviour
     public GameObject SelectionPanel;
     public GameObject QuestionDisplayPanel;
     public GameObject StartPanel;
+    public CustomFirebase item;
+    public GameObject Firebase;
+    public Text errormsg;
+    bool roomExist;
     private void Awake()
     {
+
+        // Setting up the reference.
+        GameObject FireBase = GameObject.Find("Canvas");
+        item = FireBase.GetComponent<CustomFirebase>();
         if (instance == null)
         {
             instance = this;
@@ -60,12 +68,10 @@ public class CreateRoom : MonoBehaviour
         Section = int.Parse(SectionSelect.options[SectionSelect.value].text);
         Debug.Log(Section);
     }
-    public void CreateRoomButton()
+    public void FinishButton()
     {
-        Room = createRoomID.text;
-        Debug.Log(Room);
-        SelectionPanel.gameObject.SetActive(true);
-        StartPanel.gameObject.SetActive(false);
+        StartPanel.gameObject.SetActive(true);
+        QuestionDisplayPanel.gameObject.SetActive(false);
     }
     public void PressBackButtonforSelection()
     {
@@ -82,10 +88,6 @@ public class CreateRoom : MonoBehaviour
         QuestionDisplayPanel.gameObject.SetActive(false);
         SelectionPanel.gameObject.SetActive(true);
     }
-    /*public void PressBackButtonForQuestion()
-    {
-        QuestionDisplayPanel.gameObject.SetActive(true);
-        QuestionPanel.gameObject.SetActive(false);
-    }*/
+
 
 }
