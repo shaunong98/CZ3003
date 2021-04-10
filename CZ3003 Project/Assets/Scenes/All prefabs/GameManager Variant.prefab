@@ -39,6 +39,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4381834259627016856, guid: 18b3e1fc2d50a024b9d5c6ce49dce81f,
         type: 3}
+      propertyPath: levelMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 0edb9c9ac7118a7439edf0df84115498, type: 3}
+    - target: {fileID: 4381834259627016856, guid: 18b3e1fc2d50a024b9d5c6ce49dce81f,
+        type: 3}
       propertyPath: pauseMenuUI
       value: 
       objectReference: {fileID: 0}

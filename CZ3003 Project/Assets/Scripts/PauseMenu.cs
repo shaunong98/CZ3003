@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    [SerializeField] private AudioClip levelMusic;
+    public LevelLoader battleLoader;
     public FirebaseManager firebaseManager;
     public bool GameisPaused = false;
 
@@ -44,15 +46,17 @@ public class PauseMenu : MonoBehaviour
 
     public void Quit()
     {
+        battleLoader.FadetoBlack();
         Application.Quit();
     }
 
     public void Menu()
     {
+        AudioManager.Instance.PlayMusic(levelMusic);
         pauseMenuUI.SetActive(false);
         GameisPaused = false;
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Map Selection");
+        battleLoader.LoadMain();
     }
 
     public void Save() {
