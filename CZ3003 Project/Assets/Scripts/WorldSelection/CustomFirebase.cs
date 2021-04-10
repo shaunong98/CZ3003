@@ -27,6 +27,10 @@ public class CustomFirebase : MonoBehaviour
     bool userfound = false;
 
     public static string createdUsername;
+
+    public GameObject questionElement;
+    public Transform questionListContent;
+    string Question;
     
     void Awake()
     {
@@ -154,6 +158,46 @@ public class CustomFirebase : MonoBehaviour
                 }
             }
         }
+    }
+    public void displayallquestions(){
+        Debug.Log("Yes");
+        StartCoroutine(filterquestions());
+    }
+    public IEnumerator filterquestions(){
+        int world = CreateRoom.World;
+        int section = CreateRoom.Section;
+        string difficulty = CreateRoom.Difficulty;
+        Debug.Log(world);
+        Debug.Log(section);
+        Debug.Log(difficulty);
+
+         var DBTask = DBreference.Child("Qns").Child($"{world}").Child($"{section}").Child(difficulty).GetValueAsync();
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.Log("Yea");
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            DataSnapshot snapshot = DBTask.Result;
+            foreach (Transform child in questionListContent.transform)
+            {
+                Destroy(child.gameObject);
+            }
+            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                string question = childSnapshot.Child("Question").Value.ToString();
+                Debug.Log(question);
+                GameObject questionListElement = Instantiate(questionElement, questionListContent);
+                questionListElement.GetComponent<QuestionPicker>().NewQuestionItem(question);
+            }
+        }
+    }
+    public void Addquestion(string _question){
+        Question = _question;
+        Debug.Log(Question);
     }
    
 }
