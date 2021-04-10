@@ -54,7 +54,7 @@ public class SectionSelection : MonoBehaviour
     private void UnlockLevel()
     {
         int previousLvIndex = int.Parse(gameObject.name) - 1; // get previous level
-        if(PlayerPrefs.GetInt("Lv"+previousLvIndex)>1)
+        if(PlayerPrefs.GetInt("Lv"+previousLvIndex)>3)
         {
             isUnlocked = true;
         }

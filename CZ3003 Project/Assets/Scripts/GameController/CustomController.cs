@@ -56,14 +56,12 @@ public class CustomController: MonoBehaviour
     public void StartBattle(BattleUnit trainerUnit) {
         state = PVPState.Battle;
         CustomBattleSystem.Instance.gameObject.SetActive(true);
-        CustomBattleSystem.Instance.StartBattle(trainerUnit); 
+        CustomBattleSystem.Instance.StartBattle(trainerUnit);
     }
 
     public void EndBattle(bool won) {
         state = PVPState.End;
         CustomBattleSystem.Instance.gameObject.SetActive(false);
-        //SceneManager.LoadScene("Map Selection");
-        //worldCamera.gameObject.SetActive(true);
     }
 
     private void Update()
