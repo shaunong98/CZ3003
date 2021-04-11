@@ -1164,7 +1164,7 @@ public class FirebaseManager : MonoBehaviour
                 if (username == _username)
                 {
                     teacher = true;
-                    UIManager.instance.ClearScreen();
+                    UIManager.instance.ClearScreenForTeacher();
                     SceneManager.LoadScene("TeacherUI");
                     break;
                 }
