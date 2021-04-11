@@ -10,6 +10,7 @@ public class AudioController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(levelMusic!=null)
         AudioManager.Instance.PlayMusicWithFade(levelMusic);
     }
 

@@ -148,4 +148,17 @@ public class WorldUIManager : MonoBehaviour
         Application.OpenURL("https://softwaremon.quora.com/");
     }
 
+    public void pressBackButton()
+    {
+        AudioManager.Instance.PlaySFX(cfmClickSFX); 
+        SceneManager.LoadScene("LoginScene");
+    }
+
+    public void PressCustomBackButton()
+    {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
+        modeSelectionPanel.gameObject.SetActive(true);
+        CustomSelection.gameObject.SetActive(false);
+    }
+
 }
