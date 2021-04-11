@@ -303,7 +303,13 @@ public class BattleSystem : MonoBehaviour
             DataSnapshot snapshot = DBTask.Result;
             username = snapshot.Child("username").Value.ToString();
         }
-        yield return dialogBox.TypeDialog($"{username} used {move.Base.Name}.");
+        if (sourceUnit.IsPlayerUnit) {
+            yield return dialogBox.TypeDialog($"{username} used {move.Base.Name}.");
+        }
+        else {
+            yield return dialogBox.TypeDialog($"{sourceUnit.Monster.Base.Name} used {move.Base.Name}.");
+        }
+        //yield return dialogBox.TypeDialog($"{username} used {move.Base.Name}.");
         sourceUnit.PlayerAttackAnimation();
         AudioManager.Instance.PlaySFX(AttackMusic);
         yield return new WaitForSeconds(1f);
