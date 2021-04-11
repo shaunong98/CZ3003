@@ -22,6 +22,7 @@ public class BattleHud : MonoBehaviour
             nameText.text = CustomFirebase.createdUsername;
         }
         else{
+            Debug.Log("Not custom game");
             nameText.text = monster.Base.Name;
         }
         //

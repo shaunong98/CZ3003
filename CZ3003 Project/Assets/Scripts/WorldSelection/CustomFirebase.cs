@@ -101,8 +101,9 @@ public class CustomFirebase : MonoBehaviour
             username = snapshot.Child("username").Value.ToString();
         }
 
-        if (enterRoomID != null) 
+        if (enterRoomID.text != "") 
         {
+            Debug.Log("null");
             var DBTask = DBreference.Child("custom").GetValueAsync();
             yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 
@@ -166,6 +167,11 @@ public class CustomFirebase : MonoBehaviour
                     warningText.text = "";
                 }
             }
+        }
+        else {
+            warningText.text = "Please enter a roomID!";
+            yield return new WaitForSeconds(1f);
+            warningText.text = "";
         }
     }
     public void displayallquestions(){
