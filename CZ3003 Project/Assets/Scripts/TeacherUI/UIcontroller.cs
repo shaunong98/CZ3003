@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class UIcontroller : MonoBehaviour
 {
+    public static UIcontroller instance;
     public GameObject AddQuestionPanel;
     public GameObject LeaderBoardPanel;
     public GameObject ViewStatisticPanel;
@@ -12,6 +14,24 @@ public class UIcontroller : MonoBehaviour
     public GameObject FunctionSelectionPanel;
     public GameObject EditQuestionPanel;
     public GameObject ScorePanel;
+
+    public Dropdown WorldLeaderboard;
+    public static int WorldLdrboard;
+    public Dropdown SectionLeaderboard;
+    public static int SectionLdrboard;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != null)
+        {
+            Debug.Log("Instance already exists, destroying object!");
+            Destroy(this);
+        }
+    }
 
     public void PressAddQuestionButton()
     {
@@ -71,5 +91,32 @@ public class UIcontroller : MonoBehaviour
     {
         ScorePanel.gameObject.SetActive(false);
         MakeAssignmentPanel.gameObject.SetActive(true);
+    }
+
+    public void WorldLdrboardSelect()
+    {
+        Debug.Log(WorldLeaderboard.options[WorldLeaderboard.value].text);
+        switch (WorldLeaderboard.options[WorldLeaderboard.value].text)
+        {
+            case "OODP":
+                WorldLdrboard = 1;
+                break;
+            case "SE":
+                WorldLdrboard = 2;
+                break;
+            case "SSAD":
+                WorldLdrboard = 3;
+                break;
+            default:
+                Debug.Log("Error Occured");
+                break;
+        }
+        Debug.Log(WorldLdrboard);
+    }
+
+    public void SectionLdrboardSelection()
+    {
+        SectionLdrboard = int.Parse(SectionLeaderboard.options[SectionLeaderboard.value].text);
+        Debug.Log(SectionLdrboard);
     }
 }
