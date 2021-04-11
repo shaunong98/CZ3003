@@ -19,12 +19,10 @@ public class TeacherFireBase : MonoBehaviour
 
     //User Data variables
     [Header("UserData")]
-    public TMP_InputField usernameField;
-    public TMP_InputField xpField;
-    public TMP_InputField killsField;
-    public TMP_InputField masteryField;
     public GameObject statisticElement;
     public Transform scoreboardContent;
+    public GameObject leaderElement;
+    public Transform leaderboardContent;
 
     //Question and Answers variables
     [Header("QnA")]
@@ -32,7 +30,7 @@ public class TeacherFireBase : MonoBehaviour
     public InputField AnswerInputField1;
     public InputField AnswerInputField2;
     public InputField AnswerInputField3;
-    public TMP_Text Warning_Text;
+    //public TMP_Text Warning_Text;
 
     public GameObject AddQuestionPanel;
     public GameObject OptionSelectionPanel;
@@ -178,13 +176,12 @@ public class TeacherFireBase : MonoBehaviour
         {
             Debug.LogWarning(message: $"Failed to register task with {qnTask.Exception}");
 
-            string message = "Missing Question!";
+            /*string message = "Missing Question!";
             if (string.IsNullOrWhiteSpace(QuestionInputField.text))
             {
                 Warning_Text.text = message;
                 SubmitButton.interactable = false;
-            }
-
+            }*/
         }
 
         var a1Task = DBreference.Child("Qns").Child($"{worldNumber}").Child($"{sectionNumber}").Child(difficulty).Child($"{length + 1}").Child("A1").SetValueAsync(_answer1);
@@ -752,12 +749,12 @@ public class TeacherFireBase : MonoBehaviour
         {
             Debug.LogWarning(message: $"Failed to register task with {qnTask.Exception}");
 
-            string message = "Missing Question!";
+            /*string message = "Missing Question!";
             if (string.IsNullOrWhiteSpace(QuestionInputField.text))
             {
                 Warning_Text.text = message;
                 SubmitButton.interactable = false;
-            }
+            }*/
 
         }
 
@@ -1096,6 +1093,156 @@ public class TeacherFireBase : MonoBehaviour
                 string user = childSnapshot.Key.ToString();
                 GameObject studentListElement = Instantiate(studentElement, studentListContent);
                 studentListElement.GetComponent<StudentScoreItem>().CreateItem(user, score);
+            }
+        }
+    }
+
+    //Function for the scoreboard button
+    public void ScoreboardButton()
+    {
+        StartCoroutine(LoadScoreboardData());
+    }
+
+    private IEnumerator LoadScoreboardData()
+    {
+        int rank = 0;
+        //string LoggedinUser = "";
+        string worldsection = "All";
+
+        //Get all the users data ordered by kills amount
+        var DBTask = DBreference.Child("users").OrderByChild("TotalPoints").GetValueAsync();
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Data has been retrieved
+            DataSnapshot snapshot = DBTask.Result;
+
+            //Get the currently logged in user data
+            /*var DBTask1 = DBreference.Child("users").Child(User.UserId).GetValueAsync();
+
+            yield return new WaitUntil(predicate: () => DBTask1.IsCompleted);
+
+            if (DBTask1.Exception != null)
+            {
+                Debug.LogWarning(message: $"Failed to register task with {DBTask1.Exception}");
+            }
+            else if (DBTask1.Result.Value == null)
+            {
+                //No data exists yet
+            }
+            else
+            {
+                //Data has been retrieved
+                DataSnapshot snapshot1 = DBTask1.Result;
+
+                LoggedinUser = snapshot1.Child("username").Value.ToString();
+            }*/
+
+
+            //Destroy any existing scoreboard elements
+            foreach (Transform child in leaderboardContent.transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            //Loop through every users UID
+            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                rank += 1;
+                string username = childSnapshot.Child("username").Value.ToString();
+                int points = int.Parse(childSnapshot.Child("TotalPoints").Value.ToString());
+
+                /*if (LoggedinUser.Equals(username))
+                {
+                    ranktext.text = "You are ranked #" + $"{rank}";
+                }*/
+
+                //Instantiate new scoreboard elements
+                GameObject scoreboardElement = Instantiate(leaderElement, leaderboardContent);
+                scoreboardElement.GetComponent<ScoreElement>().NewScoreElement($"{rank}", username, worldsection, points);
+            }
+
+            //Go to scoreboard screen
+            //UIcontroller.instance.PressLeaderboardButton();
+        }
+    }
+
+    public void displayWorldSectionData()
+    {
+        StartCoroutine(LoadWorldSectionData());
+    }
+
+    private IEnumerator LoadWorldSectionData()
+    {
+        int rank = 0;
+        //string LoggedinUser = "";
+        int worldNumber = UIcontroller.WorldLdrboard;
+        int sectionNumber = UIcontroller.SectionLdrboard;
+        Debug.Log(worldNumber);
+        Debug.Log(sectionNumber);
+        //Get all the users data ordered by points
+        var DBTask = DBreference.Child("users").OrderByChild("BattleStats/" + $"{worldNumber}" + "/" + $"{sectionNumber}" + "/Points").GetValueAsync();
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Data has been retrieved
+            DataSnapshot snapshot = DBTask.Result;
+
+            //Get the currently logged in user data
+            /*var DBTask1 = DBreference.Child("users").Child(User.UserId).GetValueAsync();
+
+            yield return new WaitUntil(predicate: () => DBTask1.IsCompleted);
+
+            if (DBTask1.Exception != null)
+            {
+                Debug.LogWarning(message: $"Failed to register task with {DBTask1.Exception}");
+            }
+            else if (DBTask1.Result.Value == null)
+            {
+                //No data exists yet
+            }
+            else
+            {
+                //Data has been retrieved
+                DataSnapshot snapshot1 = DBTask1.Result;
+
+                LoggedinUser = snapshot1.Child("username").Value.ToString();
+            }*/
+
+            //Destroy any existing scoreboard elements
+            foreach (Transform child in leaderboardContent.transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            //Loop through every users UID
+            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            {
+                rank += 1;
+                string username = childSnapshot.Child("username").Value.ToString();
+                Debug.Log(username);
+                int points = int.Parse(childSnapshot.Child("BattleStats").Child($"{worldNumber}").Child($"{sectionNumber}").Child("Points").Value.ToString());
+
+                /*if (LoggedinUser.Equals(username))
+                {
+                    ranktext.text = "You are ranked #" + $"{rank}";
+                }*/
+
+                //Instantiate new scoreboard elements
+                GameObject scoreboardElement = Instantiate(leaderElement, leaderboardContent);
+                scoreboardElement.GetComponent<ScoreElement>().NewScoreElement($"{rank}", username, $"{worldNumber}" + "." + $"{sectionNumber}", points);
             }
         }
     }
