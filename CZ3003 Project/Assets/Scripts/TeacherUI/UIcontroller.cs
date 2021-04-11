@@ -11,6 +11,7 @@ public class UIcontroller : MonoBehaviour
     public GameObject MakeAssignmentPanel;
     public GameObject FunctionSelectionPanel;
     public GameObject EditQuestionPanel;
+    public GameObject ScorePanel;
 
     public void PressAddQuestionButton()
     {
@@ -65,5 +66,10 @@ public class UIcontroller : MonoBehaviour
     public void Presslogoutbutton()
     {
         SceneManager.LoadScene("LoginScene");
+    }
+    public void PressBackScorePanel()
+    {
+        ScorePanel.gameObject.SetActive(false);
+        MakeAssignmentPanel.gameObject.SetActive(true);
     }
 }
