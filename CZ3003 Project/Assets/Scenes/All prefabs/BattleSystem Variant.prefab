@@ -99,6 +99,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1277695420682305580, guid: 69420855c4fc4bf4186c7a2989525e2b,
         type: 3}
+      propertyPath: runMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 48ff16bfaae57ce4a8a8c4854e88cff0, type: 3}
+    - target: {fileID: 1277695420682305580, guid: 69420855c4fc4bf4186c7a2989525e2b,
+        type: 3}
       propertyPath: AttackMusic
       value: 
       objectReference: {fileID: 8300000, guid: d3a7c2999ae023f41841a56f80293c0e, type: 3}

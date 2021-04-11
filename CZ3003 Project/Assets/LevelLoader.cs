@@ -16,6 +16,11 @@ public class LevelLoader : MonoBehaviour
         StartCoroutine(LoadLevel("Map Selection"));
     }
 
+    public void LoadPVP()
+    {
+        StartCoroutine(LoadLevel("BattleScene"));
+    }
+
     public void Loadlevel(string levelName)
     {
         StartCoroutine(LoadLevel(levelName));
