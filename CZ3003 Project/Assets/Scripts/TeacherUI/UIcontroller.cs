@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIcontroller : MonoBehaviour
 {
@@ -60,5 +61,9 @@ public class UIcontroller : MonoBehaviour
     {
         EditQuestionPanel.gameObject.SetActive(false);
         FunctionSelectionPanel.gameObject.SetActive(true);
+    }
+    public void Presslogoutbutton()
+    {
+        SceneManager.LoadScene("LoginScene");
     }
 }

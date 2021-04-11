@@ -47,6 +47,13 @@ public class UIManager : MonoBehaviour
         userDataUI.SetActive(false);
         scoreboardUI.SetActive(false);
     }
+    public void ClearScreenForTeacher() //Turn off all screens
+    {
+        loginUI.SetActive(true);
+        registerUI.SetActive(false);
+        userDataUI.SetActive(false);
+        scoreboardUI.SetActive(false);
+    }
 
     public void LoginScreen() //Back button
     {
