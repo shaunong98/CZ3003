@@ -24,6 +24,7 @@ public class Sharing : MonoBehaviour
     }
     public void shareFacebook()
     {
-        Application.OpenURL("https://www.facebook.com/dialog/feed?" + "app_id=" + AppID + "&link=" + Link + "&caption=" + Caption + "&description=" + Description);
+        //Application.OpenURL("https://www.facebook.com/dialog/feed?" + "app_id=" + AppID + "&link=" + Link + "&caption=" + Caption + "&description=" + Description);
+        Application.OpenURL("https://www.facebook.com");
     }
 }
