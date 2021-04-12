@@ -92,7 +92,7 @@ public class BattleSystem : MonoBehaviour
         DBreference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
-        // Method to call the state action selection. 
+    // Method to call the state action selection. 
     public void ActionSelection() {
         state = BattleState.ActionSelection;
         StartCoroutine(dialogBox.TypeDialog("Choose an action"));
@@ -370,7 +370,7 @@ public class BattleSystem : MonoBehaviour
             BattleOver(true); 
     }
 
-    // Method to Handle all updates every frames that will be called in GameController class.
+    // Method to Handle all updates on every frames that will be called in GameController/PVP Controller class.
     public void HandleUpdate() {
         if (state == BattleState.ActionSelection) {
             HandleActionSelection();
