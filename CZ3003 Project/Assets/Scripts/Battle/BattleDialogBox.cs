@@ -6,32 +6,25 @@ using UnityEngine.UI;
 
 public class BattleDialogBox : MonoBehaviour
 {
+    // Text timerSeconds is displayed on the battle screen to show how much time is left for the player.
    [SerializeField] Text timerSeconds;
-   public float timer = 20f;
-   public bool timerPaused = false;
-   public int points = 0;
 
-   public bool TimerPaused {
-       get {return timerPaused;}
-   }
-
-   public float Timer {
-        get { return timer; }
-        set { timer = value; }
-    }
-
-    public int Points {
-        get { return points; }
-        set { points = value; }
-    }
-
+    // To control speed at which letters are printing out.
    [SerializeField] int lettersPerSecond;
+
+   // Highlighted color when you are pointing on that text.
    [SerializeField] Color highlightedColor; 
 
    [SerializeField] Text dialogText;
    [SerializeField] Text questionText;
+
+   // Move selector contains Easy Medium Hard.
    [SerializeField] GameObject moveSelector;
+
+   // Run selector contains the answers to the question.
    [SerializeField] GameObject answerSelector; 
+
+   // Action Selector contains Fight and Run text.
    [SerializeField] GameObject actionSelector; 
 
    [SerializeField] List<Text> actionText;
@@ -40,95 +33,85 @@ public class BattleDialogBox : MonoBehaviour
 
     public List<Text> AnswerText { get; set; }
 
+    public float timer = 20f;
+
+    // bool variable timer being paused.
+    public bool timerPaused = false;
+
+    // Points obtained by student depending on time left during PVP battlescene.
+    public int points = 0;
+
+    // Able to access this boolean variable from another class.
+    public bool TimerPaused {
+        get {return timerPaused;}
+    }
+
+    // Able to access timer from another class.
+    public float Timer {
+        get { return timer; }
+        set { timer = value; }
+    }
+
+    // Able to access points from another class.
+    public int Points {
+        get { return points; }
+        set { points = value; }
+    }
+
+    // Setting timer text on unity UI to the time.
     public void SetTimer(string time) {
         timerSeconds.text = time;
     }
 
-    public IEnumerator TypeQuestion(string question) {
-       questionText.text = "";
-       foreach (var letter in question.ToCharArray()) {
-           questionText.text += letter;
-           yield return new WaitForSeconds(1f/lettersPerSecond);
-       }
-   }
+    // Method to print out the words one by one in the dialog box.
+    public IEnumerator TypeDialog(string dialog) {
+        dialogText.text = "";
+        foreach (var letter in dialog.ToCharArray()) {
+            dialogText.text += letter;
+            yield return new WaitForSeconds(1f/lettersPerSecond);
+        }
+    }
 
-   public IEnumerator TypeDialog(string dialog) {
-       dialogText.text = "";
-       foreach (var letter in dialog.ToCharArray()) {
-           dialogText.text += letter;
-           yield return new WaitForSeconds(1f/lettersPerSecond);
-       }
-   }
-
+    // Setting move names to be Easy Medium and Hard
     public void SetMoveNames() {
         moveText[0].text =  "Easy";
         moveText[1].text =  "Medium";
         moveText[2].text =  "Hard";
-   }
+    }
 
-    public int SetAnswer(QuestionBase question) {
-        int answer = 0;
-        List<int> list = new List<int>();   //  Declare list
- 
-        for (int n = 0; n < 3; n++)    //  Populate list
-        {
-            list.Add(n);
-        }
-        int count = 0;
-        for (int ind = 0; ind < 3; ++ind) {
-            int index = Random.Range(0, list.Count);    //  Pick random element from the list
-            int i = list[index]; //  i = the number that was randomly picked
-            list.RemoveAt(index); 
-            if (count == 0) {
-                answerText[i].text = $"{i}. {question.Answer}";
-                answer = i;
-                ++count;
-            }
-            else if (count == 1) {
-                answerText[i].text = $"{i}. {question.WrongAnswer1}";
-                ++count;
-            } 
-            else if (count == 2) {
-                answerText[i].text = $"{i}. {question.WrongAnswer2}";
-                ++count;
-            } 
-        }
-        return answer;   
-   }
-
-//    public bool isAnswer(QuestionBase question, string answer) {
-//        if (answer == question.Answer) {
-//            return true;
-//        }
-//        return false;
-//    }
-
+    // Method to enable timer text.
     public void EnableTimerText(bool enabled) {
        timerSeconds.enabled = enabled;
-   }
+    }
 
-   public void EnableDialogText(bool enabled) {
+    // Method to enable dialog text.
+    public void EnableDialogText(bool enabled) {
        dialogText.enabled = enabled;
-   }
+    }
 
+    // Method to enable question text.
     public void EnableQuestionText(bool enabled) {
         Debug.Log("enabled text");
-       questionText.enabled = enabled;
-   }
+        questionText.enabled = enabled;
+    }
 
-   public void EnableAnswerSelector(bool enabled) {
+    // Method to enable answer gameoject
+    public void EnableAnswerSelector(bool enabled) {
        answerSelector.SetActive(enabled);
-   }
+    }
 
-   public void EnableActionSelector(bool enabled) {
+    // Method to enable action gameobject.
+    public void EnableActionSelector(bool enabled) {
        actionSelector.SetActive(enabled);
-   }
+    }
 
-   public void EnableMoveSelector(bool enabled) {
+    // Method to enable move gameobject.
+    public void EnableMoveSelector(bool enabled) {
        moveSelector.SetActive(enabled);
-   }
+    }
 
-   public void UpdateActionSelection(int selectedAction) {
+    // Method to change action text to blue as the player presses W or S.
+    public void UpdateActionSelection(int selectedAction) {
        for (int i = 0; i < actionText.Count; ++i) {
            if (i == selectedAction) {
                actionText[i].color = highlightedColor;
@@ -138,7 +121,8 @@ public class BattleDialogBox : MonoBehaviour
        }
    }
 
-   public void UpdateMoveSelection(int selectedMove) {
+    // Method to change move text to blue as the player presses A or D.
+    public void UpdateMoveSelection(int selectedMove) {
        for (int i = 0; i < moveText.Count; ++i) {
            if (i == selectedMove) {
                moveText[i].color = highlightedColor;
@@ -146,9 +130,10 @@ public class BattleDialogBox : MonoBehaviour
            else
                 moveText[i].color = Color.black;
        }
-   }
+    }
 
-   public void UpdateAnswerSelection(int selectedAnswer) {
+    // Method to change answer text to blue as the player presses A or D.
+    public void UpdateAnswerSelection(int selectedAnswer) {
        for (int i = 0; i < answerText.Count; ++i) {
            if (i == selectedAnswer) {
                answerText[i].color = highlightedColor;
@@ -156,16 +141,17 @@ public class BattleDialogBox : MonoBehaviour
            else
                 answerText[i].color = Color.black;
        }
-   }
+    }
 
+    // Reset Answer text to empty whenever a new question is being displayed.
     public void RestartAnswerSelection() {
        for (int i = 0; i < answerText.Count; ++i) {
             answerText[i].text = "";
        }
     }
    
-
-   public void completedLevel()
+    // Method to convert the time left to points for the player.
+    public void completedLevel()
     {
         timerPaused = true;
         points = (int)timer;
