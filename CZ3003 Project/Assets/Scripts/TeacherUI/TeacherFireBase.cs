@@ -35,7 +35,6 @@ public class TeacherFireBase : MonoBehaviour
     public GameObject AddQuestionPanel;
     public GameObject OptionSelectionPanel;
     public GameObject FunctionSelectionPanel;
-    public GameObject InfoBox;
     public Button SubmitButton;
 
     string StudentSearched;
@@ -105,6 +104,8 @@ public class TeacherFireBase : MonoBehaviour
     public GameObject studentElement;
     public Transform studentListContent;
 
+    public Text missinginput;
+
     void Awake()
     {
         //Check that all of the necessary dependencies for Firebase are present on the system
@@ -147,8 +148,15 @@ public class TeacherFireBase : MonoBehaviour
     //Function for the register button
     public void SubmitButtonMethod()
     {
-        Debug.Log("Reached here!");
-        StartCoroutine(createQuestionsAndAnswers(QuestionInputField.text, AnswerInputField1.text, AnswerInputField2.text, AnswerInputField3.text));
+        if (QuestionInputField.text != "" & AnswerInputField1.text != "" & AnswerInputField2.text != "" & AnswerInputField3.text != "")
+        {
+            missinginput.text = "";
+            StartCoroutine(createQuestionsAndAnswers(QuestionInputField.text, AnswerInputField1.text, AnswerInputField2.text, AnswerInputField3.text));
+        }
+        else 
+        {
+            missinginput.text = "Missing input(s)";
+        }
     }
 
     private IEnumerator createQuestionsAndAnswers(string _question, string _answer1, string _answer2, string _answer3)
@@ -175,13 +183,6 @@ public class TeacherFireBase : MonoBehaviour
         if (qnTask.Exception != null)
         {
             Debug.LogWarning(message: $"Failed to register task with {qnTask.Exception}");
-
-            /*string message = "Missing Question!";
-            if (string.IsNullOrWhiteSpace(QuestionInputField.text))
-            {
-                Warning_Text.text = message;
-                SubmitButton.interactable = false;
-            }*/
         }
 
         var a1Task = DBreference.Child("Qns").Child($"{worldNumber}").Child($"{sectionNumber}").Child(difficulty).Child($"{length + 1}").Child("A1").SetValueAsync(_answer1);
@@ -191,12 +192,6 @@ public class TeacherFireBase : MonoBehaviour
         if (a1Task.Exception != null)
         {
             Debug.LogWarning(message: $"Failed to register task with {a1Task.Exception}");
-
-            /*string message = "Missing Answer!";
-            if (string.IsNullOrEmpty(AnswerInputField1.text))
-            {
-                Warning_Text.text = message;
-            }*/
         }
 
         var a2Task = DBreference.Child("Qns").Child($"{worldNumber}").Child($"{sectionNumber}").Child(difficulty).Child($"{length + 1}").Child("A2").SetValueAsync(_answer2);
@@ -206,12 +201,6 @@ public class TeacherFireBase : MonoBehaviour
         if (a2Task.Exception != null)
         {
             Debug.LogWarning(message: $"Failed to register task with {a2Task.Exception}");
-
-            /*string message = "Missing Answer!";
-            if (string.IsNullOrEmpty(AnswerInputField2.text))
-            {
-                Warning_Text.text = message;
-            }*/
         }
 
         var a3Task = DBreference.Child("Qns").Child($"{worldNumber}").Child($"{sectionNumber}").Child(difficulty).Child($"{length + 1}").Child("A3").SetValueAsync(_answer3);
@@ -221,12 +210,6 @@ public class TeacherFireBase : MonoBehaviour
         if (a3Task.Exception != null)
         {
             Debug.LogWarning(message: $"Failed to register task with {a3Task.Exception}");
-
-            /*string message = "Missing Answer!";
-            if (string.IsNullOrEmpty(AnswerInputField3.text))
-            {
-                Warning_Text.text = message;
-            }*/
         }
 
         ClearQuestionAndAnswersFields();
@@ -285,11 +268,6 @@ public class TeacherFireBase : MonoBehaviour
         {
             Debug.Log("hello");
             DataSnapshot snapshot = DBTask.Result;
-            /*foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
-            {
-                string username1 = childSnapshot.Child("username").Value.ToString();
-                Debug.Log(username1);
-            }*/
             foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
             {
                 
@@ -419,8 +397,6 @@ public class TeacherFireBase : MonoBehaviour
     {
         world = Worldselection.options[Worldselection.value].text;
         section = SectionSelection.options[SectionSelection.value].text;
-        Debug.Log(world);
-        Debug.Log(section);
         StartCoroutine(LoadOverallStatistics(world, section));
     }
     //This method creates the entries in the scrollview depending on the filters selected
@@ -445,7 +421,6 @@ public class TeacherFireBase : MonoBehaviour
                 int stars = 0;
                 int points = 0;
                 string username = childSnapshot.Child("username").Value.ToString();
-                Debug.Log(username);
                 int oodpS1pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{1}").Child($"{1}").Child("Points").Value.ToString());
                 int oodpS2pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{1}").Child($"{2}").Child("Points").Value.ToString());
                 int oodpS3pts = int.Parse(childSnapshot.Child("BattleStats").Child($"{1}").Child($"{3}").Child("Points").Value.ToString());
@@ -650,9 +625,6 @@ public class TeacherFireBase : MonoBehaviour
         int world = EditQuestion.World;
         int section = EditQuestion.Section;
         string difficulty = EditQuestion.Difficulty;
-        //Debug.Log(world);
-        //Debug.Log(section);
-        //Debug.Log(difficulty);
 
         var DBTask = DBreference.Child("Qns").Child($"{world}").Child($"{section}").Child(difficulty).GetValueAsync();
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
@@ -681,7 +653,6 @@ public class TeacherFireBase : MonoBehaviour
     public void EditData(string _question)
     {
         Question = _question;
-        Debug.Log(Question);
         EditQuestionInputField.text = Question;
         StartCoroutine(GetQuestionData());
         EditQuestionPanel.gameObject.SetActive(true);
@@ -719,9 +690,6 @@ public class TeacherFireBase : MonoBehaviour
                     currentindex = totalquestion;
                 }
              }
-            Debug.Log(totalquestion);
-            Debug.Log(currentindex);
-            Debug.Log(totalquestion-currentindex+1);
         }
     }
     public void savenewquestion()
@@ -748,14 +716,6 @@ public class TeacherFireBase : MonoBehaviour
         if (qnTask.Exception != null)
         {
             Debug.LogWarning(message: $"Failed to register task with {qnTask.Exception}");
-
-            /*string message = "Missing Question!";
-            if (string.IsNullOrWhiteSpace(QuestionInputField.text))
-            {
-                Warning_Text.text = message;
-                SubmitButton.interactable = false;
-            }*/
-
         }
 
         var a1Task = DBreference.Child("Qns").Child($"{world}").Child($"{section}").Child(difficulty).Child($"{index}").Child("A1").SetValueAsync(_answer1);
@@ -765,12 +725,6 @@ public class TeacherFireBase : MonoBehaviour
         if (a1Task.Exception != null)
         {
             Debug.LogWarning(message: $"Failed to register task with {a1Task.Exception}");
-
-            /*string message = "Missing Answer!";
-            if (string.IsNullOrEmpty(AnswerInputField1.text))
-            {
-                Warning_Text.text = message;
-            }*/
         }
 
         var a2Task = DBreference.Child("Qns").Child($"{world}").Child($"{section}").Child(difficulty).Child($"{index}").Child("A2").SetValueAsync(_answer2);
@@ -780,12 +734,6 @@ public class TeacherFireBase : MonoBehaviour
         if (a2Task.Exception != null)
         {
             Debug.LogWarning(message: $"Failed to register task with {a2Task.Exception}");
-
-            /*string message = "Missing Answer!";
-            if (string.IsNullOrEmpty(AnswerInputField2.text))
-            {
-                Warning_Text.text = message;
-            }*/
         }
 
         var a3Task = DBreference.Child("Qns").Child($"{world}").Child($"{section}").Child(difficulty).Child($"{index}").Child("A3").SetValueAsync(_answer3);
@@ -795,12 +743,6 @@ public class TeacherFireBase : MonoBehaviour
         if (a3Task.Exception != null)
         {
             Debug.LogWarning(message: $"Failed to register task with {a3Task.Exception}");
-
-            /*string message = "Missing Answer!";
-            if (string.IsNullOrEmpty(AnswerInputField3.text))
-            {
-                Warning_Text.text = message;
-            }*/
         }
 
         //ClearQuestionAndAnswersFields();
@@ -813,32 +755,39 @@ public class TeacherFireBase : MonoBehaviour
     }
     private IEnumerator CheckExistingRoom(){
         Room = createRoomID.text;
-        var DBTask = DBreference.Child("custom").GetValueAsync();
-        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-        Debug.Log("here");
-        roomexist = false;
-        if (DBTask.Exception != null)
+        if (Room == "")
         {
-            Debug.Log("Yea");
-            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+            errormsg.text = "Please input something.";
         }
         else{
-            DataSnapshot snapshot = DBTask.Result;
-            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            var DBTask = DBreference.Child("custom").GetValueAsync();
+            yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+            Debug.Log("here");
+            roomexist = false;
+            if (DBTask.Exception != null)
             {
-                string roomid = childSnapshot.Key.ToString();
-                if (roomid == Room) {
-                    roomexist = true;
-                    errormsg.text = "Room already exist!";
+                Debug.Log("Yea");
+                Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+            }
+            else{
+                DataSnapshot snapshot = DBTask.Result;
+                foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+                {
+                    string roomid = childSnapshot.Key.ToString();
+                    if (roomid == Room) {
+                        roomexist = true;
+                        errormsg.text = "Room already exist!";
+                    }
+                }
+                if (roomexist != true)
+                {
+                SelectionPanel.gameObject.SetActive(true);
+                StartPanel.gameObject.SetActive(false);
+                errormsg.text = "";
                 }
             }
-            if (roomexist != true)
-            {
-            SelectionPanel.gameObject.SetActive(true);
-            StartPanel.gameObject.SetActive(false);
-            errormsg.text = "";
-            }
         }
+        
     }
     public void displayallquestions(){
         Debug.Log("Yes");
@@ -926,14 +875,6 @@ public class TeacherFireBase : MonoBehaviour
         if (qnTask.Exception != null)
         {
             Debug.LogWarning(message: $"Failed to register task with {qnTask.Exception}");
-
-            /*string message = "Missing Question!";
-            if (string.IsNullOrWhiteSpace(QuestionInputField.text))
-            {
-                Warning_Text.text = message;
-                SubmitButton.interactable = false;
-            }*/
-
         }
 
         var a1Task = DBreference.Child("custom").Child(Room).Child($"{questionNo}").Child("A1").SetValueAsync(A1);
@@ -943,12 +884,6 @@ public class TeacherFireBase : MonoBehaviour
         if (a1Task.Exception != null)
         {
             Debug.LogWarning(message: $"Failed to register task with {a1Task.Exception}");
-
-            /*string message = "Missing Answer!";
-            if (string.IsNullOrEmpty(AnswerInputField1.text))
-            {
-                Warning_Text.text = message;
-            }*/
         }
 
         var a2Task = DBreference.Child("custom").Child(Room).Child($"{questionNo}").Child("A2").SetValueAsync(A2);
@@ -958,12 +893,6 @@ public class TeacherFireBase : MonoBehaviour
         if (a2Task.Exception != null)
         {
             Debug.LogWarning(message: $"Failed to register task with {a2Task.Exception}");
-
-            /*string message = "Missing Answer!";
-            if (string.IsNullOrEmpty(AnswerInputField2.text))
-            {
-                Warning_Text.text = message;
-            }*/
         }
 
         var a3Task = DBreference.Child("custom").Child(Room).Child($"{questionNo}").Child("A3").SetValueAsync(A3);
@@ -973,12 +902,6 @@ public class TeacherFireBase : MonoBehaviour
         if (a3Task.Exception != null)
         {
             Debug.LogWarning(message: $"Failed to register task with {a3Task.Exception}");
-
-            /*string message = "Missing Answer!";
-            if (string.IsNullOrEmpty(AnswerInputField3.text))
-            {
-                Warning_Text.text = message;
-            }*/
         }
 
         FirebaseUser User;
@@ -1008,12 +931,6 @@ public class TeacherFireBase : MonoBehaviour
         if (UCTask.Exception != null)
         {
             Debug.LogWarning(message: $"Failed to register task with {UCTask.Exception}");
-
-            /*string message = "Missing Answer!";
-            if (string.IsNullOrEmpty(AnswerInputField3.text))
-            {
-                Warning_Text.text = message;
-            }*/
         }
         var UserTask = DBreference.Child("custom").Child(Room).Child("users").SetValueAsync(null);
 
@@ -1022,12 +939,6 @@ public class TeacherFireBase : MonoBehaviour
         if (UserTask.Exception != null)
         {
             Debug.LogWarning(message: $"Failed to register task with {UserTask.Exception}");
-
-            /*string message = "Missing Answer!";
-            if (string.IsNullOrEmpty(AnswerInputField3.text))
-            {
-                Warning_Text.text = message;
-            }*/
         }
     }
     public void checkRoomExistForViewScore(){
@@ -1106,7 +1017,6 @@ public class TeacherFireBase : MonoBehaviour
     private IEnumerator LoadScoreboardData()
     {
         int rank = 0;
-        //string LoggedinUser = "";
         string worldsection = "All";
 
         //Get all the users data ordered by kills amount
@@ -1123,28 +1033,6 @@ public class TeacherFireBase : MonoBehaviour
             //Data has been retrieved
             DataSnapshot snapshot = DBTask.Result;
 
-            //Get the currently logged in user data
-            /*var DBTask1 = DBreference.Child("users").Child(User.UserId).GetValueAsync();
-
-            yield return new WaitUntil(predicate: () => DBTask1.IsCompleted);
-
-            if (DBTask1.Exception != null)
-            {
-                Debug.LogWarning(message: $"Failed to register task with {DBTask1.Exception}");
-            }
-            else if (DBTask1.Result.Value == null)
-            {
-                //No data exists yet
-            }
-            else
-            {
-                //Data has been retrieved
-                DataSnapshot snapshot1 = DBTask1.Result;
-
-                LoggedinUser = snapshot1.Child("username").Value.ToString();
-            }*/
-
-
             //Destroy any existing scoreboard elements
             foreach (Transform child in leaderboardContent.transform)
             {
@@ -1157,11 +1045,6 @@ public class TeacherFireBase : MonoBehaviour
                 rank += 1;
                 string username = childSnapshot.Child("username").Value.ToString();
                 int points = int.Parse(childSnapshot.Child("TotalPoints").Value.ToString());
-
-                /*if (LoggedinUser.Equals(username))
-                {
-                    ranktext.text = "You are ranked #" + $"{rank}";
-                }*/
 
                 //Instantiate new scoreboard elements
                 GameObject scoreboardElement = Instantiate(leaderElement, leaderboardContent);
@@ -1181,7 +1064,6 @@ public class TeacherFireBase : MonoBehaviour
     private IEnumerator LoadWorldSectionData()
     {
         int rank = 0;
-        //string LoggedinUser = "";
         int worldNumber = UIcontroller.WorldLdrboard;
         int sectionNumber = UIcontroller.SectionLdrboard;
         Debug.Log(worldNumber);
@@ -1200,27 +1082,6 @@ public class TeacherFireBase : MonoBehaviour
             //Data has been retrieved
             DataSnapshot snapshot = DBTask.Result;
 
-            //Get the currently logged in user data
-            /*var DBTask1 = DBreference.Child("users").Child(User.UserId).GetValueAsync();
-
-            yield return new WaitUntil(predicate: () => DBTask1.IsCompleted);
-
-            if (DBTask1.Exception != null)
-            {
-                Debug.LogWarning(message: $"Failed to register task with {DBTask1.Exception}");
-            }
-            else if (DBTask1.Result.Value == null)
-            {
-                //No data exists yet
-            }
-            else
-            {
-                //Data has been retrieved
-                DataSnapshot snapshot1 = DBTask1.Result;
-
-                LoggedinUser = snapshot1.Child("username").Value.ToString();
-            }*/
-
             //Destroy any existing scoreboard elements
             foreach (Transform child in leaderboardContent.transform)
             {
@@ -1234,11 +1095,6 @@ public class TeacherFireBase : MonoBehaviour
                 string username = childSnapshot.Child("username").Value.ToString();
                 Debug.Log(username);
                 int points = int.Parse(childSnapshot.Child("BattleStats").Child($"{worldNumber}").Child($"{sectionNumber}").Child("Points").Value.ToString());
-
-                /*if (LoggedinUser.Equals(username))
-                {
-                    ranktext.text = "You are ranked #" + $"{rank}";
-                }*/
 
                 //Instantiate new scoreboard elements
                 GameObject scoreboardElement = Instantiate(leaderElement, leaderboardContent);
