@@ -13,6 +13,14 @@ public enum CustomBattleState { Start, ActionSelection, MoveSelection, PlayerAns
 
 public class CustomBattleSystem : MonoBehaviour
 {
+
+    [SerializeField] private AudioClip arrowClickSFX;
+    [SerializeField] private AudioClip cfmClickSFX;
+
+    [SerializeField] private AudioClip AttackMusic;
+    [SerializeField] private AudioClip NoHealthMusic;
+
+    [SerializeField] private AudioClip runMusic;
     //[SerializeField] BattleUnit playerUnit;
     //[SerializeField] BattleUnit enemyUnit;
     //[SerializeField] TrainerController trainer;
@@ -242,6 +250,7 @@ public class CustomBattleSystem : MonoBehaviour
         }
         yield return dialogBox.TypeDialog($"{username} used {move.Base.Name}.");
         sourceUnit.PlayerAttackAnimation();
+        AudioManager.Instance.PlaySFX(AttackMusic);
         yield return new WaitForSeconds(1f);
 
         targetUnit.PlayerHitAnimation();
@@ -253,6 +262,7 @@ public class CustomBattleSystem : MonoBehaviour
         if (isFainted) {
             yield return dialogBox.TypeDialog($"{targetUnit.Monster.Base.Name} has fainted.");
             targetUnit.PlayerFaintAnimation();
+            AudioManager.Instance.PlaySFX(NoHealthMusic);
             yield return new WaitForSeconds(2f);
             CheckForBattleOver(targetUnit);
         }
@@ -296,10 +306,12 @@ public class CustomBattleSystem : MonoBehaviour
 
     public void HandleActionSelection() {
         if (Input.GetKeyDown(KeyCode.S)) {
+            AudioManager.Instance.PlaySFX(arrowClickSFX);
             if (currentAction < 1)
                 ++currentAction;
         }
         else if (Input.GetKeyDown(KeyCode.W)) {
+            AudioManager.Instance.PlaySFX(arrowClickSFX);
             if (currentAction > 0)
                 --currentAction;
         }
@@ -307,6 +319,7 @@ public class CustomBattleSystem : MonoBehaviour
         dialogBox.UpdateActionSelection(currentAction);
 
         if (Input.GetKeyDown(KeyCode.Space)) {
+            AudioManager.Instance.PlaySFX(cfmClickSFX);
             if (currentAction == 0) {
                 dialogBox.EnableQuestionText(true);
                 Debug.Log("enable question is selected");
@@ -319,6 +332,7 @@ public class CustomBattleSystem : MonoBehaviour
             }
             else if (currentAction == 1) {
                 //run
+                AudioManager.Instance.PlaySFX(runMusic);
                 BattleOver(false);
             }
         }
@@ -326,10 +340,12 @@ public class CustomBattleSystem : MonoBehaviour
 
     public void HandleAnswerSelection(int answer) {
         if (Input.GetKeyDown(KeyCode.D)) {
+            AudioManager.Instance.PlaySFX(arrowClickSFX);
             if (currentAnswer < 2)
                 ++currentAnswer;
         }
         else if (Input.GetKeyDown(KeyCode.A)) {
+            AudioManager.Instance.PlaySFX(arrowClickSFX);
             if (currentAnswer > 0)
                 --currentAnswer;
         }
@@ -337,6 +353,7 @@ public class CustomBattleSystem : MonoBehaviour
         dialogBox.UpdateAnswerSelection(currentAnswer);
 
         if (Input.GetKeyDown(KeyCode.Space)) {
+            AudioManager.Instance.PlaySFX(cfmClickSFX);
             if (currentAnswer == 0 && currentAnswer == answer) {
                 dialogBox.EnableDialogText(true);
                 dialogBox.EnableAnswerSelector(false);

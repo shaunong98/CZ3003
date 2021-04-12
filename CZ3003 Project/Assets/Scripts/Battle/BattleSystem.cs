@@ -489,10 +489,12 @@ public class BattleSystem : MonoBehaviour
     // Method to handle answer selection as you choose a different answer.
     public void HandleAnswerSelection(int answer) {
         if (Input.GetKeyDown(KeyCode.D)) {
+            AudioManager.Instance.PlaySFX(arrowClickSFX);
             if (currentAnswer < 2)
                 ++currentAnswer;
         }
         else if (Input.GetKeyDown(KeyCode.A)) {
+            AudioManager.Instance.PlaySFX(arrowClickSFX);
             if (currentAnswer > 0)
                 --currentAnswer;
         }
@@ -500,6 +502,7 @@ public class BattleSystem : MonoBehaviour
         dialogBox.UpdateAnswerSelection(currentAnswer);
 
         if (Input.GetKeyDown(KeyCode.Space)) {
+            AudioManager.Instance.PlaySFX(cfmClickSFX);
             if (currentAnswer == 0 && currentAnswer == answer) {
                 dialogBox.EnableDialogText(true);
                 dialogBox.EnableAnswerSelector(false);

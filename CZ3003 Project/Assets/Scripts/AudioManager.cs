@@ -107,7 +107,6 @@ public class AudioManager : MonoBehaviour
         for(t = 0; t< transitionTime;t+=Time.deltaTime)
         {
             activeSource.volume = (musicVolume - ((t/ transitionTime) * musicVolume));
-            Debug.Log(activeSource.volume);
             yield return null;
         }
 
