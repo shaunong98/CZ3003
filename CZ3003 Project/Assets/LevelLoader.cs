@@ -21,6 +21,11 @@ public class LevelLoader : MonoBehaviour
         StartCoroutine(LoadLevel("BattleScene"));
     }
 
+    public void LoadCustom()
+    {
+        StartCoroutine(LoadLevel("CustomBattleScene"));
+    }
+
     public void Loadlevel(string levelName)
     {
         StartCoroutine(LoadLevel(levelName));
