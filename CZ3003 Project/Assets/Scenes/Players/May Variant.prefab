@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: playerUnit
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8804928474900416298, guid: 3dbf02b3b0b05774e877c4849cffa5fd,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 8804928474900416299, guid: 3dbf02b3b0b05774e877c4849cffa5fd,
         type: 3}
       propertyPath: m_RootOrder
@@ -67,10 +72,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8804928474900416303, guid: 3dbf02b3b0b05774e877c4849cffa5fd,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 8804928474900416341, guid: 3dbf02b3b0b05774e877c4849cffa5fd,
         type: 3}
       propertyPath: m_Name
-      value: May
+      value: May Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8804928474900416341, guid: 3dbf02b3b0b05774e877c4849cffa5fd,
         type: 3}

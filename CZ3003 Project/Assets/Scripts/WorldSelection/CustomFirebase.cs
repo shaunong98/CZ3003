@@ -26,6 +26,8 @@ public class CustomFirebase : MonoBehaviour
     bool roomfound = false;
     bool userfound = false;
 
+    public LevelLoader battleLoader;
+
     public static string createdUsername;
 
     public GameObject questionElement;
@@ -40,6 +42,7 @@ public class CustomFirebase : MonoBehaviour
     public GameObject StartPanel;
     public GameObject SelectionPanel;
     public string Room;
+    [SerializeField] private AudioClip CustomMusic;
     
     void Awake()
     {
@@ -152,7 +155,8 @@ public class CustomFirebase : MonoBehaviour
                         confirmText.text = "RoomID found. Directing to BattleRoom...";
                         yield return new WaitForSeconds(2f);
                         confirmText.text = "";
-                        SceneManager.LoadScene("CustomBattleScene");
+                        AudioManager.Instance.PlayMusicWithFade(CustomMusic,0.1f);
+                        battleLoader.LoadCustom();
                     }
                     else {
                         warningText.text = "You have attempted already!";
@@ -390,6 +394,8 @@ public class CustomFirebase : MonoBehaviour
                     if (roomid == Room) {
                         roomexist = true;
                         errormsg.text = "Room already exist!";
+                        yield return new WaitForSeconds(1f);
+                        errormsg.text = "";
                     }
                 }
                 if (roomexist != true)
