@@ -7,8 +7,6 @@ public class Monster
 {
   public MonsterBase Base { get; set; }
 
-  //public int Level{ get; set; }
-
   public int HP { get; set; }
 
   public List <Move> Moves { get; set; }
@@ -17,22 +15,14 @@ public class Monster
 
   public Monster(MonsterBase pBase) {
       Base = pBase;
-      //Level = plevel;
       HP = MaxHp;
 
       //Generate Moves base on level
       Moves = new List<Move>(); //Move is a class that contains moves which will be assigned to each monster
       foreach (var move in Base.LearnableMoves) { //loop through the learnable moves of a pokemon and check if it matches level
-        //if (move.Level <= Level) {
-            Moves.Add(new Move(move.Base));
-       // }
-        
+          Moves.Add(new Move(move.Base));
       }
   }
-
-  // public int Attack {
-  //     get { return Mathf.FloorToInt((Base.Attack * Level) / 100f) + 5; }
-  // }
 
   //might change
   public int MaxHp {
