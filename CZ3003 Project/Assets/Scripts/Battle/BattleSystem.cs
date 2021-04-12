@@ -8,14 +8,12 @@ using Firebase.Auth;
 using Firebase.Database;
 //using UnityEngine.UI;
 
-
+// Creating BattleStates during the Battle System to instantiate different actions.
 public enum BattleState { Start, ActionSelection, MoveSelection, PlayerAnswer, PerformMove, Busy, BattleOver }
 
 public class BattleSystem : MonoBehaviour
 {
-    //[SerializeField] BattleUnit playerUnit;
-    //[SerializeField] BattleUnit enemyUnit;
-    //[SerializeField] TrainerController trainer;
+    // Reference to player controller.
     [SerializeField] public PlayerController player;
 
     [SerializeField] private AudioClip arrowClickSFX;
@@ -26,24 +24,45 @@ public class BattleSystem : MonoBehaviour
 
     [SerializeField] private AudioClip runMusic;
 
-    // [SerializeField] BattleHud playerHud;
-    // [SerializeField] BattleHud enemyHud;
+    // Reference to battle dialogbox to access its methods.
     [SerializeField] BattleDialogBox dialogBox;
-    [SerializeField] BattleQuestions battleQuestions;
-    //[SerializeField] CountdownTimer countDown;
+
+    // Reference to trainer unit however this variable will be passed by the GameController class.
     BattleUnit trainerUnit;
+
+    // Bool variable to check if the battle system is pvp or not.
     public bool isPVP;
 
-    // BattleSystem battleSystem;
-
+    // Creating an instance of the battlesystem so that we will be able to reference it from another class.
     public static BattleSystem Instance{ get; private set; }
+
+    // Instantiating an event for other classes to subscribe to it.
+    public event Action<bool> onBattleOver;
+
+    // Creating a variable of state to reference to it.
+    BattleState state;
+
+    // Current Action refers to where the player cursor is pointing to -  "Fight" or "Run".
+    int currentAction;
+
+    // Current Move refers to where the player cursor is pointing to -  "Easy" or "Medium" or "Hard".
+    int currentMove;
+
+    // Current Answer refers to where the player cursor is pointing to -  "A1" or "A2" or "A3".
+    int currentAnswer;
+
+    // Index of the correct answer.
+    public static int correctAnswer;
+
+    // bool variable to store if player answered correctly or not.
+    bool isCorrect = true;
 
     [Header("Firebase")]
     public DependencyStatus dependencyStatus;
     public FirebaseAuth auth;
-    //public FirebaseUser User;
     public DatabaseReference DBreference;
 
+    // Awake function to call whenever this class is called.
     public void Awake() {
         Instance = this;
 
@@ -63,6 +82,7 @@ public class BattleSystem : MonoBehaviour
         });
     }
 
+    // Initializing firebase.
     private void InitializeFirebase()
     {
         Debug.Log("Setting up Firebase Auth");
@@ -71,20 +91,53 @@ public class BattleSystem : MonoBehaviour
         DBreference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
-    public event Action<bool> onBattleOver;
+        // Method to call the state action selection. 
+    public void ActionSelection() {
+        state = BattleState.ActionSelection;
+        StartCoroutine(dialogBox.TypeDialog("Choose an action"));
+        dialogBox.EnableActionSelector(true);
+        dialogBox.EnableMoveSelector(false);
+        dialogBox.EnableDialogText(true);
+        dialogBox.EnableAnswerSelector(false);
+    }
 
-    BattleState state;
+    // Method to call the state action selection if the player has answered wrongly (for pvp). 
+    public void ActionSelectionifWrong() {
+        state = BattleState.ActionSelection;
+        //isCorrect = true;
+        StartCoroutine(dialogBox.TypeDialog("You answered wrongly! Choose an action"));
+        dialogBox.EnableActionSelector(true);
+        dialogBox.EnableMoveSelector(false);
+        dialogBox.EnableDialogText(true);
+        dialogBox.EnableAnswerSelector(false);
+    }
 
-    int currentAction;
-    int currentMove;
-    int currentAnswer;
-    public static int correctAnswer;
-    bool isCorrect = true;
+    // Method to call the state move selection. 
+    public void MoveSelection() {
+        state = BattleState.MoveSelection;
+        dialogBox.EnableActionSelector(false);
+        dialogBox.EnableDialogText(false);
+        dialogBox.EnableAnswerSelector(false);
+        dialogBox.EnableMoveSelector(true);
+        dialogBox.EnableQuestionText(false);
+    }
 
+    // Method to call the state answer selection. 
+    public void PlayerAnswer() {
+        state = BattleState.PlayerAnswer;
+        dialogBox.EnableActionSelector(false);
+        dialogBox.EnableDialogText(false);
+        dialogBox.EnableQuestionText(true);
+        dialogBox.EnableAnswerSelector(true);
+        dialogBox.EnableMoveSelector(false);
+    }
+
+    // Method to start the coroutine for the setting up of battle.
     public void StartBattle(BattleUnit trainerUnit) {
         StartCoroutine(SetupBattle(trainerUnit));
     }
-    // i changed all enemyunit to trainer.TrainerUnit and playerunit to player.PlayerUnit
+
+    // Method to set up the battlescene.
     public IEnumerator SetupBattle(BattleUnit trainerUnit) {
         this.trainerUnit = trainerUnit;
         player.PlayerUnit.SetUp(true);
@@ -108,20 +161,23 @@ public class BattleSystem : MonoBehaviour
         ActionSelection();
     }
 
+    // Params won - True: Player has won; False: Player has lost.
+    // Method to call the event that battle is over to signal to the controllers that the battle has ended.
     public void BattleOver(bool won) { //if true means player has won
         state = BattleState.BattleOver; //notifies state only
         if (won && isPVP) {
             Debug.Log($"{dialogBox.Points}");
-            //StudentFireBase.Instance.updateBattlePoints(dialogBox.Points);
             StartCoroutine(updateUserBattlePoints(dialogBox.Points, won));
             Debug.Log("How to solve this");
         }
         else {
             onBattleOver(won);
         }
-        //onBattleOver(won); //onBattleOver notifies gamecontroller that its over 
     }
 
+    // Params won - True: Player has won; False: Player has lost.
+    // Params points - represent points earned by the player.
+    // Updating the Firebase of the total points obtained by the player while making sure that its the highest points obtained.
     public IEnumerator updateUserBattlePoints(int points, bool won)
     {
         //need integrate with jh one!
@@ -205,43 +261,7 @@ public class BattleSystem : MonoBehaviour
         onBattleOver(won);
     }    
 
-    public void ActionSelection() {
-        state = BattleState.ActionSelection;
-        StartCoroutine(dialogBox.TypeDialog("Choose an action"));
-        dialogBox.EnableActionSelector(true);
-        dialogBox.EnableMoveSelector(false);
-        dialogBox.EnableDialogText(true);
-        dialogBox.EnableAnswerSelector(false);
-    }
-
-    public void ActionSelectionifWrong() {
-        state = BattleState.ActionSelection;
-        //isCorrect = true;
-        StartCoroutine(dialogBox.TypeDialog("You answered wrongly! Choose an action"));
-        dialogBox.EnableActionSelector(true);
-        dialogBox.EnableMoveSelector(false);
-        dialogBox.EnableDialogText(true);
-        dialogBox.EnableAnswerSelector(false);
-    }
-
-    public void MoveSelection() {
-        state = BattleState.MoveSelection;
-        dialogBox.EnableActionSelector(false);
-        dialogBox.EnableDialogText(false);
-        dialogBox.EnableAnswerSelector(false);
-        dialogBox.EnableMoveSelector(true);
-        dialogBox.EnableQuestionText(false);
-    }
-
-    public void PlayerAnswer() {
-        state = BattleState.PlayerAnswer;
-        dialogBox.EnableActionSelector(false);
-        dialogBox.EnableDialogText(false);
-        dialogBox.EnableQuestionText(true);
-        dialogBox.EnableAnswerSelector(true);
-        dialogBox.EnableMoveSelector(false);
-    }
-
+    // Method to call the move made by the player. 
     public IEnumerator PlayerMove() {
         state = BattleState.PerformMove;
         Move move;
@@ -267,6 +287,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    // Method to call the move made by the trainer. 
     public IEnumerator EnemyMove() {
         state = BattleState.PerformMove;
 
@@ -283,6 +304,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    // Method to call the move made by the players/trainer after the player has answered a question.
     public IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move) {
         FirebaseUser User;
         User = FirebaseManager.User;
@@ -321,7 +343,12 @@ public class BattleSystem : MonoBehaviour
         yield return targetUnit.Hud.UpdateHP();
 
         if (isFainted) {
-            yield return dialogBox.TypeDialog($"{targetUnit.Monster.Base.Name} has fainted.");
+            if (targetUnit.IsPlayerUnit) {
+                yield return dialogBox.TypeDialog($"{username} has fainted.");
+            }
+            else {
+                yield return dialogBox.TypeDialog($"{targetUnit.Monster.Base.Name} has fainted.");
+            }
             targetUnit.PlayerFaintAnimation();
             AudioManager.Instance.PlaySFX(NoHealthMusic);
             yield return new WaitForSeconds(2f);
@@ -329,12 +356,12 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    // Method to check if the battle is over after every turn of fighting.
     public void CheckForBattleOver(BattleUnit faintedUnit) {
         if (faintedUnit.IsPlayerUnit) {
             BattleOver(false);
         }
         else if (isPVP && !faintedUnit.IsPlayerUnit) {
-            Debug.Log("completed level");
             dialogBox.completedLevel();
             BattleOver(true);
         }
@@ -342,6 +369,7 @@ public class BattleSystem : MonoBehaviour
             BattleOver(true); 
     }
 
+    // Method to Handle all updates every frames that will be called in GameController class.
     public void HandleUpdate() {
         if (state == BattleState.ActionSelection) {
             HandleActionSelection();
@@ -365,6 +393,7 @@ public class BattleSystem : MonoBehaviour
 
     }
 
+    // Method to check if the timer has reached 0 - battle over and to reduce time by 10 seconds for every incorrect answer.
     public void HandleTimer() 
     {
         if (!isCorrect) {
@@ -379,12 +408,10 @@ public class BattleSystem : MonoBehaviour
         if (dialogBox.Timer <= 0)
         {
             BattleOver(false); //player have lost.
-            //SceneManager.LoadScene("Map Selection");
-            //Application.LoadLevel(levelToLoad);
         }
     }
     
-
+    // Method to handle action selection as you choose a different answer.
     public void HandleActionSelection() {
         if (Input.GetKeyDown(KeyCode.S)) {
             AudioManager.Instance.PlaySFX(arrowClickSFX);
@@ -412,6 +439,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    // Method to handle move selection as you choose a different answer and display questions & answers from the firebase
     public void HandleMoveSelection() {
         
         if (Input.GetKeyDown(KeyCode.D)) {
@@ -434,49 +462,31 @@ public class BattleSystem : MonoBehaviour
                 Debug.Log("enable question is selected");
                 dialogBox.EnableAnswerSelector(false);
                 dialogBox.RestartAnswerSelection();
-                //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Easy").Question));
                 StartCoroutine(QuestionManager.Instance.getQuestionsBaseOnLevel("Easy"));
-                // string question = QuestionManager.Instance.Question;
-                // Debug.Log(question);
-                // StartCoroutine(dialogBox.TypeQuestion(question));
-                //correctAnswer = QuestionManager.correctAnswer;
                 Debug.Log($"correct answer is {correctAnswer}");
-                //correctAnswer = dialogBox.SetAnswer(SelectQuestion(battleQuestions.Questions.QB, "Easy"));
                 PlayerAnswer();
             }
             else if (currentMove == 1) {
                 dialogBox.EnableQuestionText(true);
                 dialogBox.EnableAnswerSelector(true);
                 dialogBox.RestartAnswerSelection();
-                //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Medium").Question));
                 StartCoroutine(QuestionManager.Instance.getQuestionsBaseOnLevel("Medium"));
                 Debug.Log($"correct answer is {correctAnswer}");
-                //correctAnswer = dialogBox.SetAnswer(SelectQuestion(battleQuestions.Questions.QB, "Medium"));
                 PlayerAnswer();
             }
             else if (currentMove == 2) {
                 dialogBox.EnableQuestionText(true);
                 dialogBox.EnableAnswerSelector(true);
                 dialogBox.RestartAnswerSelection();
-                //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Hard").Question));
                 StartCoroutine(QuestionManager.Instance.getQuestionsBaseOnLevel("Hard"));
                 Debug.Log($"correct answer is {correctAnswer}");
-                //correctAnswer = dialogBox.SetAnswer(SelectQuestion(battleQuestions.Questions.QB, "Hard"));
                 PlayerAnswer();
             }
 
         }
     }
 
-    public QuestionBase SelectQuestion(List<QuestionBase> questions, string difficulty) {
-        foreach (var question in questions) {
-            if (question.QuestionDifficulty == difficulty) {
-                return question;
-            }
-        }
-        return null;
-    }
-
+    // Method to handle answer selection as you choose a different answer.
     public void HandleAnswerSelection(int answer) {
         if (Input.GetKeyDown(KeyCode.D)) {
             if (currentAnswer < 2)
@@ -518,7 +528,6 @@ public class BattleSystem : MonoBehaviour
                     StartCoroutine(EnemyMove());
                 }
                 else {
-                    //dialogBox.TypeDialog("You answered wrongly!");
                     ActionSelectionifWrong();
                 }
                 

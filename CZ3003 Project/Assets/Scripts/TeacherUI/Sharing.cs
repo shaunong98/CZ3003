@@ -8,7 +8,7 @@ public class Sharing : MonoBehaviour
 
     string TWEET_LANGUAGE = "en";
 
-    string textToDisplay = "Thank you jezoz!";//change to room id and password later
+    string textToDisplay = "I have made an assignment! Room ID: ";//change to room id and password later
 
     string AppID = "457206565578095";
 

@@ -80,6 +80,7 @@ public class CustomFirebase : MonoBehaviour
     }
 
     public IEnumerator checkRoomID() {
+        userfound = false;
         FirebaseUser User;
         User = FirebaseManager.User;
         string username = "";
