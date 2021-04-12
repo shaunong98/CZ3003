@@ -1,8 +1,8 @@
+// Authors: Daryl Neo, Jethro Phuah
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Authors: Daryl Neo, Jethro Phuah
 
 public class NPCController : MonoBehaviour, Interactable
 {

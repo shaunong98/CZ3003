@@ -1,3 +1,4 @@
+// Authors: Daryl Neo
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,36 +34,59 @@ public class CharacterSel : MonoBehaviour
         public Color characterColor;
     }
 
+    // Method to execute when click Confirm Button
     public void Confirm()
     {
+        // Store Player's selection into PlayerPref
         PlayerPrefs.SetInt("CharacterSelected",selectedCharacterIndex);
-        if(PlayerPrefs.HasKey("CharacterSelected"))
 
-        Debug.Log(string.Format("Character {0}:{1} has been chosen", selectedCharacterIndex, characterList[selectedCharacterIndex].characterName));
+        // Plays sfx
         AudioManager.Instance.PlaySFX(cfmClickSFX);
+
+        // Transition Scene to Main Menu
         levelLoader.LoadMain();
     }
+        
+    // Method to execute when click Left Button
     public void LeftArrow()
     {
+        // Cycles through character list
         selectedCharacterIndex--;
         if(selectedCharacterIndex<0)
             selectedCharacterIndex = characterList.Count - 1;
+
+        // Switch to next character on list
         UpdateCharacterSelectionUI();
+
+        // Plays sfx
         AudioManager.Instance.PlaySFX(arrowClickSFX);
     }
 
+    // Method to execute when click Right Button
     public void RightArrow()
     {
+        // Cycles through character list
         selectedCharacterIndex++;
         if(selectedCharacterIndex == characterList.Count)
             selectedCharacterIndex = 0;
+        
+        // Switch to next character on list
         UpdateCharacterSelectionUI();
+
+        // Plays sfx
         AudioManager.Instance.PlaySFX(arrowClickSFX);
     }
+
+    // UpdateCharacterSelection method
     private void UpdateCharacterSelectionUI()
     {
+        // Changes color to unique color tied to character
         desiredColor = characterList[selectedCharacterIndex].characterColor;
+
+        // Changes character image
         characterSplash.sprite = characterList[selectedCharacterIndex].splash;
+
+        // Changes character name
         characterName.text = characterList[selectedCharacterIndex].characterName;
     }
 
@@ -73,6 +97,7 @@ public class CharacterSel : MonoBehaviour
     
     private void Update() 
     {
+        // Creates a animation to change background colors between each character
         backgroundColor.color = Color.Lerp(backgroundColor.color,desiredColor,Time.deltaTime*backgroundColorTransitionSpeed);
     }
 }
