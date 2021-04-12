@@ -175,7 +175,6 @@ public class CustomFirebase : MonoBehaviour
         }
     }
     public void displayallquestions(){
-        Debug.Log("Yes");
         StartCoroutine(filterquestions());
     }
     public IEnumerator filterquestions(){
@@ -369,32 +368,39 @@ public class CustomFirebase : MonoBehaviour
     }
     private IEnumerator CheckExistingRoom(){
         Room = createRoomID.text;
-        var DBTask = DBreference.Child("custom").GetValueAsync();
-        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-        Debug.Log("here");
-        roomexist = false;
-        if (DBTask.Exception != null)
+        if (Room == "")
         {
-            Debug.Log("Yea");
-            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+            errormsg.text = "Please input something";
         }
         else{
-            DataSnapshot snapshot = DBTask.Result;
-            foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+            var DBTask = DBreference.Child("custom").GetValueAsync();
+            yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+            
+            roomexist = false;
+            if (DBTask.Exception != null)
             {
-                string roomid = childSnapshot.Key.ToString();
-                if (roomid == Room) {
-                    roomexist = true;
-                    errormsg.text = "Room already exist!";
+                Debug.Log("Yea");
+                Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+            }
+            else{
+                DataSnapshot snapshot = DBTask.Result;
+                foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
+                {
+                    string roomid = childSnapshot.Key.ToString();
+                    if (roomid == Room) {
+                        roomexist = true;
+                        errormsg.text = "Room already exist!";
+                    }
+                }
+                if (roomexist != true)
+                {
+                SelectionPanel.gameObject.SetActive(true);
+                StartPanel.gameObject.SetActive(false);
+                errormsg.text = "";
                 }
             }
-            if (roomexist != true)
-            {
-            SelectionPanel.gameObject.SetActive(true);
-            StartPanel.gameObject.SetActive(false);
-            errormsg.text = "";
-            }
         }
+        
     }
    
 }
