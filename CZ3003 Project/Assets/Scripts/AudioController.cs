@@ -1,9 +1,9 @@
+// Authors: Daryl Neo
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-// Authors: Daryl Neo
 public class AudioController : MonoBehaviour
 {
     [SerializeField] private AudioClip levelMusic;
