@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+// Authors: Daryl Neo
+
 public class Character : MonoBehaviour
 {
     public bool IsMoving;
@@ -13,6 +16,8 @@ public class Character : MonoBehaviour
     public Vector2 moveDir;
     public bool isCollided;
     public NPCController npcController;
+
+    // Initialize Values and Components
     public void Start()
     {
         npcController = GetComponent<NPCController>();
@@ -21,57 +26,62 @@ public class Character : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
         walkCounter = walkTime;
     }
+
     private void Update() 
     {
+        // Counts down walkCounter duration
         if(walkCounter>=0)
         {
             walkCounter -= Time.deltaTime;
-//            gameObject.transform.position = new Vector2 (transform.position.x + (moveDir.x * moveSpeed*Time.deltaTime), transform.position.y + (moveDir.y * moveSpeed*Time.deltaTime));
         }
+        // Stop moving when counter reaches 0
         else
         {
+            // Stops movement
             myRigidbody.velocity = Vector2.zero;
+
+            // Set bool to false
             IsMoving=false;
+
+            // Disable Moving animation to stand still
             animator.SetBool("IsMoving", false);
+
+            // Update current state of NPC
             npcController.setIdle();
         }
     }
+
+    // Method called to make NPCs face player when interacting
     public void LookTowards(Vector3 targetPos)
     {
+        // Calc position differences with Y offset
         var xdiff = targetPos.x - transform.position.x;
         var ydiff = (targetPos.y - transform.position.y)+0.5f;
-        Debug.Log("x "+ xdiff + " y " + (ydiff-0.5f));
-        Debug.DrawLine(new Vector3(transform.position.x,transform.position.y+0.5f),targetPos,Color.blue,1.5f);
+
+        // If X Y position differences falls within range
         if(xdiff>=-1||xdiff<=1||ydiff>=-1||ydiff<=1)
         {
+            // Face correct direction of the player interacting
             animator.SetFloat("moveX",Mathf.Clamp(xdiff,-1f,1f));
             animator.SetFloat("moveY",Mathf.Clamp(ydiff,-1f,1f));
         }
-        else
-            Debug.Log("cant see diag");
     }
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            Debug.Log("collided with player");
-        }
-    }
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            Debug.Log("did it detect this?");
-            isCollided = true;
-        }
-    }
+
+    // Movement script for Characters
     public IEnumerator Move(Vector2 moveVec)
     {
+        // Set bool to true
         IsMoving=true;
+        
         moveDir = moveVec;
+
+        // Reset walkCounter to predefined values
         walkCounter = walkTime;
+
+        // Allowed to walk if walkCounter is >=0
         if(walkCounter>=0)
         {   
+            // Set valid directions for animations and sprites
             if(moveVec.x>0)
             {
                 animator.SetFloat("moveX",moveVec.x);
@@ -92,11 +102,15 @@ public class Character : MonoBehaviour
                 animator.SetFloat("moveX",moveVec.x);
                 animator.SetFloat("moveY",moveVec.y);
             }
+            // Set bool to true
             IsMoving=true;
+            
+        // Set animation to walking animation from standstill
         animator.SetBool("IsMoving", moveDir.magnitude > 0);
         yield return null;
        
         }
+        // Apply velocity in appropriate direction
         myRigidbody.velocity = new Vector2 (moveDir.x * moveSpeed,moveDir.y * moveSpeed);
     }
     
