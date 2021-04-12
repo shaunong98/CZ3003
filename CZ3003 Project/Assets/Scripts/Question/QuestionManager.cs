@@ -1,3 +1,4 @@
+// Authors: Jethro
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
@@ -76,6 +77,7 @@ public class QuestionManager : MonoBehaviour {
         DBreference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
+    // Method to print out the words one by one in the question box.
     public IEnumerator TypeQuestion(string question) {
        questionText.text = "";
        foreach (var letter in question.ToCharArray()) {

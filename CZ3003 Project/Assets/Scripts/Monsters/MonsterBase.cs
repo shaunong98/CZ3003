@@ -1,3 +1,4 @@
+// Authors: Jethro
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -52,11 +53,6 @@ public class MonsterBase : ScriptableObject
 [System.Serializable]
 public class LearnableMoves{
     [SerializeField] MoveBase moveBase;
-    [SerializeField] int level;
-
-    public int Level {
-        get { return level; }
-    }
 
     public MoveBase Base {
         get { return moveBase; }
