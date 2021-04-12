@@ -394,6 +394,8 @@ public class CustomFirebase : MonoBehaviour
                     if (roomid == Room) {
                         roomexist = true;
                         errormsg.text = "Room already exist!";
+                        yield return new WaitForSeconds(1f);
+                        errormsg.text = "";
                     }
                 }
                 if (roomexist != true)
