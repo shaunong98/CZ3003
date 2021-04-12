@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿// Authors: Jethro, Su Te
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
