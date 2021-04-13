@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿// Authors: Jethro, Su Te
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -20,6 +21,11 @@ public class UIManager : MonoBehaviour
     public Dropdown SectionSelect;
     public static int Section;
 
+    public Dropdown WorldLeaderboard;
+    public static int WorldLdrboard;
+    public Dropdown SectionLeaderboard;
+    public static int SectionLdrboard;
+
     private void Awake()
     {
         if (instance == null)
@@ -38,6 +44,13 @@ public class UIManager : MonoBehaviour
     public void ClearScreen() //Turn off all screens
     {
         loginUI.SetActive(false);
+        registerUI.SetActive(false);
+        userDataUI.SetActive(false);
+        scoreboardUI.SetActive(false);
+    }
+    public void ClearScreenForTeacher() //Turn off all screens
+    {
+        loginUI.SetActive(true);
         registerUI.SetActive(false);
         userDataUI.SetActive(false);
         scoreboardUI.SetActive(false);
@@ -99,6 +112,33 @@ public class UIManager : MonoBehaviour
     {
         Section = int.Parse(SectionSelect.options[SectionSelect.value].text);
         Debug.Log(Section);
+    }
+
+    public void WorldLdrboardSelect()
+    {
+        Debug.Log(WorldLeaderboard.options[WorldLeaderboard.value].text);
+        switch (WorldLeaderboard.options[WorldLeaderboard.value].text)
+        {
+            case "OODP":
+                WorldLdrboard = 1;
+                break;
+            case "SE":
+                WorldLdrboard = 2;
+                break;
+            case "SSAD":
+                WorldLdrboard = 3;
+                break;
+            default:
+                Debug.Log("Error Occured");
+                break;
+        }
+        Debug.Log(WorldLdrboard);
+    }
+
+    public void SectionLdrboardSelection()
+    {
+        SectionLdrboard = int.Parse(SectionLeaderboard.options[SectionLeaderboard.value].text);
+        Debug.Log(SectionLdrboard);
     }
     
 }
