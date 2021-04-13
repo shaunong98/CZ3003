@@ -57,19 +57,16 @@ public class EditQuestion : MonoBehaviour
                 Debug.Log("Error Occured");
                 break;
         }
-        Debug.Log(World);
     }
     // This methods extracts the data in the dropdown for difficulty
     public void DifficultySelection()
     {
         Difficulty = DifficultySelect.options[DifficultySelect.value].text;
-        Debug.Log(Difficulty);
     }
     // This methods extracts the data in the dropdown for section
     public void SectionSelection()
     {
         Section = int.Parse(SectionSelect.options[SectionSelect.value].text);
-        Debug.Log(Section);
     }
     // This methods is called to transition from the selection panel to the display all question panel after the next button is pressed on the selection panel
     public void PressNextButton()

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class QuestionItem : MonoBehaviour
 {
+    //This is the text component for the question
     public Text Question;
     int World;
     int Section;
