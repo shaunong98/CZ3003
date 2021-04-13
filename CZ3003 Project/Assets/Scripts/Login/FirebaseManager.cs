@@ -57,8 +57,30 @@ public class FirebaseManager : MonoBehaviour
 
     public Toggle register_toggle;
 
+    private static FirebaseManager instance;
+    public static FirebaseManager Instance
+    {
+        get
+        {
+            if(instance == null)
+            {
+                instance = FindObjectOfType<FirebaseManager>();
+                if(instance == null)
+                {
+                    instance = new GameObject("Spawned FirebaseManager", typeof(FirebaseManager)).GetComponent<FirebaseManager>();
+                }
+            }
+            return instance;
+        }
+        private set
+        {
+            instance = value;
+        }
+    }
     void Awake()
     {
+        // Set gameobject as  DontDestroyOnLoad
+        DontDestroyOnLoad(this.gameObject);
         //Check that all of the necessary dependencies for Firebase are present on the system
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
