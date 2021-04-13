@@ -5,8 +5,11 @@ using UnityEngine.UI;
 
 public class QuestionItem : MonoBehaviour
 {
+    //This is the text component for the question
     public Text Question;
+    // This is the world which the question can come from
     int World;
+    // This is the section which the question can come from
     int Section;
     public TeacherFireBase item;
     public GameObject Firebase;
