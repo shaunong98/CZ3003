@@ -17,6 +17,7 @@ public class Navigation : MonoBehaviour
         Instance = this;
     }
     //This method is called when the user clicks on the world that he wants to play
+    //_index: the index of the world the user wants to play
     public void ClickWorld(int _index)
     {
         World[_index].gameObject.SetActive(true);
@@ -40,6 +41,7 @@ public class Navigation : MonoBehaviour
         SelectionPanel.gameObject.SetActive(false);
     }
     //This methods allows the user to return from playing the PVP mode
+    //_index: the index of the world the user has played
     public void backToWorldPVPScreen(int index) {
         SceneManager.LoadScene("Map Selection");
     }
