@@ -75,14 +75,21 @@ public class TeacherFireBase : MonoBehaviour
     public GameObject questionElement;
     public Transform questionListContent;
     string Question;
-
+    //This is the textinput field for the user to edit the question
     public InputField EditQuestionInputField;
+    //This is the textinput field for the user to edit the correct answer
     public InputField EditAnswerInputField1;
+    //This is the textinput field for the user to edit the wrong answer
     public InputField EditAnswerInputField2;
+    //This is the textinput field for the user to edit the wrong answer
     public InputField EditAnswerInputField3;
+    //This panel is where the user can edits the question
     public GameObject EditQuestionPanel;
+    //This panel is where the user will select the question he/she want to edit
     public GameObject DisplayQuestionPanel;
+    //This variable sums the total number of question for the world and section that the user filtered 
     int totalquestion = 0;
+    // This variable will have the index of the current question selected
     int currentindex;
 
     public GameObject CustomquestionElement;
@@ -91,12 +98,14 @@ public class TeacherFireBase : MonoBehaviour
     string A1;
     string A2;
     string A3;
+    //This variable store the number of questions in a room created in the make an assignment function
     int questionNo;
     bool roomexist;
     public Text errormsg;
     public Text errormsg1;
     public GameObject StartPanel;
     public GameObject SelectionPanel;
+    //This is the room created in the make an assignment
     string Room;
     public InputField createRoomID;
     public InputField ViewRoomID;
@@ -650,6 +659,8 @@ public class TeacherFireBase : MonoBehaviour
             }
         }
     }
+    //This method is called when the user wants to edit a question
+    //_question: This is the question to be edited
     public void EditData(string _question)
     {
         Question = _question;
@@ -658,6 +669,7 @@ public class TeacherFireBase : MonoBehaviour
         EditQuestionPanel.gameObject.SetActive(true);
         DisplayQuestionPanel.gameObject.SetActive(false);
     }
+    //This method pulls the question from the database and its answers before populating the questions and answers fields to be edited
     private IEnumerator GetQuestionData() { 
         int world = EditQuestion.World;
         int section = EditQuestion.Section;
@@ -822,16 +834,18 @@ public class TeacherFireBase : MonoBehaviour
             }
         }
     }
+    //This sets the question count to 0 for every new room
     public void newRoom()
     {
         questionNo = 0;
     }
+    //This method will add the question into an assignment
     public void Addquestion(string _question){
         CustomQuestion = _question;
-        Debug.Log(Question);
         StartCoroutine(LoadQuestionAndAnswer());
         StartCoroutine(PushtoDB());
     }
+    //This method will pull the Answers to the question selected
     public IEnumerator LoadQuestionAndAnswer(){
         int world = FilterAssignment.World;
         int section = FilterAssignment.Section;
@@ -862,6 +876,7 @@ public class TeacherFireBase : MonoBehaviour
             }
         }
     }
+    //The method pushed the question and answers selected into the room in the firebase backend
     public IEnumerator PushtoDB(){
         int world = FilterAssignment.World;
         int section = FilterAssignment.Section;
@@ -941,9 +956,11 @@ public class TeacherFireBase : MonoBehaviour
             Debug.LogWarning(message: $"Failed to register task with {UserTask.Exception}");
         }
     }
+    //This methods checks if the custom room exist to view scores
     public void checkRoomExistForViewScore(){
         StartCoroutine(CheckExistingRoomView());
     }
+    //This method will 
     private IEnumerator CheckExistingRoomView(){
         Room = ViewRoomID.text;
         //Debug.Log(Room);

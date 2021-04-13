@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+//Done by Jun Hao and Zhi Fah
 public class StatisticElement : MonoBehaviour
 {
     public Text username;
