@@ -13,17 +13,13 @@ MonoBehaviour:
   m_Name: Serena
   m_EditorClassIdentifier: 
   name: Serena
-  description: 
   frontSprite: {fileID: 8426410015707501485, guid: c78ed2892b0c6ac4d877feabaf0c248c,
     type: 3}
   backSprite: {fileID: -8446935919194892437, guid: c78ed2892b0c6ac4d877feabaf0c248c,
     type: 3}
-  maxHp: 50
+  maxHp: 100
   attack: 5
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 73a605629e94c564fa22a1aa854acc60, type: 2}
-    level: 1
   - moveBase: {fileID: 11400000, guid: 55967d5cb66e0e843b286e821c8128d6, type: 2}
-    level: 1
   - moveBase: {fileID: 11400000, guid: cabfb4137941ca346898efd219a604b7, type: 2}
-    level: 1

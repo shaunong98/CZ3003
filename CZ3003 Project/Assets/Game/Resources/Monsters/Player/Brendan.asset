@@ -13,17 +13,13 @@ MonoBehaviour:
   m_Name: Brendan
   m_EditorClassIdentifier: 
   name: Brendan
-  description: 
   frontSprite: {fileID: -3190212445718334284, guid: 16b165101c318824399fd19d1dbfb430,
     type: 3}
   backSprite: {fileID: -6282994940998876196, guid: 16b165101c318824399fd19d1dbfb430,
     type: 3}
-  maxHp: 50
+  maxHp: 100
   attack: 5
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 73a605629e94c564fa22a1aa854acc60, type: 2}
-    level: 1
   - moveBase: {fileID: 11400000, guid: 55967d5cb66e0e843b286e821c8128d6, type: 2}
-    level: 1
   - moveBase: {fileID: 11400000, guid: cabfb4137941ca346898efd219a604b7, type: 2}
-    level: 1

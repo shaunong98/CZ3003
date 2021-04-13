@@ -365,10 +365,40 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2398869411577839441, guid: 609f5494aaf93414e9b2fbab3271f6d3,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398869411577839446, guid: 609f5494aaf93414e9b2fbab3271f6d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398869411577839446, guid: 609f5494aaf93414e9b2fbab3271f6d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2398869412814583002, guid: 609f5494aaf93414e9b2fbab3271f6d3,
         type: 3}
       propertyPath: isCustom
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398869412821574546, guid: 609f5494aaf93414e9b2fbab3271f6d3,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398869412821574547, guid: 609f5494aaf93414e9b2fbab3271f6d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398869412821574547, guid: 609f5494aaf93414e9b2fbab3271f6d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2398869412961060000, guid: 609f5494aaf93414e9b2fbab3271f6d3,
         type: 3}
@@ -485,7 +515,7 @@ MonoBehaviour:
   runMusic: {fileID: 8300000, guid: 48ff16bfaae57ce4a8a8c4854e88cff0, type: 3}
   player: {fileID: 0}
   dialogBox: {fileID: 524119466}
-  isPVP: 1
+  isCustom: 0
   dependencyStatus: 0
 --- !u!1 &679975990 stripped
 GameObject:
