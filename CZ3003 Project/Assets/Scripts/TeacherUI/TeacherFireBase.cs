@@ -7,73 +7,109 @@ using Firebase.Database;
 using TMPro;
 using System.Linq;
 using UnityEngine.SceneManagement;
+//Done by Jun Hao and Zhi Fah
 
 public class TeacherFireBase : MonoBehaviour
 {
     //Firebase variables
     [Header("Firebase")]
+    //Variable for DependencyStatus
     public DependencyStatus dependencyStatus;
+    //Variable for FirebaseAuth 
     public FirebaseAuth auth;
+    //Variable for user for firebase
     public FirebaseUser User;
+    //Variable for Database reference
     public DatabaseReference DBreference;
 
     //User Data variables
     [Header("UserData")]
+    //Component to be instantiated for statistic scroll view
     public GameObject statisticElement;
+    //The content of the scrollview on statistic page
     public Transform scoreboardContent;
+    //Component to be instantiated for leaderboard scroll view
     public GameObject leaderElement;
+    //The content of the scrollview on leaderboard page
     public Transform leaderboardContent;
 
     //Question and Answers variables
     [Header("QnA")]
+    //The question to be added under question adding function
     public InputField QuestionInputField;
+    //The answer to be added under question adding function
     public InputField AnswerInputField1;
+    //The answer to be added under question adding function
     public InputField AnswerInputField2;
+    //The answer to be added under question adding function
     public InputField AnswerInputField3;
-    //public TMP_Text Warning_Text;
-
+    //This panel is where the user types out the question and answer that he/she wants to be added
     public GameObject AddQuestionPanel;
+    //The panel where the user can filter the world, section and difficulty before adding question
     public GameObject OptionSelectionPanel;
+    //The panel which the user can select the functions
     public GameObject FunctionSelectionPanel;
+    //The submit button to add the question
     public Button SubmitButton;
-
+    //The student that is being searched
     string StudentSearched;
+    //Searchbar on the statistic page
     public InputField SearchBar;
+    //The panel which display statistics for all students
     public GameObject OverviewPanel;
+    //The panel which display statistics for a student
     public GameObject StudentPanel;
-
+    //The points gained from OODP section 1
     public Text OODP_S1_points;
+    //The points gained from OODP section 2
     public Text OODP_S2_points;
+    //The points gained from OODP section 3
     public Text OODP_S3_points;
-
+    //The points gained from SE section 1
     public Text SE_S1_points;
+    //The points gained from SE section 2
     public Text SE_S2_points;
+    //The points gained from SE section 3
     public Text SE_S3_points;
-
+    //The points gained from SSAD section 1
     public Text SSAD_S1_points;
+    //The points gained from SSAD section 2
     public Text SSAD_S2_points;
+    //The points gained from SSAD section 3
     public Text SSAD_S3_points;
-
+    //The stars gained from OODP section 1
     public Text OODP_S1_stars;
+    //The stars gained from OODP section 2
     public Text OODP_S2_stars;
+    //The stars gained from OODP section 3
     public Text OODP_S3_stars;
-
+    //The stars gained from SE section 1
     public Text SE_S1_stars;
+    //The stars gained from SE section 2
     public Text SE_S2_stars;
+    //The stars gained from SE section 3
     public Text SE_S3_stars;
-
+    //The stars gained from SSAD section 1
     public Text SSAD_S1_stars;
+    //The stars gained from SSAD section 2
     public Text SSAD_S2_stars;
+    //The stars gained from SSAD section 3
     public Text SSAD_S3_stars;
-
+    //The username of the user
     public Text Name;
-
+    //Dropdown selection for world
     public Dropdown Worldselection;
+    //Dropdown selection for section
     public Dropdown SectionSelection;
+    //The variable to store the world selected
     string world;
+    //The variable to store the section selected
     string section;
+    //The question element which will be instantiated in the scrollview for the edit question panel
     public GameObject questionElement;
+    //The content of the scrollview in the editquestion panel
     public Transform questionListContent;
+    //The question which is going to be edited
     string Question;
     //This is the textinput field for the user to edit the question
     public InputField EditQuestionInputField;
@@ -91,18 +127,27 @@ public class TeacherFireBase : MonoBehaviour
     int totalquestion = 0;
     // This variable will have the index of the current question selected
     int currentindex;
-
+    //The component which will be instantiated in the scrollview of the make an assignment panel
     public GameObject CustomquestionElement;
+    //The content of the scroll view for the make an assignment panel
     public Transform CustomquestionListContent;
+    //The question which is being added in the make an assignment panel
     string CustomQuestion;
+    //The answer for the question added in the make an assignment panel
     string A1;
+    //The answer for the question added in the make an assignment panel
     string A2;
+    //The answer for the question added in the make an assignment panel
     string A3;
     //This variable store the number of questions in a room created in the make an assignment function
     int questionNo;
+    //This variable store the value of whether the assignment room already exist
     bool roomexist;
+    //This variable displays the error message
     public Text errormsg;
+    //This variable displays the error message
     public Text errormsg1;
+    //This panel contains the create an assignment and view score for an assignment
     public GameObject StartPanel;
     public GameObject SelectionPanel;
     //This is the room created in the make an assignment
@@ -167,10 +212,9 @@ public class TeacherFireBase : MonoBehaviour
             missinginput.text = "Missing input(s)";
         }
     }
-
+    //This method adds the question and answers to correct branch based on filters in firebase
     private IEnumerator createQuestionsAndAnswers(string _question, string _answer1, string _answer2, string _answer3)
     {
-        //need integrate with jh one!
         int worldNumber = QuestionAdder.World;
         int sectionNumber = QuestionAdder.Section;
         string difficulty = QuestionAdder.Difficulty;
@@ -616,19 +660,17 @@ public class TeacherFireBase : MonoBehaviour
                             }
                     }
                 }
-                Debug.Log(stars);
-                Debug.Log(points);
                 GameObject scoreboardElement = Instantiate(statisticElement, scoreboardContent);
                 scoreboardElement.GetComponent<StatisticElement>().NewScoreElement(username,stars, points);
             }
         }
     }
-    //Button to call the display of all the 
+    //Button to call the display of all the question which can be edited based on the filters world, section and difficulty
     public void DisplayAllQuestionButtonMethod()
     {
-        Debug.Log("Reached here!");
         StartCoroutine(LoadAllQuestionsToDisplay());
     }
+    //This method pulls the relevant data from firebase based on the filters
     private IEnumerator LoadAllQuestionsToDisplay()
     {
         int world = EditQuestion.World;
@@ -757,8 +799,6 @@ public class TeacherFireBase : MonoBehaviour
             Debug.LogWarning(message: $"Failed to register task with {a3Task.Exception}");
         }
 
-        //ClearQuestionAndAnswersFields();
-
         EditQuestionPanel.gameObject.SetActive(false);
         FunctionSelectionPanel.gameObject.SetActive(true);// shift this to button
     }
@@ -801,10 +841,11 @@ public class TeacherFireBase : MonoBehaviour
         }
         
     }
+    //This is the method to display all the questions to be selected when the user wants to make an assignment
     public void displayallquestions(){
-        Debug.Log("Yes");
         StartCoroutine(filterquestions());
     }
+    //This method pull the relevant question and create the component to be displayed in the scrollview item
     public IEnumerator filterquestions(){
         int world = FilterAssignment.World;
         int section = FilterAssignment.Section;
@@ -960,7 +1001,7 @@ public class TeacherFireBase : MonoBehaviour
     public void checkRoomExistForViewScore(){
         StartCoroutine(CheckExistingRoomView());
     }
-    //This method will 
+    //This method will check the custom room with the pre-existing rooms in the firebase backend
     private IEnumerator CheckExistingRoomView(){
         Room = ViewRoomID.text;
         //Debug.Log(Room);
@@ -993,10 +1034,12 @@ public class TeacherFireBase : MonoBehaviour
             }
         }
     }
+    //This method displays all the students and their score for the assignment
     public void displayStudentScores(){
         Debug.Log("Yes");
         StartCoroutine(StudentScore());
     }
+    //This method pulls the student data and score from the firebase
     public IEnumerator StudentScore(){
         Room = ViewRoomID.text;
 

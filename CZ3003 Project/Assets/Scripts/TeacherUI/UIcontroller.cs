@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class UIcontroller : MonoBehaviour
 {
+    // This is an instance of UIcontroller
     public static UIcontroller instance;
     public GameObject AddQuestionPanel;
     public GameObject LeaderBoardPanel;
