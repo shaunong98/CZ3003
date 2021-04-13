@@ -213,7 +213,7 @@ public class CustomBattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1f);
             BattleOver(false);
         }
-        dialogBox.EnableActionSelector(false);
+        dialogBox.EnableActionSelector(true);
         dialogBox.EnableMoveSelector(false);
         dialogBox.EnableDialogText(true);
         dialogBox.EnableAnswerSelector(false);

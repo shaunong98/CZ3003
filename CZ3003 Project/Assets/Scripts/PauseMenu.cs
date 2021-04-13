@@ -103,7 +103,6 @@ public class PauseMenu : MonoBehaviour
 
     // Method for Save
     public void Save() {
-        Debug.Log("save");
         // Update the Stars earned to Database
         firebaseManager.UpdateStarsToDb();
 

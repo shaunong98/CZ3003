@@ -9699,7 +9699,7 @@ Tilemap:
       - {fileID: 21301288, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301290, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301292, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -11, y: -22, z: 0}
@@ -79729,6 +79729,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 461348084188975636, guid: bfdab55654a5440428293a1efdc60363,
+        type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 461348084188975636, guid: bfdab55654a5440428293a1efdc60363,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 461348084240422649, guid: bfdab55654a5440428293a1efdc60363,
         type: 3}
       propertyPath: m_Name
@@ -79838,6 +79848,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 461348084478691914, guid: bfdab55654a5440428293a1efdc60363,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 461348084478691915, guid: bfdab55654a5440428293a1efdc60363,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 257.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 461348084478691915, guid: bfdab55654a5440428293a1efdc60363,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 271.0067
+      objectReference: {fileID: 0}
+    - target: {fileID: 461348084478691915, guid: bfdab55654a5440428293a1efdc60363,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00036621094
+      objectReference: {fileID: 0}
+    - target: {fileID: 461348084478691915, guid: bfdab55654a5440428293a1efdc60363,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 119.46588
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfdab55654a5440428293a1efdc60363, type: 3}

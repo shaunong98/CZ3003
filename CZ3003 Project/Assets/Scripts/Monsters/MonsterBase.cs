@@ -9,8 +9,6 @@ public class MonsterBase : ScriptableObject
     // Name of player/trainer.
     [SerializeField] string name;
 
-    [TextArea]
-
     // Front Sprite of player/trainer.
     [SerializeField] Sprite frontSprite;
 
