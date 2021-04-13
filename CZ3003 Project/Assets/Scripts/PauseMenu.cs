@@ -1,10 +1,10 @@
+// Authors: Daryl Neo
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// Authors: Daryl Neo
 public class PauseMenu : MonoBehaviour
 {
     public Slider AudioSlider;

@@ -1116,6 +1116,11 @@ public class FirebaseManager : MonoBehaviour
         StartCoroutine(LoadWorldSectionData());
     }
 
+     public void displayTotalPoints()
+    {
+        StartCoroutine(LoadScoreboardData());
+    }
+
     private IEnumerator UpdateTeacherUsernameDatabase(string _username)
     {
         //Set the currently logged in user username in the database

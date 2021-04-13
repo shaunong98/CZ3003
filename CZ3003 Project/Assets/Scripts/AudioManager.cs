@@ -1,8 +1,8 @@
+// Authors: Daryl Neo
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Authors: Daryl Neo
 public class AudioManager : MonoBehaviour
 {
     private AudioSource musicSource;

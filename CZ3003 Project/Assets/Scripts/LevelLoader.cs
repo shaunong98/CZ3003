@@ -1,9 +1,9 @@
+// Authors: Daryl Neo
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Authors: Daryl Neo
 public class LevelLoader : MonoBehaviour
 {
     public Animator transition;

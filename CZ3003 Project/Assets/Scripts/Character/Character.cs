@@ -1,8 +1,8 @@
+// Authors: Daryl Neo
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Authors: Daryl Neo
 
 public class Character : MonoBehaviour
 {
@@ -104,7 +104,7 @@ public class Character : MonoBehaviour
             }
             // Set bool to true
             IsMoving=true;
-            
+
         // Set animation to walking animation from standstill
         animator.SetBool("IsMoving", moveDir.magnitude > 0);
         yield return null;
