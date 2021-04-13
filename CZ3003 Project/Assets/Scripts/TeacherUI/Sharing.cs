@@ -20,4 +20,9 @@ public class Sharing : MonoBehaviour
     {
         Application.OpenURL("https://www.facebook.com");
     }
+    //This method opens the forum
+    public void Quora()
+    {
+        Application.OpenURL("https://softwaremon.quora.com/");
+    }
 }
