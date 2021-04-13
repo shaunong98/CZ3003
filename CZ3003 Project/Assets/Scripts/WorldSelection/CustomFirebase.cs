@@ -41,24 +41,33 @@ public class CustomFirebase : MonoBehaviour
     public LevelLoader battleLoader;
     //This is the username of room creator
     public static string createdUsername;
-
+    //This component is instantiated in the scroll view in the question display panel
     public GameObject questionElement;
+    //This is the scroll view in the question display panel
     public Transform questionListContent;
+    //This is the question selected
     string Question;
+    //This is the answer for the question selected
     string A1;
+    //This is the answer for the question selected
     string A2;
+    //This is the answer for the question selected
     string A3;
+    //This is the number of questions in the room
     int questionNo;
+    //This variable determines if the room exist
     bool roomexist;
+    //This is the error message
     public Text errormsg;
+    //This is the starting panel where the user can create or enter room
     public GameObject StartPanel;
-    //This is the selection panel fo
+    //This is the selection panel for the create room
     public GameObject SelectionPanel;
     //This is the room
     public string Room;
     //This is game music
     [SerializeField] private AudioClip CustomMusic;
-    
+    //This method creates an instance of firebase
     void Awake()
     {
         //Check that all of the necessary dependencies for Firebase are present on the system
@@ -77,6 +86,7 @@ public class CustomFirebase : MonoBehaviour
         });
     }
 
+    //This method initialises the firebase
     private void InitializeFirebase()
     {
         Debug.Log("Setting up Firebase Auth");
