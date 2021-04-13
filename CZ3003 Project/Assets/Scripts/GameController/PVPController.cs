@@ -1,16 +1,21 @@
+// Authors: Jethro
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Creating PVPStates during the instantiate the end and duration of battle.
 public enum PVPState{End, Battle}
 
 public class PVPController: MonoBehaviour
 {
+    // PlayerController Object.
     [SerializeField] public PlayerController playerController;
-    [SerializeField] BattleSystem battleSystem;
-    //[SerializeField] Camera worldCamera;
 
+    //BattleSystem Object.
+    [SerializeField] BattleSystem battleSystem;
+
+    // PVPstate reference.
     PVPState state;
 
     [SerializeField] BattleUnit trainerUnit;
@@ -27,28 +32,6 @@ public class PVPController: MonoBehaviour
         battleSystem.Awake();
         StartBattle(trainerUnit); 
         BattleSystem.Instance.onBattleOver += EndBattle;
-        
-        // playerController.onEnterTrainersView += (Collider2D trainerCollider) => 
-        // {
-        //     var trainer = trainerCollider.GetComponentInParent<TrainerController>();
-        //     this.trainer = trainer;
-        //     if (trainer != null) {
-        //         state = GameState.Cutscene;
-                
-        //         StartCoroutine(trainer.TriggerTrainerBattle(playerController));
-        //     }
-        // };
-
-        // DialogManager.Instance.OnShowDialog += () =>
-        // {
-        //     state = GameState.Dialog;
-        // };
-
-        // DialogManager.Instance.OnCloseDialog += () =>
-        // {
-        //     if(state == GameState.Dialog)
-        //         state = GameState.FreeRoam;
-        // };
     }
 
     
@@ -62,8 +45,6 @@ public class PVPController: MonoBehaviour
     public void EndBattle(bool won) {
         state = PVPState.End;
         BattleSystem.Instance.gameObject.SetActive(false);
-        //SceneManager.LoadScene("Map Selection");
-        //worldCamera.gameObject.SetActive(true);
     }
 
     private void Update()

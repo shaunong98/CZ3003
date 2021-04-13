@@ -1,3 +1,4 @@
+// Authors: Daryl Neo
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class AudioManager : MonoBehaviour
     public float musicVolume;
     private bool firstMusicSourceisPlaying;
     private static AudioManager instance;
+
+    // Sets Current Audio Manager as instance, else create a new Audio Manager
     public static AudioManager Instance
     {
         get
@@ -33,89 +36,86 @@ public class AudioManager : MonoBehaviour
 
     private void Awake() 
     {
+        // Set gameobject as  DontDestroyOnLoad
         DontDestroyOnLoad(this.gameObject);
+
+        // Create multiple Audio Source
         musicSource=this.gameObject.AddComponent<AudioSource>();
         musicSource2=this.gameObject.AddComponent<AudioSource>();
         sfxSource=this.gameObject.AddComponent<AudioSource>();
 
-
+        // Enables looping of audio
         musicSource.loop = true;
         musicSource2.loop = true;
     }
 
+    // Plays a specific music set by the parameter 
     public void PlayMusic(AudioClip musicClip)
     {
-       AudioSource activeSource = musicSource;
-       musicSource.clip = musicClip;
-       activeSource.volume = 1;
-       musicSource.Play();
+        // Set first Audio Source as active Audio Source
+        AudioSource activeSource = musicSource;
+
+        musicSource.clip = musicClip;
+
+        // Adjust Volume to 1 of active Audio Source
+        activeSource.volume = 1;
+
+        musicSource.Play();
     }
 
+    // Plays a specific SFX set by the parameter 
     public void PlaySFX(AudioClip clip)
     {
         sfxSource.PlayOneShot(clip);
     }
 
+    // Plays a specific SFX set by the parameter with volume overload
     public void PlaySFX(AudioClip clip, float volume)
     {
         sfxSource.PlayOneShot(clip, volume);
     }
 
+    // Allows a new music to be played while fading the previous music
     public void PlayMusicWithFade(AudioClip newClip, float transitionTime=1.0f)
     {
         AudioSource activeSource = musicSource;
 
+        // Adjust Volume to current volume of active Audio Source
         musicVolume = activeSource.volume;
 
+        // Starts Coroutine to initialize the audio swap
         StartCoroutine(UpdateMusicWithFade(activeSource,newClip,transitionTime));
     }
 
-    public void PlayMusicWithCrossFade(AudioClip musicClip, float transitionTime=1.0f)
-    {
-        AudioSource activeSource = (firstMusicSourceisPlaying) ? musicSource : musicSource2;
-        AudioSource newSource = (firstMusicSourceisPlaying) ? musicSource2 : musicSource;
-
-        firstMusicSourceisPlaying = !firstMusicSourceisPlaying;
-        musicVolume = activeSource.volume;
-
-        newSource.clip = musicClip;
-        newSource.Play();
-        StartCoroutine(UpdateMusicWithCrossFade(activeSource,newSource,transitionTime));
-    }
-
-    private IEnumerator UpdateMusicWithCrossFade(AudioSource original,AudioSource newSource,float transitionTime)
-    {
-        float t= 0.0f;
-        for(t=0.0f; t<=transitionTime; t+= Time.deltaTime)
-        {
-            original.volume=(1-(t/transitionTime));
-            newSource.volume= (t/transitionTime);
-            yield return null;
-        }
-        original.Stop();
-    }
+    // Audio Swap with existing music
     private IEnumerator UpdateMusicWithFade(AudioSource activeSource, AudioClip newClip, float transitionTime)
     {
+        // If no music is playing, play music of activeSource
         if(!activeSource.isPlaying)
         {
             activeSource.Play();
         }
 
+        // Set counter to 0
         float t = 0.0f;
 
-        //fade out
+        // Music fades out over time
         for(t = 0; t< transitionTime;t+=Time.deltaTime)
         {
             activeSource.volume = (musicVolume - ((t/ transitionTime) * musicVolume));
-            Debug.Log(activeSource.volume);
             yield return null;
         }
 
+        // Stop current music
         activeSource.Stop();
+
+        // Swap out current music to new music
         activeSource.clip = newClip;
+
+        // Play new current music
         activeSource.Play();
 
-        //fade in
+        // Music fades in over time
         for(t = 0; t< transitionTime;t+=Time.deltaTime)
         {
             activeSource.volume = (t / transitionTime) * musicVolume;
@@ -123,18 +123,21 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    // Pauses current AudioSource
     public void PauseMusic()
     {
         musicSource.Pause();
         musicSource2.Pause();
     }
 
+    // Resumes current AudioSource
     public void ResumeMusic()
     {
         musicSource.UnPause();
         musicSource2.UnPause();
     }
 
+    // Volume Control
     public void SetMusicVolume(float volume)
     {
         musicSource.volume = volume;
