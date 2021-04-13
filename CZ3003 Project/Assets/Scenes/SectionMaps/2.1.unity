@@ -26372,6 +26372,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5799157848974155362, guid: cd615dafe74f617499153f472e2db301,
+        type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799157848974155362, guid: cd615dafe74f617499153f472e2db301,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 5799157849059023496, guid: cd615dafe74f617499153f472e2db301,
         type: 3}
       propertyPath: m_Pivot.x
@@ -26481,6 +26491,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Dialog Canvas Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799157849339266621, guid: cd615dafe74f617499153f472e2db301,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 257.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799157849339266621, guid: cd615dafe74f617499153f472e2db301,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 271.0067
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799157849339266621, guid: cd615dafe74f617499153f472e2db301,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.0004272461
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799157849339266621, guid: cd615dafe74f617499153f472e2db301,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 119.46588
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd615dafe74f617499153f472e2db301, type: 3}
@@ -26793,6 +26823,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6125392689933485656, guid: 830662160f6d0da47baee15a933a312a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1876656549}
+    - target: {fileID: 6125392689933485656, guid: 830662160f6d0da47baee15a933a312a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Save
+      objectReference: {fileID: 0}
     - target: {fileID: 8385467024116314520, guid: 830662160f6d0da47baee15a933a312a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -26932,6 +26972,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8873496029085967826, guid: 830662160f6d0da47baee15a933a312a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1876656549}
+    - target: {fileID: 8873496029085967826, guid: 830662160f6d0da47baee15a933a312a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Quit
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 830662160f6d0da47baee15a933a312a, type: 3}
@@ -31018,7 +31068,7 @@ Tilemap:
       - {fileID: 21301262, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301264, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301266, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -5, y: 11, z: 0}
@@ -31631,6 +31681,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2398869411577839441, guid: 609f5494aaf93414e9b2fbab3271f6d3,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398869411577839446, guid: 609f5494aaf93414e9b2fbab3271f6d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398869411577839446, guid: 609f5494aaf93414e9b2fbab3271f6d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398869412821574546, guid: 609f5494aaf93414e9b2fbab3271f6d3,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398869412821574547, guid: 609f5494aaf93414e9b2fbab3271f6d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398869412821574547, guid: 609f5494aaf93414e9b2fbab3271f6d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2398869412961060002, guid: 609f5494aaf93414e9b2fbab3271f6d3,
         type: 3}
       propertyPath: m_RootOrder
@@ -31690,6 +31770,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BattleSystem Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2398869412961060003, guid: 609f5494aaf93414e9b2fbab3271f6d3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 609f5494aaf93414e9b2fbab3271f6d3, type: 3}
@@ -51184,7 +51269,7 @@ Tilemap:
       - {fileID: 21301288, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301290, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301292, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:

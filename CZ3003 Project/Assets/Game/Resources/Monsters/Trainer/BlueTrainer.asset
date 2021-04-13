@@ -13,16 +13,12 @@ MonoBehaviour:
   m_Name: BlueTrainer
   m_EditorClassIdentifier: 
   name: BlueTrainer
-  description: 
   frontSprite: {fileID: -1375388617340961162, guid: 3094190c94c051d45840faa262df1301,
     type: 3}
   backSprite: {fileID: 21300000, guid: bee15babab8fe8f4e9fea1f1a7afc1d0, type: 3}
-  maxHp: 50
+  maxHp: 100
   attack: 5
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 73a605629e94c564fa22a1aa854acc60, type: 2}
-    level: 1
   - moveBase: {fileID: 11400000, guid: 55967d5cb66e0e843b286e821c8128d6, type: 2}
-    level: 1
   - moveBase: {fileID: 11400000, guid: cabfb4137941ca346898efd219a604b7, type: 2}
-    level: 1
