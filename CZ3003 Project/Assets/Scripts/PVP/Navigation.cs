@@ -37,6 +37,5 @@ public class Navigation : MonoBehaviour
 
     public void backToWorldPVPScreen(int index) {
         SceneManager.LoadScene("Map Selection");
-        //World[index].gameObject.SetActive(true);
     }
 }

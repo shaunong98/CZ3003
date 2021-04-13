@@ -15,7 +15,7 @@ public class CustomController: MonoBehaviour
     // CustomBattleSystem Object.
     [SerializeField] CustomBattleSystem battleSystem;
 
-    // PVPstate reference.
+    // Customstate reference.
     CustomState state;
 
     //TrainerUnit object.
@@ -30,7 +30,7 @@ public class CustomController: MonoBehaviour
         Debug.Log("Are we starting the battle");
     }
 
-    // Start method to be called after the awake to start the battle
+    // Start is called before the first frame update
     private void Start() 
     {
         battleSystem.Awake();
