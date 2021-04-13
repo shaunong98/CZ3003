@@ -823,11 +823,9 @@ public class TeacherFireBase : MonoBehaviour
         else{
             var DBTask = DBreference.Child("custom").GetValueAsync();
             yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-            Debug.Log("here");
             roomexist = false;
             if (DBTask.Exception != null)
             {
-                Debug.Log("Yea");
                 Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
             }
             else{
@@ -878,7 +876,6 @@ public class TeacherFireBase : MonoBehaviour
             foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
             {
                 string question = childSnapshot.Child("Question").Value.ToString();
-                Debug.Log(question);
                 GameObject CustomquestionListElement = Instantiate(CustomquestionElement, CustomquestionListContent);
                 CustomquestionListElement.GetComponent<QuestionListItem>().NewQuestionItem(question);
             }
@@ -1016,11 +1013,9 @@ public class TeacherFireBase : MonoBehaviour
         //Debug.Log(Room);
         var DBTask = DBreference.Child("custom").GetValueAsync();
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-        Debug.Log("here");
         roomexist = false;
         if (DBTask.Exception != null)
         {
-            Debug.Log("Yea");
             Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
         }
         else{
@@ -1028,9 +1023,7 @@ public class TeacherFireBase : MonoBehaviour
             foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
             {
                 string roomid = childSnapshot.Key.ToString();
-                Debug.Log(roomid);
                 if (roomid == Room) {
-                    Debug.Log("i did it");
                     ScorePanel.gameObject.SetActive(true);
                     StartPanel.gameObject.SetActive(false);
                     roomexist = true;
@@ -1045,7 +1038,6 @@ public class TeacherFireBase : MonoBehaviour
     }
     //This method displays all the students and their score for the assignment
     public void displayStudentScores(){
-        Debug.Log("Yes");
         StartCoroutine(StudentScore());
     }
     //This method pulls the student data and score from the firebase
