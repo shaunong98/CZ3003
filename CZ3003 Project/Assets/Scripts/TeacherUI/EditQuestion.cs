@@ -21,10 +21,11 @@ public class EditQuestion : MonoBehaviour
     public static int Section;
     // The panel where the user can select the filters of world, section and difficulty 
     public GameObject SelectionPanel;
-    // The panel where the question are all displayed after being filtered
+    // The panel where the question are all displayed after being filtered, these questions can be selected to be edited 
     public GameObject QuestionDisplayPanel;
-    // The panel where 
+    // The panel which displays the individual question to be edited after it is selected
     public GameObject QuestionPanel;
+    // This method ensures there is only 1 instance of the selection panel
     private void Awake()
     {
         if (instance == null)
@@ -37,6 +38,7 @@ public class EditQuestion : MonoBehaviour
             Destroy(this);
         }
     }
+    // This methods extracts the data in the dropdown for world
     public void WorldSelect()
     {
         Debug.Log(WorldSelection.options[WorldSelection.value].text);
@@ -57,27 +59,31 @@ public class EditQuestion : MonoBehaviour
         }
         Debug.Log(World);
     }
+    // This methods extracts the data in the dropdown for difficulty
     public void DifficultySelection()
     {
         Difficulty = DifficultySelect.options[DifficultySelect.value].text;
         Debug.Log(Difficulty);
     }
+    // This methods extracts the data in the dropdown for section
     public void SectionSelection()
     {
         Section = int.Parse(SectionSelect.options[SectionSelect.value].text);
         Debug.Log(Section);
     }
-
+    // This methods is called to transition from the selection panel to the display all question panel after the next button is pressed on the selection panel
     public void PressNextButton()
     {
         QuestionDisplayPanel.gameObject.SetActive(true);
         SelectionPanel.gameObject.SetActive(false);
     }
+    // This methods is called to transition from the display all question panel to the selection panel after the back button is pressed on the display all questions panel
     public void PressBackButton()
     {
         QuestionDisplayPanel.gameObject.SetActive(false);
         SelectionPanel.gameObject.SetActive(true);
     }
+    // This methods is called to transition from the individual question panel to the display all question panel after the back button is pressed on the individual questions panel
     public void PressBackButtonForQuestion()
     {
         QuestionDisplayPanel.gameObject.SetActive(true);
