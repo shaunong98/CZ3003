@@ -4,13 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public enum GameState{FreeRoam, Battle, Dialog, Cutscene}
 
 public class GameController : MonoBehaviour
 {
+    // Reference to levelloader that gives the black screen after every scene transition.
     public LevelLoader battleLoader;
+
+    // PlayerController Object.
     [SerializeField] public PlayerController playerController;
+
+    // CustomBattleSystem Object.
     [SerializeField] BattleSystem battleSystem;
+
+    // Camera Object
     [SerializeField] Camera worldCamera;
 
     [SerializeField] private AudioClip BattleMusic;
@@ -18,18 +26,22 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private AudioClip LevelMusic;
 
-
+    // Gamestate reference.
     GameState state;
 
+    // Trainer controller reference
     TrainerController trainer;
 
+    // Creating an instance for game controller to be called in another class.
     public static GameController Instance { get; private set; }
 
+    // Awake method to be called when this class is instantiated.
     private void Awake() {
         Instance = this;
         Debug.Log("Are we starting the battle");
     }
 
+    // Start is called before the first frame update. If the player enters the trainer's view, the battle will be triggered.
     private void Start() 
     {
         battleSystem.Awake();
@@ -59,7 +71,7 @@ public class GameController : MonoBehaviour
     }
 
     
-
+    // Method that changes camera view from the map to the battlescene.
     public IEnumerator StartBattle(BattleUnit trainerUnit) {
         state = GameState.Battle;
         AudioManager.Instance.PlayMusic(BattleMusic);
@@ -67,18 +79,16 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         BattleSystem.Instance.gameObject.SetActive(true);
         battleLoader.UnFade();
-        //SceneManager.LoadScene("BattleScene");
         worldCamera.gameObject.SetActive(false);
         BattleSystem.Instance.StartBattle(trainerUnit); 
     }
 
+    // Method to signal the end of the battle and setting the battle scene to false.
     void EndBattle(bool won) {
         if (won == true) { //true means trainer lost and false means trainer won.
             AudioManager.Instance.PlayMusicWithFade(VictoryMusic,0.1f);
             Debug.Log("trainer lost");
             trainer.BattleLost();
-            //Debug.Log("it reached here");
-            //trainer = null;
             battleLoader.FadetoBlack();
         }
         else {
@@ -94,6 +104,7 @@ public class GameController : MonoBehaviour
         worldCamera.gameObject.SetActive(true);
     }
 
+    // Update to be called constantly during each frames and checking to see which state Game state is.
     private void Update()
     {
         if (state == GameState.FreeRoam)
