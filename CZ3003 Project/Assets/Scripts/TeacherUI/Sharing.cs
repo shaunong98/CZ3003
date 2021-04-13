@@ -4,7 +4,7 @@ using UnityEngine;
 //Done by Jun Hao and Zhi Fah
 public class Sharing : MonoBehaviour
 {
-    //This is the twitter adder
+    //This is the twitter address
     string TWITTER_ADDRESS = "http://twitter.com/intent/tweet";
     //This is the twitter language
     string TWEET_LANGUAGE = "en";

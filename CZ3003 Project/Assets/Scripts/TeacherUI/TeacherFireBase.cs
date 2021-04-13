@@ -149,17 +149,23 @@ public class TeacherFireBase : MonoBehaviour
     public Text errormsg1;
     //This panel contains the create an assignment and view score for an assignment
     public GameObject StartPanel;
+    //This panel contains the filters for selecting the question for making an assignment
     public GameObject SelectionPanel;
     //This is the room created in the make an assignment
     string Room;
+    //This is the Inputfield for the user to enter the room to make
     public InputField createRoomID;
+    //This is the Inputfield for the user to enter the room to view the score of players who played
     public InputField ViewRoomID;
+    //The panel which shows the scores of students who played the assignment
     public GameObject ScorePanel;
+    //This component is instantiated in the scroll view of the score panel
     public GameObject studentElement;
+    //This is the content of the scrollview in the score panel
     public Transform studentListContent;
-
+    //This is the error message displayed when there is missing input
     public Text missinginput;
-
+    //This method initializes firebase when there is an instance of the script
     void Awake()
     {
         //Check that all of the necessary dependencies for Firebase are present on the system
@@ -177,7 +183,7 @@ public class TeacherFireBase : MonoBehaviour
             }
         });
     }
-
+    //This method initializes firebase
     private void InitializeFirebase()
     {
         Debug.Log("Setting up Firebase Auth");
@@ -185,7 +191,7 @@ public class TeacherFireBase : MonoBehaviour
         auth = FirebaseAuth.DefaultInstance;
         DBreference = FirebaseDatabase.DefaultInstance.RootReference;
     }
-
+    //This method clears all the question and answer fields
 
     public void ClearQuestionAndAnswersFields()
     {
@@ -319,7 +325,6 @@ public class TeacherFireBase : MonoBehaviour
         }
         else
         {
-            Debug.Log("hello");
             DataSnapshot snapshot = DBTask.Result;
             foreach (DataSnapshot childSnapshot in snapshot.Children.Reverse<DataSnapshot>())
             {
@@ -746,6 +751,7 @@ public class TeacherFireBase : MonoBehaviour
              }
         }
     }
+    //This method reads the new edited questions and answers
     public void savenewquestion()
     {
         string revisedquestion = EditQuestionInputField.text;
@@ -754,6 +760,7 @@ public class TeacherFireBase : MonoBehaviour
         string revisedA3 = EditAnswerInputField3.text;
         StartCoroutine(setrevisedquestion(revisedquestion,revisedA1,revisedA2,revisedA3));
     }
+    //This method save the edited questions and answers to the correct place in firebase
     private IEnumerator setrevisedquestion(string _question, string _answer1, string _answer2, string _answer3)
     {
         //need integrate with jh one!
@@ -802,9 +809,11 @@ public class TeacherFireBase : MonoBehaviour
         EditQuestionPanel.gameObject.SetActive(false);
         FunctionSelectionPanel.gameObject.SetActive(true);// shift this to button
     }
+    //This method check whether the room exist when making an assignment
     public void checkRoomExist(){
         StartCoroutine(CheckExistingRoom());
     }
+    //This method compares the room to the existing room in firebase
     private IEnumerator CheckExistingRoom(){
         Room = createRoomID.text;
         if (Room == "")
@@ -1073,7 +1082,7 @@ public class TeacherFireBase : MonoBehaviour
     {
         StartCoroutine(LoadScoreboardData());
     }
-
+    //This method pulls the data from firebase to be displayed
     private IEnumerator LoadScoreboardData()
     {
         int rank = 0;
@@ -1115,12 +1124,12 @@ public class TeacherFireBase : MonoBehaviour
             //UIcontroller.instance.PressLeaderboardButton();
         }
     }
-
+    //This method is called when the leaderboard is filtered
     public void displayWorldSectionData()
     {
         StartCoroutine(LoadWorldSectionData());
     }
-
+    //This method pulls the relevant data to be displayed
     private IEnumerator LoadWorldSectionData()
     {
         int rank = 0;
@@ -1164,6 +1173,3 @@ public class TeacherFireBase : MonoBehaviour
     }
 }
     
-
-
-///// FIX ERROR HANDLING!!!!!
