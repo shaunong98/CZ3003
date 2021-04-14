@@ -57,8 +57,6 @@ public class CustomFirebase : MonoBehaviour
     int questionNo;
     //This variable determines if the room exist
     bool roomexist;
-    //This is the error message
-    public Text errormsg;
     //This is the starting panel where the user can create or enter room
     public GameObject StartPanel;
     //This is the selection panel for the create room
@@ -364,7 +362,9 @@ public class CustomFirebase : MonoBehaviour
         Room = createRoomID.text;
         if (Room == "")
         {
-            errormsg.text = "Please input something";
+            warningText.text = "Please input something";
+            yield return new WaitForSeconds(1f);
+            warningText.text = "";
         }
         else{
             var DBTask = DBreference.Child("custom").GetValueAsync();
@@ -383,16 +383,16 @@ public class CustomFirebase : MonoBehaviour
                     string roomid = childSnapshot.Key.ToString();
                     if (roomid == Room) {
                         roomexist = true;
-                        errormsg.text = "Room already exist!";
+                        warningText.text = "Room already exist!";
                         yield return new WaitForSeconds(1f);
-                        errormsg.text = "";
+                        warningText.text = "";
                     }
                 }
                 if (roomexist != true)
                 {
                 SelectionPanel.gameObject.SetActive(true);
                 StartPanel.gameObject.SetActive(false);
-                errormsg.text = "";
+                warningText.text = "";
                 }
             }
         }
