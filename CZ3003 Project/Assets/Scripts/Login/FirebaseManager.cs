@@ -57,8 +57,31 @@ public class FirebaseManager : MonoBehaviour
 
     public Toggle register_toggle;
 
+    private static FirebaseManager instance;
+
+    public static FirebaseManager Instance
+    {
+        get
+        {
+            if(instance == null)
+            {
+                instance = FindObjectOfType<FirebaseManager>();
+                if(instance == null)
+                {
+                    instance = new GameObject("Spawned FirebaseManager", typeof(FirebaseManager)).GetComponent<FirebaseManager>();
+                }
+            }
+            return instance;
+        }
+        private set
+        {
+            instance = value;
+        }
+    }
     void Awake()
     {
+        // Set gameobject as  DontDestroyOnLoad
+        DontDestroyOnLoad(this.gameObject);
         //Check that all of the necessary dependencies for Firebase are present on the system
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
@@ -217,6 +240,9 @@ public class FirebaseManager : MonoBehaviour
 
     private IEnumerator Register(string _email, string _password, string _username)
     {
+        var DBTask = DBreference.Child("users").GetValueAsync(); // add
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted); // add
+        bool exist = false; // add
         if (_username == "")
         {
             //If the username field is blank show a warning
@@ -229,71 +255,86 @@ public class FirebaseManager : MonoBehaviour
         }
         else 
         {
-            //Call the Firebase auth signin function passing the email and password
-            var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(_email, _password);
-            //Wait until the task completes
-            yield return new WaitUntil(predicate: () => RegisterTask.IsCompleted);
-
-            if (RegisterTask.Exception != null)
+             //Data has been retrieved
+            DataSnapshot snapshot = DBTask.Result;// add
+            //Loop through every users UID
+            foreach (DataSnapshot childSnapshot in snapshot.Children) // add to
             {
-                //If there are errors handle them
-                Debug.LogWarning(message: $"Failed to register task with {RegisterTask.Exception}");
-                FirebaseException firebaseEx = RegisterTask.Exception.GetBaseException() as FirebaseException;
-                AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
-
-                string message = "Register Failed!";
-                switch (errorCode)
-                {
-                    case AuthError.MissingEmail:
-                        message = "Missing Email";
-                        break;
-                    case AuthError.MissingPassword:
-                        message = "Missing Password";
-                        break;
-                    case AuthError.WeakPassword:
-                        message = "Weak Password";
-                        break;
-                    case AuthError.EmailAlreadyInUse:
-                        message = "Email Already In Use";
-                        break;
+                string existing_user = childSnapshot.Child("username").Value.ToString(); 
+                if (existing_user == _username){
+                    warningRegisterText.text = "Username Taken!";
+                    exist = true;
                 }
-                warningRegisterText.text = message;
+
             }
-            else
+            if(exist == false) // here
             {
-                //User has now been created
-                //Now get the result
-                User = RegisterTask.Result;
+                //Call the Firebase auth signin function passing the email and password
+                var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(_email, _password);
+                //Wait until the task completes
+                yield return new WaitUntil(predicate: () => RegisterTask.IsCompleted);
 
-                if (User != null)
+                if (RegisterTask.Exception != null)
                 {
-                    //Create a user profile and set the username
-                    UserProfile profile = new UserProfile{DisplayName = _username};
+                    //If there are errors handle them
+                    Debug.LogWarning(message: $"Failed to register task with {RegisterTask.Exception}");
+                    FirebaseException firebaseEx = RegisterTask.Exception.GetBaseException() as FirebaseException;
+                    AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
 
-                    //Call the Firebase auth update user profile function passing the profile with the username
-                    var ProfileTask = User.UpdateUserProfileAsync(profile);
-                    //Wait until the task completes
-                    yield return new WaitUntil(predicate: () => ProfileTask.IsCompleted);
-                    // StartCoroutine(UpdateInnerStars(0));
-                    InitialisePlayerProfile();
-                    StartCoroutine(UpdateUsernameDatabase(_username));
-                    if (ProfileTask.Exception != null)
+                    string message = "Register Failed!";
+                    switch (errorCode)
                     {
-                        //If there are errors handle them
-                        Debug.LogWarning(message: $"Failed to register task with {ProfileTask.Exception}");
-                        warningRegisterText.text = "Username Set Failed!";
+                        case AuthError.MissingEmail:
+                            message = "Missing Email";
+                            break;
+                        case AuthError.MissingPassword:
+                            message = "Missing Password";
+                            break;
+                        case AuthError.WeakPassword:
+                            message = "Weak Password";
+                            break;
+                        case AuthError.EmailAlreadyInUse:
+                            message = "Email Already In Use";
+                            break;
                     }
-                    else
+                    warningRegisterText.text = message;
+                }
+                else
+                {
+                    //User has now been created
+                    //Now get the result
+                    User = RegisterTask.Result;
+
+                    if (User != null)
                     {
-                        //Username is now set
-                        //Now return to login screen
-                        confirmRegisterText.text = "Account created successfully";
-                        yield return new WaitForSeconds(1f);
-                        confirmRegisterText.text = "";
-                        UIManager.instance.LoginScreen();                        
-                        warningRegisterText.text = "";
-                        ClearRegisterFeilds();
-                        ClearLoginFeilds();
+                        //Create a user profile and set the username
+                        UserProfile profile = new UserProfile{DisplayName = _username};
+
+                        //Call the Firebase auth update user profile function passing the profile with the username
+                        var ProfileTask = User.UpdateUserProfileAsync(profile);
+                        //Wait until the task completes
+                        yield return new WaitUntil(predicate: () => ProfileTask.IsCompleted);
+                        // StartCoroutine(UpdateInnerStars(0));
+                        InitialisePlayerProfile();
+                        StartCoroutine(UpdateUsernameDatabase(_username));
+                        if (ProfileTask.Exception != null)
+                        {
+                            //If there are errors handle them
+                            Debug.LogWarning(message: $"Failed to register task with {ProfileTask.Exception}");
+                            warningRegisterText.text = "Username Set Failed!";
+                        }
+                        else
+                        {
+                            //Username is now set
+                            //Now return to login screen
+                            warningRegisterText.text = "";
+                            confirmRegisterText.text = "Account created successfully";
+                            yield return new WaitForSeconds(1f);
+                            confirmRegisterText.text = "";
+                            UIManager.instance.LoginScreen();                        
+                            ClearRegisterFeilds();
+                            ClearLoginFeilds();
+                        }
                     }
                 }
             }
@@ -863,6 +904,11 @@ public class FirebaseManager : MonoBehaviour
         StartCoroutine(loadSelectedStarsPoints(usernameTitle.text));
     }
 
+    public void viewProfile()
+    {
+        StartCoroutine(loadMainMenu());
+    }
+
     private IEnumerator loadMainMenu()
     {
         //get the currently logged in user data
@@ -958,7 +1004,7 @@ public class FirebaseManager : MonoBehaviour
             totalPoints.text = totalPointsObtained.ToString();
 
         }
-        loginUI.SetActive(false);
+        //loginUI.SetActive(false);
         userDataUI.SetActive(true);
     }
 

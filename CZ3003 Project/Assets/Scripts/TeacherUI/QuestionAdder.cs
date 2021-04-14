@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+//Done by Jun Hao and Zhi Fah
 public class QuestionAdder : MonoBehaviour
 {
     // The instance of the file that can be reference by other files later
