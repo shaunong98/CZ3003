@@ -106,6 +106,9 @@ public class PauseMenu : MonoBehaviour
         // Update the Stars earned to Database
         firebaseManager.UpdateStarsToDb();
 
+        // Resume activeSource music
+        AudioManager.Instance.ResumeMusic();
+
         // Enable Pause UI
         pauseMenuUI.SetActive(false);
 

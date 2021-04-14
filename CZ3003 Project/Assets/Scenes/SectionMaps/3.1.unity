@@ -453,6 +453,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2398869411118558738, guid: 609f5494aaf93414e9b2fbab3271f6d3,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1106511937541109406, guid: 5e92e4381a92d5649bd2246f7decdb7b,
+        type: 3}
     - target: {fileID: 2398869411577839441, guid: 609f5494aaf93414e9b2fbab3271f6d3,
         type: 3}
       propertyPath: m_FontData.m_Alignment
