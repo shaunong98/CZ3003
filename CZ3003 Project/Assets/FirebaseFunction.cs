@@ -197,4 +197,10 @@ public class FirebaseFunction : MonoBehaviour
         modeSelectionPanel.SetActive(false);
         userDataUI.SetActive(true);
     }
+
+    public void BacktoGameMode() 
+    {
+        userDataUI.SetActive(false);
+        modeSelectionPanel.SetActive(true);
+    }
 }

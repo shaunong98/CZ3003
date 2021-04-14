@@ -48050,6 +48050,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2398869411118558738, guid: 609f5494aaf93414e9b2fbab3271f6d3,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5627729976014493891, guid: 5e92e4381a92d5649bd2246f7decdb7b,
+        type: 3}
     - target: {fileID: 2398869411577839441, guid: 609f5494aaf93414e9b2fbab3271f6d3,
         type: 3}
       propertyPath: m_FontData.m_Alignment
@@ -52076,7 +52082,7 @@ Tilemap:
       - {fileID: 21301262, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301264, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
       - {fileID: 21301266, guid: fe3b1e453b9d88047b7d779f8a2ba8c1, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -13, y: -18, z: 0}
