@@ -58,6 +58,7 @@ public class FirebaseManager : MonoBehaviour
     public Toggle register_toggle;
 
     private static FirebaseManager instance;
+
     public static FirebaseManager Instance
     {
         get
@@ -903,6 +904,11 @@ public class FirebaseManager : MonoBehaviour
         StartCoroutine(loadSelectedStarsPoints(usernameTitle.text));
     }
 
+    public void viewProfile()
+    {
+        StartCoroutine(loadMainMenu());
+    }
+
     private IEnumerator loadMainMenu()
     {
         //get the currently logged in user data
@@ -998,7 +1004,7 @@ public class FirebaseManager : MonoBehaviour
             totalPoints.text = totalPointsObtained.ToString();
 
         }
-        loginUI.SetActive(false);
+        //loginUI.SetActive(false);
         userDataUI.SetActive(true);
     }
 
