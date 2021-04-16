@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿// Authors: Jethro, Su Te
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -42,7 +43,19 @@ public class UIManager : MonoBehaviour
 
     public void ClearScreen() //Turn off all screens
     {
+        if(loginUI!=null)
         loginUI.SetActive(false);
+        if(registerUI!=null)
+        registerUI.SetActive(false);
+
+        userDataUI.SetActive(false);
+        scoreboardUI.SetActive(false);
+    }
+    public void ClearScreenForTeacher() //Turn off all screens
+    {
+        if(loginUI!=null)
+        loginUI.SetActive(true);
+        if(registerUI!=null)
         registerUI.SetActive(false);
         userDataUI.SetActive(false);
         scoreboardUI.SetActive(false);
@@ -63,18 +76,22 @@ public class UIManager : MonoBehaviour
 
     public void UserDataScreen() //Logged in
     {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
         ClearScreen();
         userDataUI.SetActive(true);
     }
 
     public void EnterGame() //Enter Game
     {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
         ClearScreen();
         levelLoader.LoadCharSel();
     }
 
     public void ScoreboardScreen() //Scoreboard button
     {
+
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
         ClearScreen();
         scoreboardUI.SetActive(true);
     }
@@ -129,6 +146,7 @@ public class UIManager : MonoBehaviour
 
     public void SectionLdrboardSelection()
     {
+        AudioManager.Instance.PlaySFX(cfmClickSFX);
         SectionLdrboard = int.Parse(SectionLeaderboard.options[SectionLeaderboard.value].text);
         Debug.Log(SectionLdrboard);
     }

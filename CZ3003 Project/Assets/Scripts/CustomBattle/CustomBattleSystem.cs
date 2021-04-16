@@ -1,3 +1,4 @@
+// Authors: Jethro
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,45 +9,68 @@ using Firebase.Auth;
 using Firebase.Database;
 //using UnityEngine.UI;
 
-
+// Creating BattleStates during the Battle System to instantiate different actions.
 public enum CustomBattleState { Start, ActionSelection, MoveSelection, PlayerAnswer, PerformMove, Busy, BattleOver }
 
 public class CustomBattleSystem : MonoBehaviour
 {
-    //[SerializeField] BattleUnit playerUnit;
-    //[SerializeField] BattleUnit enemyUnit;
-    //[SerializeField] TrainerController trainer;
+
+    [SerializeField] private AudioClip arrowClickSFX;
+    [SerializeField] private AudioClip cfmClickSFX;
+
+    [SerializeField] private AudioClip AttackMusic;
+    [SerializeField] private AudioClip NoHealthMusic;
+
+    [SerializeField] private AudioClip runMusic;
+
+    // Reference to player controller.
     [SerializeField] public PlayerController player;
-    // [SerializeField] BattleHud playerHud;
-    // [SerializeField] BattleHud enemyHud;
+
+    // Reference to battle dialogbox to access its methods.
     [SerializeField] BattleDialogBox dialogBox;
-    //[SerializeField] CountdownTimer countDown;
+
+    // Reference to trainer unit
     BattleUnit trainerUnit;
-    public bool isPVP;
 
-    // BattleSystem battleSystem;
+    // Bool variable to check if the battle system is pvp or not.
+    public bool isCustom;
 
+    // Creating an instance of the custombattlesystem so that we will be able to reference it from another class.
     public static CustomBattleSystem Instance{ get; private set; }
 
     [Header("Firebase")]
     public DependencyStatus dependencyStatus;
     public FirebaseAuth auth;
-    //public FirebaseUser User;
     public DatabaseReference DBreference;
 
+    // Instantiating an event for other classes to subscribe to it.
     public event Action<bool> onBattleOver;
 
+    // Creating a variable of state to reference to it.
     CustomBattleState state;
 
+    // Current Action refers to where the player cursor is pointing to -  "Fight" or "Run".
     int currentAction;
-    int currentMove = 0;
+
+    // Current Answer refers to where the player cursor is pointing to -  "A1" or "A2" or "A3".
     int currentAnswer;
+
+    // Current Answer refers to where the player cursor is pointing to -  "A1" or "A2" or "A3".
     public static int correctAnswer;
+
+    // Question num to record which question he/she is at right now.
     public static int questionNum = 1;
+
+    // TotalQuestionNum to store the total number of questions that is given in the custom room.
     public static int totalQuestionNum = 1;
+
+    // Total correct answer stores the total number of correct answers.
     public static int totalcorrectAnswer = 0;
+
+    // Boolean variable to see if the student has scored correct or not.
     bool isCorrect = true;
 
+    // Awake method to be called when custombattlesystem is instantiated.
     public void Awake() {
         Instance = this;
 
@@ -66,24 +90,25 @@ public class CustomBattleSystem : MonoBehaviour
         });
     }
 
+    // Method to initializefirebase.
     private void InitializeFirebase()
     {
         Debug.Log("Setting up Firebase Auth");
-        //Set the authentication instance object
         auth = FirebaseAuth.DefaultInstance;
         DBreference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
+    // Method to start the coroutine for the custom battle scene.
     public void StartBattle(BattleUnit trainerUnit) {
         StartCoroutine(SetupBattle(trainerUnit));
 
     }
-    // i changed all enemyunit to trainer.TrainerUnit and playerunit to player.PlayerUnit
+
+    // Coroutine to set up the battle scene.
     public IEnumerator SetupBattle(BattleUnit trainerUnit) {
         this.trainerUnit = trainerUnit;
         player.PlayerUnit.SetUp(true);
         trainerUnit.SetUp(false);    
-        //string initialPoint;
         string username = "";
         var DBTask = DBreference.Child("custom").Child(QuestionManager.roomID).GetValueAsync();
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
@@ -104,7 +129,7 @@ public class CustomBattleSystem : MonoBehaviour
         }
 
         dialogBox.SetMoveNames();
-        if (!isPVP) {
+        if (!isCustom) {
             Debug.Log("timer text true");
             dialogBox.EnableTimerText(false);
         }
@@ -119,21 +144,20 @@ public class CustomBattleSystem : MonoBehaviour
         ActionSelection();
     }
 
+    // Method that calls the state BattleOver and updates the player score into the firebase.
     public void BattleOver(bool won) { //if true means player has won
-        state = CustomBattleState.BattleOver; //notifies state only
-        //StudentFireBase.Instance.updateBattlePoints(dialogBox.Points);
+        state = CustomBattleState.BattleOver; 
         StartCoroutine(updateUserCustomBattlePoints(won));
         Debug.Log("How to solve this");
     }
 
+    // Coroutine to update players score to firebase.
     public IEnumerator updateUserCustomBattlePoints(bool won)
     {
-        //need add in username and the score for this
         FirebaseUser User;
         User = FirebaseManager.User;
         Debug.Log("update user battle");
         Debug.Log(User.UserId);
-        //string initialPoint;
         var DBTask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
         Debug.Log("reached here at users");
@@ -166,6 +190,7 @@ public class CustomBattleSystem : MonoBehaviour
         onBattleOver(won);
     }    
 
+    // Method to call the state action selection. 
     public void ActionSelection() {
         state = CustomBattleState.ActionSelection;
         StartCoroutine(dialogBox.TypeDialog("Choose an action"));
@@ -175,9 +200,9 @@ public class CustomBattleSystem : MonoBehaviour
         dialogBox.EnableAnswerSelector(false);
     }
 
+    // Method to call the state action selection if the player has answered wrongly (for custom) and if the player has answered all questions, the method BattleOver will be called.
     public IEnumerator ActionSelectionifWrong() {
         state = CustomBattleState.ActionSelection;
-        //isCorrect = true;
         yield return dialogBox.TypeDialog("You answered wrongly!");
 
         if (questionNum == (totalQuestionNum + 1))
@@ -188,12 +213,13 @@ public class CustomBattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1f);
             BattleOver(false);
         }
-        dialogBox.EnableActionSelector(false);
+        dialogBox.EnableActionSelector(true);
         dialogBox.EnableMoveSelector(false);
         dialogBox.EnableDialogText(true);
         dialogBox.EnableAnswerSelector(false);
     }
 
+    // Method to call the state answer selection. 
     public void PlayerAnswer() {
         state = CustomBattleState.PlayerAnswer;
         dialogBox.EnableActionSelector(false);
@@ -203,10 +229,11 @@ public class CustomBattleSystem : MonoBehaviour
         dialogBox.EnableMoveSelector(false);
     }
 
+    // Method to call the move made by the player. 
     public IEnumerator PlayerMove() {
         state = CustomBattleState.PerformMove;
         Move move;
-        move = player.PlayerUnit.Monster.Moves[currentMove];
+        move = player.PlayerUnit.Monster.Moves[0];
         yield return dialogBox.TypeDialog($"You answered correctly!");
         yield return new WaitForSeconds(1f);
 
@@ -217,6 +244,7 @@ public class CustomBattleSystem : MonoBehaviour
         }
     }
 
+    // Method to call the move made by the players/trainer after the player has answered a question.
     public IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move) {
         FirebaseUser User;
         User = FirebaseManager.User;
@@ -242,6 +270,7 @@ public class CustomBattleSystem : MonoBehaviour
         }
         yield return dialogBox.TypeDialog($"{username} used {move.Base.Name}.");
         sourceUnit.PlayerAttackAnimation();
+        AudioManager.Instance.PlaySFX(AttackMusic);
         yield return new WaitForSeconds(1f);
 
         targetUnit.PlayerHitAnimation();
@@ -253,6 +282,7 @@ public class CustomBattleSystem : MonoBehaviour
         if (isFainted) {
             yield return dialogBox.TypeDialog($"{targetUnit.Monster.Base.Name} has fainted.");
             targetUnit.PlayerFaintAnimation();
+            AudioManager.Instance.PlaySFX(NoHealthMusic);
             yield return new WaitForSeconds(2f);
             CheckForBattleOver(targetUnit);
         }
@@ -268,11 +298,12 @@ public class CustomBattleSystem : MonoBehaviour
         
     }
 
+    // Method to check if the battle is over after every turn of fighting.
     public void CheckForBattleOver(BattleUnit faintedUnit) {
         if (faintedUnit.IsPlayerUnit) {
             BattleOver(false);
         }
-        else if (isPVP && !faintedUnit.IsPlayerUnit) {
+        else if (isCustom && !faintedUnit.IsPlayerUnit) {
             Debug.Log("completed level");
             dialogBox.completedLevel();
             BattleOver(true);
@@ -281,12 +312,12 @@ public class CustomBattleSystem : MonoBehaviour
             BattleOver(true); 
     }
 
+    // Method to handle all updates on every frames that will be called in CustomController class.
     public void HandleUpdate() {
         if (state == CustomBattleState.ActionSelection) {
             HandleActionSelection();
             
         }
-
         else if (state == CustomBattleState.PlayerAnswer) {
             HandleAnswerSelection(correctAnswer);
             
@@ -294,12 +325,15 @@ public class CustomBattleSystem : MonoBehaviour
 
     }
 
+    // Method to handle action selection and display questions & answers from the firebase
     public void HandleActionSelection() {
         if (Input.GetKeyDown(KeyCode.S)) {
+            AudioManager.Instance.PlaySFX(arrowClickSFX);
             if (currentAction < 1)
                 ++currentAction;
         }
         else if (Input.GetKeyDown(KeyCode.W)) {
+            AudioManager.Instance.PlaySFX(arrowClickSFX);
             if (currentAction > 0)
                 --currentAction;
         }
@@ -307,29 +341,33 @@ public class CustomBattleSystem : MonoBehaviour
         dialogBox.UpdateActionSelection(currentAction);
 
         if (Input.GetKeyDown(KeyCode.Space)) {
+            AudioManager.Instance.PlaySFX(cfmClickSFX);
             if (currentAction == 0) {
                 dialogBox.EnableQuestionText(true);
                 Debug.Log("enable question is selected");
                 dialogBox.EnableAnswerSelector(false);
                 dialogBox.RestartAnswerSelection();
-                //StartCoroutine(dialogBox.TypeQuestion(SelectQuestion(battleQuestions.Questions.QB, "Easy").Question));
+
                 StartCoroutine(QuestionManager.Instance.getQuestionsforCustom(questionNum));
                 Debug.Log($"correct answer is {correctAnswer}");
                 PlayerAnswer();
             }
             else if (currentAction == 1) {
-                //run
+                AudioManager.Instance.PlaySFX(runMusic);
                 BattleOver(false);
             }
         }
     }
 
+    // Method to handle answer selection as you choose a different answer.
     public void HandleAnswerSelection(int answer) {
         if (Input.GetKeyDown(KeyCode.D)) {
+            AudioManager.Instance.PlaySFX(arrowClickSFX);
             if (currentAnswer < 2)
                 ++currentAnswer;
         }
         else if (Input.GetKeyDown(KeyCode.A)) {
+            AudioManager.Instance.PlaySFX(arrowClickSFX);
             if (currentAnswer > 0)
                 --currentAnswer;
         }
@@ -337,6 +375,7 @@ public class CustomBattleSystem : MonoBehaviour
         dialogBox.UpdateAnswerSelection(currentAnswer);
 
         if (Input.GetKeyDown(KeyCode.Space)) {
+            AudioManager.Instance.PlaySFX(cfmClickSFX);
             if (currentAnswer == 0 && currentAnswer == answer) {
                 dialogBox.EnableDialogText(true);
                 dialogBox.EnableAnswerSelector(false);

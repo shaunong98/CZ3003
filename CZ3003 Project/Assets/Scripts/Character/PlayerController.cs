@@ -1,3 +1,4 @@
+// Authors: Daryl Neo
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] BattleUnit playerUnit;
 
-    public BattleUnit PlayerUnit { 
+    public BattleUnit PlayerUnit 
+    { 
         get { return playerUnit; }
     }
 
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
 
     private SpriteRenderer spriteRenderer;
+    // Initialize variables from Components of gameobject
     private void Awake() 
     {
         spriteRenderer=GetComponent<SpriteRenderer>();
@@ -33,9 +36,13 @@ public class PlayerController : MonoBehaviour
 
     public void HandleUpdate()
     {
+        // Checks if player is within Trainer's view
         CheckIfInTrainersView();
+
+        // Reset direction
         Vector2 dir = Vector2.zero;
         
+        // Detects input and move as accordingly with the correct animation playing
         if (Input.GetKey(KeyCode.A))
         {
             dir.x = -1;
@@ -67,11 +74,17 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("moveY",dir.y);
         }
 
+        // Normalize the direction
         dir.Normalize();
+
+        // Set animation to moving from standstill
         animator.SetBool("IsMoving", dir.magnitude > 0);
+
+        // Applies velocity to gameobject allowing it to move in specific direction 
         GetComponent<Rigidbody2D>().velocity = speed * dir;
         
 
+        // Interacts when player is not moving
         if(Input.GetKeyDown(KeyCode.Space))
         {
             animator.SetBool("IsMoving", false);
@@ -80,18 +93,27 @@ public class PlayerController : MonoBehaviour
         
     }
     
+    // Interact method
     void Interact()
     {
+        // Get the current direction player is facing
         var faceDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+
+        // Store current position + direction
         var interactPos = transform.position+faceDir;
-       
+
         var collider = Physics2D.OverlapCircle(interactPos,0.3f,NPCLayer);
+
+        // If collider detects something
         if(collider!=null)
         {
-            collider.GetComponent<Interactable>()?.Interact(transform); //collider returns the object you are colliding with
+            // Collider returns the object you are colliding with
+            // Call the collided object Interact method
+            collider.GetComponent<Interactable>()?.Interact(transform); 
         }
     }
 
+    // CheckIfInTrainersView method
     private void CheckIfInTrainersView()
     {
         var collider = Physics2D.OverlapCircle(transform.position, 0.2f, fovLayer);
@@ -101,8 +123,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // stopCharacter method
     public void stopCharacter() {
+        // Stop character's movement
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        
+        // Set bool to false and change moving animation to standstill
         animator.SetBool("IsMoving", false);
     }
 }
